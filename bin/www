@@ -1,0 +1,148 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+"use strict"
+
+const sPort = "3000";;
+const sServerName = "Node Express RestApi Project Server";
+
+var app = require('../app');
+var debug = require('debug')('nodeprj:server');
+var http = require('http');
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || sPort);
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+var server = http.createServer(app);
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+server.listen(port,function(){
+  console.log("███╗   ██╗ ██████╗ ██████╗ ███████╗    ███████╗███████╗██████╗ ██╗   ██╗███████╗██████╗     ███████╗████████╗ █████╗ ██████╗ ████████╗██╗ ");
+  console.log("████╗  ██║██╔═══██╗██╔══██╗██╔════╝    ██╔════╝██╔════╝██╔══██╗██║   ██║██╔════╝██╔══██╗    ██╔════╝╚══██╔══╝██╔══██╗██╔══██╗╚══██╔══╝██║ ");
+  console.log("██╔██╗ ██║██║   ██║██║  ██║█████╗      ███████╗█████╗  ██████╔╝██║   ██║█████╗  ██████╔╝    ███████╗   ██║   ███████║██████╔╝   ██║   ██║ ");
+  console.log("██║╚██╗██║██║   ██║██║  ██║██╔══╝      ╚════██║██╔══╝  ██╔══██╗╚██╗ ██╔╝██╔══╝  ██╔══██╗    ╚════██║   ██║   ██╔══██║██╔══██╗   ██║   ╚═╝ ");
+  console.log("██║ ╚████║╚██████╔╝██████╔╝███████╗    ███████║███████╗██║  ██║ ╚████╔╝ ███████╗██║  ██║    ███████║   ██║   ██║  ██║██║  ██║   ██║   ██╗ ");
+  console.log("╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝    ╚══════╝╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚══════╝╚═╝  ╚═╝    ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ");
+  console.log("██████╗  ██████╗ ██████╗ ████████╗    ██████╗  ██████╗  ██████╗  ██████╗                                                                  ");
+  console.log("██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝    ╚════██╗██╔═████╗██╔═████╗██╔═████╗                                                                 ");
+  console.log("██████╔╝██║   ██║██████╔╝   ██║        █████╔╝██║██╔██║██║██╔██║██║██╔██║                                                                 ");
+  console.log("██╔═══╝ ██║   ██║██╔══██╗   ██║        ╚═══██╗████╔╝██║████╔╝██║████╔╝██║                                                                 ");
+  console.log("██║     ╚██████╔╝██║  ██║   ██║       ██████╔╝╚██████╔╝╚██████╔╝╚██████╔╝                                                                 ");
+  console.log("╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝       ╚═════╝  ╚═════╝  ╚═════╝  ╚═════╝                                                                  ");
+  console.log("%s",sServerName);
+});
+
+/**
+ * Server Event Listener
+ */
+server.on('error', onError);
+server.on('listening', onListening);
+server.on('request',onRequest);
+server.on('connection',onConnection);
+
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+function onError(error) {
+  console.log('onError start');
+
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+
+  console.log('onError end');
+};
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+};
+
+/**
+ * Event listener for HTTP server "request" event.
+ */
+function onRequest(req,res) {
+  // console.log('onRequest start');
+  // console.log(req.headers);
+  // console.log("req.rawHeaders => "+req.rawHeaders);
+  // console.log("req.url        => "+req.url);
+  // console.log("req.method     => "+req.method);
+  // // console.log("req.timeout    => "+req.server.timeout);
+  // console.log("req._peername  => "+req._peername);
+  // console.log("req.baseUrl    => "+req.baseUrl);
+  // console.log("req.originalUrl=> "+req.originalUrl);
+  // console.log("req._startTime => "+req._startTime);
+  // console.log("req._startAt   => "+req._startAt);
+  // console.log("req._remoteAddress=> "+req._remoteAddress);
+  // console.log(req.body);
+  // console.log("req.httpVersion=> "+req.httpVersion);
+  // console.log(req.params);
+  // console.log(req.query);
+  // console.log("req.secret     => "+req.secret);
+  // console.log(req.cookies);
+  // console.log('onRequest end');
+};
+
+/**
+ * Event listener for HTTP server "connection" event.
+ */
+function onConnection(socket){
+  //console.log('onConnection start');
+  //console.log(socket);
+  //console.log('onConnection end');
+};

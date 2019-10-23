@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DATANURI NIFI API</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+      body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
+      .mySlides {display: none}
+    </style>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript">
+      "use strict"
+
+      $(function(){
+        $("#send").click(function(){
+          var ip      = $("#ip").val();
+          var port    = $("#port").val();
+          var user    = $("#user").val();
+          var pass    = $("#password").val();
+          var method  = $("#method").val();
+          var command = $("#command").val();
+          var params  = $("#params").val();
+
+          apiCall( ip, port, user, pass, method, command, params );
+        });
+      });
+     
+      var apiCall = function(__ip, __port, __user, __pass, __method, __command, __params){
+        var _default_context = "/nifi-api/v1";
+        var sendData = {
+          ip: __ip,
+          port: __port,
+          user: __user,
+          pass: __pass,
+          method: __method,
+          cmd: __command,
+          params: __params
+        };
+
+        $.ajax({
+          url       : _default_context,
+          thpe      : "GET",
+          vache     : false,
+          dataType  : "json",
+          data      : sendData,
+          success: function(data) {
+            console.log(data);
+            $("#apiresult").val(JSON.stringify(data, null, "  "));
+          }
+        });
+      };
+
+    </script>
+  </head>
+<body class="w3-content"></body>
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-light-grey w3-collapse w3-top" style="z-index:3;width:400px" id="mySidebar">
+  <div class="w3-container w3-display-container w3-padding-16">
+    <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-transparent w3-display-topright"></i>
+    <h1>NIFI API</h3>
+    <form id="apiForm" action="return false;" target="_blank"></form>
+      <p><label>IP</label></p>
+      <input id="ip" class="w3-input w3-border" type="text" placeholder="xxx.xxx.xxx.xxx" name="ip"  value="192.168.1.10" maxlength="15" required>          
+      <p><label>PORT</label></p>
+      <input id="port" class="w3-input w3-border" type="number" value="9999"  min="3000" max="50000" placeholder="xxxx" name="port" required>         
+      <p><label>USER</label></p>
+      <input id="user" class="w3-input w3-border" type="text" name="user" required}>              
+      <p><label>PASSWORD</label></p>
+      <input id="password" class="w3-input w3-border" type="password"  name="password"  required>
+      <p><label>COMMAN</label></p>
+      <input id="command" class="w3-input w3-border" type="text"  value="/flow/about" name="command"  required>
+      <p><label>METHOD</label></p>
+      <input id="method" class="w3-input w3-border" type="text"  value="get" name="method"  required>
+      <p><label>PARAMS</label></p>
+      <input id="params" class="w3-input w3-border" type="text"  name="params"  required>
+      <p><button id="send" class="w3-button w3-block w3-green w3-left-align" type="button">send</button></p>
+    </form>
+  </div>
+
+</nav>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main w3-white" style="margin-left:400px">
+  <div class="w3-container">
+    <h4><strong>Api Result</strong></h4>
+    <div class="w3-row w3-large">
+      <textarea id="apiresult" name="apiresult" cols="90" rows="29" ></textarea>
+    </div>
+  </div>
+  <footer class="w3-container w3-padding-16" style="margin-top:32px">Powered by <a href="https://datanuri.com/" title="DATANURI" target="_blank" class="w3-hover-text-green">DATANURI</a></footer>
+
+<!-- End page content -->
+</div>
+
+
+</body>
+</html>
