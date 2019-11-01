@@ -1,0 +1,117 @@
+<!-- SCRIPT -->
+<script>
+	$(function(){
+		make_header();
+
+		var pageObj = $("#pagination").pagination({
+			items: 100,
+			itemsOnPage: 10,
+			cssStyle: 'light-theme',
+			onPageClick : function(p,e){
+				console.log(p);
+			}
+		});
+
+		//그리드 아이템 수 변경 10 => 20으로
+		pageObj.pagination('updateItemsOnPage', 5);
+
+		// 조회된 아이템수 변경 100 => 200
+		pageObj.pagination('updateItems', 200);
+
+		//페이지 선택 1 => 5
+		pageObj.pagination('drawPage', 5);
+		pageObj.pagination('selectPage', 6);
+		
+
+		layerPopup();
+
+		$(".close-button, #mCancel").click((e)=>{
+			$(".modal").removeClass("show-modal");
+		});
+	});
+
+	var make_header = ()=>{
+		var header = ["Company","Contact","Country"];
+		$.each(header, function(i,v){
+			$("#ghead").append("<th>"+v+"</th>");
+		});
+	};
+
+	var layerPopup = ()=>{
+		var modal = $(".modal");
+		var closeButton = $(".close-button");
+		//modal.classList.toggle("show-modal");
+		$(".modal").addClass("show-modal");
+		
+	};
+</script>
+<!-- SCRIPT END-->
+<!-- DATA GRID -->
+	<section>
+	<div class="w3-row-padding" style="height:800px;">
+		<div style="margin-top:10px;border:1px solid rgba(100, 101, 105, 0.2); width:100%;height:700px;">
+			<table >
+					<tr id="ghead">
+						<th>No</th>
+					</tr>
+				<div id="gbody">
+					<tr>
+						<td>1</td>
+						<td>Alfreds Futterkiste</td>
+						<td>Maria Anders</td>
+						<td>Germany</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Centro comercial Moctezuma</td>
+						<td>Francisco Chang</td>
+						<td>Mexico</td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>Ernst Handel</td>
+						<td>Roland Mendel</td>
+						<td>Austria</td>
+					</tr>
+					<tr>
+						<td>4</td>
+						<td>Island Trading</td>
+						<td>Helen Bennett</td>
+						<td>UK</td>
+					</tr>
+					<tr>
+						<td>5</td>
+						<td>Laughing Bacchus Winecellars</td>
+						<td>Yoshi Tannamuri</td>
+						<td>Canada</td>
+					</tr>
+					<tr>
+						<td>6</td>
+						<td>Magazzini Alimentari Riuniti</td>
+						<td>Giovanni Rovelli</td>
+						<td>Italy</td>
+					</tr>
+				</div>
+			</table>
+			<div id="pagination" style="position:absolute; left:50%; margin-left:-50px;margin-top:10px;"></div>
+		</div>
+	</div>
+</section>
+<!-- DATA GRID END-->
+<!-- Layer Popup-->
+	<!-- 팝업 될 레이어 --> 
+<div class="modal" style="z-index:10;">
+	<div class="modal-content">
+		<span class="close-button">&times;</span>
+		<h1 class="title">테스트</h1>
+		<form id="fm01">
+			<label for="email">Email</label>
+			<input type="email" name="email" placeholder="Your email" required="required">
+			<label></label>
+			<textarea name="message" placeholder="Test Message" required="required"></textarea>
+			<input type="button" id="mCancel" value="취소">
+			<input type="button" id="mSave" value="저장">
+		</form>
+	</div>
+</div>
+<!-- Layer Popup End-->

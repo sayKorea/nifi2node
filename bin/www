@@ -5,154 +5,217 @@
  */
 "use strict"
 
-const sPort = "9443";;
-const sServerName = "Node Express RestApi Project Server";
+//const sPort = "9443";
+const sPort = "10000";;
+//const sServerName = "Node Express RestApi Project Server";
 
 var app = require('../app');
 var debug = require('debug')('nodeprj:server');
-// var http = require('http');
-var https = require('https');
-const fs = require('fs');
+var http = require('http');
+// var https = require('https');
+// const fs = require('fs');
 
 /**
  * Get port from environment and store in Express.
  */
 
-const https_options = {
-	key: fs.readFileSync('./ssl/private.pem', 'utf8'),
-	cert: fs.readFileSync('./ssl/public.pem', 'utf8')
-};
+// const https_options = {
+// 	key: fs.readFileSync('./ssl/private.pem', 'utf8'),
+// 	cert: fs.readFileSync('./ssl/public.pem', 'utf8')
+// };
 
-console.log(fs.readFileSync('./ssl/private.pem'));
-console.log(fs.readFileSync('./ssl/public.pem'));
-
+// console.log(fs.readFileSync('./ssl/private.pem'));
+// console.log(fs.readFileSync('./ssl/public.pem'));
+process.env.active_type = process.argv[2];
+console.log(process.env.active_type);
 var port = normalizePort(process.env.PORT || sPort);
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
-var server = https.createServer(https_options, app);
+var server = http.createServer(app);
+
+// var server = https.createServer(https_options, app);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
-server.listen(port,function(){
-  console.log("███╗   ██╗ ██████╗ ██████╗ ███████╗    ███████╗███████╗██████╗ ██╗   ██╗███████╗██████╗     ███████╗████████╗ █████╗ ██████╗ ████████╗██╗ ");
-  console.log("████╗  ██║██╔═══██╗██╔══██╗██╔════╝    ██╔════╝██╔════╝██╔══██╗██║   ██║██╔════╝██╔══██╗    ██╔════╝╚══██╔══╝██╔══██╗██╔══██╗╚══██╔══╝██║ ");
-  console.log("██╔██╗ ██║██║   ██║██║  ██║█████╗      ███████╗█████╗  ██████╔╝██║   ██║█████╗  ██████╔╝    ███████╗   ██║   ███████║██████╔╝   ██║   ██║ ");
-  console.log("██║╚██╗██║██║   ██║██║  ██║██╔══╝      ╚════██║██╔══╝  ██╔══██╗╚██╗ ██╔╝██╔══╝  ██╔══██╗    ╚════██║   ██║   ██╔══██║██╔══██╗   ██║   ╚═╝ ");
-  console.log("██║ ╚████║╚██████╔╝██████╔╝███████╗    ███████║███████╗██║  ██║ ╚████╔╝ ███████╗██║  ██║    ███████║   ██║   ██║  ██║██║  ██║   ██║   ██╗ ");
-  console.log("╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝    ╚══════╝╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚══════╝╚═╝  ╚═╝    ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ");
-//   console.log("██████╗  ██████╗ ██████╗ ████████╗    ██████╗  ██████╗  ██████╗  ██████╗                                                                  ");
-//   console.log("██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝    ╚════██╗██╔═████╗██╔═████╗██╔═████╗                                                                 ");
-//   console.log("██████╔╝██║   ██║██████╔╝   ██║        █████╔╝██║██╔██║██║██╔██║██║██╔██║                                                                 ");
-//   console.log("██╔═══╝ ██║   ██║██╔══██╗   ██║        ╚═══██╗████╔╝██║████╔╝██║████╔╝██║                                                                 ");
-//   console.log("██║     ╚██████╔╝██║  ██║   ██║       ██████╔╝╚██████╔╝╚██████╔╝╚██████╔╝                                                                 ");
-//   console.log("╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝       ╚═════╝  ╚═════╝  ╚═════╝  ╚═════╝                                                                  ");
-  console.log("%s",sServerName);
+server.listen(port, function () {
+	if(process.env.active_type === "dev"){
+		console.log("██████╗ ███████╗██╗   ██╗        ");
+		console.log("██╔══██╗██╔════╝██║   ██║        ");
+		console.log("██║  ██║█████╗  ██║   ██║        ");
+		console.log("██║  ██║██╔══╝  ╚██╗ ██╔╝        ");
+		console.log("██████╔╝███████╗ ╚████╔╝         ");
+		console.log("╚═════╝ ╚══════╝  ╚═══╝          ");
+	}else if(process.env.active_type === "stag"){
+		console.log("███████╗████████╗ ██████╗        ");
+		console.log("██╔════╝╚══██╔══╝██╔════╝        ");
+		console.log("███████╗   ██║   ██║  ███╗       ");
+		console.log("╚════██║   ██║   ██║   ██║       ");
+		console.log("███████║   ██║   ╚██████╔╝       ");
+		console.log("╚══════╝   ╚═╝    ╚═════╝        ");
+	}else if(process.env.active_type === "prod"){
+		console.log("██████╗ ██████╗  ██████╗ ██████╗ ");
+		console.log("██╔══██╗██╔══██╗██╔═══██╗██╔══██╗");
+		console.log("██████╔╝██████╔╝██║   ██║██║  ██║");
+		console.log("██╔═══╝ ██╔══██╗██║   ██║██║  ██║");
+		console.log("██║     ██║  ██║╚██████╔╝██████╔╝");
+		console.log("╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ");
+	};
+	// console.log("███╗   ██╗ ██████╗ ██████╗ ███████╗    ███████╗███████╗██████╗ ██╗   ██╗███████╗██████╗     ███████╗████████╗ █████╗ ██████╗ ████████╗██╗ ");
+	// console.log("████╗  ██║██╔═══██╗██╔══██╗██╔════╝    ██╔════╝██╔════╝██╔══██╗██║   ██║██╔════╝██╔══██╗    ██╔════╝╚══██╔══╝██╔══██╗██╔══██╗╚══██╔══╝██║ ");
+	// console.log("██╔██╗ ██║██║   ██║██║  ██║█████╗      ███████╗█████╗  ██████╔╝██║   ██║█████╗  ██████╔╝    ███████╗   ██║   ███████║██████╔╝   ██║   ██║ ");
+	// console.log("██║╚██╗██║██║   ██║██║  ██║██╔══╝      ╚════██║██╔══╝  ██╔══██╗╚██╗ ██╔╝██╔══╝  ██╔══██╗    ╚════██║   ██║   ██╔══██║██╔══██╗   ██║   ╚═╝ ");
+	// console.log("██║ ╚████║╚██████╔╝██████╔╝███████╗    ███████║███████╗██║  ██║ ╚████╔╝ ███████╗██║  ██║    ███████║   ██║   ██║  ██║██║  ██║   ██║   ██╗ ");
+	// console.log("╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝    ╚══════╝╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚══════╝╚═╝  ╚═╝    ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ");
+	// console.log("██████╗  ██████╗ ██████╗ ████████╗    ██████╗  ██████╗  ██████╗  ██████╗                                                                  ");
+	// console.log("██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝    ╚════██╗██╔═████╗██╔═████╗██╔═████╗                                                                 ");
+	// console.log("██████╔╝██║   ██║██████╔╝   ██║        █████╔╝██║██╔██║██║██╔██║██║██╔██║                                                                 ");
+	// console.log("██╔═══╝ ██║   ██║██╔══██╗   ██║        ╚═══██╗████╔╝██║████╔╝██║████╔╝██║                                                                 ");
+	// console.log("██║     ╚██████╔╝██║  ██║   ██║       ██████╔╝╚██████╔╝╚██████╔╝╚██████╔╝                                                                 ");
+	// console.log("╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝       ╚═════╝  ╚═════╝  ╚═════╝  ╚═════╝                                                                  ");
+
+	// console.log("██████╗  ██████╗ ██████╗ ████████╗     █████╗ ██╗  ██╗██╗  ██╗██████╗ ");
+	// console.log("██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝    ██╔══██╗██║  ██║██║  ██║╚════██╗");
+	// console.log("██████╔╝██║   ██║██████╔╝   ██║       ╚██████║███████║███████║ █████╔╝");
+	// console.log("██╔═══╝ ██║   ██║██╔══██╗   ██║        ╚═══██║╚════██║╚════██║ ╚═══██╗");
+	// console.log("██║     ╚██████╔╝██║  ██║   ██║        █████╔╝     ██║     ██║██████╔╝");
+	// console.log("╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝        ╚════╝      ╚═╝     ╚═╝╚═════╝ ");
+	//console.log("%s", sServerName);
 });
 
 /**
  * Server Event Listener
  */
-server.on('error', onError);
-server.on('listening', onListening);
-server.on('request',onRequest);
-server.on('connection',onConnection);
-
-
+server	.on('error', 		onError)
+		.on('listening', 	onListening);
+		// .on('request', 		onRequest);
+		// .on('connection', 	onConnection)
+		// .on('close', 		onClose)
+		// .on('exit', 		onExit)
+		// .on('finish', 		onFinish)
+		// .on('infomation', 	onInfomation)
+		// .on('abort', 		onAbort)
+		// .on('timeout', 		onTimeout);
 /**
  * Normalize a port into a number, string, or false.
  */
 function normalizePort(val) {
-  var port = parseInt(val, 10);
+	var port = parseInt(val, 10);
 
-  if (isNaN(port)) {
-    // named pipe
-    return val;
-  }
+	if (isNaN(port)) {
+		// named pipe
+		return val;
+	}
 
-  if (port >= 0) {
-    // port number
-    return port;
-  }
+	if (port >= 0) {
+		// port number
+		return port;
+	}
 
-  return false;
+	return false;
 }
 
 /**
  * Event listener for HTTP server "error" event.
  */
 function onError(error) {
-  console.log('onError start');
+	console.error('onError start');
 
-  if (error.syscall !== 'listen') {
-    throw error;
-  }
+	if (error.syscall !== 'listen') {
+		throw error;
+	};
 
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+	var bind = typeof port === 'string'
+		? 'Pipe ' + port
+		: 'Port ' + port;
 
-  // handle specific listen errors with friendly messages
-  switch (error.code) {
-    case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
-      process.exit(1);
-      break;
-    case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
-      process.exit(1);
-      break;
-    default:
-      throw error;
-  }
+	// handle specific listen errors with friendly messages
+	switch (error.code) {
+		case 'EACCES':
+			console.error(bind + ' requires elevated privileges');
+			process.exit(1);
+			break;
+		case 'EADDRINUSE':
+			console.error(bind + ' is already in use');
+			process.exit(1);
+			break;
+		default:
+			throw error;
+	};
 
-  console.log('onError end');
+	console.error('onError end');
 };
 
 /**
  * Event listener for HTTP server "listening" event.
  */
 function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+	var addr = server.address();
+	var bind = typeof addr === 'string'
+		? 'pipe ' + addr
+		: 'port ' + addr.port;
+	debug('Listening on ' + bind);
 };
 
 /**
  * Event listener for HTTP server "request" event.
  */
-function onRequest(req,res) {
-  // console.log('onRequest start');
-  // console.log(req.headers);
-  // console.log("req.rawHeaders => "+req.rawHeaders);
-  // console.log("req.url        => "+req.url);
-  // console.log("req.method     => "+req.method);
-  // // console.log("req.timeout    => "+req.server.timeout);
-  // console.log("req._peername  => "+req._peername);
-  // console.log("req.baseUrl    => "+req.baseUrl);
-  // console.log("req.originalUrl=> "+req.originalUrl);
-  // console.log("req._startTime => "+req._startTime);
-  // console.log("req._startAt   => "+req._startAt);
-  // console.log("req._remoteAddress=> "+req._remoteAddress);
-  // console.log(req.body);
-  // console.log("req.httpVersion=> "+req.httpVersion);
-  // console.log(req.params);
-  // console.log(req.query);
-  // console.log("req.secret     => "+req.secret);
-  // console.log(req.cookies);
-  // console.log('onRequest end');
-};
+// function onRequest(req, res) {
+	//console.log("ON REQUEST");
+	// console.log('onRequest start');
+	// console.log(req.headers);
+	// console.log("req.rawHeaders => "+req.rawHeaders);
+	// console.log("req.url        => "+req.url);
+	// console.log("req.method     => "+req.method);
+	// console.log("req.timeout    => "+req.server.timeout);
+	// console.log("req._peername  => "+req._peername);
+	// console.log("req.baseUrl    => "+req.baseUrl);
+	// console.log("req.originalUrl=> "+req.originalUrl);
+	// console.log("req._startTime => "+req._startTime);
+	// console.log("req._startAt   => "+req._startAt);
+	// console.log("req._remoteAddress=> "+req._remoteAddress);
+	// console.log(req.body);
+	// console.log("req.httpVersion=> "+req.httpVersion);
+	// console.log(req.params);
+	// console.log(req.query);
+	// console.log("req.secret     => "+req.secret);
+	// console.log(req.cookies);
+	// console.log('onRequest end');
+// };
+
+// function onConnection(socket) { console.log("ON SOCKET"); };
+// function onClose(){ 			console.log("ON CLOSE"); };
+// function onExit(){ 				console.log("ON EXIT"); };
+// function onFinish(){ 			console.log("ON FINISH"); };
+// function onInfomation(info){	console.log("ON INFORMAION"); };
+// function onAbort(){ 			console.log("ON ABORT"); };
+// function onTimeout(){ 			console.log("ON TIMEOUT"); };
+
+
+// process.on("close", function(){ console.log("process onClose"); });
+// process.on("abort",function(){ 	console.log("process onAbort"); });
+// process.on("exit",function(){ 	console.log("process onExit"); });
+// process.on("finish",function(){	console.log("process onFinish"); });
 
 /**
  * Event listener for HTTP server "connection" event.
  */
-function onConnection(socket){
-  //console.log('onConnection start');
-  //console.log(socket);
-  //console.log('onConnection end');
-};
+// function onConnection(socket) {
+	//console.log('onConnection start');
+	//console.log(socket);
+	//console.log('onConnection end');
+// };
+
+
+
+
+
+
+
+
+
+
+

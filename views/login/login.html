@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Login Page - Product Admin Template</title>
+    <!-- <link rel="stylesheet" href="/stylesheets/login/robot.css"/> -->
+    <link rel="stylesheet" href="/stylesheets/login/fontawesome.min.css" />
+    <link rel="stylesheet" href="/stylesheets/login/bootstrap.min.css" />
+	<link rel="stylesheet" href="/stylesheets/login/templatemo-style.css">
+	<script src="/javascripts/jquery/jquery.3.4.1.min.js" type="text/javascript"></script>
+	<script src="/javascripts/jquery/bootstrap.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		$(function(){
+
+			$("#login").click(function(){
+				var userid = $("#userid").val();
+				var password = $("#password").val();
+
+				if(!userid || userid == ""){
+					alert("사용자를 입력 하세요");
+					$("#userid").focus();
+					return;
+				}
+
+				if(!password || password == ""){
+					alert("패스워드를 입력 하세요");
+					$("#password").focus();
+					return;
+				}
+
+				$.ajax({
+					url       : "/login",
+					type      : "GET",
+					async	  : false,  
+					dataType  : "json",
+					data      : $("#fm01").serialize(),
+					success: function(data) {
+						var cnt = data[0].CNT;
+						if(cnt == 0){
+							alert("로그인 실패");
+							return;
+						}else if(cnt == 1){
+							alert("로그인 성공");
+							location.href = "/main";
+						}else{
+							alert("에러~~~");
+							return;
+						}
+					}
+				});
+			});
+			$("#join").click(function(){
+				alert("가입");
+			});
+		});
+	</script>
+  </head>
+
+  <body>
+    <div>
+      <nav class="navbar navbar-expand-xl">
+      </nav>
+    </div>
+
+    <div class="container tm-mt-big tm-mb-big">
+      <div class="row">
+        <div class="col-12 mx-auto tm-login-col">
+          <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+            <div class="row">
+              <div class="col-12 text-center">
+                <h2 class="tm-block-title mb-4">Welcome to Interface, Login</h2>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-12">
+                <form id="fm01" class="tm-login-form">
+                  <div class="form-group">
+                    <label for="username">User ID</label>
+                    <input name="userid" type="text" class="form-control validate" id="userid" value="" required/>
+                  </div>
+                  <div class="form-group mt-3">
+                    <label for="password">Password</label>
+                    <input name="password" type="password" class="form-control validate" id="password" value="" required/>
+                  </div>
+                  <div class="form-group mt-4">
+                    	<button id="login" type="button" class="btn btn-primary btn-block text-uppercase">
+                      		Login
+						</button>
+						<button id="join" type="button"  class="btn btn-primary btn-block text-uppercase">
+							Join
+					  	</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="tm-footer row tm-mt-small">
+      <div class="col-12 font-weight-light">
+      </div>
+    </footer>
+  </body>
+</html>
