@@ -1,0 +1,116 @@
+<!-- SCRIPT -->
+<script>
+	$(function(){
+
+
+		var pageObj = $("#pagination").pagination({
+			items: 1,
+			itemsOnPage: 20,
+			cssStyle: 'light-theme',
+			onPageClick : function(p,e){
+				console.log(p);
+			}
+		});
+
+		//GRID 생성
+		make_header();
+		retrieve(1);
+		
+
+		//layerPopup();
+
+		$(".close-button, #mCancel").click((e)=>{
+			$(".modal").removeClass("show-modal");
+		});
+	});
+		
+	var make_header = ()=>{
+		var header = ["No","저장소ID","저장소명","저장소타입","저장소설명","저장소용량","저장소토큰","생성자","생성일자"];
+		$.each(header, function(i,v){
+			$("#ghead").append("<th>"+v+"</th>");
+		});
+	};
+
+	var layerPopup = ()=>{
+		var modal = $(".modal");
+		var closeButton = $(".close-button");
+		//modal.classList.toggle("show-modal");
+		$(".modal").addClass("show-modal");
+		
+	};
+
+	var retrieve = (num) => {
+		$.ajax({
+			url       : "/repository/list",
+			type      : "GET",
+			async	  : false,
+			success: function(data) {
+				//console.log(data);
+				//$("#contents").empty().append(html);
+				if(data){
+					var rows = "";
+					//REPO_ID,REPO_NM,REPO_DESC,REPO_TYPE,REPO_VOLUME,ACC_TOKEN,REG_ID,REG_DT,MOD_ID,MOD_DT
+					$.each(data, function(i,r){
+						console.log(r);
+						rows += "<tr>";
+						rows += "<td>"+r.REPO_NO+"</td>";
+						rows += "<td>"+r.REPO_ID+"</td>";
+						rows += "<td>"+r.REPO_NM+"</td>";
+						rows += "<td>"+r.REPO_TYPE+"</td>";
+						rows += "<td>"+r.REPO_DESC+"</td>";
+						rows += "<td>"+r.REPO_VOLUME+"</td>";
+						rows += "<td>"+r.ACC_TOKEN+"</td>";
+						rows += "<td>"+r.REG_ID+"</td>";
+						rows += "<td>"+r.REG_DT+"</td>";
+						rows += "</tr>"
+					});
+					console.log(rows);
+					$("#ghead").after(rows);
+				}
+			}
+		});
+	};
+</script>
+<!-- SCRIPT END-->
+<!-- CONTDITION -->
+	<div class="w3-row-padding" style="height:800px;">
+		<form id="fm01">
+				<label for="email">Email</label>
+				<input type="email" name="email" placeholder="Your email" required="required">
+				<label></label>
+				<textarea name="message" placeholder="Test Message" required="required"></textarea>
+				<input type="button" id="mCancel" value="취소">
+				<input type="button" id="mSave" value="저장">
+		</form>
+	</div>
+	
+<!-- CONTDITION END -->
+<!-- DATA GRID -->
+	<section>
+	<div class="w3-row-padding" style="height:800px;">
+		<div style="margin-top:10px;border:1px solid rgba(100, 101, 105, 0.2); width:100%;height:700px;">
+			<table >
+				<tr id="ghead"></tr>
+			</table>
+			<div id="pagination" style="position:absolute; left:50%; margin-left:-50px;margin-top:10px;"></div>
+		</div>
+	</div>
+</section>
+<!-- DATA GRID END-->
+<!-- Layer Popup-->
+	<!-- 팝업 될 레이어 --> 
+<div class="modal" style="z-index:10;">
+	<div class="modal-content">
+		<span class="close-button">&times;</span>
+		<h1 class="title">테스트</h1>
+		<form id="fm01">
+			<label for="email">Email</label>
+			<input type="email" name="email" placeholder="Your email" required="required">
+			<label></label>
+			<textarea name="message" placeholder="Test Message" required="required"></textarea>
+			<input type="button" id="mCancel" value="취소">
+			<input type="button" id="mSave" value="저장">
+		</form>
+	</div>
+</div>
+<!-- Layer Popup End-->

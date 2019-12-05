@@ -7,6 +7,7 @@
 <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link type="text/css" rel="stylesheet" href="/stylesheets/paging/simplePagination.css"/>
 <link type="text/css" rel="stylesheet" href="/stylesheets/main/style.css"/>
+<link type="text/css" rel="stylesheet" href="/stylesheets/form.css"/>
 
 <script type="text/javascript" src="/javascripts/jquery/jquery.3.4.1.min.js"></script>
 <script type="text/javascript" src="/javascripts/jquery/jquery.simplePagination.js"></script>	
@@ -31,16 +32,20 @@
 				.prepend("<i class='fa fa-caret-right w3-margin-right'></i>");
 
 			$("#menuNm").text($(this).attr("title"));
+
+			var url = $(this).attr("url");
+			$.ajax({
+				url       : url,
+				type      : "GET",
+				async	  : false,
+				success: function(html) {
+					$("#contents").empty().append(html);
+				}
+			});
+
 		});
 
-		$.ajax({
-			url       : "/repository",
-			type      : "GET",
-			async	  : false,
-			success: function(html) {
-				$("#contents").empty().append(html);
-			}
-		});
+
 	});
 
 // 	function w3_open() {
@@ -60,62 +65,46 @@
 	var bar_close = () => {
 		$("#m_sidebar, #m_overlay").hide();
 	};
-	// var make_header = ()=>{
-	// 	var header = ["Company","Contact","Country"];
-	// 	$.each(header, function(i,v){
-	// 		$("#ghead").append("<th>"+v+"</th>");
-	// 	});
-	// };
-
-	// var layerPopup = ()=>{
-	// 	var modal = $(".modal");
-	// 	var closeButton = $(".close-button");
-	// 	//modal.classList.toggle("show-modal");
-	// 	$(".modal").addClass("show-modal");
-		
-	// };
 </script>
 <body class="w3-content" style="max-width:1400px">
 	<!-- Sidebar/menu -->
 	<nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px;border-right: 1px solid rgba(100, 101, 105, 0.2);" id="m_sidebar">
-	<div class="w3-container w3-display-container w3-padding-16">
-		<i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
-		<h3 class="w3-wide"><img src="/images/datanuri_logo.png" onclick="javascript:location.hreg='/logout'"></h3>
-	</div>
-	<div id="leftMenu" class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
-		
-		<a id="storgae" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align">
-			저장소 <i class="fa fa-caret-down"></i>
-		</a>
-		<div id="storgae-sub" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-			<a href="javascript:void(0)" class="w3-bar-item w3-button" title="저장소 등록" url="/repository">목록</a>
-			<a href="javascript:void(0)" class="w3-bar-item w3-button" title="저장소 이력" url="/repository/history">이력</a>
+		<div class="w3-container w3-display-container w3-padding-16">
+			<i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
+			<h3 class="w3-wide"><img src="/images/datanuri_logo.png" onclick="javascript:location.hreg='/logout'"></h3>
 		</div>
+		<div id="leftMenu" class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
+			
+			<a id="storgae" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align">
+				저장소 <i class="fa fa-caret-down"></i>
+			</a>
+			<div id="storgae-sub" class="w3-bar-block w3-hide w3-padding-large w3-medium">
+				<a href="javascript:void(0)" class="w3-bar-item w3-button" title="저장소 목록" url="/repository">목록</a>
+				<a href="javascript:void(0)" class="w3-bar-item w3-button" title="저장소 이력" url="/repository/history">이력</a>
+			</div>
 
-		<a id="metadata" href="javascript:void(0)"  class="w3-button w3-block w3-white w3-left-align">
-			메타데이터  <i class="fa fa-caret-down"></i>
-		</a>
-		<div id="metadata-sub" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-				<a href="javascript:void(0)" class="w3-bar-item w3-button" title="메타데이터 등록" url="/metadata">목록</a>
-				<a href="javascript:void(0)" class="w3-bar-item w3-button" title="메타데이터 이력" url="/metadata/history">이력</a>
+			<a id="metadata" href="javascript:void(0)"  class="w3-button w3-block w3-white w3-left-align">
+				메타데이터  <i class="fa fa-caret-down"></i>
+			</a>
+			<div id="metadata-sub" class="w3-bar-block w3-hide w3-padding-large w3-medium">
+					<a href="javascript:void(0)" class="w3-bar-item w3-button" title="메타데이터 목록" url="/metadata">목록</a>
+					<a href="javascript:void(0)" class="w3-bar-item w3-button" title="메타데이터 이력" url="/metadata/history">이력</a>
+			</div>
+
+			<a id="dataload" href="javascript:void(0)"  class="w3-button w3-block w3-white w3-left-align">
+				적재  <i class="fa fa-caret-down"></i>
+			</a>
+			<div id="dataload-sub" class="w3-bar-block w3-hide w3-padding-large w3-medium">
+					<a href="javascript:void(0)" class="w3-bar-item w3-button" title="적재 목록" url="/dataload">목록</a>
+					<a href="javascript:void(0)" class="w3-bar-item w3-button" title="적재 이력" url="/dataload/history">이력</a>
+			</div>
 		</div>
-
-		<a id="dataload" href="javascript:void(0)"  class="w3-button w3-block w3-white w3-left-align">
-			적재  <i class="fa fa-caret-down"></i>
-		</a>
-		<div id="dataload-sub" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-				<a href="javascript:void(0)" class="w3-bar-item w3-button" title="적재 등록" url="/dataload">목록</a>
-				<a href="javascript:void(0)" class="w3-bar-item w3-button" title="적재 이력" url="/dataload/history">이력</a>
-		</div>
-
-	</div>
-
 	</nav>
 
 	<!-- Top menu on small screens -->
 	<header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
-	<div class="w3-bar-item w3-padding-24 w3-wide">LOGO</div>
-	<a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="bar_open()"><i class="fa fa-bars"></i></a>
+		<div class="w3-bar-item w3-padding-24 w3-wide">Datanuri Interface Management</div>
+		<a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="bar_open()"><i class="fa fa-bars"></i></a>
 	</header>
 
 	<!-- Overlay effect when opening sidebar on small screens -->
@@ -128,10 +117,10 @@
 	<!-- <div class="w3-hide-large" style="margin-top:83px"></div> -->
 	
 	<!-- Top header -->
-	<header class="w3-container w3-xlarge" style="background-color: darkgray;">
+	<header class="w3-container w3-xlarge" style="background-color:whitesmoke;">
 		<p id="menuNm" class="w3-left">MAIN</p>
 		<p class="w3-right">
-				admin <a href="javascript:location.href='/logout';"> <span style="color:darkslategray">Logout</span></a>
+			admin <a href="javascript:location.href='/logout';"> <span style="color:darkslategray">Logout</span></a>
 		</p>
 	</header>
 	<!-- BODY CONTENT -->

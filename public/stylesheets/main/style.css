@@ -12,13 +12,12 @@ td, th {
   text-align: left;
   padding: 8px;
 }
+tr{height: 24px;}
 tr:nth-child(even) {
   background-color: #dddddd;
 }
-
-form { margin: 0 auto; width: 459px; }
 input, textarea {
-	width: 439px;
+	width: 570px;
 	height: 27px;
 	background-color: #efefef;
 	border-radius: 6px;
@@ -75,8 +74,8 @@ textarea{ height: 60px; background-color: #efefef; }
 	transform: translate(-50%, -50%);
 	background-color: white;
 	padding: 1rem 1.5rem;
-	width: 500px;
-	height: 350px;
+	width: 700px;
+	height: 500px;
 	border-radius: 0.5rem;
 }
 .close-button {
