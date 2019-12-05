@@ -3,118 +3,13 @@
 <title>Interface</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link type="text/css" rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link type="text/css" rel="stylesheet" href="/stylesheets/main/w3.css">
 <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
 <link type="text/css" rel="stylesheet" href="/stylesheets/paging/simplePagination.css"/>
+<link type="text/css" rel="stylesheet" href="/stylesheets/main/style.css"/>
 
 <script type="text/javascript" src="/javascripts/jquery/jquery.3.4.1.min.js"></script>
 <script type="text/javascript" src="/javascripts/jquery/jquery.simplePagination.js"></script>	
-
-
-<style>
-.w3-sidebar a {font-family: "Roboto", sans-serif}
-body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
-
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-
-form {
-	margin: 0 auto;
-	width: 459px;
-}
-input, textarea {
-	width: 439px;
-	height: 27px;
-	background-color: #efefef;
-	border-radius: 6px;
-	border: 1px solid #dedede; 
-	padding: 10px;
-	margin-top: 3px;
-	font-size: 0.9em;
-	color: #3a3a3a; 
-}
-input:focus, textarea:focus{ border: 1px solid #97d6eb; }
-textarea{ height: 60px; background-color: #efefef; }
-#mSave{
-	width: 127px;
-	height: 48px;
-	text-align: center;
-	border: none;
-	margin-top: 20px;
-	cursor: pointer;
-}
-#mSave:hover{
-	color: #fff;
-	background-color: #216282;
-	opacity: 0.9;
-}
-#mCancel {
-	width: 127px; height: 48px;
-	text-align: center;
-	border: none;
-	margin-top: 20px;
-	cursor: pointer;
-}
-#mCancel:hover{
-	color: #fff;
-	background-color: #216282;
-	opacity: 0.9;
-}
-
-.modal {
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0, 0, 0, 0.5);
-	opacity: 0;
-	visibility: hidden;
-	transform: scale(1.1);
-	transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
-}
-.modal-content {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	background-color: white;
-	padding: 1rem 1.5rem;
-	width: 500px;
-	height: 350px;
-	border-radius: 0.5rem;
-}
-.close-button {
-	float: right;
-	width: 1.5rem;
-	line-height: 1.5rem;
-	text-align: center;
-	cursor: pointer;
-	border-radius: 0.25rem;
-	background-color: lightgray;
-}
-.close-button:hover {
-	background-color: darkgray;
-}
-.show-modal {
-	opacity: 1;
-	visibility: visible;
-	transform: scale(1.0);
-	transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
-}
-</style>
 <script>
 	$(function(){
 		$("#leftMenu > a").on("click",function(){
@@ -138,45 +33,33 @@ textarea{ height: 60px; background-color: #efefef; }
 			$("#menuNm").text($(this).attr("title"));
 		});
 
-		// make_header();
-
-		// var pageObj = $("#pagination").pagination({
-		// 	items: 100,
-		// 	itemsOnPage: 10,
-		// 	cssStyle: 'light-theme',
-		// 	onPageClick : function(p,e){
-		// 		console.log(p);
-		// 	}
-		// });
-
-		// //그리드 아이템 수 변경 10 => 20으로
-		// pageObj.pagination('updateItemsOnPage', 5);
-
-		// // 조회된 아이템수 변경 100 => 200
-		// pageObj.pagination('updateItems', 200);
-
-		// //페이지 선택 1 => 5
-		// pageObj.pagination('drawPage', 5);
-		// pageObj.pagination('selectPage', 6);
-		
-
-		// layerPopup();
-
-		// $(".close-button, #mCancel").click((e)=>{
-		// 	$(".modal").removeClass("show-modal");
-		// });
-
 		$.ajax({
 			url       : "/repository",
 			type      : "GET",
 			async	  : false,
 			success: function(html) {
-				console.log(html);
+				$("#contents").empty().append(html);
 			}
 		});
-		
 	});
 
+// 	function w3_open() {
+//   document.getElementById("mySidebar").style.display = "block";
+//   document.getElementById("myOverlay").style.display = "block";
+// }
+ 
+// function w3_close() {
+//   document.getElementById("mySidebar").style.display = "none";
+//   document.getElementById("myOverlay").style.display = "none";
+// }
+
+	var bar_open = () => {
+		$("#m_sidebar, #m_overlay").show();
+	};
+
+	var bar_close = () => {
+		$("#m_sidebar, #m_overlay").hide();
+	};
 	// var make_header = ()=>{
 	// 	var header = ["Company","Contact","Country"];
 	// 	$.each(header, function(i,v){
@@ -194,7 +77,7 @@ textarea{ height: 60px; background-color: #efefef; }
 </script>
 <body class="w3-content" style="max-width:1400px">
 	<!-- Sidebar/menu -->
-	<nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px;border-right: 1px solid rgba(100, 101, 105, 0.2);" id="mySidebar">
+	<nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px;border-right: 1px solid rgba(100, 101, 105, 0.2);" id="m_sidebar">
 	<div class="w3-container w3-display-container w3-padding-16">
 		<i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
 		<h3 class="w3-wide"><img src="/images/datanuri_logo.png" onclick="javascript:location.hreg='/logout'"></h3>
@@ -205,24 +88,24 @@ textarea{ height: 60px; background-color: #efefef; }
 			저장소 <i class="fa fa-caret-down"></i>
 		</a>
 		<div id="storgae-sub" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-			<a href="javascript:void(0)" class="w3-bar-item w3-button" title="저장소 등록" url="/repository">등록</a>
-			<a href="javascript:void(0)" class="w3-bar-item w3-button" title="저장소 이력">이력</a>
+			<a href="javascript:void(0)" class="w3-bar-item w3-button" title="저장소 등록" url="/repository">목록</a>
+			<a href="javascript:void(0)" class="w3-bar-item w3-button" title="저장소 이력" url="/repository/history">이력</a>
 		</div>
 
 		<a id="metadata" href="javascript:void(0)"  class="w3-button w3-block w3-white w3-left-align">
 			메타데이터  <i class="fa fa-caret-down"></i>
 		</a>
 		<div id="metadata-sub" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-				<a href="javascript:void(0)" class="w3-bar-item w3-button" title="메타데이터 등록">등록</a>
-				<a href="javascript:void(0)" class="w3-bar-item w3-button" title="메타데이터 이력">이력</a>
+				<a href="javascript:void(0)" class="w3-bar-item w3-button" title="메타데이터 등록" url="/metadata">목록</a>
+				<a href="javascript:void(0)" class="w3-bar-item w3-button" title="메타데이터 이력" url="/metadata/history">이력</a>
 		</div>
 
 		<a id="dataload" href="javascript:void(0)"  class="w3-button w3-block w3-white w3-left-align">
 			적재  <i class="fa fa-caret-down"></i>
 		</a>
 		<div id="dataload-sub" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-				<a href="javascript:void(0)" class="w3-bar-item w3-button" title="적재 등록">등록</a>
-				<a href="javascript:void(0)" class="w3-bar-item w3-button" title="적재 이력">이력</a>
+				<a href="javascript:void(0)" class="w3-bar-item w3-button" title="적재 등록" url="/dataload">목록</a>
+				<a href="javascript:void(0)" class="w3-bar-item w3-button" title="적재 이력" url="/dataload/history">이력</a>
 		</div>
 
 	</div>
@@ -232,11 +115,11 @@ textarea{ height: 60px; background-color: #efefef; }
 	<!-- Top menu on small screens -->
 	<header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
 	<div class="w3-bar-item w3-padding-24 w3-wide">LOGO</div>
-	<a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></a>
+	<a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="bar_open()"><i class="fa fa-bars"></i></a>
 	</header>
 
 	<!-- Overlay effect when opening sidebar on small screens -->
-	<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+	<div class="w3-overlay w3-hide-large" onclick="bar_close()" style="cursor:pointer" title="close side menu" id="m_overlay"></div>
 
 	<!-- !PAGE CONTENT! -->
 	<div class="w3-main" style="margin-left:250px">
@@ -252,7 +135,7 @@ textarea{ height: 60px; background-color: #efefef; }
 		</p>
 	</header>
 	<!-- BODY CONTENT -->
-	<div id="body_content"></div>
+	<div id="contents"></div>
 	<!-- BODY CONTENT END-->
 </body>
 </html>
