@@ -13,19 +13,20 @@
 		make_header();
 
 		$(".close-button, #mCancel").click((e)=>{
+			$("#fm01p")[0].reset();
 			$(".modal").removeClass("show-modal");
 		});
 
 		$("#searchBtn").click((e)=>{
-			repoRetrieve(1);
+			repo_retrieve(1);
 		});
 
 		$("#creRepo").click((e)=>{
-			layerPopup();
+			register_popup();
 		});
 
 		$("#mSave").click((e)=>{
-			repoSave();
+			repo_save();
 		});
 
 	});
@@ -37,7 +38,7 @@
 		});
 	};
 
-	var layerPopup = ()=>{
+	var register_popup = ()=>{
 		var modal = $(".modal");
 		var closeButton = $(".close-button");
 		//modal.classList.toggle("show-modal");
@@ -45,14 +46,15 @@
 		
 	};
 
-	var repoRetrieve = (num) => {
+	var repo_retrieve = (num) => {
 		console.log($("#fm01").serialize());
 		$.ajax({
-			url       : "/repository/list",
+			url       : "/repo/list",
 			type      : "GET",
 			async	  : false,
 			data	  : $("#fm01").serialize(),
 			success: function(data) {
+				console.log(data);
 				$("#gTable tr").not('tr:first').remove();
 				//console.log(data);
 				//$("#contents").empty().append(html);
@@ -61,27 +63,30 @@
 					//REPO_ID,REPO_NM,REPO_DESC,REPO_TYPE,REPO_VOLUME,ACC_TOKEN,REG_ID,REG_DT,MOD_ID,MOD_DT
 					$.each(data, function(i,r){
 						rows += "<tr>";
-						rows += "<td>"+r.REPO_NO+"</td>";
-						rows += "<td>"+r.REPO_ID+"</td>";
-						rows += "<td>"+r.REPO_NM+"</td>";
-						rows += "<td>"+r.REPO_TYPE+"</td>";
-						rows += "<td>"+r.REPO_DESC+"</td>";
-						rows += "<td>"+r.REPO_VOLUME+"</td>";
-						rows += "<td>"+r.ACC_TOKEN+"</td>";
-						rows += "<td>"+r.REG_ID+"</td>";
-						rows += "<td>"+r.REG_DT+"</td>";
+						rows += "<td>"+r.repo_no+"</td>";
+						rows += "<td>"+r.repo_id+"</td>";
+						rows += "<td>"+r.repo_nm+"</td>";
+						rows += "<td>"+r.repo_type+"</td>";
+						rows += "<td>"+r.repo_desc+"</td>";
+						rows += "<td>"+r.repo_volume+"</td>";
+						rows += "<td>"+r.acc_token+"</td>";
+						rows += "<td>"+r.reg_id+"</td>";
+						rows += "<td>"+r.reg_dt+"</td>";
 						rows += "</tr>"
 					});
 					$("#ghead").after(rows);
 				}
+			},
+			error:function(request,status,error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		});
 	};
 
-	var repoSave = () => {
+	var repo_save = () => {
 		console.log($("#fm01p").serialize());
 		$.ajax({
-			url       : "/repository/save",
+			url       : "/repo/save",
 			type      : "POST",
 			async	  : false,
 			data	  : $("#fm01p").serialize(),
@@ -91,9 +96,14 @@
 					alert("저장 성공!");
 					$(".modal").removeClass("show-modal");
 					repoRetrieve(1);
+					$("#fm01p")[0].reset();
 				}else{
 					alert("저장 실패!");
 				}
+				
+			},
+			error:function(request,status,error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		});
 	};

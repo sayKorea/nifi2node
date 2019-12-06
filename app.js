@@ -22,20 +22,22 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public/images', 'favicon.ico')));
 
 
+
 //ROUTER Mapping
 app.use('/', 		require('./routes/index'));
 app.use('/users', 	require('./routes/interface/users'));
 app.use('/auth', 	require('./routes/interface/auth'));
 app.use('/org', 	require('./routes/interface/org'));
-app.use('/repository', require('./routes/interface/repository'));
+app.use('/repo', 	require('./routes/interface/repository'));
 app.use('/meta', 	require('./routes/interface/meta'));
 app.use('/load', 	require('./routes/interface/load'));
 app.use('/test', 	require('./routes/interface/test'));
+app.all('*',(req,res) => res.status(404).send('<h1> 요청 페이지 없음 </h1>'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res) {
 	//console.log("app.use(function (req, res) {");
-	//console.log(req);
+	console.log(req);
 });
 
 // catch 404 and forward to error handler
@@ -44,6 +46,11 @@ app.use(function (req, res, next) {
 	// console.log(next);
 	next(createError(404));
 });
+
+
+
+
+출처: https://3dmpengines.tistory.com/1868 [3DMP]
 
 // error handler
 app.use(function (err, req, res, next) {

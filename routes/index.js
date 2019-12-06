@@ -1,6 +1,6 @@
 const express = require('express');
-const router = express.Router();
 const dao = require('../common/commonDao');
+const router = express.Router();
 
 /* GET Login page. */
 router.get('/', function(req, res, next) {
@@ -14,19 +14,11 @@ router.get('/login', function(req, res, next) {
 	var params = [userid, password];
 	console.log(userid+" / "+password);
 
-	var query = 'SELECT COUNT(1) AS CNT FROM USER WHERE USER_ID=? AND USER_PASS=?';
-
-	dao.getConnection(function(conn) {
-		conn.query(query, params)
-			.then((data) => {
-				conn.end();
-				res.send(data);
-			})
-			.catch(err => {
-				//handle error
-				console.log(err);
-				conn.end();
-			});
+	var query = 'SELECT COUNT(1) AS CNT FROM USERS WHERE USER_ID=$1 AND USER_PASS=$2';
+	dao.query(query,params, (e, r) => {
+		//console.log(e, r)
+		//pool.end()
+		res.send(r.rows);
 	});
 });
 

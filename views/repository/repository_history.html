@@ -14,8 +14,6 @@
 		$("#searchBtn").click((e)=>{
 			repoRetrieve(1);
 		});
-
-
 	});
 		
 	var make_header = ()=>{
@@ -24,45 +22,39 @@
 			$("#ghead").append("<th>"+v+"</th>");
 		});
 	};
-
-	var layerPopup = ()=>{
-		var modal = $(".modal");
-		var closeButton = $(".close-button");
-		//modal.classList.toggle("show-modal");
-		$(".modal").addClass("show-modal");
-		
-	};
-
 	var repoRetrieve = (num) => {
 		console.log($("#fm01").serialize());
 		$.ajax({
-			url       : "/repository/history_list",
+			url       : "/repo/his_list",
 			type      : "GET",
 			async	  : false,
 			data	  : $("#fm01").serialize(),
 			success: function(data) {
 				$("#gTable tr").not('tr:first').remove();
-				//console.log(data);
+				console.log(data);
 				//$("#contents").empty().append(html);
 				if(data){
 					var rows = "";
 					//REPO_ID,REPO_NM,REPO_DESC,REPO_TYPE,REPO_VOLUME,ACC_TOKEN,REG_ID,REG_DT,MOD_ID,MOD_DT
 					$.each(data, function(i,r){
 						rows += "<tr>";
-						rows += "<td>"+r.REPO_HIS_NO+"</td>";
-						rows += "<td>"+r.REPO_HIS_TYPE+"</td>";
-						rows += "<td>"+r.REPO_ID+"</td>";
-						rows += "<td>"+r.REPO_NM+"</td>";
-						rows += "<td>"+r.REPO_TYPE+"</td>";
-						rows += "<td>"+r.REPO_DESC+"</td>";
-						rows += "<td>"+r.REPO_VOLUME+"</td>";
-						rows += "<td>"+r.ACC_TOKEN+"</td>";
-						rows += "<td>"+r.REG_ID+"</td>";
-						rows += "<td>"+r.REG_DT+"</td>";
+						rows += "<td>"+r.repo_his_no+"</td>";
+						rows += "<td>"+r.repo_his_type+"</td>";
+						rows += "<td>"+r.repo_id+"</td>";
+						rows += "<td>"+r.repo_nm+"</td>";
+						rows += "<td>"+r.repo_type+"</td>";
+						rows += "<td>"+r.repo_desc+"</td>";
+						rows += "<td>"+r.repo_volume+"</td>";
+						rows += "<td>"+r.acc_token+"</td>";
+						rows += "<td>"+r.reg_id+"</td>";
+						rows += "<td>"+r.reg_dt+"</td>";
 						rows += "</tr>"
 					});
 					$("#ghead").after(rows);
 				}
+			},
+			error:function(request,status,error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		});
 	};
@@ -112,7 +104,6 @@
 	</div>
 	<!-- CONTDITION END -->
 	<div class="w3-row-padding" style="height:800px;">
-		<div style="float:right;margin-top:10px;"><button id="creRepo" style="">저장소등록</button></div>
 		<div style="margin-top:10px;border:1px solid rgba(100, 101, 105, 0.2); width:100%;height:700px;">
 			<table id="gTable">
 				<tr id="ghead"></tr>

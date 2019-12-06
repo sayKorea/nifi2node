@@ -1,9 +1,361 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Meta</title>
-  </head>
- <body>
-	<h1>Meta</h1>
- </body>
-</html>
+<!-- SCRIPT -->
+<script>
+	$(function(){
+		var pageObj = $("#pagination").pagination({
+			items: 1,
+			itemsOnPage: 20,
+			cssStyle: 'light-theme',
+			onPageClick : function(p,e){
+				console.log(p);
+			}
+		});
+
+		repoList_retrieve();
+		//GRID 생성
+		make_header();
+
+		$(".close-button, #mCancel").click((e)=>{
+			$("#fm01p")[0].reset();
+			$("#fm02p")[0].reset();
+			$("#regModal , #modModal").removeClass("show-modal");
+		});
+
+		$("#searchBtn").click((e)=>{
+			meta_retrieve(1);
+		});
+
+		$("#creMeta").click((e)=>{
+			register_popup();
+		});
+
+		$("#mSave").click((e)=>{
+			meta_save();
+		});
+
+		$("#mMod").click((e)=>{
+			meta_update();
+		});
+
+	});
+		
+	var make_header = ()=>{
+		var header = ["No","저장소명","메타명","메타설명","소스경로","소스API","타켓경로","타켓API","검증포맷" ];
+		$.each(header, function(i,v){
+			$("#ghead").append("<th>"+v+"</th>");
+		});
+	};
+
+	var register_popup = ()=>{
+		$("#regModal").addClass("show-modal");
+		
+	};
+
+	var repoList_retrieve = () => {
+		$.ajax({
+			url       : "/meta/repo_list",
+			type      : "GET",
+			async	  : false,
+			success: function(data) {
+				console.log(data);
+				if(data){
+					var rows = "";
+					$.each(data, function(i,r){
+						rows +="<option value="+r.cd+">"+r.cdnm+"</option>";
+					});
+					$("#repoNo, #modRepoNo").append(rows);
+				}
+			},
+			error:function(request,status,error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	};
+
+	var meta_retrieve = (num) => {
+		console.log($("#fm01").serialize());
+		$.ajax({
+			url       : "/meta/list",
+			type      : "GET",
+			async	  : false,
+			data	  : $("#fm01").serialize(),
+			success: function(data) {
+				console.log(data);
+				$("#gTable tr").not('tr:first').remove();
+				//console.log(data);
+				//$("#contents").empty().append(html);
+				if(data){
+					var rows = "";
+					//REPO_ID,REPO_NM,REPO_DESC,REPO_TYPE,REPO_VOLUME,ACC_TOKEN,REG_ID,REG_DT,MOD_ID,MOD_DT
+	  
+					$.each(data, function(i,r){
+						rows += "<tr>";
+						rows += "<td><a href='javascript:meta_detail("+r.meta_no+")'>"+r.meta_no+"</a></td>";
+						rows += "<td>"+r.repo_nm+"</td>";
+						rows += "<td>"+r.meta_nm+"</td>";
+						rows += "<td>"+r.meta_desc+"</td>";
+						rows += "<td>"+r.meta_source_host+"</td>";
+						rows += "<td>"+r.meta_source_nifi_api_url+"</td>";
+						rows += "<td>"+r.meta_target_host+"</td>";
+						rows += "<td>"+r.meta_target_nifi_api_url+"</td>";
+						rows += "<td>"+r.meta_valid_str+"</td>";
+						// rows += "<td>"+r.reg_id+"</td>";
+						// rows += "<td>"+r.reg_dt+"</td>";
+						rows += "</tr>"
+					});
+					$("#ghead").after(rows);
+				}
+			},
+			error:function(request,status,error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	};
+
+	var meta_save = () => {
+		console.log($("#fm01p").serialize());
+		$.ajax({
+			url       : "/meta/save",
+			type      : "POST",
+			async	  : false,
+			data	  : $("#fm01p").serialize(),
+			success: function(data) {
+				console.log(data);
+				if(data.success){
+					alert("저장 성공!");
+					$(".modal").removeClass("show-modal");
+					metaRetrieve(1);
+				}else{
+					alert("저장 실패!");
+				}
+			},
+			error:function(request,status,error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	};
+
+	var meta_update = () => {
+		console.log($("#fm01p").serialize());
+		$.ajax({
+			url       : "/meta/update",
+			type      : "POST",
+			async	  : false,
+			data	  : $("#fm02p").serialize(),
+			success: function(data) {
+				console.log(data);
+				if(data.success){
+					alert("수정 성공!");
+					$(".modal").removeClass("show-modal");
+					metaRetrieve(1);
+				}else{
+					alert("수정 실패!");
+				}
+			},
+			error:function(request,status,error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	};
+
+	var meta_detail = (metaNo) => {
+		console.log(metaNo);
+		$.ajax({
+			url       : "/meta/detail_list",
+			type      : "GET",
+			async	  : false,
+			data	  : {metaNo:metaNo},
+			success: function(data) {
+				console.log(data);
+				if(data){
+// 					meta_auth: null
+// meta_desc: "NIFI 연동 테스트"
+// meta_license: null
+// meta_nm: "NIFI 연동 테스트"
+// meta_no: 3
+// meta_source_host: "10.39.143.190"
+// meta_source_nifi_api_url: "192.168.1.130:8080/nifi-api/processors/da9a6bee-016e-1000-02dc-48acef3c38a7"
+// meta_source_pass: "1234"
+// meta_source_path: "/home1/ncloud/test"
+// meta_source_path_type: null
+// meta_source_port: "22"
+// meta_source_user: "ncloud"
+// meta_target_host: "10.39.143.190"
+// meta_target_nifi_api_url: "192.168.1.130:8080/nifi-api/processors/da9a6bee-016e-1000-02dc-48acef3c38a7"
+// meta_target_pass: "1234"
+// meta_target_path: "/"
+// meta_target_path_type: null
+// meta_target_port: "22"
+// meta_target_user: "ncloud"
+// meta_valid_str: "{
+// ↵  "type": "record",
+// ↵  "name": "CandyRecord",
+// ↵  "fields" : [
+// ↵    {"name": "competitorname", "type": "string"},
+// ↵    {"name": "chocolate", "type": ["null","int"]},
+// ↵    {"name": "fruity", "type": "int"},
+// ↵    {"name": "caramel", "type": "int"},
+// ↵    {"name": "peanutyalmondy", "type": "int"},
+// ↵    {"name": "nougat", "type": "int"},
+// ↵    {"name": "crispedricewafer", "type": "int"},
+// ↵    {"name": "hard", "type": "int"},
+// ↵    {"name": "bar", "type": "int"},
+// ↵    {"name": "pluribus", "type": "int"},
+// ↵    {"name": "sugarpercent", "type": "double"},
+// ↵    {"name": "pricepercent", "type": "double"},
+// ↵    {"name": "winpercent", "type": "double"}    
+// ↵  ]
+// ↵}"
+// mod_dt: "2019-12-05T15:00:00.000Z"
+// mod_id: null
+// reg_dt: "2019-12-05T15:00:00.000Z"
+// reg_id: "admin"
+// repo_desc: "테스트1"
+// repo_nm: "test1"
+// repo_no: 1
+					$("#mMetaNo").val(data[0].meta_no);
+					$("#mRepoNo").val(data[0].repo_no);
+					$("#mMetaNm").val(data[0].meta_nm);
+					$("#mMetaDesc").val(data[0].meta_desc);
+					$("#mSrcHost").val(data[0].meta_source_host);
+					$("#mSrcPort").val(data[0].meta_source_port);
+					$("#mSrcUser").val(data[0].meta_source_user);
+					$("#mSrcPass").val(data[0].meta_source_pass);
+					$("#mSrcPath").val(data[0].meta_source_path);
+					$("#mSrcSetApiUrl").val(data[0].meta_source_nifi_api_url);
+					$("#mTgtHost").val(data[0].meta_target_host);
+					$("#mTgtPort").val(data[0].meta_target_port);
+					$("#mTgtUser").val(data[0].meta_target_user);
+					$("#mTgtPass").val(data[0].meta_target_pass);
+					$("#mTgtPath").val(data[0].meta_target_path);
+					$("#mTgtSetApiUrl").val(data[0].meta_target_nifi_api_url);
+					$("#mValidJson").text(data[0].meta_valid_str);
+					$("#mModal").addClass("show-modal");
+				}
+			},
+			error:function(request,status,error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	};
+</script>
+<!-- SCRIPT END-->
+
+<!-- DATA GRID -->
+<section>
+	<!-- CONTDITION -->
+	<div class="w3-row-padding" style="width:100%;height:60px;">
+		<div style="width:90%;float:left;">
+			<form id="fm01" class="form-style-9">
+				<ul>
+					<li>
+						<div style="float:left;">
+							<label for="metaNm" style="margin-left:10px;float:left;margin-top:5px;">메타명</label>
+							<input id="metaNm" name="metaNm" type="text" style="width:400px;" class="field-style field-split" placeholder="메타데이터명" />
+						</div>
+						<div style="float:right;">
+							<label for="repoNm" style="margin-left:10px;margin-top:5px;">저장소명</label>
+							<input id="repoNm" name="repoNm" type="text" style="width:400px;" class="field-style field-split" placeholder="저장소명" />
+						</div>
+					</li>
+					<!-- <li>
+						<input type="text" name="field3" class="field-style field-split align-left" placeholder="Phone" />
+						<input type="url" name="field4" class="field-style field-split align-right" placeholder="Website" />
+					</li>
+					<li>
+						<input type="text" name="field3" class="field-style field-full align-none" placeholder="Subject" />
+					</li> -->
+				</ul>
+			</form>
+		</div>
+		<!-- <div style="width:10%;float:right;padding:15px;"><button style="width:100px;height:80px;" type="button">조회</button></div> -->
+		<div style="width:10%;float:right;padding:15px;"><button id="searchBtn" style="width:100px;height:40px;" type="button">조회</button></div>
+	</div>
+	<!-- CONTDITION END -->
+
+	<div class="w3-row-padding" style="height:800px;">
+		<div style="float:right;margin-top:10px;"><button id="creMeta">메타등록</button></div>
+		<div style="margin-top:10px;border:1px solid rgba(100, 101, 105, 0.2); width:100%;height:700px;">
+			<table id="gTable">
+				<tr id="ghead"></tr>
+			</table>
+			<div id="pagination" style="position:absolute; left:50%; margin-left:-50px;margin-top:10px;"></div>
+		</div>
+	</div>
+</section>
+<!-- DATA GRID END-->
+<!-- Layer Popup-->
+	<!-- 팝업 될 레이어 --> 
+<div id="regModal" class="modal" style="z-index:10;">
+	<div class="modal-content" style="height:900px;width:1000px;">
+		<span class="close-button">&times;</span>
+		<h1 class="title">메타등록</h1>
+		<!-- var header = ["No","저장소명","메타명","메타설명","소스경로","소스API","타켓경로","타켓API","검증포맷" ]; -->
+		<form id="fm01p" style="margin: 0 auto; width: 1000px;">
+			<div>
+				<label for="repoNo">저장소</label>
+				<select id="repoNo" name="repoNo" class="" style="width:200px;height:27px;padding:0px;" required="required"></select>
+				<span id="repoDesc"></span>
+			</div>
+			<input id="metaNm" name="metaNm" type="text"  style="width:950px;" placeholder="메타명" required="required">
+			<input id="metaDesc" name="metaDesc" type="text"  style="width:950px;" placeholder="메타설명" required="required">
+			<dvi>
+					<input id="srcHost" name="srcHost" type="text"  style="width:250px;" placeholder="소스 호스트명(IP)" required="required">
+					<input id="srcPort" name="srcPort" type="text"  style="width:50px;" placeholder="포트" required="required">
+					<input id="srcUser" name="srcUser" type="text"  style="width:150px;" placeholder="사용자 ID" required="required">
+					<input id="srcPass" name="srcPass" type="text"  style="width:150px;" placeholder="사용자 비밀번호" required="required">
+					<input id="srcPath" name="srcPath" type="text"  style="width:330px;" placeholder="소스경로" required="required">
+			</dvi>
+			<input id="srcSetApiUrl" name="srcSetApiUrl" type="text"  style="width:950px;" placeholder="소스 NIFI API 호출 URL" required="required">
+			<dvi>
+					<input id="tgtHost" name="tgtHost" type="text"  style="width:250px;" placeholder="타켓 호스트명(IP)" required="required">
+					<input id="tgtPort" name="tgtPort" type="text"  style="width:50px;" placeholder="포트" required="required">
+					<input id="tgtUser" name="tgtUser" type="text"  style="width:150px;" placeholder="사용자 ID" required="required">
+					<input id="tgtPass" name="tgtPass" type="text"  style="width:150px;" placeholder="사용자 비밀번호" required="required">
+					<input id="tgtPath" name="tgtPath" type="text"  style="width:330px;" placeholder="소스경로" required="required">
+			</dvi>
+			<input id="tgtSetApiUrl" name="tgtSetApiUrl" type="text"  style="width:950px;" placeholder="타켓 NIFI API 호출 URL" required="required">
+			<textarea id="validJson" name="validJson" style="height:400px;width:950px;" placeholder="JSON 형식 검증  데이터" required="required"></textarea>
+			<br>
+			<input type="button" id="mCancel" value="취소">
+			<input type="button" id="mSave" value="저장">
+		</form>
+	</div>
+</div>
+<div id="modModal" class="modal" style="z-index:10;">
+	<div class="modal-content" style="height:900px;width:1000px;">
+		<span class="close-button">&times;</span>
+		<h1 class="title">메타등록</h1>
+		<!-- var header = ["No","저장소명","메타명","메타설명","소스경로","소스API","타켓경로","타켓API","검증포맷" ]; -->
+		<form id="fm02p" style="margin: 0 auto; width: 1000px;">
+			<input id="mMetaNo" name="mMetaNo" type="hidden">
+			<div>
+				<label for="mRepoNo">저장소</label>
+				<select id="mRepoNo" name="mRepoNo" class="" style="width:200px;height:27px;padding:0px;" required="required" disabled></select>
+				<span id="mRepoDesc"></span>
+			</div>
+			<input id="mMetaNm" name="mMetaNm" type="text"  style="width:950px;" placeholder="메타명" required="required">
+			<input id="mMetaDesc" name="mMetaDesc" type="text"  style="width:950px;" placeholder="메타설명" required="required">
+			<dvi>
+					<input id="mSrcHost" name="mSrcHost" type="text"  style="width:250px;" placeholder="소스 호스트명(IP)" required="required">
+					<input id="mSrcPort" name="mSrcPort" type="text"  style="width:50px;" placeholder="포트" required="required">
+					<input id="mSrcUser" name="mSrcUser" type="text"  style="width:150px;" placeholder="사용자 ID" required="required">
+					<input id="mSrcPass" name="mSrcPass" type="text"  style="width:150px;" placeholder="사용자 비밀번호" required="required">
+					<input id="mSrcPtah" name="mSrcPtah" type="text"  style="width:330px;" placeholder="소스경로" required="required">
+			</dvi>
+			<input id="mSrcSetApiUrl" name="mSrcSetApiUrl" type="text"  style="width:950px;" placeholder="소스 NIFI API 호출 URL" required="required">
+			<dvi>
+					<input id="mTgtHost" name="mTgtHost" type="text"  style="width:250px;" placeholder="타켓 호스트명(IP)" required="required">
+					<input id="mTgtPort" name="mTgtPort" type="text"  style="width:50px;" placeholder="포트" required="required">
+					<input id="mTgtUser" name="mTgtUser" type="text"  style="width:150px;" placeholder="사용자 ID" required="required">
+					<input id="mTgtPass" name="mTgtPass" type="text"  style="width:150px;" placeholder="사용자 비밀번호" required="required">
+					<input id="mTgtPath" name="mTgtPath" type="text"  style="width:330px;" placeholder="소스경로" required="required">
+			</dvi>
+			<input id="mTgtSetApiUrl" name="mTgtSetApiUrl" type="text"  style="width:950px;" placeholder="타켓 NIFI API 호출 URL" required="required">
+			<textarea id="mValidJson" name="mValidJson" style="height:400px;width:950px;" placeholder="JSON 형식 검증  데이터" required="required"></textarea>
+			<br>
+			<input type="button" id="mCancel" value="취소">
+			<input type="button" id="mMod" value="수정">
+		</form>
+	</div>
+</div>
+<!-- Layer Popup End-->
