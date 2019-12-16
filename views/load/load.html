@@ -1,0 +1,529 @@
+<!-- SCRIPT -->
+<script>
+	var loop_timer;
+	$(function(){
+		var pageObj = $("#pagination").pagination({
+			items: 1,
+			itemsOnPage: 20,
+			cssStyle: 'light-theme',
+			onPageClick : function(p,e){
+				console.log(p);
+			}
+		});
+
+		repoList_retrieve();
+		mataList_retrieve();
+		//GRID 생성
+		make_header();
+
+		$(".close-button, #mCancel").click((e)=>{
+			$("#fm01p")[0].reset();
+			$("#fm02p")[0].reset();
+			$("#fm03p")[0].reset();
+			$("#regModal , #mModal , #executeModal").removeClass("show-modal");
+			clearTimeout(loop_timer);
+		});
+
+		//적재 조회
+		$("#searchBtn").click((e)=>{
+			load_retrieve(1);
+		});
+
+		//적재 등록 팝업
+		$("#regLoad").click((e)=>{
+			register_popup();
+		});
+
+		//적재 저장
+		$("#mSave").click((e)=>{
+			load_save();
+		});
+
+		//적재 수정
+		$("#mUpdate").click((e)=>{
+			load_update();
+		});
+
+		//등록 저장소 변경시
+		$("#repoNo").change((e)=>{
+			mataList_retrieve();
+		});
+	});
+		
+	var make_header = ()=>{
+		var header = ["No","저장소명","메타명","JOB명","JOB결과","JOBUNIT","JOB시작시간","JOB종료시간","수행" ];
+		$.each(header, function(i,v){
+			$("#ghead").append("<th>"+v+"</th>");
+		});
+	};
+
+	var register_popup = ()=>{
+		$("#regModal").addClass("show-modal");
+	};
+
+	var job_check_poppup = (jobno)=>{
+		$("#executeModal").addClass("show-modal");
+
+		// execute_detail_retrieve(jobno);
+
+		// loop_timer = setTimeout(function() {
+		// 	execute_detail_retrieve_loop(jobno);
+		// }, 3000);
+
+		//execute_detail_retrieve
+		//eRepoNo eMetaNo eJobNm eJobDesc eJobExeUnit
+		// exeHeader
+
+		$.ajax({
+			url       : "/load/list",
+			type      : "GET",
+			async	  : false,
+			data	  : {data_load_no:jobno},
+			success: function(data) {
+				console.log(data);
+				$("#gTable tr").not('tr:first').remove();
+				//console.log(data);
+				//$("#contents").empty().append(html);
+				if(data){
+// 					data_load_no: 1
+// job_desc: "11"
+// job_end_time: null
+// job_exe_result: ""
+// job_exe_time: null
+// job_exe_type: null
+// job_exe_unit: "now"
+// job_exe_unit_val: null
+// job_nm: "TE"
+// job_start_time: null
+// meta_nm: "TEST1"
+// meta_no: 1
+// mod_dt: null
+// mod_id: null
+// reg_dt: "2019-12-07T15:00:00.000Z"
+// reg_id: "admin"
+// repo_nm: "TEST"
+// repo_no: 1
+					$("#eRepoNo").append("<option>"+data[0].repo_nm+"</option>");
+					$("#eMetaNo").append("<option>"+data[0].meta_nm+"</option>");
+					$("#eJobNm").val(data[0].job_nm);
+					$("#eJobDesc").val(data[0].job_desc);
+					$("#eJobExeUnit").val(data[0].job_exe_unit);
+
+					// var rows = "";
+					// $.each(data, function(i,r){
+					// 	rows += "<tr>";
+					// 	rows += "<td><a href='javascript:meta_detail("+r.data_load_no+")'>"+r.data_load_no+"</a></td>";
+					// 	rows += "<td>"+r.repo_nm+"</td>";
+					// 	rows += "<td>"+r.meta_nm+"</td>";
+					// 	rows += "<td>"+r.job_desc+"</td>";
+					// 	rows += "<td>"+r.job_exe_result+"</td>";
+					// 	rows += "<td>"+r.job_exe_unit+"</td>";
+					// 	rows += "<td>"+r.job_start_time+"</td>";
+					// 	rows += "<td>"+r.job_end_time+"</td>";
+					// 	rows += "<td><button onclick='javascript:job_check_poppup("+r.data_load_no+")' type='button'>수행</button></td>";
+					// 	rows += "</tr>"
+					// });
+					// $("#ghead").after(rows);
+					// $("#execute").click(e=>{
+					// 	e.defaultPrevented;
+					// 	 console.log(e);
+					// 	 console.log($(e.currentTarget).attr("jobno"));
+
+					// 	//job_check_poppup($(e.currentTarget).attr("jobno"));
+						
+					// });
+					// $("#gTable td").click(e=>{
+					// 	console.log(e);
+					// });
+				}
+			},
+			error:function(request,status,error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+
+	};
+	var repoList_retrieve = () => {
+		$.ajax({
+			url       : "/load/repo_list",
+			type      : "GET",
+			async	  : false,
+			success: function(data) {
+				console.log(data);
+				if(data){
+					var rows = "";
+					$.each(data, function(i,r){
+						rows +="<option value="+r.cd+">"+r.cdnm+"</option>";
+					});
+					$("#repoNo").append(rows);
+					$("#repoNo option:eq(0)").attr("selected","selected");
+					$("#mRepoNo").append(rows);
+				}
+			},
+			error:function(request,status,error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	};
+
+	var mataList_retrieve = () => {
+		$.ajax({
+			url       : "/load/meta_list",
+			type      : "GET",
+			async	  : false,
+			data	  : {repo_no:$("#repoNo option:selected").val()},
+			success: function(data) {
+				
+				if(data){
+					console.log(data);
+					var rows = "";
+					if(data.length > 0 ){
+						$.each(data, function(i,r){
+							rows +="<option value="+r.cd+">"+r.cdnm+"</option>";
+						});
+						$("#metaNo").append(rows);
+					} else{
+						$("#metaNo").empty();
+					}
+					
+				}
+			},
+			error:function(request,status,error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	};
+
+	var load_retrieve = (num) => {
+		console.log($("#fm01").serialize());
+		$.ajax({
+			url       : "/load/list",
+			type      : "GET",
+			async	  : false,
+			data	  : $("#fm01").serialize(),
+			success: function(data) {
+				console.log(data);
+				$("#gTable tr").not('tr:first').remove();
+				//console.log(data);
+				//$("#contents").empty().append(html);
+				if(data){
+					var rows = "";
+					$.each(data, function(i,r){
+						rows += "<tr>";
+						rows += "<td><a href='javascript:meta_detail("+r.data_load_no+")'>"+r.data_load_no+"</a></td>";
+						rows += "<td>"+r.repo_nm+"</td>";
+						rows += "<td>"+r.meta_nm+"</td>";
+						rows += "<td>"+r.job_desc+"</td>";
+						rows += "<td>"+r.job_exe_result+"</td>";
+						rows += "<td>"+r.job_exe_unit+"</td>";
+						rows += "<td>"+r.job_start_time+"</td>";
+						rows += "<td>"+r.job_end_time+"</td>";
+						rows += "<td><button onclick='javascript:job_check_poppup("+r.data_load_no+")' type='button'>수행</button></td>";
+						rows += "</tr>"
+					});
+					$("#ghead").after(rows);
+					// $("#execute").click(e=>{
+					// 	e.defaultPrevented;
+					// 	 console.log(e);
+					// 	 console.log($(e.currentTarget).attr("jobno"));
+
+					// 	//job_check_poppup($(e.currentTarget).attr("jobno"));
+						
+					// });
+					// $("#gTable td").click(e=>{
+					// 	console.log(e);
+					// });
+				}
+			},
+			error:function(request,status,error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	};
+
+	var load_save = () => {
+		console.log($("#fm01p").serialize());
+		$.ajax({
+			url       : "/load/save",
+			type      : "POST",
+			async	  : false,
+			data	  : $("#fm01p").serialize(),
+			success: function(data) {
+				console.log(data);
+				if(data.success){
+					alert("저장 성공!");
+					$(".modal").removeClass("show-modal");
+					load_retrieve(1);
+				}else{
+					alert("저장 실패!");
+				}
+			},
+			error:function(request,status,error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	};
+
+	var load_update = () => {
+		console.log($("#fm01p").serialize());
+		$.ajax({
+			url       : "/meta/update",
+			type      : "POST",
+			async	  : false,
+			data	  : $("#fm02p").serialize(),
+			success: function(data) {
+				console.log(data);
+				if(data.success){
+					alert("수정 성공!");
+					$(".modal").removeClass("show-modal");
+					meta_retrieve(1);
+				}else{
+					alert("수정 실패!");
+				}
+			},
+			error:function(request,status,error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	};
+
+	var laod_detail = (metaNo) => {
+		console.log(metaNo);
+		$.ajax({
+			url       : "/meta/detail_list",
+			type      : "GET",
+			async	  : false,
+			data	  : {metaNo:metaNo},
+			success: function(data) {
+				console.log(data);
+				if(data){
+					$("#mMetaNo").val(data[0].meta_no);
+					$("#mRepoDesc").text(data[0].repo_desc);
+					$("#mRepoNo").val(data[0].repo_no);
+					$("#mMetaNm").val(data[0].meta_nm);
+					$("#mMetaDesc").val(data[0].meta_desc);
+					$("#mSrcHost").val(data[0].meta_source_host);
+					$("#mSrcPort").val(data[0].meta_source_port);
+					$("#mSrcUser").val(data[0].meta_source_user);
+					$("#mSrcPass").val(data[0].meta_source_pass);
+					$("#mSrcPath").val(data[0].meta_source_path);
+					$("#mSrcSetApiUrl").val(data[0].meta_source_nifi_api_url);
+					$("#mTgtHost").val(data[0].meta_target_host);
+					$("#mTgtPort").val(data[0].meta_target_port);
+					$("#mTgtUser").val(data[0].meta_target_user);
+					$("#mTgtPass").val(data[0].meta_target_pass);
+					$("#mTgtPath").val(data[0].meta_target_path);
+					$("#mTgtSetApiUrl").val(data[0].meta_target_nifi_api_url);
+					$("#mValidJson").text(data[0].meta_valid_str);
+					$("#mModal").addClass("show-modal");
+				}
+			},
+			error:function(request,status,error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	};
+
+	var execute_detail_retrieve = (jobNo) => {
+		$.ajax({
+			url       : "/load/list",
+			type      : "GET",
+			async	  : false,
+			data	  : {data_load_no:jobNo},
+			success: function(data) {
+				if(data){
+					console.log(data);
+					$("#eRepoNo").append("<option>"+data[0].repo_nm+"</option>");
+					$("#eMetaNo").append("<option>"+data[0].meta_nm+"</option>");
+					$("#eJobNm").val(data[0].job_nm);
+					$("#eJobDesc").val(data[0].job_desc);
+					$("#eJobExeUnit").val(data[0].job_exe_unit);
+				}
+			},
+			error:function(request,status,error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	};
+
+	var execute_detail_retrieve_loop = (jobNo) => {
+		$.ajax({
+			url       : "/load/execute_list",
+			type      : "GET",
+			async	  : false,
+			data	  : {jobNo:jobNo},
+			success: function(data) {
+				console.log(data);
+				if(data){
+					$("#exeHeader tr").not('tr:first').remove();
+					var rows = "";
+					$.each(data, function(i,r){
+						rows += "<tr>";
+						rows += "<td>"+r.process_name+"</td>";
+						rows += "<td>"+r.process_start_time+"</td>";
+						rows += "<td>"+r.process_success+"</td>";
+						rows += "</tr>"
+					});
+				
+					$("#exeHeader").after(rows);
+				}
+			},
+			error:function(request,status,error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	};
+
+</script>
+<!-- SCRIPT END-->
+
+<!-- DATA GRID -->
+<section>
+	<!-- CONTDITION -->
+	<div class="w3-row-padding" style="width:100%;height:60px;">
+		<div style="width:90%;float:left;">
+			<form id="fm01" class="form-style-9">
+				<ul>
+					<li>
+						<div style="float:left;">
+							<label for="repoNm" style="margin-left:10px;margin-top:5px;">저장소명</label>
+							<input id="repoNm" name="repoNm" type="text" style="width:400px;" class="field-style field-split" placeholder="저장소명" />
+						</div>
+						<div style="float:right;">
+							<label for="metaNm" style="margin-left:10px;margin-top:5px;">메타명</label>
+							<input id="metaNm" name="metaNm" type="text" style="width:400px;" class="field-style field-split" placeholder="메타데이터명" />
+						</div>
+					</li>
+					<!-- <li>
+						<input type="text" name="field3" class="field-style field-split align-left" placeholder="Phone" />
+						<input type="url" name="field4" class="field-style field-split align-right" placeholder="Website" />
+					</li>
+					<li>
+						<input type="text" name="field3" class="field-style field-full align-none" placeholder="Subject" />
+					</li> -->
+				</ul>
+			</form>
+		</div>
+		<!-- <div style="width:10%;float:right;padding:15px;"><button style="width:100px;height:80px;" type="button">조회</button></div> -->
+		<div style="width:10%;float:right;padding:15px;"><button id="searchBtn" style="width:100px;height:40px;" type="button">조회</button></div>
+	</div>
+	<!-- CONTDITION END -->
+
+	<div class="w3-row-padding" style="height:800px;">
+		<div style="float:right;margin-top:10px;"><button id="regLoad">JOB등록</button></div>
+		<div style="margin-top:10px;border:1px solid rgba(100, 101, 105, 0.2); width:100%;height:700px;overflow:auto;">
+			<table id="gTable" style="width:1400px;">
+				<tr id="ghead"></tr>
+			</table>
+			<div id="pagination" style="position:absolute; left:50%; margin-left:-50px;margin-top:10px;"></div>
+		</div>
+	</div>
+</section>
+<!-- DATA GRID END-->
+<!-- Layer Popup-->
+	<!-- 팝업 될 레이어 --> 
+<div id="regModal" class="modal" style="z-index:10;">
+	<div class="modal-content" style="height:350px;width:600px;">
+		<span class="close-button">&times;</span>
+		<h1 class="title">JOB등록</h1>
+		<!-- var header = ["No","저장소명","메타명","메타설명","소스경로","소스API","타켓경로","타켓API","검증포맷" ]; -->
+		<form id="fm01p" style="margin: 0 auto; width: 600px;">
+			<div>
+				<label for="repoNo">저장소</label>
+				<select id="repoNo" name="repoNo" class="" style="width:200px;height:27px;padding:0px;" required="required"></select>
+				<span id="repoDesc"></span>
+				<label for="metaNo">메타데이터</label>
+				<select id="metaNo" name="metaNo" class="" style="width:200px;height:27px;padding:0px;" required="required"></select>
+				<span id="metaDesc"></span>
+			</div>
+			<input id="jobNm" name="jobNm" type="text"  style="width:550px;" placeholder="JOB명" required="required">
+			<input id="jobDesc" name="jobDesc" type="text"  style="width:550px;" placeholder="JOB설명" required="required">
+			<br>
+			<dvi>
+					<label for="jobExeUnit">수행주기</label>
+					<select id="jobExeUnit" name="jobExeUnit" class="" style="width:100px;height:27px;padding:0px;" required="required">
+						<option value="now">즉시</option>
+						<option value="hour">시</option>
+						<option value="day">일</option>
+						<option value="month">월</option>
+					</select>
+					<input id="jobExeUnitVal" name="jobExeUnitVal" type="text"  style="width:250px;" placeholder="수행주기값" required="required" disabled>
+			</dvi>
+			<br>
+			<input type="button" id="mCancel" value="취소">
+			<input type="button" id="mSave" value="저장">
+		</form>
+	</div>
+</div>
+
+<div id="mModal" class="modal" style="z-index:10;">
+	<div class="modal-content" style="height:900px;width:1000px;">
+		<span class="close-button">&times;</span>
+		<h1 class="title">메타등록</h1>
+		<!-- var header = ["No","저장소명","메타명","메타설명","소스경로","소스API","타켓경로","타켓API","검증포맷" ]; -->
+		<form id="fm02p" style="margin: 0 auto; width: 1000px;">
+			<input id="mMetaNo" name="mMetaNo" type="hidden">
+			<div>
+				<label for="mRepoNo">저장소</label>
+				<select id="mRepoNo" name="mRepoNo" class="" style="width:200px;height:27px;padding:0px;" required="required"></select>
+				<span id="mRepoDesc"></span>
+			</div>
+			<input id="mMetaNm" name="mMetaNm" type="text"  style="width:950px;" placeholder="메타명" required="required">
+			<input id="mMetaDesc" name="mMetaDesc" type="text"  style="width:950px;" placeholder="메타설명" required="required">
+			<dvi>
+					<input id="mSrcHost" name="mSrcHost" type="text"  style="width:250px;" placeholder="소스 호스트명(IP)" required="required">
+					<input id="mSrcPort" name="mSrcPort" type="text"  style="width:50px;" placeholder="포트" required="required">
+					<input id="mSrcUser" name="mSrcUser" type="text"  style="width:150px;" placeholder="사용자 ID" required="required">
+					<input id="mSrcPass" name="mSrcPass" type="text"  style="width:150px;" placeholder="사용자 비밀번호" required="required">
+					<input id="mSrcPtah" name="mSrcPtah" type="text"  style="width:330px;" placeholder="소스경로" required="required">
+			</dvi>
+			<input id="mSrcSetApiUrl" name="mSrcSetApiUrl" type="text"  style="width:950px;" placeholder="소스 NIFI API 호출 URL" required="required">
+			<dvi>
+					<input id="mTgtHost" name="mTgtHost" type="text"  style="width:250px;" placeholder="타켓 호스트명(IP)" required="required">
+					<input id="mTgtPort" name="mTgtPort" type="text"  style="width:50px;" placeholder="포트" required="required">
+					<input id="mTgtUser" name="mTgtUser" type="text"  style="width:150px;" placeholder="사용자 ID" required="required">
+					<input id="mTgtPass" name="mTgtPass" type="text"  style="width:150px;" placeholder="사용자 비밀번호" required="required">
+					<input id="mTgtPath" name="mTgtPath" type="text"  style="width:330px;" placeholder="소스경로" required="required">
+			</dvi>
+			<input id="mTgtSetApiUrl" name="mTgtSetApiUrl" type="text"  style="width:950px;" placeholder="타켓 NIFI API 호출 URL" required="required">
+			<textarea id="mValidJson" name="mValidJson" style="height:400px;width:950px;" placeholder="JSON 형식 검증  데이터" required="required"></textarea>
+			<br>
+			<input type="button" id="mCancel" value="취소">
+			<input type="button" id="mUpdate" value="수정">
+		</form>
+	</div>
+</div>
+
+<div id="executeModal" class="modal" style="z-index:10;">
+	<div class="modal-content" style="height:700px;width:900px;">
+		<span class="close-button">&times;</span>
+		<h1 class="title">JOB수행상태</h1>
+		<!-- var header = ["No","저장소명","메타명","메타설명","소스경로","소스API","타켓경로","타켓API","검증포맷" ]; -->
+		<form id="fm03p" style="margin: 0 auto; width: 900px;">
+			<div>
+				<label for="eRepoNo">저장소</label>
+				<select id="eRepoNo" name="eRepoNo" class="" style="width:200px;height:27px;padding:0px;" required="required"></select>
+				<span id="eRepoDesc"></span>
+				<label for="eMetaNo">메타데이터</label>
+				<select id="eMetaNo" name="eMetaNo" class="" style="width:200px;height:27px;padding:0px;" required="required"></select>
+				<span id="eMetaDesc"></span>
+			</div>
+			<input id="eJobNm" name="eJobNm" type="text"  style="width:850px;" placeholder="JOB명" required="required" >
+			<input id="eJobDesc" name="eJobDesc" type="text"  style="width:850px;" placeholder="JOB설명" required="required" >
+			<br>
+			<input id="eJobExeUnit" name="jobExeUnit" type="text"  style="width:850px;" placeholder="JOB Unit" required="required" >
+			<br>
+			<div>
+				<table style="width:850px;">
+					<tr id="exeHeader">
+						<th>프로세스명</th>
+						<th>시작시간</th>
+						<th>상태</th>
+					</tr>
+				</table>
+			</div>
+			<input type="button" id="mCancel" value="닫기">
+		</form>
+	</div>
+</div>
+<!-- Layer Popup End-->

@@ -25,13 +25,16 @@ app.use(favicon(path.join(__dirname, 'public/images', 'favicon.ico')));
 
 //ROUTER Mapping
 app.use('/', 		require('./routes/index'));
-app.use('/users', 	require('./routes/interface/users'));
-app.use('/auth', 	require('./routes/interface/auth'));
-app.use('/org', 	require('./routes/interface/org'));
+// app.use('/users', 	require('./routes/interface/users'));
+// app.use('/auth', 	require('./routes/interface/auth'));
+// app.use('/org', 	require('./routes/interface/org'));
 app.use('/repo', 	require('./routes/interface/repository'));
-app.use('/meta', 	require('./routes/interface/meta'));
-app.use('/load', 	require('./routes/interface/load'));
-app.use('/test', 	require('./routes/interface/test'));
+// app.use('/meta', 	require('./routes/interface/meta'));
+// app.use('/load', 	require('./routes/interface/load'));
+// app.use('/test', 	require('./routes/interface/test'));
+app.use('/nifi', 	require('./routes/interface/nifi'));
+app.use('/resource',require('./routes/resource/resource'));
+app.use('/distribution',require('./routes/resource/distribution'));
 app.all('*',(req,res) => res.status(404).send('<h1> 요청 페이지 없음 </h1>'));
 
 // catch 404 and forward to error handler

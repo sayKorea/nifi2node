@@ -1,0 +1,195 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+<style>
+.pop_tabla  {width:100%; border-top:2px solid #000; border-bottom:1px solid #000; font-size:12px;}
+.pop_tabla th {background:#f4f4f4; border-bottom:1px solid #ddd;padding:10px;  text-align:center; width:100px;}
+.pop_tabla th .point_color{color:#ef1111;}
+.pop_tabla td {border-bottom:1px solid #ddd; padding:10px;}
+.pop_tabla td input {border:1px solid #ddd; padding:5px 10px; /*width:85%;*/}
+.pop_tabla td select {border:1px solid #ddd; padding:5px 10px; }
+.pop_tabla td textarea {border:1px solid #ddd; padding:5px 10px; }
+.pop_tabla .text_center { text-align:center;}
+.table_bt01 {text-align:center; float:left;}
+.table_bt01 a{border:1px solid #009fe9; background:#009fe9; color:#fff; display:inline-block; padding:14px 40px; text-decoration:none; font-size:13px;}
+.table_bt02 {text-align:center; float:left;}
+.table_bt02 a{border:1px solid #009fe9; color:#009fe9; display:inline-block; padding:14px 40px; text-decoration:none; font-size:13px;}
+</style>
+
+	<div style="width:1200px;">
+		<div style="font-size:30px; color:#222;  padding:25px 30px;" ><strong>데이터(배포)등록</strong></div>
+		<div style="margin:0 30px 20px 30px;">
+			<table cellpadding="0" cellspacing="0" class="pop_tabla">
+				<tr>
+					<th>센터아이디 <span class="point_color">*</span></th>
+					<td><input id="" type="text"  name="" placeholder="센터아이디를 입력 하세요"></td>
+					<th>메타데이터 <span class="point_color">*</span></th>
+					<td>
+						<input id="" type="text"  name="" placeholder="메타데이터를 검색 하세요">	
+						<a href="#." style="display:inline-block; background:#333; color:#fff; padding:6px 15px; text-decoration:none; margin-left:10px;" target="_blank">메타검색</a>
+					</td>
+				</tr>
+				<tr>
+					<th>데이터명 <span class="point_color">*</span></th>
+					<td><input id="" type="text"  name="" placeholder="데이터명 입력 하세요"></td>
+					<th>미디어 타입</th>
+					<td><input id="" type="text"  name="" placeholder="미디어 타입을 입력 하세요"></td>
+				</tr>
+				<tr>
+					<th>포맷  <span class="point_color">*</span></th>
+					<td colspan="3"><input id="" type="text"  name="" placeholder="CSV" ></td>
+				</tr>
+				<tr>
+					<th>데이터 저장소</th>
+					<td>
+						<select name="">
+							<option>저장소 선택</option>
+						</select>
+					</td>
+					<th>데이터 유형</th>
+					<td>
+						<input type="radio" name="" id="" value="Y" checked> <label for="sms_y">정형 </label>
+						<input type="radio" name="" id="" value="N" style="margin-left:30px;"> <label for="sms_n">비정형</label>
+					</td>
+				</tr>
+				<tr>
+					<th>저작권</th>
+					<td><input id="" type="text"  name="" placeholder="저작권을 입력 하세요"></td>
+					<th>라이선스</th>
+					<td>
+						<select name="">
+							<option>라이선스을 선택해주세요</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th>공간해상도</th>
+					<td><input id="" type="text"  name="" placeholder="간해상도를 입력 하세요"></td>
+					<th>시간해상도</th>
+					<td><input id="" type="text"  name="" placeholder="시간해상도를 입력하세요"></td>
+				</tr>
+				<tr>
+					<th>설명</th>
+					<td colspan="3">
+						<textarea name="" placeholder="설명을 입력하세요" style="width:95%; height:100px; "></textarea>
+					</td>
+				</tr>
+				<tr>
+				<tr>
+					<th>기준규정</th>
+					<td><input id="" type="text"  name="" placeholder="기준규정을 입력 하세요"></td>
+					<th>Access Right</th>
+					<td><input id="" type="text"  name="" placeholder="접근권한을 입력하세요"></td>
+				</tr>
+			</table>
+
+			<p style="font-size:20px; color:#222; font-weight:bold; margin-top:30px;">데이터 필드 정의</p>
+			<table cellpadding="0" cellspacing="0" class="pop_tabla">
+				<tr>
+					<th>번호</th>
+					<th>데이터 필드명</th>
+					<th>데이터 유형</th>
+					<th>유형보기</th>
+					<th>데이터 필드명 설명</th>
+					<th>단위(직접입력)</th>
+					<th>체크결과</th>
+				</tr>
+				<tr>
+					<td class="text_center">1</td>
+					<td class="text_center">일자</td>
+					<td class="text_center">
+						<select name="">
+							<option>날짜</option>
+						</select>
+					</td>
+					<td class="text_center">YYYY-MM-DD</td>
+					<td class="text_center">일자</td>
+					<td class="text_center"></td>
+					<td class="text_center">유효성 체크를 하세요!</td>
+				</tr>
+				<tr>
+					<td class="text_center">2</td>
+					<td class="text_center">시간</td>
+					<td class="text_center">
+						<select name="">
+							<option>시간</option>
+						</select>
+					</td>
+					<td class="text_center">HH:MM:SS</td>
+					<td class="text_center">시간</td>
+					<td class="text_center"></td>
+					<td class="text_center">유효성 체크를 하세요!</td>
+				</tr>
+				<tr>
+					<td class="text_center">3</td>
+					<td class="text_center">지역</td>
+					<td class="text_center">
+						<select name="">
+							<option>텍스트</option>
+						</select>
+					</td>
+					<td class="text_center">형식에 제한이 없는 Text</td>
+					<td class="text_center">지역</td>
+					<td class="text_center"></td>
+					<td class="text_center">유효성 체크를 하세요!</td>
+				</tr>
+				<tr>
+					<td class="text_center">4</td>
+					<td class="text_center">점포유형</td>
+					<td class="text_center">
+						<select name="">
+							<option>텍스트</option>
+						</select>
+					</td>
+					<td class="text_center">형식에 제한이 없는 Text</td>
+					<td class="text_center">점포유형</td>
+					<td class="text_center"></td>
+					<td class="text_center">유효성 체크를 하세요!</td>
+				</tr>
+			</table>
+			<div style="float:right;">
+				<p class="table_bt01"><a href="#." target="_blank"><strong>추가</strong></a></p>
+				<p class="table_bt02" style="margin-left:20px;"><a href="#." target="_blank"><strong>삭제</strong></a></p>
+				<p class="table_bt02" style="margin-left:20px;"><a href="#." target="_blank"><strong>초기화</strong></a></p>
+			</div>
+
+
+			<p style="font-size:20px; color:#222; font-weight:bold; margin-top:80px; ">데이터 목록</p>
+			<table cellpadding="0" cellspacing="0" class="pop_tabla">
+				<tr>
+					<th>데이터명</th>
+					<th>포맷</th>
+					<th>Byte 사이즈</th>
+					<th>저작권</th>
+					<th>라이선스</th>
+					<th>데이터 유형</th>
+					<th>저장소 유형</th>
+					<th>개인가격</th>
+					<th>조직가격</th>
+				</tr>
+				<tr>
+					<td class="text_center"></td>
+					<td class="text_center"></td>
+					<td class="text_center"></td>
+					<td class="text_center"></td>
+					<td class="text_center"></td>
+					<td class="text_center"></td>
+					<td class="text_center"></td>
+					<td class="text_center"></td>
+					<td class="text_center"></td>
+				</tr>
+
+			</table>
+			<div style="float:right;">
+				<p class="table_bt01"><a href="#." target="_blank"><strong>추가</strong></a></p>
+			</div>
+
+
+		</div>
+	</div>
+</body>
+</html>	

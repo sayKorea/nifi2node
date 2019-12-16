@@ -17,14 +17,14 @@
 		$(".close-button, #mCancel").click((e)=>{
 			$("#fm01p")[0].reset();
 			$("#fm02p")[0].reset();
-			$("#regModal , #modModal").removeClass("show-modal");
+			$("#regModal , #mModal").removeClass("show-modal");
 		});
 
 		$("#searchBtn").click((e)=>{
 			meta_retrieve(1);
 		});
 
-		$("#creMeta").click((e)=>{
+		$("#regMeta").click((e)=>{
 			register_popup();
 		});
 
@@ -32,7 +32,7 @@
 			meta_save();
 		});
 
-		$("#mMod").click((e)=>{
+		$("#mUpdate").click((e)=>{
 			meta_update();
 		});
 
@@ -47,7 +47,6 @@
 
 	var register_popup = ()=>{
 		$("#regModal").addClass("show-modal");
-		
 	};
 
 	var repoList_retrieve = () => {
@@ -62,7 +61,9 @@
 					$.each(data, function(i,r){
 						rows +="<option value="+r.cd+">"+r.cdnm+"</option>";
 					});
-					$("#repoNo, #modRepoNo").append(rows);
+					$("#repoNo").append(rows);
+					$("#mRepoNo").append(rows);
+					
 				}
 			},
 			error:function(request,status,error){
@@ -123,7 +124,7 @@
 				if(data.success){
 					alert("저장 성공!");
 					$(".modal").removeClass("show-modal");
-					metaRetrieve(1);
+					meta_retrieve(1);
 				}else{
 					alert("저장 실패!");
 				}
@@ -146,7 +147,7 @@
 				if(data.success){
 					alert("수정 성공!");
 					$(".modal").removeClass("show-modal");
-					metaRetrieve(1);
+					meta_retrieve(1);
 				}else{
 					alert("수정 실패!");
 				}
@@ -167,52 +168,8 @@
 			success: function(data) {
 				console.log(data);
 				if(data){
-// 					meta_auth: null
-// meta_desc: "NIFI 연동 테스트"
-// meta_license: null
-// meta_nm: "NIFI 연동 테스트"
-// meta_no: 3
-// meta_source_host: "10.39.143.190"
-// meta_source_nifi_api_url: "192.168.1.130:8080/nifi-api/processors/da9a6bee-016e-1000-02dc-48acef3c38a7"
-// meta_source_pass: "1234"
-// meta_source_path: "/home1/ncloud/test"
-// meta_source_path_type: null
-// meta_source_port: "22"
-// meta_source_user: "ncloud"
-// meta_target_host: "10.39.143.190"
-// meta_target_nifi_api_url: "192.168.1.130:8080/nifi-api/processors/da9a6bee-016e-1000-02dc-48acef3c38a7"
-// meta_target_pass: "1234"
-// meta_target_path: "/"
-// meta_target_path_type: null
-// meta_target_port: "22"
-// meta_target_user: "ncloud"
-// meta_valid_str: "{
-// ↵  "type": "record",
-// ↵  "name": "CandyRecord",
-// ↵  "fields" : [
-// ↵    {"name": "competitorname", "type": "string"},
-// ↵    {"name": "chocolate", "type": ["null","int"]},
-// ↵    {"name": "fruity", "type": "int"},
-// ↵    {"name": "caramel", "type": "int"},
-// ↵    {"name": "peanutyalmondy", "type": "int"},
-// ↵    {"name": "nougat", "type": "int"},
-// ↵    {"name": "crispedricewafer", "type": "int"},
-// ↵    {"name": "hard", "type": "int"},
-// ↵    {"name": "bar", "type": "int"},
-// ↵    {"name": "pluribus", "type": "int"},
-// ↵    {"name": "sugarpercent", "type": "double"},
-// ↵    {"name": "pricepercent", "type": "double"},
-// ↵    {"name": "winpercent", "type": "double"}    
-// ↵  ]
-// ↵}"
-// mod_dt: "2019-12-05T15:00:00.000Z"
-// mod_id: null
-// reg_dt: "2019-12-05T15:00:00.000Z"
-// reg_id: "admin"
-// repo_desc: "테스트1"
-// repo_nm: "test1"
-// repo_no: 1
 					$("#mMetaNo").val(data[0].meta_no);
+					$("#mRepoDesc").text(data[0].repo_desc);
 					$("#mRepoNo").val(data[0].repo_no);
 					$("#mMetaNm").val(data[0].meta_nm);
 					$("#mMetaDesc").val(data[0].meta_desc);
@@ -249,12 +206,12 @@
 				<ul>
 					<li>
 						<div style="float:left;">
-							<label for="metaNm" style="margin-left:10px;float:left;margin-top:5px;">메타명</label>
-							<input id="metaNm" name="metaNm" type="text" style="width:400px;" class="field-style field-split" placeholder="메타데이터명" />
-						</div>
-						<div style="float:right;">
 							<label for="repoNm" style="margin-left:10px;margin-top:5px;">저장소명</label>
 							<input id="repoNm" name="repoNm" type="text" style="width:400px;" class="field-style field-split" placeholder="저장소명" />
+						</div>
+						<div style="float:right;">
+							<label for="metaNm" style="margin-left:10px;margin-top:5px;">메타명</label>
+							<input id="metaNm" name="metaNm" type="text" style="width:400px;" class="field-style field-split" placeholder="메타데이터명" />
 						</div>
 					</li>
 					<!-- <li>
@@ -273,9 +230,9 @@
 	<!-- CONTDITION END -->
 
 	<div class="w3-row-padding" style="height:800px;">
-		<div style="float:right;margin-top:10px;"><button id="creMeta">메타등록</button></div>
-		<div style="margin-top:10px;border:1px solid rgba(100, 101, 105, 0.2); width:100%;height:700px;">
-			<table id="gTable">
+		<div style="float:right;margin-top:10px;"><button id="regMeta">메타등록</button></div>
+		<div style="margin-top:10px;border:1px solid rgba(100, 101, 105, 0.2); width:100%;height:700px;overflow:auto;">
+			<table id="gTable" style="width:1900px;">
 				<tr id="ghead"></tr>
 			</table>
 			<div id="pagination" style="position:absolute; left:50%; margin-left:-50px;margin-top:10px;"></div>
@@ -298,21 +255,23 @@
 			</div>
 			<input id="metaNm" name="metaNm" type="text"  style="width:950px;" placeholder="메타명" required="required">
 			<input id="metaDesc" name="metaDesc" type="text"  style="width:950px;" placeholder="메타설명" required="required">
-			<dvi>
+			<div>
+					<label>[ CENTER ]</label><br>
 					<input id="srcHost" name="srcHost" type="text"  style="width:250px;" placeholder="소스 호스트명(IP)" required="required">
 					<input id="srcPort" name="srcPort" type="text"  style="width:50px;" placeholder="포트" required="required">
 					<input id="srcUser" name="srcUser" type="text"  style="width:150px;" placeholder="사용자 ID" required="required">
 					<input id="srcPass" name="srcPass" type="text"  style="width:150px;" placeholder="사용자 비밀번호" required="required">
 					<input id="srcPath" name="srcPath" type="text"  style="width:330px;" placeholder="소스경로" required="required">
-			</dvi>
+			</div>
 			<input id="srcSetApiUrl" name="srcSetApiUrl" type="text"  style="width:950px;" placeholder="소스 NIFI API 호출 URL" required="required">
-			<dvi>
+			<div>
+					<label>[ Object Storage ]</label><br>
 					<input id="tgtHost" name="tgtHost" type="text"  style="width:250px;" placeholder="타켓 호스트명(IP)" required="required">
 					<input id="tgtPort" name="tgtPort" type="text"  style="width:50px;" placeholder="포트" required="required">
 					<input id="tgtUser" name="tgtUser" type="text"  style="width:150px;" placeholder="사용자 ID" required="required">
 					<input id="tgtPass" name="tgtPass" type="text"  style="width:150px;" placeholder="사용자 비밀번호" required="required">
 					<input id="tgtPath" name="tgtPath" type="text"  style="width:330px;" placeholder="소스경로" required="required">
-			</dvi>
+			</div>
 			<input id="tgtSetApiUrl" name="tgtSetApiUrl" type="text"  style="width:950px;" placeholder="타켓 NIFI API 호출 URL" required="required">
 			<textarea id="validJson" name="validJson" style="height:400px;width:950px;" placeholder="JSON 형식 검증  데이터" required="required"></textarea>
 			<br>
@@ -321,7 +280,7 @@
 		</form>
 	</div>
 </div>
-<div id="modModal" class="modal" style="z-index:10;">
+<div id="mModal" class="modal" style="z-index:10;">
 	<div class="modal-content" style="height:900px;width:1000px;">
 		<span class="close-button">&times;</span>
 		<h1 class="title">메타등록</h1>
@@ -330,7 +289,7 @@
 			<input id="mMetaNo" name="mMetaNo" type="hidden">
 			<div>
 				<label for="mRepoNo">저장소</label>
-				<select id="mRepoNo" name="mRepoNo" class="" style="width:200px;height:27px;padding:0px;" required="required" disabled></select>
+				<select id="mRepoNo" name="mRepoNo" class="" style="width:200px;height:27px;padding:0px;" required="required"></select>
 				<span id="mRepoDesc"></span>
 			</div>
 			<input id="mMetaNm" name="mMetaNm" type="text"  style="width:950px;" placeholder="메타명" required="required">
@@ -340,7 +299,7 @@
 					<input id="mSrcPort" name="mSrcPort" type="text"  style="width:50px;" placeholder="포트" required="required">
 					<input id="mSrcUser" name="mSrcUser" type="text"  style="width:150px;" placeholder="사용자 ID" required="required">
 					<input id="mSrcPass" name="mSrcPass" type="text"  style="width:150px;" placeholder="사용자 비밀번호" required="required">
-					<input id="mSrcPtah" name="mSrcPtah" type="text"  style="width:330px;" placeholder="소스경로" required="required">
+					<input id="mSrcPath" name="mSrcPath" type="text"  style="width:330px;" placeholder="소스경로" required="required">
 			</dvi>
 			<input id="mSrcSetApiUrl" name="mSrcSetApiUrl" type="text"  style="width:950px;" placeholder="소스 NIFI API 호출 URL" required="required">
 			<dvi>
@@ -354,7 +313,7 @@
 			<textarea id="mValidJson" name="mValidJson" style="height:400px;width:950px;" placeholder="JSON 형식 검증  데이터" required="required"></textarea>
 			<br>
 			<input type="button" id="mCancel" value="취소">
-			<input type="button" id="mMod" value="수정">
+			<input type="button" id="mUpdate" value="수정">
 		</form>
 	</div>
 </div>

@@ -17,13 +17,18 @@ router.get('/repo_list', function(req, res, next) {
 	var query = ' SELECT  REPO_NO AS CD';
 		query +=' 		, REPO_ID AS CDID';
 		query +=' 		, REPO_NM AS CDNM';
+		query +=' 		, REPO_DESC AS CDDESC';
 		query +=' FROM REPOSITORY';
 		query +=' WHERE 1=1';
 		query +=' ORDER BY REPO_NO';
 
 	dao.query(query, (e, r) => {
-		console.log(r.rows);
-		res.send(r.rows);
+		if(e){
+			res.send({success:false});
+			throw e;
+		}else{
+			res.send(r.rows);
+		}
 	});
 
 });
@@ -35,6 +40,7 @@ router.get('/list', function(req, res, next) {
 	var query  =" SELECT      A.META_NO     			";
 		query +=" 			, B.REPO_NO     			";
 		query +=" 			, B.REPO_NM     			";
+		query +=" 			, B.REPO_DESC     			";
 		query +=" 			, A.META_NM 				";
 		query +=" 			, A.META_DESC 				";
 		query +=" 			, A.META_LICENSE 			";
@@ -106,7 +112,7 @@ router.get('/detail_list', function(req, res, next) {
 		//if(repoNm && repoNm != "") query +=" AND REPO_NM LIKE '%"+ repoNm +"%'";
 		//if(repoType && repoType != "") query +=" AND REPO_TYPE = '"+repoType+"'";
 		query +=" ORDER BY META_NO";
-
+	console.log(query);
 	dao.query(query, (e, r) => {
 		if(e){
 			res.send({success:false});
@@ -248,7 +254,7 @@ router.post('/update', function(req, res, next) {
 	var params = [repoNo, metaNm, metaDesc, srcHost, srcPort, srcUser,srcPass,srcPath,srcSetApiUrl,tgtHost,tgtPort,tgtUser,tgtPass,tgtPath,tgtSetApiUrl,validJson];
 	
 	//console.log(query,params);
-	dao.query(insert ,params , (e, r) => {
+	dao.query(update ,params , (e, r) => {
 		if(e){
 			res.send({success:false});
 			throw e;

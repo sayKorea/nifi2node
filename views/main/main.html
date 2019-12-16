@@ -71,7 +71,7 @@
 	<nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px;border-right: 1px solid rgba(100, 101, 105, 0.2);" id="m_sidebar">
 		<div class="w3-container w3-display-container w3-padding-16">
 			<i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
-			<h3 class="w3-wide"><img src="/images/datanuri_logo.png" onclick="javascript:location.hreg='/logout'"></h3>
+			<h3 class="w3-wide"><img src="" onclick="javascript:location.hreg='/logout'"></h3>
 		</div>
 		<div id="leftMenu" class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
 			
@@ -80,24 +80,36 @@
 			</a>
 			<div id="storgae-sub" class="w3-bar-block w3-hide w3-padding-large w3-medium">
 				<a href="javascript:void(0)" class="w3-bar-item w3-button" title="저장소 목록" url="/repo">목록</a>
-				<a href="javascript:void(0)" class="w3-bar-item w3-button" title="저장소 이력" url="/repo/his">이력</a>
+				<!-- <a href="javascript:void(0)" class="w3-bar-item w3-button" title="저장소 이력" url="/repo/his">이력</a> -->
 			</div>
 
-			<a id="metadata" href="javascript:void(0)"  class="w3-button w3-block w3-white w3-left-align">
+			<a id="resource" href="javascript:void(0)"  class="w3-button w3-block w3-white w3-left-align">
+				메타데이터  <i class="fa fa-caret-down"></i>
+			</a>
+			<div id="resource-sub" class="w3-bar-block w3-hide w3-padding-large w3-medium">
+				<a href="javascript:void(0)" class="w3-bar-item w3-button" title="메타데이터 목록" url="/resource">목록</a>
+			</div>
+			<a id="distribution" href="javascript:void(0)"  class="w3-button w3-block w3-white w3-left-align">
+				배포  <i class="fa fa-caret-down"></i>
+			</a>
+			<div id="distribution-sub" class="w3-bar-block w3-hide w3-padding-large w3-medium">
+				<a href="javascript:void(0)" class="w3-bar-item w3-button" title="배포 목록" url="/distribution">목록</a>
+			</div>
+			<!-- <a id="metadata" href="javascript:void(0)"  class="w3-button w3-block w3-white w3-left-align">
 				메타데이터  <i class="fa fa-caret-down"></i>
 			</a>
 			<div id="metadata-sub" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-					<a href="javascript:void(0)" class="w3-bar-item w3-button" title="메타 목록" url="/meta">목록</a>
-					<a href="javascript:void(0)" class="w3-bar-item w3-button" title="메타 이력" url="/meta/his">이력</a>
-			</div>
+				<a href="javascript:void(0)" class="w3-bar-item w3-button" title="메타 목록" url="/meta">목록</a>
+				<a href="javascript:void(0)" class="w3-bar-item w3-button" title="메타 이력" url="/meta/his">이력</a>
+			</div> -->
 
-			<a id="dataload" href="javascript:void(0)"  class="w3-button w3-block w3-white w3-left-align">
+			<!-- <a id="dataload" href="javascript:void(0)"  class="w3-button w3-block w3-white w3-left-align">
 				적재  <i class="fa fa-caret-down"></i>
 			</a>
 			<div id="dataload-sub" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-					<a href="javascript:void(0)" class="w3-bar-item w3-button" title="적재 목록" url="/load">목록</a>
-					<a href="javascript:void(0)" class="w3-bar-item w3-button" title="적재 이력" url="/load/his">이력</a>
-			</div>
+				<a href="javascript:void(0)" class="w3-bar-item w3-button" title="적재 목록" url="/load">목록</a>
+				 <a href="javascript:void(0)" class="w3-bar-item w3-button" title="적재 이력" url="/load/his">이력</a>
+			</div> -->
 		</div>
 	</nav>
 
@@ -120,7 +132,7 @@
 	<header class="w3-container w3-xlarge" style="background-color:whitesmoke;">
 		<p id="menuNm" class="w3-left">MAIN</p>
 		<p class="w3-right">
-			admin <a href="javascript:location.href='/logout';"> <span style="color:darkslategray">Logout</span></a>
+			관리자<!-- admin <a href="javascript:location.href='/logout';"> <span style="color:darkslategray">Logout</span></a> -->
 		</p>
 	</header>
 	<!-- BODY CONTENT -->

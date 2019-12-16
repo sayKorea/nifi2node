@@ -6,7 +6,7 @@
 "use strict"
 
 //const sPort = "9443";
-const sPort = "10000";;
+const sPort = "18080";;
 //const sServerName = "Node Express RestApi Project Server";
 
 var app = require('../app');
@@ -27,8 +27,9 @@ var http = require('http');
 // console.log(fs.readFileSync('./ssl/private.pem'));
 // console.log(fs.readFileSync('./ssl/public.pem'));
 process.env.active_type = process.argv[2];
-console.log(process.env.active_type);
+//console.log(process.env.active_type);
 var port = normalizePort(process.env.PORT || sPort);
+console.log("PORT : "+sPort);
 app.set('port', port);
 
 /**

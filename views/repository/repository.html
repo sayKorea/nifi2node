@@ -32,7 +32,7 @@
 	});
 		
 	var make_header = ()=>{
-		var header = ["No","저장소ID","저장소명","저장소타입","저장소설명","저장소용량","저장소토큰","생성자","생성일자"];
+		var header = ["No","센터ID","저장소명","저장소타입","저장소소스경로","저장소타켓경로","저장소설명","생성자","생성일자"];
 		$.each(header, function(i,v){
 			$("#ghead").append("<th>"+v+"</th>");
 		});
@@ -64,14 +64,15 @@
 					$.each(data, function(i,r){
 						rows += "<tr>";
 						rows += "<td>"+r.repo_no+"</td>";
-						rows += "<td>"+r.repo_id+"</td>";
+						rows += "<td>"+r.repo_center_id+"</td>";
 						rows += "<td>"+r.repo_nm+"</td>";
 						rows += "<td>"+r.repo_type+"</td>";
+						rows += "<td>"+r.repo_source_path+"</td>";
+						rows += "<td>"+r.repo_target_path+"</td>";
 						rows += "<td>"+r.repo_desc+"</td>";
-						rows += "<td>"+r.repo_volume+"</td>";
-						rows += "<td>"+r.acc_token+"</td>";
 						rows += "<td>"+r.reg_id+"</td>";
 						rows += "<td>"+r.reg_dt+"</td>";
+						rows += "<td><button onclick='javascript:repo_del(\""+r.repo_no+"\")' type='button'>삭제</button></td>";
 						rows += "</tr>"
 					});
 					$("#ghead").after(rows);
@@ -84,7 +85,32 @@
 	};
 
 	var repo_save = () => {
-		console.log($("#fm01p").serialize());
+		console.log(($("#fm01p").serialize()));
+		var repo_nm = $("#repo_nm").val();
+		var repo_center_id = $("#repo_center_id").val();
+		var repo_source_path = $("#repo_source_path").val();
+		var repo_target_path = $("#repo_target_path").val();
+
+		if(!repo_nm || repo_nm.trim() == ""){
+			alert("저장소명을 입력하세요.");
+			$("#repo_nm").focus();
+			return false;
+		}
+		if(!repo_center_id || repo_center_id.trim() == ""){
+			alert("센터ID를 입력하세요.");
+			$("#repo_center_id").focus();
+			return false;
+		}
+		if(!repo_source_path || repo_source_path.trim() == ""){
+			alert("저장소 소스경로를  입력하세요.");
+			$("#repo_source_path").focus();
+			return false;
+		}
+		if(!repo_target_path || repo_target_path.trim() == ""){
+			alert("저장소 타켓경로를  입력하세요.");
+			$("#repo_target_path").focus();
+			return false;
+		}
 		$.ajax({
 			url       : "/repo/save",
 			type      : "POST",
@@ -95,18 +121,40 @@
 				if(data.success){
 					alert("저장 성공!");
 					$(".modal").removeClass("show-modal");
-					repoRetrieve(1);
+					repo_retrieve(1);
 					$("#fm01p")[0].reset();
 				}else{
 					alert("저장 실패!");
 				}
-				
 			},
 			error:function(request,status,error){
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		});
 	};
+
+	var repo_del = (repo_no) => {
+		console.log(repo_no);
+		$.ajax({
+			url       : "/repo/del",
+			type      : "POST",
+			async	  : false,
+			data	  : {repo_no:repo_no},
+			success: function(data) {
+				console.log(data);
+				if(data.success){
+					alert("삭제 완료!");
+					repo_retrieve(1);
+				}else{
+					alert("삭제 실패!");
+				}
+			},
+			error:function(request,status,error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	};
+
 </script>
 <!-- SCRIPT END-->
 
@@ -119,15 +167,15 @@
 				<ul>
 					<li>
 						<div class="float:left;">
-							<label for="repoNm" style="margin-left:10px;float:left;margin-top:5px;">저장소명</label>
-							<input id="repoNm" name="repoNm" type="text"  class="field-style field-split align-left" placeholder="저장소명" />
+							<label for="s_repo_nm" style="margin-left:10px;float:left;margin-top:5px;">저장소명</label>
+							<input id="s_repo_nm" name="s_repo_nm" type="text"  class="field-style field-split align-left" placeholder="저장소명" />
 						</div>
 						<div class="float:right;">
-							<label for="repoType" style="margin-left:10px;">저장소타입</label>
-							<select id="repoType" name="repoType" class="" style="height:27px;padding:0px;margin:3px;">
+							<label for="s_repo_type" style="margin-left:10px;">저장소타입</label>
+							<select id="s_repo_type" name="s_repo_type" class="" style="height:27px;padding:0px;margin:3px;">
 								<option value="">전체</option>
-								<option value="public">공개</option>
-								<option value="private">비공개</option>
+								<option value="public">외부</option>
+								<option value="private">내부</option>
 							</select>
 						</div>
 					</li>
@@ -148,11 +196,11 @@
 
 	<div class="w3-row-padding" style="height:800px;">
 		<div style="float:right;margin-top:10px;"><button id="creRepo" style="">저장소등록</button></div>
-		<div style="margin-top:10px;border:1px solid rgba(100, 101, 105, 0.2); width:100%;height:700px;">
-			<table id="gTable">
+		<div style="margin-top:10px;border:1px solid rgba(100, 101, 105, 0.2); width:100%;height:700px;overflow:auto;">
+			<table id="gTable"  style="width:1400px;">
 				<tr id="ghead"></tr>
 			</table>
-			<div id="pagination" style="position:absolute; left:50%; margin-left:-50px;margin-top:10px;"></div>
+			<div id="pagination" style="position:absolute; left:50%; margin-left:-50px;margin-top:10px;">
 		</div>
 	</div>
 </section>
@@ -160,18 +208,37 @@
 <!-- Layer Popup-->
 	<!-- 팝업 될 레이어 --> 
 <div class="modal" style="z-index:10;">
-	<div class="modal-content" style="height:350px;">
+	<div class="modal-content" style="width:750px;height:400px;float:left;">
 		<span class="close-button">&times;</span>
 		<h1 class="title">저장소등록</h1>
-		<form id="fm01p" style="margin: 0 auto; width: 600px;">
-			<input id="repoNm" name="repoNm" type="text"  placeholder="저장소명" required="required">
-			<input id="repoVolume" name="repoVolume" type="text"  placeholder="저장소용량(MB)" required="required">
-			<textarea id="repoDesc" rows="500" cols="400" name="repoDesc" style="resize:none; " placeholder="저장소설명" required="required"></textarea>
-			<br>
-			<select id="repoType" name="repoType" class="" style="width:100px;height:27px;padding:0px;" required="required">
-				<option value="public">공개</option>
-				<option value="private">비공개</option>
-			</select><br>
+		<form id="fm01p" style="margin: 0 auto;">
+			<div>
+				<label for="repo_nm">저장소명</label>
+				<input id="repo_nm" name="repo_nm" type="text"  placeholder="저장소명" required="required">
+			</div>
+			<div>
+				<label for="repo_center_id">저장소 센터ID</label>
+				<input id="repo_center_id" name="repo_center_id" type="text"  placeholder="저장소명" required="required">
+			</div>
+			<div>
+				<label for="repo_source_path">저장소 소스경로</label>
+				<input id="repo_source_path" name="repo_source_path" type="text"  placeholder="저장소 소스경로" required="required">
+			</div>
+			<div>
+				<label for="repo_target_path">저장소 타켓경로</label>
+				<input id="repo_target_path" name="repo_target_path" type="text"  placeholder="저장소 타켓경로" required="required">
+			</div>
+			<div>
+				<label for="repo_desc">저장소 설명</label>
+				<textarea id="repo_desc" rows="500" cols="400" name="repo_desc" style="resize:none; " placeholder="저장소 설명" required="required"></textarea>
+			</div>
+			<div>
+				<label for="repo_type">저장소 타입</label>
+				<select id="repo_type" name="repo_type" class="" style="width:100px;height:27px;padding:0px;" required="required">
+					<option value="public">외부</option>
+					<option value="private">내부</option>
+				</select><br>
+			</div>
 			<input type="button" id="mCancel" value="취소">
 			<input type="button" id="mSave" value="저장">
 		</form>
