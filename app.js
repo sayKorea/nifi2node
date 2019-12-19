@@ -11,6 +11,9 @@ global.n_debug_mode = "false";
 global.n_user_id 	= "sodas_admin";
 global.n_password 	= "so8087";
 
+// global.n_user_id 	= "admin";
+// global.n_password 	= "admin.123";
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

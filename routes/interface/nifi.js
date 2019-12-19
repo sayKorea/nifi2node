@@ -4,7 +4,7 @@ const uuid = require('uuid4');
 const router = express.Router();
 const request = require('request-promise');
 const ip = require("ip");
-const nifiPort = "9090";
+const nifiPort = "20000";
 const webPort	= "18080";
 const debug_log = true;
 
@@ -15,7 +15,6 @@ let source_path;
 let target_path;
 let resource_id;
 let source_file_name;
-
 
 var process_group				= "";
 var process_group_stop			= "";
@@ -136,7 +135,7 @@ router.get('/process_set', async (req, res, next) => {
 
 		var insert  = " INSERT INTO DATA_LOAD_DETAIL(DATASET_UUID, PROCESS_NAME, PROCESS_TYPE, PROCESS_SUCCESS, PROCESS_START_TIME)";
 			insert += " VALUES ($1, $2, $3, $4, CURRENT_DATE)";
-		var params = [resource_id, 'nifi setting start', '', 'success!'];
+		var params = [resource_id, 'nifi setting start', '', 'success'];
 		queryResult = await callDb(insert ,params);//dao.query(insert ,params);
 		if(queryResult) console.log(queryResult);
 
@@ -165,7 +164,7 @@ router.get('/process_set', async (req, res, next) => {
 		requestOption.body = process_group_stop;
 		responese = await callAPI(requestOption);
 		if(responese){
-			console.log("[ 01. Process Group Properties Modfy Success!]]");
+			console.log("[ 01. Process Group Properties Modfy Success!]");
 			console.log(responese);
 		}
 
@@ -244,7 +243,7 @@ router.get('/process_set', async (req, res, next) => {
 		requestOption.body = null;
 		responese = await callAPI(requestOption);
 		if(responese){
-			console.log("[ 05. Get File Start Properties Get Success!]]");
+			console.log("[ 05. Get File Start Properties Get Success!]");
 			if(debug_log) console.log(responese);
 		}
 		
@@ -256,7 +255,7 @@ router.get('/process_set', async (req, res, next) => {
 		requestOption.body =responese;
 		responese = await callAPI(requestOption);
 		if(responese){
-			console.log("[ 06. Get File Start Properties Modfy Success!]]");
+			console.log("[ 06. Get File Start Properties Modfy Success!]");
 			if(debug_log) console.log(responese);
 		}
 
@@ -269,7 +268,7 @@ router.get('/process_set', async (req, res, next) => {
 		requestOption.body = null;
 		responese = await callAPI(requestOption);
 		if(responese){
-			console.log("[ 07. HTTP INVOKE Start Properties Get Success!]]");
+			console.log("[ 07. HTTP INVOKE Start Properties Get Success!]");
 			if(debug_log) console.log(responese);
 		}
 		
@@ -280,7 +279,7 @@ router.get('/process_set', async (req, res, next) => {
 		requestOption.body =responese;
 		responese = await callAPI(requestOption);
 		if(responese){
-			console.log("[ 08. HTTP INVOKE Start Properties Modfy Success!]]");
+			console.log("[ 08. HTTP INVOKE Start Properties Modfy Success!]");
 			if(debug_log) console.log(responese);
 		}
 
@@ -292,7 +291,7 @@ router.get('/process_set', async (req, res, next) => {
 		requestOption.body = null;
 		responese = await callAPI(requestOption);
 		if(responese){
-			console.log("[ 09. HTTP INVOKE Start Properties Get Success!]]");
+			console.log("[ 09. HTTP INVOKE Start Properties Get Success!]");
 			if(debug_log) console.log(responese);
 		}
 		
@@ -303,7 +302,7 @@ router.get('/process_set', async (req, res, next) => {
 		requestOption.body =responese;
 		responese = await callAPI(requestOption);
 		if(responese){
-			console.log("[ 10. HTTP INVOKE Start Properties Modfy Success!]]");
+			console.log("[ 10. HTTP INVOKE Start Properties Modfy Success!]");
 			if(debug_log) console.log(responese);
 		}
 
@@ -317,14 +316,15 @@ router.get('/process_set', async (req, res, next) => {
 		requestOption.body = null;
 		responese = await callAPI(requestOption);
 		if(responese){
-			console.log("[ 11. PUT HDFS Properties Get Success!]]");
+			console.log("[ 11. PUT HDFS Properties Get Success!]");
 			if(debug_log) console.log(responese);
 		}
 		
 		//put
 		requestOption.method = 'PUT';
 		responese.component.config.properties["Remote Path"] =target_path;			//"/hadoop/dfs/test"; // /hsdoop/dfs/test
-		responese.component.config.properties["Hostname"] ="182.173.185.41";				//"/hadoop/dfs/test"; // /hsdoop/dfs/test
+		//신대수 수정
+		//responese.component.config.properties["Hostname"] ="182.173.185.41";		//"/hadoop/dfs/test"; // /hsdoop/dfs/test
 		responese.component.config.properties["Port"] ="22";						//"/hadoop/dfs/test"; // /hsdoop/dfs/test
 		responese.component.config.properties["Username"] ="ncloud";				//"/hadoop/dfs/test"; // /hsdoop/dfs/test
 		responese.component.config.properties["Password"] ="ifKebp20!9i";			//"/hadoop/dfs/test"; // /hsdoop/dfs/test
@@ -332,7 +332,7 @@ router.get('/process_set', async (req, res, next) => {
 		requestOption.body = responese;
 		responese = await callAPI(requestOption);
 		if(responese){
-			console.log("[ 12.GET SFTP Properties Modfy Success!]]");
+			console.log("[ 12.GET SFTP Properties Modfy Success!]");
 			console.log( responese.component.config.properties["Remote Path"] );
 			if(debug_log) console.log(responese);
 		}
@@ -493,7 +493,7 @@ router.get('/process_set', async (req, res, next) => {
 		//if(responese){console.log("[ Process Group Properties Modfy Success!]]");}
 
 		if(responese){
-			console.log("[ 13. Process Group Properties Modfy Success!]]");
+			console.log("[ 13. Process Group Properties Modfy Success!]");
 			if(debug_log) console.log(responese);
 
 			//NIFI START
@@ -503,7 +503,7 @@ router.get('/process_set', async (req, res, next) => {
 			queryResult = await callDb(insert ,params);//dao.query(insert ,params);
 			if(queryResult) console.log(queryResult);
 		}
-		res.send({success:true});
+		res.send({success:true});return true;
 	} catch (error) {
 		//NIFI FAIL
 		var insert  = " INSERT INTO DATA_LOAD_DETAIL(DATASET_UUID, PROCESS_NAME, PROCESS_TYPE, PROCESS_SUCCESS, PROCESS_START_TIME)";
@@ -513,7 +513,7 @@ router.get('/process_set', async (req, res, next) => {
 		if(queryResult) console.log(queryResult);
 
 		console.log(error);
-	 	 res.status(500).send({success:false});
+	 	 res.status(500).send({success:false});return false;
 	}
 	
 });
@@ -570,16 +570,17 @@ router.get('/process_log', async function (req, res, next) {
 			responese = await callAPI(requestOption);
 
 			if(responese){
-				console.log("[ Process Group Properties Stop Success!]]");
+				console.log("[ Process Group Properties Stop Success!]");
 				if(debug_log) console.log(responese);
 			}
-			res.send({success:true});
+			res.send({success:true});return true;
 		} catch (error) {
 			console.log(error);
-			res.status(500).send({success:false});
+			res.status(500).send({success:false});return false;
 		}
+	}else{
+		res.send({success:true});return true;
 	}
-	res.send({success:true});
 });
 
 async function  callDb(query, params){

@@ -99,8 +99,9 @@ router.post('/save', async function(req, res, next) {
 	if(!repo_source_path || repo_source_path  == "") valid = false;
 	if(!repo_target_path || repo_target_path == "") valid = false;
 	if(!repo_type || repo_type == "") valid = false;
-	if(!valid) res.send({success:false});
-
+	if(!valid) {
+		res.send({success:false});return false;
+	}
 	var insert  = "INSERT INTO REPOSITORY (REPO_CENTER_ID, REPO_NM, REPO_DESC, REPO_TYPE, REPO_SOURCE_PATH, REPO_TARGET_PATH, REG_ID) VALUES ( $1, $2, $3, $4, $5, $6, $7  ); ";
 	var params = [repo_center_id, repo_nm, repo_desc, repo_type, repo_source_path, repo_target_path, reg_id];
 
@@ -122,9 +123,9 @@ router.post('/save', async function(req, res, next) {
 	var queryResult = await callDb(insert, params);
 	if(queryResult){
 		console.log(queryResult);
-		res.send({success:true});
+		res.send({success:true});return true;
 	}else{
-		res.send({success:false});
+		res.send({success:false});return false;
 	}
 });
 
@@ -142,9 +143,9 @@ router.post('/del', async function(req, res, next) {
 	var queryResult = await callDb(repo_delete);
 	if(queryResult){
 		console.log(queryResult);
-		res.send({success:true});
+		res.send({success:true}); return true;
 	}else{
-		res.send({success:false});
+		res.send({success:false}); return false;
 	}
 });
 

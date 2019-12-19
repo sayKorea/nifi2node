@@ -13,8 +13,7 @@
 		make_header();
 
 		$(".close-button, #mCancel").click((e)=>{
-			$("#fm01p")[0].reset();
-			$(".modal").removeClass("show-modal");
+			close_layer();
 		});
 
 		$("#searchBtn").click((e)=>{
@@ -154,6 +153,11 @@
 			}
 		});
 	};
+
+	var close_layer = () =>{
+		$("#fm01p")[0].reset();
+		$(".modal").removeClass("show-modal");
+	};
 </script>
 <!-- SCRIPT END-->
 
@@ -205,11 +209,69 @@
 <!-- DATA GRID END-->
 <!-- Layer Popup-->
 	<!-- 팝업 될 레이어 --> 
+<style>
+	.pop_tabla  {width:100%; border-top:2px solid #000; border-bottom:1px solid #000; font-size:12px;}
+	.pop_tabla th {background:#f4f4f4; border-bottom:1px solid #ddd;padding:10px;  text-align:center; width:140px;}
+	.pop_tabla th .point_color{color:#ef1111;}
+	.pop_tabla td {border-bottom:1px solid #ddd; padding:10px; background-color: white;}
+	.pop_tabla td input {border:1px solid #ddd; padding:5px 10px; width:85%; background-color: white;}
+	.pop_tabla td select {border:1px solid #ddd; padding:5px 10px; background-color: white; }
+	.pop_tabla td textarea {border:1px solid #ddd; padding:5px 10px; background-color: white;}
+	.pop_tabla .text_center { text-align:center;}
+	.table_bt01 {text-align:center; float:left;}
+	.table_bt01 a{border:1px solid #009fe9; background:#009fe9; color:#fff; display:inline-block; padding:14px 40px; text-decoration:none; font-size:13px;}
+	.table_bt02 {text-align:center; float:left;}
+	.table_bt02 a{border:1px solid #009fe9; color:#009fe9; display:inline-block; padding:14px 40px; text-decoration:none; font-size:13px;}
+</style>
 <div class="modal" style="z-index:10;">
-	<div class="modal-content" style="width:750px;height:400px;float:left;">
+	<div class="modal-content" style="width:750px;height:500px;float:left;">
 		<span class="close-button">&times;</span>
 		<h1 class="title">저장소등록</h1>
 		<form id="fm01p" style="margin: 0 auto;">
+			<div style="width:700px;">
+				<div style="margin:0 30px 20px 30px;">
+					<table cellpadding="0" cellspacing="0" class="pop_tabla">
+						<tr>
+							<th>센터ID<span class="point_color">*</span></th>
+							<td colspan="3">
+								<input id="repo_center_id" type="text"  name="repo_center_id" placeholder="센터ID를 입력 하세요" required >	
+							</td>
+						</tr>
+						<tr>
+							<th>저장소명 <span class="point_color">*</span></th>
+							<td colspan="3"><input id="repo_nm" type="text"  name="repo_nm" placeholder="저장소명 입력 하세요" required></td>
+						</tr>
+						<tr>
+							<th>저장소 소스경로 <span class="point_color">*</span></th>
+							<td colspan="3"><input id="repo_source_path" type="text"  name="repo_source_path" placeholder="저장소 소스경로를 입력 하세요" required></td>
+						</tr>
+						<tr>
+							<th>저장소 타켓경로 <span class="point_color">*</span></th>
+							<td colspan="3"><input id="repo_target_path" type="text"  name="repo_target_path" placeholder="저장소 타켓경로를 입력 하세요" required></td>
+						</tr>
+						<tr>
+							<th>저장소 설명</th>
+							<td colspan="3"><input id="repo_desc" type="text"  name="repo_desc" placeholder="저장소 설명을 입력 하세요"></td>
+						</tr>
+						<tr>
+							<th>저장소 타입 <span class="point_color">*</span></th>
+							<td colspan="3">
+								<select id="repo_type" name="repo_type">
+									<option value="public">외부</option>
+									<option value="private">내부</option>
+								</select>
+							</td>
+						</tr>
+					</table>
+					<div style="float:right;">
+						<p class="table_bt01"><a href="javascript:close_layer();" style="background-color: gray;"><strong>닫기</strong></a></p>
+						<p class="table_bt01" style="margin-left:7px;"><a href="javascript:repo_save();"><strong>등록</strong></a></p>
+					</div>
+				</div>
+			</div>
+		</form>
+
+		<!-- <form id="fm01p" style="margin: 0 auto;">
 			<div>
 				<label for="repo_center_id">센터ID</label>
 				<input id="repo_center_id" name="repo_center_id" type="text"  placeholder="센터ID" required="required">
@@ -239,7 +301,7 @@
 			</div>
 			<input type="button" id="mCancel" value="취소">
 			<input type="button" id="mSave" value="저장">
-		</form>
+		</form> -->
 	</div>
 </div>
 <!-- Layer Popup End-->

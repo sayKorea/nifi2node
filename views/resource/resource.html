@@ -36,15 +36,12 @@
 			$("#insert_modal , #update_modal").removeClass("show-modal");
 		//	clearTimeout(loop_timer);
 		});
-
 		//taxonomy version retrieve
 		taxonomy_version_list_retrieve();
-
 		//상품 조회
 		$("#searchBtn").click((e)=>{
 			resource_retrieve(1);
 		});
-
 		//상품 등록 팝업
 		$("#insert_popup").click((e)=>{
 			$("#fm01p")[0].reset();
@@ -53,12 +50,10 @@
 			// $("#publisherId").val(userid);
 			$("#insert_modal").addClass("show-modal");
 		});
-
 		//상품 저장
 		$("#mSave").click((e)=>{
 			resource_save();
 		});
-
 		//상품 수정
 		$("#mUpdate").click((e)=>{
 			resource_update();
@@ -70,14 +65,16 @@
 	});
 
 	var make_header = ()=>{
-		var header = ["No","상품명","제공기업명","제공기업ID","설명","상품상태","다운수","등록일자","최근수정일" ];
-		var size   = ["10","300","100","200","600","100","60","100","100"] 
+		// var header = ["No","상품명","제공기업명","제공기업ID","설명","상품상태","다운수","등록일자","최근수정일" ];
+		// var size   = ["10","300","100","200","600","100","60","100","100"];
+		var header = ["No","상품명","설명","상품상태","다운수","등록일자","최근수정일" ];
+		var size   = ["10","300","600","100","60","100","100"];
 		$.each(header, (i,v) =>{
 			$("#ghead").append("<th style='width:"+size[i]+"px;'>"+v+"</th>");
 		});
 	};
 
-	//taxonomy_version_list_retrieve
+	// 분류 체계 버젼 리스트 조회
 	var taxonomy_version_list_retrieve = () => {
 		$.ajax({
 			url       : "/resource/v1/reference-model/taxonomy/version/list",
@@ -92,32 +89,17 @@
 						$.each(data.versions,(i,r) => {
 							option +="<option value="+r.versionId+">"+r.version+"</option>";
 						});
-						
-						// $("#s_taxonomy_version_list").append(option);
-						// $("#s_taxonomy_version_list").change(()=>{	
-						// 	option = "";
-						// 	var data = category_list_retrieve($("#s_taxonomy_version_list").val()).then((category_list)=>{
-						// 		console.log(data);
-						// 		$("#s_category_list").empty();
-						// 		$.each(category_list,(i,r) => {
-						// 			option +="<option value="+r.id+">"+r.title+"</option>";
-						// 		});
-						// 		$("#s_category_list").append(option);
-						// 	});
-						// });
 
 						$("#taxonomy_version").append(option);
 						$("#taxonomy_version").change(()=>{	
 							console.log($("#taxonomy_version").val());
 							option = "";
 							 category_list_retrieve($("#taxonomy_version").val()).then((category_list)=>{
-								//console.log(category_list);
 								$("#category_list").empty();
 								$.each(category_list.taxonomy,(i,r) => {
 									if(i==0) return true;
 									option +="<option value="+r.id+">"+r.title+"</option>";
 								});
-								//console.log(option);
 								$("#category_list").append(option);
 							});
 						});
@@ -131,6 +113,7 @@
 			}
 		});
 	};
+	// 카테고리 리스트 조회
 	var category_list_retrieve = (versionId) => {
 		return new Promise((resolve,reject)=>{
 			try{
@@ -152,6 +135,7 @@
 		});
 	};
 
+	// 메타데이터 조회
 	var resource_retrieve = (num) => {
 		$.ajax({
 			url       : "/resource/v1/resource/dataset/list?"+$("#fm01").serialize(),
@@ -171,13 +155,17 @@
 						append += "<tr>";
 						append += "<td><a href='javascript:resource_detail(\""+r.id+"\")'>"+((i+((current_page-1)*pageItems))+1)+"</a></td>";
 						append += "<td><a href='javascript:resource_detail(\""+r.id+"\")'>"+r.title+"</a></td>";
-						append += "<td>"+r.ownerNm+"</td>";
-						append += "<td>"+r.ownerId+"</td>";
+						// append += "<td>"+r.ownerNm+"</td>";
+						// append += "<td>"+r.ownerId+"</td>";
 						append += "<td>"+r.description+"</td>";
 						if(r.approvalState === "accept"){
 							append += "<td>승인완료</td>";
 						} else if(r.approvalState === "rejct"){
 							append += "<td>반려</td>";
+						} else if(r.approvalState === "return"){
+							append += "<td>반려</td>";
+						} else{
+							append += "<td>"+r.approvalState+"</td>";
 						}
 						append += "<td>"+r.downloadcount+"</td>";
 						append += "<td>"+(r.issued==null?"":r.issued.substring(0,10))+"</td>";
@@ -193,23 +181,13 @@
 		});
 	};
 
+	// 메타데이터 등록
 	var resource_save = () => {
 		console.log($("#fm01p :input").filter((i, e)=>{return $(e).val() != '';}).serialize());
+		
 		if($("#title").val().trim() == ""){
 			alert("상품명을 입력하세요!");
 			$("#title").focus();
-			return false;
-		}
-
-		// if($("#ownerId").val().trim() == ""){
-		// 	alert("제공 기업을 입력하세요!");
-		// 	$("#ownerId").focus();
-		// 	return false;
-		// }
-
-		if($("#description").val().trim() == ""){
-			alert("설명을 입력하세요!");
-			$("#ownerId").focus();
 			return false;
 		}
 
@@ -233,6 +211,7 @@
 		});
 	};
 
+	// 메타데이터 수정
 	var resource_update = () => {
 		$.ajax({
 			url       : "/resource/v1/resource/dataset/update",
@@ -254,6 +233,7 @@
 		});
 	};
 
+	// 메타데이터 삭제
 	var resource_delete = (id) => {
 		$.ajax({
 			url       : "/resource/delete",
@@ -277,6 +257,7 @@
 	};
 	
 
+	// 메타데이터 상세
 	var resource_detail = (id) => {
 		console.log(id);
 		$.ajax({
@@ -301,16 +282,16 @@
 					$("#m_versionDescription").val(data.versionDescription);
 					$("#m_landingPageUrl").val(data.landingPageUrl);
 
-					// if(data.is_free == "free"){
-						console.log(data.isFree);
-						$("#m_isFree").val("free");
-					// }else if(data.is_free == "charged"){
-					// 	$("#m_is_free").val("charged");
-					// }else{
-					// 	$("#m_is_free").val("charged");
-					// }
+					console.log(data.isFree);
+					$("#m_priceType").val(data.isFree);
 
-					// $("#m_isPublic").val(data.isPublic);
+					// if(data.is_free == "free"){
+					// 	$("#m_priceType").val("free");
+					// }else if(data.is_free == "charge"){
+					// 	$("#m_priceType").val("charge");
+					// }else if(data.is_free == "policy"){
+					// 	$("#m_priceType").val("policy");
+					// }
 
 					if(data.isPublic){
 						console.log(data.isPublic);
@@ -373,6 +354,8 @@
 			}
 		});
 	};
+
+	// 종료 popup
 	var close_layer = () => {
 		$("#fm01p")[0].reset();
 		$("#fm02p")[0].reset();
@@ -443,11 +426,11 @@
 				<div style="margin:0 30px 20px 30px;">
 					<table cellpadding="0" cellspacing="0" class="pop_tabla">
 						<tr>
-							<th>분류체계버젼<span class="point_color">*</span></th>
+							<th>분류체계버젼</th>
 							<td>
 								<select id="taxonomy_version" name="taxonomy_version" required></select>
 							</td>
-							<th>카테고리<span class="point_color">*</span></th>
+							<th>카테고리</th>
 							<td colspan="3">
 								<select id="category_list" name="category_list" required></select>
 							</td>
@@ -463,7 +446,7 @@
 							<td><input id="creatorId" type="text"  name="creatorId" placeholder="상품생성자" ></td>
 						</tr>
 						<tr>
-							<th>상품설명<span class="point_color">*</span></th>
+							<th>상품설명</th>
 							<td colspan="7"><input id="description" type="text"  name="description" placeholder="상품설명" style="width:97.7%;"></td>
 						</tr>
 						<tr>
@@ -481,7 +464,7 @@
 									<option value="kr">한국</option>
 									<option value="us">미국</option>
 									<option value="jp">일본</option>
-									<option value="ch">중국</option>
+									<option value="cn">중국</option>
 								</select>
 							</td>
 							<!-- <th>상품분류</th>
@@ -656,7 +639,7 @@
 						<tr>
 							<input id="m_id" name="m_id" type="hidden"> 
 							<th>상품명<span class="point_color">*</span></th>
-							<td><input id="m_title" type="text"  name="m_title" placeholder="상품명" required></td>
+							<td colspan="3"><input id="m_title" type="text"  name="m_title" placeholder="상품명" required></td>
 							<!-- <th>상품등록자</th>
 							<td><input id="m_publisherId" type="text"  name="publisherId" placeholder="상품등록자" disabled></td> -->
 							<!-- <th>제공기업<span class="point_color">*</span></th>
@@ -679,11 +662,11 @@
 						<tr>
 							<th>언어</th>
 							<td>
-								<select name="m_language">
+								<select id="m_language" name="m_language">
 									<option value="kr">한국</option>
 									<option value="us">미국</option>
 									<option value="jp">일본</option>
-									<option value="ch">중국</option>
+									<option value="cn">중국</option>
 								</select>
 							</td>
 							<!-- <th>상품분류</th>
@@ -753,8 +736,8 @@
 							<td><input id="dq_index" type="text"  name="dq_index" placeholder="데이터 품질지수"></td>
 							<th>데이터 품질지수 측정일</th>
 							<td><input id="measure_date" type="text"  name="measure_date" placeholder="데이터 품질지수 측정일"></td> -->
-							<th>공강해상도</th>
-							<td><input id="m_spatialResolutionInMeters" type="text"  name="m_spatialResolutionInMeters" placeholder="공강해상도"></td>
+							<th>공간해상도</th>
+							<td><input id="m_spatialResolutionInMeters" type="text"  name="m_spatialResolutionInMeters" placeholder="공간해상도"></td>
 							<!-- <th>공간정보</th>
 							<td><input id="spatial_uri" type="text"  name="spatial_uri" placeholder="공간정보"></td> -->
 							<th>시간해상도</th>

@@ -10,7 +10,7 @@ router.get("/", (req, res, next) => {
 	res.render("resource/distribution.html", {user_id:n_user_id});
 });
 
-// 버젼 부터 가지고 와서 선택
+// 배포 리스트
 router.get("/v1/resource/dataset/distribution/list", async (req, res, next) => {
 	try{
 		let dataset_id					= req.query.dataset_id;
@@ -19,12 +19,12 @@ router.get("/v1/resource/dataset/distribution/list", async (req, res, next) => {
 		option.method 					= 'GET';
 		option.url  				    = call_request_api.distribution_list_url;
 		option.headers.Authorization 	= access_token;
-		option.qs						=  { datasetId: dataset_id };
+		option.qs						=  { datasetId: dataset_id, limit:10000000 };
 
 		console.log("[ SODAS RESOURCE DATASET DISTRIBUTION LIST ]");
 		let response 					= await call_request_api.call_api(option);
+
 		if(n_debug_mode) console.log(response);
-		
 		res.send(response);
 	}catch(e){
 		console.log(e);
@@ -32,7 +32,31 @@ router.get("/v1/resource/dataset/distribution/list", async (req, res, next) => {
 	}	
 });
 
-// 버젼에서 가지고온 ID를 입력하여 해당 카테고리를 가지고 와야됨
+// 배포 상세
+router.get("/v1/resource/dataset/distribution/get", async (req, res, next) => {
+	try{
+		let distribution_id				= req.query.distribution_id;
+		let access_token 				= await call_request_api.get_access_token();
+		let option 						= call_request_api.get_request_option();
+		option.method 					= 'GET';
+		option.url  				    = call_request_api.distribution_get_url;
+		option.headers.Authorization 	= access_token;
+		option.qs						=  { id: distribution_id };
+
+		console.log(option);
+		console.log("[ SODAS RESOURCE DATASET DISTRIBUTION GET ]");
+		let response 					= await call_request_api.call_api(option);
+
+		if(n_debug_mode) console.log(response);
+		console.log(response);
+		res.send(response);
+	}catch(e){
+		console.log(e);
+		res.send({success:false});
+	}	
+});
+
+// 배포 등록
 router.post("/v1/resource/dataset/distribution/save", async (req, res, next) => {
 	try{
 		console.log( req.body );
@@ -67,8 +91,35 @@ router.post("/v1/resource/dataset/distribution/save", async (req, res, next) => 
 	}	
 });
 
+// 배포 수정
+router.post("/v1/resource/dataset/distribution/update", async (req, res, next) => {
+	try{
+		console.log( req.body );
+		let params						= req.body ;
+		let access_token 				= await call_request_api.get_access_token();
+		let option 						= call_request_api.get_request_option();
+		option.method 					= 'POST';
+		option.url  				    = call_request_api.distribution_update_url;
+		option.headers.Authorization 	= access_token;
+		
+		//option.body						= params;
+		option.form						= params;
+		console.log(option);
+
+		console.log("[ SODAS RESOURCE DISTRIBUTION UPDATE ]");
+		let response 					= await call_request_api.call_api(option);
+		if(n_debug_mode) console.log(response);
+		if(response.result == 'success') res.send({success:true});
+		else res.send({success:false});
+	}catch(e){
+		console.log(e);
+		res.send({success:false});
+	}	
+});
 
 
+
+// 메타데이터 리스트
 router.get("/v1/resource/dataset/list", async (req, res, next) => {
 	try{
 		console.log( req.query );
@@ -97,95 +148,5 @@ router.get("/v1/resource/dataset/list", async (req, res, next) => {
 		res.send({success:false});
 	}
 });
-
-
-router.post("/v1/resource/dataset/save", async (req, res, next) => {
-	// taxonomy_version: 'b00e9670-19c1-11ea-924e-cf7457dc9c18',
-	// category_list: '2',
-	// title: '1',
-	// ownerId: '2',
-	// creatorId: '3',
-	// description: '4',
-	// descriptionDetail: '5',
-	// landingPage: '6',
-	// language: 'kr',
-	// issued: '7',
-	// modified: '8',
-	// version: '9',
-	// isFree: 'free',
-	// isPublic: 'Y',
-	// isPersonal: 'Y',
-	// extras: '19',
-	// spatialResolutionInMeters: '11',
-	// temporalResolution: '12',
-	// license: '13',
-	// method: '14',
-	// accrualPeriodicity: '15',
-	// temporalStart: '16',
-	// temporalEnd: '17',
-	// conformsTo: '18'
-
-	try{
-		console.log( req.body );
-		let params						= req.body;
-		let access_token 				= await call_request_api.get_access_token();
-		let option 						= call_request_api.get_request_option();
-
-		option.method 					= 'POST';
-		option.url  				    = call_request_api.resource_save_url;
-		option.headers.Authorization 	= access_token;
-		//option.headers['Content-Type']  = 'application/x-www-form-urlencoded';
-
-		var taxonomy 					= {};
-		taxonomy.nodeId					= params.category_list;
-		taxonomy.nodeType 				= "taxonomy";
-		params.taxonomy					= JSON.stringify(taxonomy);
-		params.etcValue					= params.extras.trim()!=""?JSON.stringify( params.extras ):{};
-		params.userPrice				= 0;
-		params.downDate					= "10";
-		params.downDateType				= "years";
-		params.version					= "1.0";
-
-		delete params.taxonomy_version;
-		delete params.category_list;
-		delete params.issued;
-		delete params.modified;
-		delete params.isFree;
-		delete params.extras;
-		delete params.license;
-		delete params.method;
-		
-		//console.log(params);
-		//option.body						= params;
-		//Object.prototype.hasOwnProperty.call(params , formData )
-		option.form				=  JSON.parse(JSON.stringify(params)) ;
-
-		//console.log(option);
-		//console.log(option);
-		console.log("[ SODAS RESOURCE SAVE ]");
-	
-		let response 					= await call_request_api.call_api(option);
-		if(n_debug_mode) console.log(response);
-		
-		res.send( response );
-	}catch(e){
-		console.log(e);
-		res.send({success:false});
-	}
-});
-
-async function  callDb(query, params){
-	var queryResult;
-	try {
-		// synchronous code     
-		if(params)  queryResult = await dao.query(query ,params);
-		else  queryResult = await dao.query(query);
-		return queryResult;
-	} catch(e) {
-		//exception handled here   
-		console.log(e.message);
-		return 0;  
-	} 
-};
 
 module.exports = router;

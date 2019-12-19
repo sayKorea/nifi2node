@@ -66,74 +66,7 @@ router.get("/v1/reference-model/taxonomy/category/list", async (req, res, next) 
 });
 
 
-// m_id: "a0d7f4a0-2063-11ea-8144-6720f00571d5"
-// m_title: "12"
-// m_version: "1.0"
-// m_seller_name: null
-// m_seller_email: null
-// m_seller_tel: null
-// m_descriptionDetail: "7"
-// m_provisionType: null
-// m_purchaseTargetFix: null
-// m_use_case: null
-// m_secure_data: null
-// m_refund_rule: null
-// m_return_reason: null
-// m_format: null
-// m_generateRequestType: null
-// m_landingPage: "6"
-// m_description: "3"
-// m_license: null
-// m_state: null
-// m_isPublic: true
-// m_is_public: true
-// m_issued: "2019-12-17T00:24:46.061Z"
-// m_modified: null
-// m_type: "dataset"
-// m_dqIndex: null
-// m_measureDate: null
-// m_approvalState: "accept"
-// m_language: "kr"
-// m_extras: "{"2":"3"}"
-// m_endpointDescription: null
-// m_endpointUrl: null
-// m_accessRights: null
-// m_temporalStart: "4"
-// m_temporalEnd: "65"
-// m_accrualPeriodicity: "3"
-// m_spatialUri: "undefined,undefined"
-// m_imagePath: null
-// m_isFree: "free"
-// m_isPersonal: true
-// m_publisherId: "sodas_admin"
-// m_ownerId: "default_org"
-// m_removeType: null
-// m_sourceType: null
-// m_publisherSpatialUri: "undefined,undefined"
-// m_landingPageUrl: "http://101.101.166.237/schema/a0d7f4a0-2063-11ea-8144-6720f00571d5"
-// m_creatorId: "2"
-// m_conformsTo: "6"
-// m_spatialResolutionInMeters: "12"
-// m_temporalResolution: "2"
-// m_wasGeneratedBy: null
-// m_servesDataset: null
-// m_method: null
-// m_versionDescription: null
-// m_isVoucher: "N"
-// m_is_voucher: "N"
-// m_viewCnt: 0
-// m_view_cnt: 0
-// m_isResale: null
-// m_hashTag: null
-// m_catalog: []
-// m_userPrice: 0
-// m_dataType: "csv"
-// m_byteSize: ""
-// m_taxonomy: []
-// m_downloadCount: "0"
-// m_ownerNm: "default_org"
-// m_favoriteCnt: "0"
-
+// 메타데이터 상세
 router.get("/v1/resource/dataset/get", async (req, res, next) => {
 	try{
 		console.log( req.query );
@@ -158,7 +91,7 @@ router.get("/v1/resource/dataset/get", async (req, res, next) => {
 	}
 });
 
-
+// 메타데이터 리스트
 router.get("/v1/resource/dataset/list", async (req, res, next) => {
 	try{
 		console.log( req.query );
@@ -182,7 +115,6 @@ router.get("/v1/resource/dataset/list", async (req, res, next) => {
 	
 		let response 					= await call_request_api.call_api(option);
 		if(n_debug_mode) console.log(response);
-		
 		res.send( response );
 	}catch(e){
 		console.log(e);
@@ -190,39 +122,13 @@ router.get("/v1/resource/dataset/list", async (req, res, next) => {
 	}
 });
 
-
+//메타데이터 등록
 router.post("/v1/resource/dataset/save", async (req, res, next) => {
-	// taxonomy_version: 'b00e9670-19c1-11ea-924e-cf7457dc9c18',
-	// category_list: '2',
-	// title: '1',
-	// ownerId: '2',
-	// creatorId: '3',
-	// description: '4',
-	// descriptionDetail: '5',
-	// landingPage: '6',
-	// language: 'kr',
-	// issued: '7',
-	// modified: '8',
-	// version: '9',
-	// isFree: 'free',
-	// isPublic: 'Y',
-	// isPersonal: 'Y',
-	// extras: '19',
-	// spatialResolutionInMeters: '11',
-	// temporalResolution: '12',
-	// license: '13',
-	// method: '14',
-	// accrualPeriodicity: '15',
-	// temporalStart: '16',
-	// temporalEnd: '17',
-	// conformsTo: '18'
-
 	try{
 		console.log( req.body );
 		let params						= req.body;
 		let access_token 				= await call_request_api.get_access_token();
 		let option 						= call_request_api.get_request_option();
-		let temporal_end				= [];
 
 		option.method 					= 'POST';
 		option.url  				    = call_request_api.resource_save_url;
@@ -233,39 +139,24 @@ router.post("/v1/resource/dataset/save", async (req, res, next) => {
 		taxonomy.nodeId					= params.category_list;
 		taxonomy.nodeType 				= "taxonomy";
 		params.taxonomy					= JSON.stringify(taxonomy);
-
 		if(params.etcValue){
-			params.etcValue					= params.extras.trim()!=""?JSON.stringify( params.extras ):{};
+			params.etcValue				= params.extras.trim()!=""?JSON.stringify( params.extras ):"{}";
+		}else{
+			params.etcValue				= "{}";
 		}
-
 		params.userPrice				= 0;
 		params.downDate					= "10";
 		params.downDateType				= "years";
 		params.version					= "1.0";
-		//params.default_org				= "1.0";
 		params.ownerId					= "default_org";
-		// params.creatorId				= n_user_id;
-		//params.organizationId					= "org1"; //api 문서에 없음 Unhandled rejection StatusCodeError: 404 - {"statusCode":404,"errorCode":10014,"flag":"ORGANIZATION_NOT_FOUND","message":"Organization does not exist"}
+		//params.organizationId			= "org1"; //api 문서에 없음 Unhandled rejection StatusCodeError: 404 - {"statusCode":404,"errorCode":10014,"flag":"ORGANIZATION_NOT_FOUND","message":"Organization does not exist"}
 		//params.orgId					= "11"; //api 문서에 없음 Unhandled rejection StatusCodeError: 404 - {"statusCode":404,"errorCode":10014,"flag":"ORGANIZATION_NOT_FOUND","message":"Organization does not exist"}
 
 		delete params.taxonomy_version;
 		delete params.category_list;
-		delete params.issued;
-		delete params.modified;
-		delete params.isFree;
-		delete params.extras;
-		delete params.license;
-		delete params.method;
-		
-		// JSON.parse(params, (k, v)=>{
-		// 	console.log(k+"  "+v);
-		// });
 
-		//console.log(params);
-		//option.body						= params;
-		//Object.prototype.hasOwnProperty.call(params , formData )
-		console.log(params);
-		option.form					=  params;
+		//option.form						= params;
+		option.body						= params ;
 
 		console.log(option);
 		//console.log(option);
@@ -281,32 +172,8 @@ router.post("/v1/resource/dataset/save", async (req, res, next) => {
 	}
 });
 
+//메타데이터 수정
 router.post("/v1/resource/dataset/update", async (req, res, next) => {
-	// taxonomy_version: 'b00e9670-19c1-11ea-924e-cf7457dc9c18',
-	// category_list: '2',
-	// title: '1',
-	// ownerId: '2',
-	// creatorId: '3',
-	// description: '4',
-	// descriptionDetail: '5',
-	// landingPage: '6',
-	// language: 'kr',
-	// issued: '7',
-	// modified: '8',
-	// version: '9',
-	// isFree: 'free',
-	// isPublic: 'Y',
-	// isPersonal: 'Y',
-	// extras: '19',
-	// spatialResolutionInMeters: '11',
-	// temporalResolution: '12',
-	// license: '13',
-	// method: '14',
-	// accrualPeriodicity: '15',
-	// temporalStart: '16',
-	// temporalEnd: '17',
-	// conformsTo: '18'
-
 	try{
 		console.log( req.body );
 		let params						= {};
@@ -370,9 +237,8 @@ router.post("/v1/resource/dataset/update", async (req, res, next) => {
 	
 		let response 					= await call_request_api.call_api(option);
 		if(n_debug_mode) console.log(response);
-		console.log(response);
-		// if(response.id) res.send({success:true});
-		res.send({success:true})
+		if(response.result && response.result == "success") res.send({success:true});
+		else res.send({success:false})
 	}catch(e){
 		console.log(e);
 		res.send({success:false});
@@ -381,7 +247,7 @@ router.post("/v1/resource/dataset/update", async (req, res, next) => {
 
 
 
-//################################### OLD ############################################
+//###################################이하 하위 소스는 Sodas 수정 전 내부 디비 사용 버젼############################################
 router.get("/his", (req, res, next) => {
 	res.render("resource/resource_history.html");
 });
