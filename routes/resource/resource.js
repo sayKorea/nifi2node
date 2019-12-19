@@ -1,25 +1,399 @@
-const express = require('express');
-const dao = require('../../common/commonDao');
-const uuid = require('uuid4');
-const router = express.Router();
-var request = require('request-promise');
+const express 			= require('express');
+const router 			= express.Router();
+const dao 				= require('../../common/commonDao');
+const call_request_api 	= require('../../common/call_request_api');
+const uuid 				= require('uuid4');
 
-router.get('/', function(req, res, next) {
-	res.render('resource/resource.html');
+const request 			= require('request-promise');
+
+router.get("/", (req, res, next) => {
+	res.render("resource/resource.html", {user_id:n_user_id});
 });
 
-router.get('/his', function(req, res, next) {
-	res.render('resource/resource_history.html');
+// router.get("/v1/user/get", async (req, res, next) => {
+// 	try{
+// 		console.log("[ SODAS GET ACCESS TOKEN ]");
+// 		let response = await call_request_api.get_access_token();
+// 		if(n_debug_mode) console.log(response);
+// 		res.send( response );
+// 	}catch(e){
+// 		console.log(e);
+// 		res.send(response);
+// 	}
+// });
+
+// 버젼 부터 가지고 와서 선택
+router.get("/v1/reference-model/taxonomy/version/list", async (req, res, next) => {
+	try{
+		let access_token 				= await call_request_api.get_access_token();
+		let option 						= call_request_api.get_request_option();
+		option.method 					= 'GET';
+		option.url  				    = call_request_api.taxonomy_get_version_list_url;
+		option.headers.Authorization 	= access_token;
+
+		console.log("[ SODAS TAXONOMY GET VERSION LIST ]");
+
+		let response 					= await call_request_api.call_api(option);
+		if(n_debug_mode) console.log(response);
+		res.send(response);
+	}catch(e){
+		console.log(e);
+		res.send({success:false});
+	}	
 });
 
-router.get('/repo_list', async function(req, res, next) {
-	var query = ' SELECT  REPO_NO AS CD';
-		query +=' 		, REPO_ID AS CDID';
-		query +=' 		, REPO_NM AS CDNM';
-		query +=' 		, REPO_DESC AS CDDESC';
-		query +=' FROM REPOSITORY';
-		query +=' WHERE 1=1';
-		query +=' ORDER BY REPO_NO';
+// 버젼에서 가지고온 ID를 입력하여 해당 카테고리를 가지고 와야됨
+router.get("/v1/reference-model/taxonomy/category/list", async (req, res, next) => {
+	try{
+		console.log( req.query );
+		let versionId 					= req.query.versionId; 
+		let access_token 				= await call_request_api.get_access_token();
+		let option 						= call_request_api.get_request_option();
+		option.method 					= 'GET';
+		option.url  				    = call_request_api.category_get_list_url;
+		option.headers.Authorization 	= access_token;
+		option.qs						=  { versionId: versionId };
+
+		console.log("[ SODAS TAXONOMY CATAGORY GET LIST ]");
+	
+		let response 					= await call_request_api.call_api(option);
+		if(n_debug_mode) console.log(response);
+		res.send(response);
+	}catch(e){
+		console.log(e);
+		res.send({success:false});
+	}	
+});
+
+
+// m_id: "a0d7f4a0-2063-11ea-8144-6720f00571d5"
+// m_title: "12"
+// m_version: "1.0"
+// m_seller_name: null
+// m_seller_email: null
+// m_seller_tel: null
+// m_descriptionDetail: "7"
+// m_provisionType: null
+// m_purchaseTargetFix: null
+// m_use_case: null
+// m_secure_data: null
+// m_refund_rule: null
+// m_return_reason: null
+// m_format: null
+// m_generateRequestType: null
+// m_landingPage: "6"
+// m_description: "3"
+// m_license: null
+// m_state: null
+// m_isPublic: true
+// m_is_public: true
+// m_issued: "2019-12-17T00:24:46.061Z"
+// m_modified: null
+// m_type: "dataset"
+// m_dqIndex: null
+// m_measureDate: null
+// m_approvalState: "accept"
+// m_language: "kr"
+// m_extras: "{"2":"3"}"
+// m_endpointDescription: null
+// m_endpointUrl: null
+// m_accessRights: null
+// m_temporalStart: "4"
+// m_temporalEnd: "65"
+// m_accrualPeriodicity: "3"
+// m_spatialUri: "undefined,undefined"
+// m_imagePath: null
+// m_isFree: "free"
+// m_isPersonal: true
+// m_publisherId: "sodas_admin"
+// m_ownerId: "default_org"
+// m_removeType: null
+// m_sourceType: null
+// m_publisherSpatialUri: "undefined,undefined"
+// m_landingPageUrl: "http://101.101.166.237/schema/a0d7f4a0-2063-11ea-8144-6720f00571d5"
+// m_creatorId: "2"
+// m_conformsTo: "6"
+// m_spatialResolutionInMeters: "12"
+// m_temporalResolution: "2"
+// m_wasGeneratedBy: null
+// m_servesDataset: null
+// m_method: null
+// m_versionDescription: null
+// m_isVoucher: "N"
+// m_is_voucher: "N"
+// m_viewCnt: 0
+// m_view_cnt: 0
+// m_isResale: null
+// m_hashTag: null
+// m_catalog: []
+// m_userPrice: 0
+// m_dataType: "csv"
+// m_byteSize: ""
+// m_taxonomy: []
+// m_downloadCount: "0"
+// m_ownerNm: "default_org"
+// m_favoriteCnt: "0"
+
+router.get("/v1/resource/dataset/get", async (req, res, next) => {
+	try{
+		console.log( req.query );
+		let params						= req.query;
+		let access_token 				= await call_request_api.get_access_token();
+		let option 						= call_request_api.get_request_option();
+		option.method 					= 'GET';
+		option.url  				    = call_request_api.resource_get_url;
+		option.headers.Authorization 	= access_token;
+		option.qs						= params;
+
+		//console.log(option);
+		console.log("[ SODAS RESOURCE GET LIST ]");
+	
+		let response 					= await call_request_api.call_api(option);
+		if(n_debug_mode) console.log(response);
+		
+		res.send( response );
+	}catch(e){
+		console.log(e);
+		res.send({success:false});
+	}
+});
+
+
+router.get("/v1/resource/dataset/list", async (req, res, next) => {
+	try{
+		console.log( req.query );
+		let params						= {};
+		let keyword 					= req.query.s_keyword;
+		let offset 						= req.query.offset; 
+		let limit 						= req.query.limit; 
+		let access_token 				= await call_request_api.get_access_token();
+		let option 						= call_request_api.get_request_option();
+		option.method 					= 'GET';
+		option.url  				    = call_request_api.resource_list_url;
+		option.headers.Authorization 	= access_token;
+		params.offset					= offset;
+		params.limit					= limit;
+		if(keyword)	params.keyword 		=  keyword;
+		
+		option.qs						= params;
+
+		//console.log(option);
+		console.log("[ SODAS RESOURCE GET LIST ]");
+	
+		let response 					= await call_request_api.call_api(option);
+		if(n_debug_mode) console.log(response);
+		
+		res.send( response );
+	}catch(e){
+		console.log(e);
+		res.send({success:false});
+	}
+});
+
+
+router.post("/v1/resource/dataset/save", async (req, res, next) => {
+	// taxonomy_version: 'b00e9670-19c1-11ea-924e-cf7457dc9c18',
+	// category_list: '2',
+	// title: '1',
+	// ownerId: '2',
+	// creatorId: '3',
+	// description: '4',
+	// descriptionDetail: '5',
+	// landingPage: '6',
+	// language: 'kr',
+	// issued: '7',
+	// modified: '8',
+	// version: '9',
+	// isFree: 'free',
+	// isPublic: 'Y',
+	// isPersonal: 'Y',
+	// extras: '19',
+	// spatialResolutionInMeters: '11',
+	// temporalResolution: '12',
+	// license: '13',
+	// method: '14',
+	// accrualPeriodicity: '15',
+	// temporalStart: '16',
+	// temporalEnd: '17',
+	// conformsTo: '18'
+
+	try{
+		console.log( req.body );
+		let params						= req.body;
+		let access_token 				= await call_request_api.get_access_token();
+		let option 						= call_request_api.get_request_option();
+		let temporal_end				= [];
+
+		option.method 					= 'POST';
+		option.url  				    = call_request_api.resource_save_url;
+		option.headers.Authorization 	= access_token;
+		//option.headers['Content-Type']  = 'application/x-www-form-urlencoded';
+
+		var taxonomy 					= {};
+		taxonomy.nodeId					= params.category_list;
+		taxonomy.nodeType 				= "taxonomy";
+		params.taxonomy					= JSON.stringify(taxonomy);
+
+		if(params.etcValue){
+			params.etcValue					= params.extras.trim()!=""?JSON.stringify( params.extras ):{};
+		}
+
+		params.userPrice				= 0;
+		params.downDate					= "10";
+		params.downDateType				= "years";
+		params.version					= "1.0";
+		//params.default_org				= "1.0";
+		params.ownerId					= "default_org";
+		// params.creatorId				= n_user_id;
+		//params.organizationId					= "org1"; //api 문서에 없음 Unhandled rejection StatusCodeError: 404 - {"statusCode":404,"errorCode":10014,"flag":"ORGANIZATION_NOT_FOUND","message":"Organization does not exist"}
+		//params.orgId					= "11"; //api 문서에 없음 Unhandled rejection StatusCodeError: 404 - {"statusCode":404,"errorCode":10014,"flag":"ORGANIZATION_NOT_FOUND","message":"Organization does not exist"}
+
+		delete params.taxonomy_version;
+		delete params.category_list;
+		delete params.issued;
+		delete params.modified;
+		delete params.isFree;
+		delete params.extras;
+		delete params.license;
+		delete params.method;
+		
+		// JSON.parse(params, (k, v)=>{
+		// 	console.log(k+"  "+v);
+		// });
+
+		//console.log(params);
+		//option.body						= params;
+		//Object.prototype.hasOwnProperty.call(params , formData )
+		console.log(params);
+		option.form					=  params;
+
+		console.log(option);
+		//console.log(option);
+		console.log("[ SODAS RESOURCE SAVE ]");
+	
+		let response 					= await call_request_api.call_api(option);
+		if(n_debug_mode) console.log(response);
+		if(response.id) res.send( {success:true} );
+		else res.send( {success:false} );
+	}catch(e){
+		console.log(e);
+		res.send({success:false});
+	}
+});
+
+router.post("/v1/resource/dataset/update", async (req, res, next) => {
+	// taxonomy_version: 'b00e9670-19c1-11ea-924e-cf7457dc9c18',
+	// category_list: '2',
+	// title: '1',
+	// ownerId: '2',
+	// creatorId: '3',
+	// description: '4',
+	// descriptionDetail: '5',
+	// landingPage: '6',
+	// language: 'kr',
+	// issued: '7',
+	// modified: '8',
+	// version: '9',
+	// isFree: 'free',
+	// isPublic: 'Y',
+	// isPersonal: 'Y',
+	// extras: '19',
+	// spatialResolutionInMeters: '11',
+	// temporalResolution: '12',
+	// license: '13',
+	// method: '14',
+	// accrualPeriodicity: '15',
+	// temporalStart: '16',
+	// temporalEnd: '17',
+	// conformsTo: '18'
+
+	try{
+		console.log( req.body );
+		let params						= {};
+		let access_token 				= await call_request_api.get_access_token();
+		let option 						= call_request_api.get_request_option();
+
+		option.method 					= 'POST';
+		option.url  				    = call_request_api.resource_update_url;
+		option.headers.Authorization 	= access_token;
+		option.headers['Content-Type']  = 'application/x-www-form-urlencoded';
+
+		var taxonomy 					= {};
+		params.taxonomy					= JSON.stringify(taxonomy);
+		params.etcValue					= req.body.m_extras.trim()!=""?JSON.stringify( req.body.m_extras ):{};
+		params.userPrice				= 0;
+		params.downDate					= "10";
+		params.downDateType				= "years";
+		params.version					= "1.0";
+		//params.default_org				= "1.0";
+		params.ownerId					= "default_org";
+		// params.creatorId				= n_user_id;
+		//params.organizationId					= "org1"; //api 문서에 없음 Unhandled rejection StatusCodeError: 404 - {"statusCode":404,"errorCode":10014,"flag":"ORGANIZATION_NOT_FOUND","message":"Organization does not exist"}
+		//params.orgId					= "11"; //api 문서에 없음 Unhandled rejection StatusCodeError: 404 - {"statusCode":404,"errorCode":10014,"flag":"ORGANIZATION_NOT_FOUND","message":"Organization does not exist"}
+
+		params.id						 	= req.body.m_id							;
+		params.title						= req.body.m_title						;	
+		params.creatorId					= req.body.m_creatorId					;	
+		params.description				 	= req.body.m_description				;	
+		params.descriptionDetail			= req.body.m_descriptionDetail			;	
+		params.landingPage				 	= req.body.m_landingPage				;	
+		params.language						= req.body.m_language					;	
+		params.version					 	= req.body.m_version					;	
+		params.priceType					= req.body.m_priceType					;	
+		params.isPublic						= req.body.m_isPublic					;	
+		params.isPersonal				 	= req.body.m_isPersonal					;
+		params.extras					 	= req.body.m_extras						;
+		params.spatialResolutionInMeters 	= req.body.m_spatialResolutionInMeters	;	
+		params.temporalResolution		 	= req.body.m_temporalResolution			;
+		params.accrualPeriodicity		 	= req.body.m_accrualPeriodicity			;
+		params.temporalStart				= req.body.m_temporalStart				;	
+		params.temporalEnd				 	= req.body.m_temporalEnd				;	
+		params.conformsTo				 	= req.body.m_conformsTo					;
+
+		// delete params.taxonomy_version;
+		// delete params.category_list;
+		// delete params.issued;
+		// delete params.modified;
+		// delete params.isFree;
+		// delete params.extras;
+		// delete params.license;
+		// delete params.method;
+		
+		//console.log(params);
+		//option.body						= params;
+		//Object.prototype.hasOwnProperty.call(params , formData )
+		option.form				=  JSON.parse(JSON.stringify(params)) ;
+
+		console.log(option);
+		//console.log(option);
+		console.log("[ SODAS RESOURCE SAVE ]");
+	
+		let response 					= await call_request_api.call_api(option);
+		if(n_debug_mode) console.log(response);
+		console.log(response);
+		// if(response.id) res.send({success:true});
+		res.send({success:true})
+	}catch(e){
+		console.log(e);
+		res.send({success:false});
+	}
+});
+
+
+
+//################################### OLD ############################################
+router.get("/his", (req, res, next) => {
+	res.render("resource/resource_history.html");
+});
+
+router.get("/repo_list", async (req, res, next) => {
+	var query = " SELECT  REPO_NO AS CD";
+		query +=" 		, REPO_ID AS CDID";
+		query +=" 		, REPO_NM AS CDNM";
+		query +=" 		, REPO_DESC AS CDDESC";
+		query +=" FROM REPOSITORY";
+		query +=" WHERE 1=1";
+		query +=" ORDER BY REPO_NO";
 	var queryResult = await callDb(query);
 	if(queryResult){
 		console.log(queryResult);
@@ -29,16 +403,17 @@ router.get('/repo_list', async function(req, res, next) {
 	}
 });
 
-router.get('/list', async function(req, res, next) {
+router.get('/list', async (req, res, next) => {
 	console.log(req.query);
 	var title = req.query.s_title;
 	var publisher_id = req.query.s_publisher_id;
 	var owner_id = req.query.s_owner_id;
+
 	var query  = " SELECT     ID                                  ";
 		query += " 			, TITLE                               ";
 		query += " 			, PUBLISHER_ID                        ";
 		query += " 			, OWNER_ID                            ";
-		query += " 			, CREATOR_ID                          ";
+		query += " 			, CREATOR_ID						  ";
 		query += " 			, LANGUAGE                            ";
 		query += " 			, LANDING_PAGE                        ";
 		query += " 			, DESCRIPTION                         ";
@@ -92,7 +467,7 @@ router.get('/list', async function(req, res, next) {
 	}
 });
 
-router.get('/detail', async function(req, res, next) {
+router.get('/detail', async (req, res, next) => {
 	var resource_id = req.query.resource_id;
 
 	var query  = " SELECT     ID                               	  ";
@@ -152,7 +527,7 @@ router.get('/detail', async function(req, res, next) {
 
 });
 
-router.post('/save', async function(req, res, next) {
+router.post('/save', async (req, res, next) => {
 	console.log(req.body);
 	var id                                 = req.body.id                          ;
 	var title                              = req.body.title                       ;
@@ -218,7 +593,7 @@ router.post('/save', async function(req, res, next) {
 });
 
 
-router.post('/update', async function(req, res, next) {
+router.post('/update', async (req, res, next) => {
 	console.log(req.body);
 	var id                                 = req.body.m_id                         ; 
 	var title                              = req.body.m_title                      ; 
@@ -339,25 +714,6 @@ async function  callDb(query, params){
 		console.log(e.message);
 		return 0;  
 	} 
-};
-
-async function callAPI(option){
-	return new Promise((resolve, reject) => {
-		request(option, function (error, resb, body) {
-			if (error){
-				console.log(error);
-			
-			}
-			if (!error && resb.statusCode == 200) {
-				//console.log(body);
-				resolve(body);
-			  } else {
-				//reject(error);
-				reject({ error: "fail!" });
-			  }
-		});
-
-	});
 };
 
 module.exports = router;

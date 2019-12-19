@@ -1,17 +1,20 @@
-const createError = require('http-errors');
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const cors = require('cors');
-const logger = require('morgan');
-const favicon = require('serve-favicon');
+const createError 	= require('http-errors');
+const express 		= require('express');
+const path 			= require('path');
+const cookieParser 	= require('cookie-parser');
+const cors 			= require('cors');
+const logger 		= require('morgan');
+const favicon	 	= require('serve-favicon');
+const app 			= express();
 
-const app = express();
+global.n_debug_mode = "false";
+global.n_user_id 	= "sodas_admin";
+global.n_password 	= "so8087";
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
-
 
 app.use(cors());
 app.use(logger('dev'));
@@ -37,6 +40,7 @@ app.use('/resource',require('./routes/resource/resource'));
 app.use('/distribution',require('./routes/resource/distribution'));
 app.all('*',(req,res) => res.status(404).send('<h1> 요청 페이지 없음 </h1>'));
 
+
 // catch 404 and forward to error handler
 app.use(function (req, res) {
 	//console.log("app.use(function (req, res) {");
@@ -49,11 +53,6 @@ app.use(function (req, res, next) {
 	// console.log(next);
 	next(createError(404));
 });
-
-
-
-
-출처: https://3dmpengines.tistory.com/1868 [3DMP]
 
 // error handler
 app.use(function (err, req, res, next) {

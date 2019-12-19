@@ -1,12 +1,20 @@
 <!-- SCRIPT -->
 <script>
-	$(function(){
-		var pageObj = $("#pagination").pagination({
+	var pageObj;
+	var pageItems = 4; 
+	var current_page = 1; 
+	var repo_list;
+	var datasetId = "";
+	var datasetTitle = "";
+	$(()=>{
+		pageObj = $("#pagination").pagination({
 			items: 1,
 			itemsOnPage: 20,
 			cssStyle: 'light-theme',
 			onPageClick : function(p,e){
 				console.log(p);
+				current_page = p;
+				resource_retrieve(p);
 			}
 		});
 
@@ -19,23 +27,16 @@
 			$("#fm01p")[0].reset();
 			$("#fm02p")[0].reset();
 			//$("#fm03p")[0].reset();
-			$("#regModal , #mModal , #executeModal").removeClass("show-modal");
+			$("#insertModal , #modifyModal").removeClass("show-modal");
 		//	clearTimeout(loop_timer);
 		});
 
 		// 저장소 조회
-		repoList_retrieve();
+		repository_retrieve();
 
 		//상품 조회
 		$("#searchBtn").click((e)=>{
 			resource_retrieve(1);
-		});
-
-		//상품 등록 팝업
-		$("#insert_popup").click((e)=>{
-			$("#fm01p")[0].reset();
-			$(".modal-content").scrollTop(0);
-			register_popup();
 		});
 
 		//상품 저장
@@ -51,237 +52,205 @@
 		$("#mDelete").click((e)=>{
 			resource_delete();
 		});
-
-		$("#i_exe_nifi").click((e)=>{
-			// console.log(this);
-			// console.log(e);
-			console.log($("#serves_dataset").val());
-			var dPath = $("#serves_dataset").val();
-			if(!dPath){
-				alert("데이터셋 패스 입력 후 실행하십시오!");
-				$("#serves_dataset").focus();
-				return false;
-			}
-
-			execute_data_load(dPath);
-
-			console.log(dPath);
-		});
 	});
 		
 	var make_header = ()=>{
-		var header = ["No","상품명","상품등록자","상품판매자","상품생성자","버젼","가격무료","공개여부","언어","상품분류","생성일자","수정일자","승인상태" ];
-		$.each(header, function(i,v){
-			$("#ghead").append("<th>"+v+"</th>");
+		// resource header
+		var header = ["No","상품명","설명","상품상태"];
+		var size   = ["10","300","900","100"] 
+		$.each(header, (i,v) =>{
+			$("#ghead").append("<th style='width:"+size[i]+"px;'>"+v+"</th>");
+		});
+
+		header = ["No","제목","설명","등록일자"];
+		size   = ["10","300","600","200"] 
+		$.each(header, (i,v) =>{
+			$("#ghead2").append("<th style='width:"+size[i]+"px;'>"+v+"</th>");
 		});
 	};
 
-	var register_popup = ()=>{
-		$("#regModal").addClass("show-modal");
-	};
-
-	var job_check_poppup = (jobno)=>{
-		$("#executeModal").addClass("show-modal");
-
-		execute_detail_retrieve(jobno);
-
-		loop_timer = setTimeout(function() {
-			execute_detail_retrieve_loop(jobno);
-		}, 3000);
-
-		//execute_detail_retrieve
-		//eRepoNo eMetaNo eJobNm eJobDesc eJobExeUnit
-		// exeHeader
-	};
-	var repoList_retrieve = () => {
+	var repository_retrieve = () => {
 		$.ajax({
-			url       : "/resource/repo_list",
+			url       : "/repo/list",
 			type      : "GET",
-			async	  : false,
-			success: function(data) {
+			success: (data) => {
 				console.log(data);
 				if(data){
-					var rows = "";
-					$.each(data, function(i,r){
-						rows +="<option value="+r.cd+">"+r.cdnm+"</option>";
+					$.each(data, (i,r)=>{
+						$("#repo_id").append("<option value='"+r.repo_no+"'>"+r.repo_nm+"</option>");
 					});
-					$("#repo_list").append(rows);
-					$("#repoNo option:eq(0)").attr("selected","selected");
-				}
-			},
-			error:function(request,status,error){
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			}
-		});
-	};
+					repo_list = data;
 
-	var mataList_retrieve = () => {
-		$.ajax({
-			url       : "/load/meta_list",
-			type      : "GET",
-			async	  : false,
-			data	  : {repo_no:$("#repoNo option:selected").val()},
-			success: function(data) {
-				
-				if(data){
-					console.log(data);
-					var rows = "";
-					if(data.length > 0 ){
-						$.each(data, function(i,r){
-							rows +="<option value="+r.cd+">"+r.cdnm+"</option>";
+					$("#repo_id").change((e)=>{
+						var repo_no = $("#repo_id").val();
+						console.log(repo_no);
+						$.each(repo_list, (i,r)=>{
+							console.log(r.repo_no+"  "+repo_no);
+							if(r.repo_no == repo_no){
+								console.log(r.repo_source_path);
+								$("#repo_source").val(r.repo_source_path);
+								$("#repo_target").val(r.repo_target_path);
+								return false;
+							}
 						});
-						$("#metaNo").append(rows);
-					} else{
-						$("#metaNo").empty();
-					}
-					
+					});
 				}
 			},
-			error:function(request,status,error){
+			error: (request,status,error) => {
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		});
 	};
 
 	var resource_retrieve = (num) => {
-		console.log($("#fm01").serialize());
 		$.ajax({
-			url       : "/resource/list",
+			url       : "/resource/v1/resource/dataset/list?"+$("#fm01").serialize(),
 			type      : "GET",
-			async	  : false,
-			data	  : $("#fm01").serialize(),
-			success: function(data) {
+			data	  : {offset:(num-1)*pageItems,limit:pageItems },
+			success: (data) => {
 				console.log(data);
-				$("#gTable tr").not('tr:first').remove();
-				//console.log(data);
-				//$("#contents").empty().append(html);
+				
 				if(data){
-					var rows = "";
-					$.each(data, function(i,r){
-						rows += "<tr>";
-						rows += "<td><a href='javascript:resource_detail(\""+r.id+"\")'>"+i+"</a></td>";
-						rows += "<td><a href='javascript:resource_detail(\""+r.id+"\")'>"+r.title+"</a></td>";
-						rows += "<td>"+r.publisher_id+"</td>";
-						rows += "<td>"+r.owner_id+"</td>";
-						rows += "<td>"+r.creator_id+"</td>";
-						rows += "<td>"+r.version+"</td>";
-						rows += "<td>"+r.is_free+"</td>";
-						rows += "<td>"+r.is_public+"</td>";
-						rows += "<td>"+r.language+"</td>";
-						rows += "<td>"+r.type+"</td>";
-						rows += "<td>"+r.issued+"</td>";
-						rows += "<td>"+r.modified+"</td>"; 
-						if(r.approval_state === "request"){
-							rows += "<td>승인요청</td>";
-						} else if(r.approval_state === "rejct"){
-							rows += "<td>반력</td>";
+					var append = "";
+					pageObj.pagination('updateItems', data.total);
+
+					//title, ownerNm,ownerId,description,approvalState,downloadcount,issued,modified
+					//["No","상품명","제공기업명","제공기업ID","설명","상품상태","다운로드수","생성일","최근수정일" ];
+					$("#gTable tr").not('tr:first').remove();
+					$.each(data.datasets, (i,r)=>{
+						append += "<tr>";
+						append += "<td>"+((i+((current_page-1)*pageItems))+1)+"</td>";
+						append += "<td><a href='javascript:distribution_retrieve(\""+r.id+"\")'>"+r.title+"</a></td>";
+						append += "<td>"+r.description+"</td>";
+						if(r.approvalState === "accept"){
+							append += "<td>승인완료</td>";
+						} else if(r.approvalState === "rejct"){
+							append += "<td>반려</td>";
 						}
-						rows += "<td><button onclick='javascript:resource_delete(\""+r.id+"\")' type='button'>삭제</button></td>";
-						//rows += "<td><button onclick='javascript:job_check_poppup("+r.data_load_no+")' type='button'>수행</button></td>";
-						rows += "</tr>"
+						append += "<td style='100'><button onclick='javascript:insert_distribution(\""+r.id+"\",\""+r.title+"\")' type='button'>배포등록</button></td>";
+						append += "</tr>"
 					});
-					$("#ghead").after(rows);
-					// $("#execute").click(e=>{
-					// 	e.defaultPrevented;
-					// 	 console.log(e);
-					// 	 console.log($(e.currentTarget).attr("jobno"));
-
-					// 	//job_check_poppup($(e.currentTarget).attr("jobno"));
-						
-					// });
-					// $("#gTable td").click(e=>{
-					// 	console.log(e);
-					// });
+					$("#ghead").after(append);
 				}
 			},
-			error:function(request,status,error){
+			error: (request,status,error) => {
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		});
 	};
 
-	var resource_save = () => {
-		console.log($("#fm01p").serialize());
-
-
-		var dataset_uuid = $("#dataset_uuid").val();
-		// if(!dataset_uuid){
-		// 	alert("데이터 적재 수행후 저장 하십시오.");
-		// 	return false;
-		// }
+	var distribution_retrieve = (dataset_id) => {
 		$.ajax({
-			url       : "/resource/save",
-			type      : "POST",
-			async	  : false,
-			data	  : $("#fm01p").serialize(),
-			success: function(data) {
+			url       : "/distribution/v1/resource/dataset/distribution/list",
+			type      : "GET",
+			data	  : {dataset_id:dataset_id },
+			success: (data) => {
 				console.log(data);
-				if(data.success){
-					alert("저장 성공!");
-					$(".modal").removeClass("show-modal");
-					resource_retrieve(1);
-				}else{
-					alert("저장 실패!");
+				if(data){
+					var append = "";
+
+					// //title, ownerNm,ownerId,description,approvalState,downloadcount,issued,modified
+					// //["No","상품명","제공기업명","제공기업ID","설명","상품상태","다운로드수","생성일","최근수정일" ];
+					$("#gTable2 tr").not('tr:first').remove();
+					$.each(data.distributions, (i,r)=>{
+						append += "<tr>";
+						append += "<td>"+((i+((current_page-1)*pageItems))+1)+"</td>";
+						 //append += "<td><a href='javascript:distribution_detail(\""+r.id+"\")'>"+r.title+"</a></td>";
+						append += "<td>"+r.title+"</td>";
+						append += "<td>"+r.description+"</td>";
+						append += "<td>"+r.issued+"</td>";
+						append += "</tr>"
+					});
+					$("#ghead2").after(append);
 				}
 			},
-			error:function(request,status,error){
+			error: (request,status,error) => {
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		});
 	};
 
-	var resource_update = () => {
+	// var distribution_save = () => {
+	// 	console.log($("#fm01p").serialize());
+	// 	// if(!dataset_uuid){
+	// 	// 	alert("데이터 적재 수행후 저장 하십시오.");
+	// 	// 	return false;
+	// 	// }
+	// 	// add_distribution();
+	// 	// return;
+	// 	$.ajax({
+	// 		url       : "/distribution/v1/resource/dataset/distribution/save",
+	// 		type      : "POST",
+	// 		async	  : false,
+	// 		data	  : $("#fm01p").serialize(),
+	// 		success: (data) => {
+	// 			console.log(data);
+	// 			if(data.success){
+	// 				alert("배포 저장 성공!");
+	// 				$(".modal").removeClass("show-modal");
+	// 			}else{
+	// 				alert("배포 저장 실패!");
+	// 			}
+	// 		},
+	// 		error:(request,status,error) => {
+	// 			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	// 		}
+	// 	});
+	// };
+
+	var distribution_update = () => {
 		$.ajax({
-			url       : "/resource/update",
+			url       : "/distribution/update",
 			type      : "POST",
 			async	  : false,
 			data	  : $("#fm02p").serialize(),
-			success: function(data) {
+			success: (data) => {
 				console.log(data);
 				if(data.success){
-					alert("수정 성공!");
+					alert("배포 수정 성공!");
 					$(".modal").removeClass("show-modal");
 					resource_retrieve(1);
 				}else{
 					alert("수정 실패!");
 				}
 			},
-			error:function(request,status,error){
+			error:(request,status,error) =>{
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		});
 	};
 
-	var resource_delete = (id) => {
+	var distribution_delete = (id) => {
 		$.ajax({
-			url       : "/resource/delete",
+			url       : "/distribution/delete",
 			type      : "POST",
 			async	  : false,
 			data	  : {id:id},
-			success: function(data) {
+			success: (data) => {
 				console.log(data);
 				if(data.success){
-					alert("삭제 완료!");
+					alert("배포 삭제 완료!");
 					$(".modal").removeClass("show-modal");
 					resource_retrieve(1);
 				}else{
 					alert("삭제 실패!");
 				}
 			},
-			error:function(request,status,error){
+			error:(request,status,error) => {
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		});
 	};
 
-	var resource_detail = (resource_id) => {
+	var distribution_detail = (resource_id) => {
+		return;
 		console.log(resource_id);
 		$.ajax({
-			url       : "/resource/detail",
+			url       : "/distribution/detail",
 			type      : "GET",
 			async	  : false,
 			data	  : {resource_id:resource_id},
-			success: function(data) {
+			success:(data) => {
 				console.log(data);
 				if(data){
 					$("#m_id").val(data[0].id);
@@ -359,7 +328,7 @@
 					$("#mModal").addClass("show-modal");
 				}
 			},
-			error:function(request,status,error){
+			error:(request,status,error)=>{
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		});
@@ -387,31 +356,124 @@
 	// 	});
 	// };
 
-	var execute_data_load = (path) => {
-		$.ajax({
-			url       : "/nifi/process_set",
-			type      : "GET",
-			async	  : false,
-			data	  : {path:path},
-			success: function(data) {
-				console.log(data);
-				if(data.success){
-					$("#dataset_uuid").val(data.dataset_uuid);
-					alert("적재 프로세스가 시작 되었습니다.");
-				}else{
-					alert("적재 프로세스가 실패 하였습니다.");
-				}
-			},
-			error:function(request,status,error){
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			}
-		});
+	var execute_data_load = () => {
+
+		var source_file_name = $("#source_file_name").val();
+		var source_path = $("#repo_source").val();
+		var target_path = $("#repo_target").val();
+		var resource_id = $("#datasetId").val();
+
+		if($("#title").val().trim() == ""){
+			alert("배포명을 입력 하세요!");
+			$("#title").focus();
+			return false;
+		}
+
+		if($("#source_file_name").val().trim() == ""){
+			alert("파일명을 입력 하세요!");
+			$("#source_file_name").focus();
+			return false;
+		}
+		if($("#repo_source").val().trim() == ""){
+			alert("소스 경로를 입력하세요!");
+			$("#repo_source").focus();
+			return false;
+		}
+		if($("#repo_target").val().trim() == ""){
+			alert("타켓 경로를 입력하세요!");
+			$("#repo_target").focus();
+			return false;
+		}
+		if($("#description").val().trim() == ""){
+			alert("설명을 입력하세요!");
+			$("#description").focus();
+			return false;
+		}
+		if($("#conformsTo").val().trim() == ""){
+			alert("기준규정을 입력하세요!");
+			$("#conformsTo").focus();
+			return false;
+		}
+
+		// alert(source_file_name);
+		// alert(source_path);
+		// alert(resource_id);
+		// alert(target_path);
+
+		// $.ajax({
+		// 	url       : "/nifi/process_set",
+		// 	type      : "GET",
+		// 	async	  : false,
+		// 	data	  : {source_file_name:source_file_name,source_path:source_path,target_path:target_path,resource_id:resource_id},
+		// 	success: (data) => {
+		// 		console.log(data);
+		// 		if(data.success){
+		// 			alert("연계 프로세스가 시작 되었습니다.");
+		// 			console.log( $("#fm01p").serialize() );
+					$.ajax({
+						url       : "/distribution/v1/resource/dataset/distribution/save",
+						type      : "POST",
+						data	  : $("#fm01p").serialize(),
+						success: (data) => {
+							console.log(data);
+					 		if(data.success){
+								alert("배포 저장 성공!");
+								// $(".modal").removeClass("show-modal");
+								add_distribution();
+								distribution_retrieve(resource_id);
+								$("#fm01p")[0].reset();
+								console.log(datasetTitle);
+								console.log(datasetId);
+								$("#resource_title").val(datasetTitle);
+								$("#datasetId").val(datasetId);
+								$("#repo_id").trigger("change");
+							}else{
+								alert("배포 저장 실패!");
+							}
+						},
+						error:(request,status,error) => {
+							alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						}
+					});
+		// 		}else{
+		// 			alert("연계 프로세스가 실패 하였습니다.");
+		// 		}
+		// 	},
+		// 	error:(request,status,error)=>{
+		// 		alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		// 	}
+		// });
+	};
+
+	var insert_distribution = (resource_id, resource_title) =>{
+		$("#fm01p")[0].reset();
+		$(".modal-content").scrollTop(0);
+		$("#repo_source").val(repo_list[0].repo_source_path);
+		$("#repo_target").val(repo_list[0].repo_target_path);
+		$("#datasetId").val(resource_id);
+		$("#resource_title").val(resource_title);
+		$("#distribution_add_info tr").not('tr:first').remove();
+		$("#insertModal").addClass("show-modal");
+		datasetId = resource_id;
+		datasetTitle = resource_title;
+	};
+
+	var add_distribution = ()=>{
+		let append;
+		append +="<tr>";
+		append +="<td class='text_center'>"+$("#title").val()+"</td>";
+		append +="<td class='text_center'>"+$("#format").val()+"</td>";
+		append +="<td class='text_center'>"+$("#mediaType").val()+"</td>";
+		append +="<td class='text_center'>"+$("#rights").val()+"</td>";
+		append +="<td class='text_center'>"+$("#license").val()+"</td>";
+		append +="</tr>";
+		$("#distribution_add_info").append(append);
 	};
 
 	var close_layer = () => {
 		$("#fm01p")[0].reset();
 		$("#fm02p")[0].reset();
-		$("#regModal , #mModal , #executeModal").removeClass("show-modal");
+		$("#insertModal , #updateModal , #executeModal").removeClass("show-modal");
 		//	clearTimeout(loop_timer);
 	};
 </script>
@@ -426,33 +488,29 @@
 				<ul>
 					<li>
 						<div style="float:left;">
-							<label for="title" style="margin-left:10px;margin-top:5px;">상품명</label>
-							<input id="title" name="title" type="text" style="width:400px;" class="field-style field-split" placeholder="상품명" />
-						</div>
-						<div style="float:left;">
-							<label for="publisher_id" style="margin-left:10px;margin-top:5px;">등록자</label>
-							<input id="publisher_id" name="publisher_id" type="text" style="width:200px;" class="field-style field-split" placeholder="등록자" />
-						</div>
-						<div style="float:left;">
-							<label for="owner_id" style="margin-left:10px;margin-top:5px;">판매자</label>
-							<input id="owner_id" name="owner_id" type="text" style="width:200px;" class="field-style field-split" placeholder="판매자" />
+							<label for="s_keyword" style="margin-left:10px;margin-top:5px;">상품명</label>
+							<input id="s_keyword" name="s_keyword" type="text" style="width:400px;" class="field-style field-split" placeholder="상품명" />
 						</div>
 					</li>
 				</ul>
 			</form>
 		</div>
 		<!-- <div style="width:10%;float:right;padding:15px;"><button style="width:100px;height:80px;" type="button">조회</button></div> -->
-		<div style="width:10%;float:right;padding:15px;"><button id="searchBtn" style="width:100px;height:40px;" type="button">조회</button></div>
+		<div style="width:10%;float:right;padding-left:15px;padding-top:5px;"><button id="searchBtn" style="width:100px;height:40px;" type="button">조회</button></div>
 	</div>
 	<!-- CONTDITION END -->
 
 	<div class="w3-row-padding" style="height:800px;">
-		<div style="float:right;margin-top:10px;"><button id="insert_popup">상품등록</button></div>
-		<div style="margin-top:10px;border:1px solid rgba(100, 101, 105, 0.2); width:100%;height:700px;overflow:auto;">
-			<table id="gTable" style="width:1400px;">
+		<div style="margin-top:10px;border:1px solid rgba(100, 101, 105, 0.2); width:100%;height:350px;overflow:auto;">
+			<table id="gTable" style="width:1500px;">
 				<tr id="ghead"></tr>
 			</table>
 			<div id="pagination" style="position:absolute; left:50%; margin-left:-50px;margin-top:10px;"></div>
+		</div>
+		<div style="margin-top:10px;border:1px solid rgba(100, 101, 105, 0.2); width:100%;height:400px;overflow:auto;">
+			<table id="gTable2" style="width:1400px;">
+				<tr id="ghead2"></tr>
+			</table>
 		</div>
 	</div>
 </section>
@@ -462,207 +520,179 @@
 <style>
 	.pop_tabla  {width:100%; border-top:2px solid #000; border-bottom:1px solid #000; font-size:12px;}
 	.pop_tabla th {background:#f4f4f4; border-bottom:1px solid #ddd;padding:10px;  text-align:center; width:100px;}
+	.pop_tabla th .point_color{color:#ef1111;}
 	.pop_tabla td {border-bottom:1px solid #ddd; padding:10px; background-color: white;}
 	.pop_tabla td input {border:1px solid #ddd; padding:5px 10px; width:85%; background-color: white;}
 	.pop_tabla td select {border:1px solid #ddd; padding:5px 10px; background-color: white; }
 	.pop_tabla td textarea {border:1px solid #ddd; padding:5px 10px; background-color: white;}
+	.pop_tabla .text_center { text-align:center;}
+	.table_bt01 {text-align:center; float:left;}
+	.table_bt01 a{border:1px solid #009fe9; background:#009fe9; color:#fff; display:inline-block; padding:14px 40px; text-decoration:none; font-size:13px;}
+	.table_bt02 {text-align:center; float:left;}
+	.table_bt02 a{border:1px solid #009fe9; color:#009fe9; display:inline-block; padding:14px 40px; text-decoration:none; font-size:13px;}
 </style>
-
-<div id="regModal" class="modal" style="z-index:10;">
-	<div class="modal-content" style="height:850px;width:1250px;overflow:auto;">
+<div id="insertModal" class="modal" style="z-index:10;">
+	<div class="modal-content" style="height:850px;width:1400px;overflow:auto;">
 		<span class="close-button">&times;</span>
-		<h1 class="title">메타등록</h1>
+		<h1 class="title">데이터(배포)등록</h1>
 		<!-- var header = ["No","저장소명","메타명","메타설명","소스경로","소스API","타켓경로","타켓API","검증포맷" ]; -->
-		<form id="fm01p" style="margin: 0 auto; width: 1220px;">
-			<div style="width:1200px;">
+		<form id="fm01p" style="margin: 0 auto; width: 1350px;">
+			<div style="width:1350px;">
 				<div style="margin:0 30px 20px 30px;">
 					<table cellpadding="0" cellspacing="0" class="pop_tabla">
 						<tr>
-							<th>상품명</th>
-							<td><input id="title" type="text"  name="title" placeholder="상품명"></td>
-							<th>상품등록자</th>
-							<td><input id="publisher_id" type="text"  name="publisher_id" placeholder="상품등록자"></td>
-							<th>상품판매자</th>
-							<td><input id="owner_id" type="text"  name="owner_id" placeholder="상품판매자"></td>
-							<th>상품생성자</th>
-							<td><input id="creator_id" type="text"  name="creator_id" placeholder="상품생성자"></td>
-						</tr>
-						<tr>
-							<th>상품설명</th>
-							<td colspan="7"><input id="description" type="text"  name="description" placeholder="상품이미지 URL" style="width:97.7%;"></td>
-						</tr>
-						<tr>
-							<th>랜딩페이지</th>
-							<td colspan="3"><input id="landing_page" type="text"  name="landing_page" placeholder="랜딩페이지" ></td>
-							<th>랜딩페이지URL</th>
-							<td colspan="3"><input id="landing_page_url" type="text"  name="landing_page_url" placeholder="랜딩페이지URL"></td>
-						</tr>
-						<tr>
-							<th>언어</th>
-							<td>
-								<select name="language">
-									<option value="kor">한국</option>
-									<option value="usa">미국</option>
-									<option value="jpn">일본</option>
-									<option value="cha">중국</option>
-								</select>
-							</td>
-							<th>상품분류</th>
-							<td><input id="type" type="text"  name="type" placeholder="상품분류"></td>
-							<th>분류체계</th>
-							<td><input id="taxonomy" type="text"  name="taxonomy" placeholder="분류체계"></td>
-							<th>생성일자</th>
-							<td><input id="issued" type="text"  name="issued" placeholder="생성일자"></td>
-						</tr>
-						<tr>
-							<th>수정일자</th>
-							<td colspan="3"><input id="modified" type="text"  name="modified" placeholder="수정일자"></td>
-							<th>버젼</th>
-							<td colspan="3"><input id="version" type="text"  name="version" placeholder="버전"></td>
-						</tr>
-						<tr>
-							<th>버젼설명</th>
+							<th>상품명</span></th>
 							<td colspan="7">
-								<textarea  id="version_description" name="version_description" placeholder="버젼설명" style="width:95%; height:100px; "></textarea>
+								<input id="resource_title" type="text"  name="resource_title" placeholder="상품명" required readonly>	
 							</td>
 						</tr>
 						<tr>
-							<th>가격무료여부</th>
-							<td>
-								<select id="is_free" name="is_free">
-									<option value="free">무료</option>
-									<option value="charged">유료</option>
-								</select>
-							</td>
-							<th>공개여부</th>
-							<td>
-								<select id="is_public"  name="is_public">
-									<option value="public">공개</option>
-									<option value="private">미공개</option>
-								</select>
-							</td>
-							<th>상품상태</th>
-							<td>
-								<select id="state" name="state">
-									<option value="start">판매중</option>
-									<option value="stop">판매중단</option>
-								</select>
-							</td>
-							<th>개인상품여부</th>
-							<td>
-								<select id="is_personal" name="is_personal">
-									<option value="personal">YES</option>
-									<option value="corp">NO</option>
-								</select>
-							</td>
+							<input id="datasetId" name="datasetId" type="hidden" >
+							<th>배포명 <span class="point_color">*</span></th>
+							<td colspan="7"><input id="title" type="text"  name="title" placeholder="배포명을 입력 하세요"></td>
 						</tr>
 						<tr>
-							<th>상품이미지URL</th>
-							<td colspan="7"><input id="image_path" type="text"  name="image_path" placeholder="상품이미지URL"></td>
-						</tr>
-						<tr>
-							<th>EXTEA 필드</th>
-							<td colspan="7">
-								<textarea id="extras" name="extras" placeholder="EXTEA 필드" style="width:95%; height:100px; "></textarea>
-							</td>
-						</tr>
-						<tr>
-							<th>was generated by</th>
-							<td colspan="7"><input id="was_generated_by" type="text"  name="was_generated_by" placeholder="was generated by"></td>
-						</tr>
-						<tr>
-							<th>데이터 품질지수</th>
-							<td><input id="dq_index" type="text"  name="dq_index" placeholder="데이터 품질지수"></td>
-							<th>데이터 품질지수 측정일</th>
-							<td><input id="measure_date" type="text"  name="measure_date" placeholder="데이터 품질지수 측정일"></td>
-							<th>공강해상도</th>
-							<td><input id="spatial_resolution_in_meters" type="text"  name="spatial_resolution_in_meters" placeholder="공강해상도"></td>
-							<th>공간정보</th>
-							<td><input id="spatial_uri" type="text"  name="spatial_uri" placeholder="공간정보"></td>
-						</tr>
-						<tr>
-							<th>갱신주기</th>
-							<td><input id="accrual_periodicity" type="text"  name="accrual_periodicity" placeholder="갱신주기"></td>
-							<th>공간정보(제공자)</th>
-							<td><input id="publisher_spatial_uri" type="text"  name="publisher_spatial_uri" placeholder="공간정보(제공자)"></td>
-							<th>시간해상도</th>
-							<td><input id="temporal_resolution" type="text"  name="temporal_resolution" placeholder="시간해상도"></td>
-							<th>시작일</th>
-							<td><input id="temporal_start" type="text"  name="temporal_start" placeholder="시작일"></td>
-						</tr>
-						<tr>
-							<th>종료일</th>
-							<td><input id="temporal_end" type="text"  name="temporal_end" placeholder="종료일"></td>
-							<th>출처구분</th>
-							<td>
-								<select id="source_type" name="source_type">
-									<option value="personal">개인</option>
-									<option value="corp">기업</option>
-								</select>
-							</td>
-							<th>접근권한</th>
-							<td>
-								<select id="access_rights" name="access_rights">
-									<option value="write">쓰기</option>
-									<option value="read">읽기</option>
-								</select>
-							</td>
-							<th>삭제타입</th>
-							<td>
-								<select id="remove_type" name="remove_type">
-									<option value="disposal">보관</option>
-									<option value="purge">삭제</option>
-								</select>
-							</td>
-						</tr>
-			
-						<tr>
-							<th>URL</th>
-							<td colspan="7"><input id="uri" type="text"  name="uri" placeholder="URL"></td>
-						</tr>
-						<tr>
-							<th>엔드포인트 URL</th>
-							<td colspan="7"><input id="endpoint_url" type="text"  name="endpoint_url" placeholder="엔드포인트 URL"></td>
-						</tr>
-						<tr>
-							<th>엔트포인트 설명</th>
-							<td colspan="7">
-								<textarea id="endpoint_description" name="endpoint_description" placeholder="엔트포인트 설명" style="width:95%; height:100px; "></textarea>
-							</td>
-						</tr>
-			
-						<tr>
-							<input type="hidden" id="dataset_uuid" name="dataset_uuid">
-							<th>Server Data Set</th>
-							<td colspan="3"><input id="serves_dataset" type="text"  name="serves_dataset" placeholder="데이터셋 적재 PATH"></td>
-							<th>적재 수행</th>
+							<th>데이터 저장소</th>
 							<td colspan="3">
-								<!-- <select id="repo_list" name="repo_list">
-								</select> -->
-								<a href="javascript:void(0);" id="i_exe_nifi" style="display:inline-block; background:#333; color:#fff; padding:6px 15px; text-decoration:none; margin-left:10px;">데이터 적재</a>
+								<select id="repo_id" name="repo_id"> </select>
+							</td>
+							<th>파일명<span class="point_color">*</span></th>
+							<td colspan="3"><input id="source_file_name" type="text"  name="source_file_name" placeholder="파일명을 입력 하세요.ex)aaa.csv"></td colspan="3">	
+						</tr>
+						<tr>
+							<th>소스경로</th>
+							<td colspan="3"><input id="repo_source" type="text"  name="repo_source" readonly></td colspan="3">
+							<th>타켓경로</th>
+							<td colspan="3"><input id="repo_target" type="text"  name="repo_target" readonly></td>
+						</tr>
+						<tr>
+							<th>미디어 타입</th>
+							<td colspan="3"><input id="mediaType" type="text"  name="mediaType" placeholder="미디어 타입을 입력 하세요"></td>
+							<th>포맷</th>
+							<td colspan="3"><input id="format" type="text"  name="format" placeholder="배포 포맷을 입력하세요." ></td colspan="7">
+						</tr>
+						<tr>
+							<th>저작권</th>
+							<td colspan="3"><input id="rights" type="text"  name="rights" placeholder="저작권을 입력 하세요"></td>
+							<th>라이선스</th>
+							<td colspan="3"><input id="license" type="text"  name="license" placeholder="라이센스를 입력 하세요"></td>
+						</tr>
+						<tr>
+							<th>공간해상도</th>
+							<td colspan="3"><input id="spatialResolutionInMeters" type="text"  name="spatialResolutionInMeters" placeholder="간해상도를 입력 하세요"></td colspan="3">
+							<th>시간해상도</th>
+							<td colspan="3"><input id="temporalResolution" type="text"  name="temporalResolution" placeholder="시간해상도를 입력하세요"></td colspan="3">
+						</tr>
+						<tr>
+							<th>설명</th>
+							<td colspan="7">
+								<textarea id="description" name="description" placeholder="설명을 입력하세요" style="width:95%; height:100px; "></textarea>
 							</td>
 						</tr>
 						<tr>
-							<th>라이센스</th>
-							<td><input id="license" type="text"  name="license" placeholder="라이센스"></td>
-							<th>Conforms_to</th>
-							<td colspan="3"><input id="conforms_to" type="text"  name="conforms_to" placeholder="Conforms_to"></td>
-							<th>메소드</th>
-							<td><input id="method" type="text"  name="method" placeholder="메소드"></td>
+							<th>기준규정</th>
+							<td colspan="7"><input id="conformsTo" type="text"  name="conformsTo" placeholder="기준규정을 입력 하세요"></tdcolspan="3">
+							<!-- <th>Access Right</th>
+							<td><input id="" type="text"  name="" placeholder="접근권한을 입력하세요"></td> -->
 						</tr>
 					</table>
-			
+				
+					<!-- <p style="font-size:20px; color:#222; font-weight:bold; margin-top:30px;">데이터 필드 정의</p>
+					<table cellpadding="0" cellspacing="0" class="pop_tabla">
+						<tr>
+							<th>번호</th>
+							<th>데이터 필드명</th>
+							<th>데이터 유형</th>
+							<th>유형보기</th>
+							<th>데이터 필드명 설명</th>
+							<th>단위(직접입력)</th>
+							<th>체크결과</th>
+						</tr>
+						<tr>
+							<td class="text_center">1</td>
+							<td class="text_center">일자</td>
+							<td class="text_center">
+								<select name="">
+									<option>날짜</option>
+								</select>
+							</td>
+							<td class="text_center">YYYY-MM-DD</td>
+							<td class="text_center">일자</td>
+							<td class="text_center"></td>
+							<td class="text_center">유효성 체크를 하세요!</td>
+						</tr>
+						<tr>
+							<td class="text_center">2</td>
+							<td class="text_center">시간</td>
+							<td class="text_center">
+								<select name="">
+									<option>시간</option>
+								</select>
+							</td>
+							<td class="text_center">HH:MM:SS</td>
+							<td class="text_center">시간</td>
+							<td class="text_center"></td>
+							<td class="text_center">유효성 체크를 하세요!</td>
+						</tr>
+						<tr>
+							<td class="text_center">3</td>
+							<td class="text_center">지역</td>
+							<td class="text_center">
+								<select name="">
+									<option>텍스트</option>
+								</select>
+							</td>
+							<td class="text_center">형식에 제한이 없는 Text</td>
+							<td class="text_center">지역</td>
+							<td class="text_center"></td>
+							<td class="text_center">유효성 체크를 하세요!</td>
+						</tr>
+						<tr>
+							<td class="text_center">4</td>
+							<td class="text_center">점포유형</td>
+							<td class="text_center">
+								<select name="">
+									<option>텍스트</option>
+								</select>
+							</td>
+							<td class="text_center">형식에 제한이 없는 Text</td>
+							<td class="text_center">점포유형</td>
+							<td class="text_center"></td>
+							<td class="text_center">유효성 체크를 하세요!</td>
+						</tr>
+					</table>
 					<div style="float:right;">
-						<p style="text-align:center; float:left;"><a href="javascript:close_layer();" style="border:1px solid #009fe9; color:#009fe9; display:inline-block; padding:14px 40px; text-decoration:none; font-size:13px;"><strong>취소</strong></a></p>
-						<p style="text-align:center; float:left; margin-left:20px;"><a href="javascript:resource_save();" style="border:1px solid #009fe9; background:#009fe9; color:#fff; display:inline-block; padding:14px 40px; text-decoration:none; font-size:13px;"><strong>저장</strong></a></p>
+						<p class="table_bt01"><a href="javascript:field_add();" target="_blank"><strong>추가</strong></a></p>
+						<p class="table_bt02" style="margin-left:20px;"><a href="javascript:field_del();" target="_blank"><strong>삭제</strong></a></p>
+						<p class="table_bt02" style="margin-left:20px;"><a href="javascript:field_init();" target="_blank"><strong>초기화</strong></a></p>
+					</div> -->
+
+					
+					<div style="float:right;">
+						<!-- <p style="font-size:20px; color:#222; font-weight:bold; margin-top:80px; ">데이터 목록</p> -->
+						<p class="table_bt01"><a href="javascript:execute_data_load();"><strong>연계</strong></a></p>
+					</div>
+
+					<table id="distribution_add_info"  cellpadding="0" cellspacing="0" class="pop_tabla">
+						<tr>
+							<th>데이터명</th>
+							<th>포맷</th>
+							<th>미디어타입</th>
+							<th>저작권</th>
+							<th>라이선스</th>
+						</tr>
+					</table>
+					<div style="float:right;">
+						<!-- <p style="font-size:20px; color:#222; font-weight:bold; margin-top:80px; ">데이터 목록</p> -->
+						<p class="table_bt01"><a href="javascript:close_layer();" style="background-color: gray;"><strong>닫기</strong></a></p>
 					</div>
 				</div>
-			</div>				
+			</div>
 		</form>
 	</div>
 </div>
 
-<div id="mModal" class="modal" style="z-index:10;">
+<div id="updateModal" class="modal" style="z-index:10;">
 	<div class="modal-content" style="height:850px;width:1250px;overflow:auto;">
 		<span class="close-button">&times;</span>
 		<h1 class="title">메타수정</h1>

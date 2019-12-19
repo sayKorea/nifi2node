@@ -1,14 +1,14 @@
 <!-- SCRIPT -->
 <script>
-	$(function(){
-		var pageObj = $("#pagination").pagination({
-			items: 1,
-			itemsOnPage: 20,
-			cssStyle: 'light-theme',
-			onPageClick : function(p,e){
-				console.log(p);
-			}
-		});
+	$(()=>{
+		// var pageObj = $("#pagination").pagination({
+		// 	items: 1,
+		// 	itemsOnPage: 20,
+		// 	cssStyle: 'light-theme',
+		// 	onPageClick : function(p,e){
+		// 		console.log(p);
+		// 	}
+		// });
 		//GRID 생성
 		make_header();
 
@@ -53,32 +53,32 @@
 			type      : "GET",
 			async	  : false,
 			data	  : $("#fm01").serialize(),
-			success: function(data) {
+			success: (data) => {
 				console.log(data);
 				$("#gTable tr").not('tr:first').remove();
 				//console.log(data);
 				//$("#contents").empty().append(html);
 				if(data){
-					var rows = "";
+					var append = "";
 					//REPO_ID,REPO_NM,REPO_DESC,REPO_TYPE,REPO_VOLUME,ACC_TOKEN,REG_ID,REG_DT,MOD_ID,MOD_DT
-					$.each(data, function(i,r){
-						rows += "<tr>";
-						rows += "<td>"+r.repo_no+"</td>";
-						rows += "<td>"+r.repo_center_id+"</td>";
-						rows += "<td>"+r.repo_nm+"</td>";
-						rows += "<td>"+r.repo_type+"</td>";
-						rows += "<td>"+r.repo_source_path+"</td>";
-						rows += "<td>"+r.repo_target_path+"</td>";
-						rows += "<td>"+r.repo_desc+"</td>";
-						rows += "<td>"+r.reg_id+"</td>";
-						rows += "<td>"+r.reg_dt+"</td>";
-						rows += "<td><button onclick='javascript:repo_del(\""+r.repo_no+"\")' type='button'>삭제</button></td>";
-						rows += "</tr>"
+					$.each(data,(i,r)=>{
+						append += "<tr>";
+						append += "<td>"+r.repo_no+"</td>";
+						append += "<td>"+r.repo_center_id+"</td>";
+						append += "<td>"+r.repo_nm+"</td>";
+						append += "<td>"+r.repo_type+"</td>";
+						append += "<td>"+r.repo_source_path+"</td>";
+						append += "<td>"+r.repo_target_path+"</td>";
+						append += "<td>"+r.repo_desc+"</td>";
+						append += "<td>"+r.reg_id+"</td>";
+						append += "<td>"+r.reg_dt+"</td>";
+						append += "<td><button onclick='javascript:repo_del(\""+r.repo_no+"\")' type='button'>삭제</button></td>";
+						append += "</tr>"
 					});
-					$("#ghead").after(rows);
+					$("#ghead").after(append);
 				}
 			},
-			error:function(request,status,error){
+			error:(request,status,error)=>{
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		});
@@ -91,14 +91,14 @@
 		var repo_source_path = $("#repo_source_path").val();
 		var repo_target_path = $("#repo_target_path").val();
 
-		if(!repo_nm || repo_nm.trim() == ""){
-			alert("저장소명을 입력하세요.");
-			$("#repo_nm").focus();
-			return false;
-		}
 		if(!repo_center_id || repo_center_id.trim() == ""){
 			alert("센터ID를 입력하세요.");
 			$("#repo_center_id").focus();
+			return false;
+		}
+		if(!repo_nm || repo_nm.trim() == ""){
+			alert("저장소명을 입력하세요.");
+			$("#repo_nm").focus();
 			return false;
 		}
 		if(!repo_source_path || repo_source_path.trim() == ""){
@@ -116,18 +116,18 @@
 			type      : "POST",
 			async	  : false,
 			data	  : $("#fm01p").serialize(),
-			success: function(data) {
+			success:(data) => {
 				console.log(data);
 				if(data.success){
-					alert("저장 성공!");
+					alert("저장소 저장 성공!");
 					$(".modal").removeClass("show-modal");
 					repo_retrieve(1);
 					$("#fm01p")[0].reset();
 				}else{
-					alert("저장 실패!");
+					alert("저장소 저장 실패!");
 				}
 			},
-			error:function(request,status,error){
+			error:(request,status,error)=>{
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		});
@@ -140,21 +140,20 @@
 			type      : "POST",
 			async	  : false,
 			data	  : {repo_no:repo_no},
-			success: function(data) {
+			success: (data) => {
 				console.log(data);
 				if(data.success){
-					alert("삭제 완료!");
+					alert("저장소 삭제 완료!");
 					repo_retrieve(1);
 				}else{
-					alert("삭제 실패!");
+					alert("저장소 삭제 실패!");
 				}
 			},
-			error:function(request,status,error){
+			error:(request,status,error)=>{
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		});
 	};
-
 </script>
 <!-- SCRIPT END-->
 
@@ -169,9 +168,7 @@
 						<div class="float:left;">
 							<label for="s_repo_nm" style="margin-left:10px;float:left;margin-top:5px;">저장소명</label>
 							<input id="s_repo_nm" name="s_repo_nm" type="text"  class="field-style field-split align-left" placeholder="저장소명" />
-						</div>
-						<div class="float:right;">
-							<label for="s_repo_type" style="margin-left:10px;">저장소타입</label>
+							<label for="s_repo_type" style="margin-left:10px;margin-top:5px;">저장소타입</label>
 							<select id="s_repo_type" name="s_repo_type" class="" style="height:27px;padding:0px;margin:3px;">
 								<option value="">전체</option>
 								<option value="public">외부</option>
@@ -190,7 +187,8 @@
 			</form>
 		</div>
 		<!-- <div style="width:10%;float:right;padding:15px;"><button style="width:100px;height:80px;" type="button">조회</button></div> -->
-		<div style="width:10%;float:right;padding:15px;"><button id="searchBtn" style="width:100px;height:40px;" type="button">조회</button></div>
+		<!-- <div style="width:10%;float:right;padding:15px;"><button id="searchBtn" style="width:100px;height:40px;" type="button">조회</button></div> -->
+		<div style="width:10%;float:right;padding-left:15px;padding-top:10px;"><button id="searchBtn" style="width:100px;height:40px;" type="button">조회</button></div>
 	</div>
 	<!-- CONTDITION END -->
 
@@ -213,12 +211,12 @@
 		<h1 class="title">저장소등록</h1>
 		<form id="fm01p" style="margin: 0 auto;">
 			<div>
-				<label for="repo_nm">저장소명</label>
-				<input id="repo_nm" name="repo_nm" type="text"  placeholder="저장소명" required="required">
+				<label for="repo_center_id">센터ID</label>
+				<input id="repo_center_id" name="repo_center_id" type="text"  placeholder="센터ID" required="required">
 			</div>
 			<div>
-				<label for="repo_center_id">저장소 센터ID</label>
-				<input id="repo_center_id" name="repo_center_id" type="text"  placeholder="저장소명" required="required">
+				<label for="repo_nm">저장소명</label>
+				<input id="repo_nm" name="repo_nm" type="text"  placeholder="저장소명" required="required">
 			</div>
 			<div>
 				<label for="repo_source_path">저장소 소스경로</label>
