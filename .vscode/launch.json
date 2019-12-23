@@ -8,7 +8,7 @@
             "type": "devtools-for-chrome",
             "name": "Launch Chrome against localhost",
             "request": "launch",
-            "url": "http://localhost:3000"
+            "url": "http://localhost:18080"
         }
     ]
 }

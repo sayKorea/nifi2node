@@ -6,36 +6,24 @@
 "use strict"
 
 //const sPort = "9443";
-const sPort = "18080";;
+const sPort = "18080";
 //const sServerName = "Node Express RestApi Project Server";
 
-var app = require('../app');
-var debug = require('debug')('nodeprj:server');
-var http = require('http');
-// var https = require('https');
-// const fs = require('fs');
+const app 	= require('../app');
+const http 	= require('http');
+const log 	= require("../common/logger");
+const session 		= require('express-session');
 
 /**
  * Get port from environment and store in Express.
  */
-
-// const https_options = {
-// 	key: fs.readFileSync('./ssl/private.pem', 'utf8'),
-// 	cert: fs.readFileSync('./ssl/public.pem', 'utf8')
-// };
-
-// console.log(fs.readFileSync('./ssl/private.pem'));
-// console.log(fs.readFileSync('./ssl/public.pem'));
-process.env.active_type = process.argv[2];
-//console.log(process.env.active_type);
-var port = normalizePort(process.env.PORT || sPort);
-console.log("PORT : "+sPort);
+var port 	= normalizePort(process.env.PORT || sPort);
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
-var server = http.createServer(app);
+var server 	= http.createServer(app);
 
 // var server = https.createServer(https_options, app);
 
@@ -43,57 +31,40 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 server.listen(port, function () {
-	if(process.env.active_type === "dev"){
-		console.log("██████╗ ███████╗██╗   ██╗        ");
-		console.log("██╔══██╗██╔════╝██║   ██║        ");
-		console.log("██║  ██║█████╗  ██║   ██║        ");
-		console.log("██║  ██║██╔══╝  ╚██╗ ██╔╝        ");
-		console.log("██████╔╝███████╗ ╚████╔╝         ");
-		console.log("╚═════╝ ╚══════╝  ╚═══╝          ");
-	}else if(process.env.active_type === "stag"){
-		console.log("███████╗████████╗ ██████╗        ");
-		console.log("██╔════╝╚══██╔══╝██╔════╝        ");
-		console.log("███████╗   ██║   ██║  ███╗       ");
-		console.log("╚════██║   ██║   ██║   ██║       ");
-		console.log("███████║   ██║   ╚██████╔╝       ");
-		console.log("╚══════╝   ╚═╝    ╚═════╝        ");
-	}else if(process.env.active_type === "prod"){
-		console.log("██████╗ ██████╗  ██████╗ ██████╗ ");
-		console.log("██╔══██╗██╔══██╗██╔═══██╗██╔══██╗");
-		console.log("██████╔╝██████╔╝██║   ██║██║  ██║");
-		console.log("██╔═══╝ ██╔══██╗██║   ██║██║  ██║");
-		console.log("██║     ██║  ██║╚██████╔╝██████╔╝");
-		console.log("╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ");
-	};
-	// console.log("███╗   ██╗ ██████╗ ██████╗ ███████╗    ███████╗███████╗██████╗ ██╗   ██╗███████╗██████╗     ███████╗████████╗ █████╗ ██████╗ ████████╗██╗ ");
-	// console.log("████╗  ██║██╔═══██╗██╔══██╗██╔════╝    ██╔════╝██╔════╝██╔══██╗██║   ██║██╔════╝██╔══██╗    ██╔════╝╚══██╔══╝██╔══██╗██╔══██╗╚══██╔══╝██║ ");
-	// console.log("██╔██╗ ██║██║   ██║██║  ██║█████╗      ███████╗█████╗  ██████╔╝██║   ██║█████╗  ██████╔╝    ███████╗   ██║   ███████║██████╔╝   ██║   ██║ ");
-	// console.log("██║╚██╗██║██║   ██║██║  ██║██╔══╝      ╚════██║██╔══╝  ██╔══██╗╚██╗ ██╔╝██╔══╝  ██╔══██╗    ╚════██║   ██║   ██╔══██║██╔══██╗   ██║   ╚═╝ ");
-	// console.log("██║ ╚████║╚██████╔╝██████╔╝███████╗    ███████║███████╗██║  ██║ ╚████╔╝ ███████╗██║  ██║    ███████║   ██║   ██║  ██║██║  ██║   ██║   ██╗ ");
-	// console.log("╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝    ╚══════╝╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚══════╝╚═╝  ╚═╝    ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ");
-	// console.log("██████╗  ██████╗ ██████╗ ████████╗    ██████╗  ██████╗  ██████╗  ██████╗                                                                  ");
-	// console.log("██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝    ╚════██╗██╔═████╗██╔═████╗██╔═████╗                                                                 ");
-	// console.log("██████╔╝██║   ██║██████╔╝   ██║        █████╔╝██║██╔██║██║██╔██║██║██╔██║                                                                 ");
-	// console.log("██╔═══╝ ██║   ██║██╔══██╗   ██║        ╚═══██╗████╔╝██║████╔╝██║████╔╝██║                                                                 ");
-	// console.log("██║     ╚██████╔╝██║  ██║   ██║       ██████╔╝╚██████╔╝╚██████╔╝╚██████╔╝                                                                 ");
-	// console.log("╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝       ╚═════╝  ╚═════╝  ╚═════╝  ╚═════╝                                                                  ");
-
-	// console.log("██████╗  ██████╗ ██████╗ ████████╗     █████╗ ██╗  ██╗██╗  ██╗██████╗ ");
-	// console.log("██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝    ██╔══██╗██║  ██║██║  ██║╚════██╗");
-	// console.log("██████╔╝██║   ██║██████╔╝   ██║       ╚██████║███████║███████║ █████╔╝");
-	// console.log("██╔═══╝ ██║   ██║██╔══██╗   ██║        ╚═══██║╚════██║╚════██║ ╚═══██╗");
-	// console.log("██║     ╚██████╔╝██║  ██║   ██║        █████╔╝     ██║     ██║██████╔╝");
-	// console.log("╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝        ╚════╝      ╚═╝     ╚═╝╚═════╝ ");
-	//console.log("%s", sServerName);
+	if(process.argv[2] === "dev"){
+		log.info("██████╗ ███████╗██╗   ██╗        ");
+		log.info("██╔══██╗██╔════╝██║   ██║        ");
+		log.info("██║  ██║█████╗  ██║   ██║        ");
+		log.info("██║  ██║██╔══╝  ╚██╗ ██╔╝        ");
+		log.info("██████╔╝███████╗ ╚████╔╝         ");
+		log.info("╚═════╝ ╚══════╝  ╚═══╝          ");
+	}else if(process.argv[2] === "stag"){
+		log.info("███████╗████████╗ ██████╗        ");
+		log.info("██╔════╝╚══██╔══╝██╔════╝        ");
+		log.info("███████╗   ██║   ██║  ███╗       ");
+		log.info("╚════██║   ██║   ██║   ██║       ");
+		log.info("███████║   ██║   ╚██████╔╝       ");
+		log.info("╚══════╝   ╚═╝    ╚═════╝        ");
+	}else if(process.argv[2] === "prod"){
+		log.info("██████╗ ██████╗  ██████╗ ██████╗ ");
+		log.info("██╔══██╗██╔══██╗██╔═══██╗██╔══██╗");
+		log.info("██████╔╝██████╔╝██║   ██║██║  ██║");
+		log.info("██╔═══╝ ██╔══██╗██║   ██║██║  ██║");
+		log.info("██║     ██║  ██║╚██████╔╝██████╔╝");
+		log.info("╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ");
+	}else{
+		log.info("not found active type!");
+		process.exit();
+	}
 });
 
 /**
  * Server Event Listener
  */
 server	.on('error', 		onError)
-		.on('listening', 	onListening);
-		// .on('request', 		onRequest);
-		// .on('connection', 	onConnection)
+		.on('listening', 	onListening)
+		//.on('request', 		onRequest)
+		//.on('connection', 	onConnection);
 		// .on('close', 		onClose)
 		// .on('exit', 		onExit)
 		// .on('finish', 		onFinish)
@@ -123,7 +94,7 @@ function normalizePort(val) {
  * Event listener for HTTP server "error" event.
  */
 function onError(error) {
-	console.error('onError start');
+	log.error('onError start');
 
 	if (error.syscall !== 'listen') {
 		throw error;
@@ -136,11 +107,11 @@ function onError(error) {
 	// handle specific listen errors with friendly messages
 	switch (error.code) {
 		case 'EACCES':
-			console.error(bind + ' requires elevated privileges');
+			log.error(bind + ' requires elevated privileges');
 			process.exit(1);
 			break;
 		case 'EADDRINUSE':
-			console.error(bind + ' is already in use');
+			log.error(bind + ' is already in use');
 			process.exit(1);
 			break;
 		default:
@@ -158,61 +129,8 @@ function onListening() {
 	var bind = typeof addr === 'string'
 		? 'pipe ' + addr
 		: 'port ' + addr.port;
-	debug('Listening on ' + bind);
+	log.debug('Listening on ' + bind);
 };
-
-/**
- * Event listener for HTTP server "request" event.
- */
-// function onRequest(req, res) {
-	//console.log("ON REQUEST");
-	// console.log('onRequest start');
-	// console.log(req.headers);
-	// console.log("req.rawHeaders => "+req.rawHeaders);
-	// console.log("req.url        => "+req.url);
-	// console.log("req.method     => "+req.method);
-	// console.log("req.timeout    => "+req.server.timeout);
-	// console.log("req._peername  => "+req._peername);
-	// console.log("req.baseUrl    => "+req.baseUrl);
-	// console.log("req.originalUrl=> "+req.originalUrl);
-	// console.log("req._startTime => "+req._startTime);
-	// console.log("req._startAt   => "+req._startAt);
-	// console.log("req._remoteAddress=> "+req._remoteAddress);
-	// console.log(req.body);
-	// console.log("req.httpVersion=> "+req.httpVersion);
-	// console.log(req.params);
-	// console.log(req.query);
-	// console.log("req.secret     => "+req.secret);
-	// console.log(req.cookies);
-	// console.log('onRequest end');
-// };
-
-// function onConnection(socket) { console.log("ON SOCKET"); };
-// function onClose(){ 			console.log("ON CLOSE"); };
-// function onExit(){ 				console.log("ON EXIT"); };
-// function onFinish(){ 			console.log("ON FINISH"); };
-// function onInfomation(info){	console.log("ON INFORMAION"); };
-// function onAbort(){ 			console.log("ON ABORT"); };
-// function onTimeout(){ 			console.log("ON TIMEOUT"); };
-
-
-// process.on("close", function(){ console.log("process onClose"); });
-// process.on("abort",function(){ 	console.log("process onAbort"); });
-// process.on("exit",function(){ 	console.log("process onExit"); });
-// process.on("finish",function(){	console.log("process onFinish"); });
-
-/**
- * Event listener for HTTP server "connection" event.
- */
-// function onConnection(socket) {
-	//console.log('onConnection start');
-	//console.log(socket);
-	//console.log('onConnection end');
-// };
-
-
-
-
 
 
 

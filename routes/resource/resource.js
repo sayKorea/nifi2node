@@ -1,26 +1,14 @@
 const express 			= require('express');
 const router 			= express.Router();
-const dao 				= require('../../common/commonDao');
-const call_request_api 	= require('../../common/call_request_api');
+const dao 				= require('../../common/common_dao');
+const call_request_api 	= require('../../common/common_request');
 const uuid 				= require('uuid4');
+const log 				= require("../../common/logger");
 
-const request 			= require('request-promise');
-
+// 메타데이터 화면
 router.get("/", (req, res, next) => {
 	res.render("resource/resource.html", {user_id:n_user_id});
 });
-
-// router.get("/v1/user/get", async (req, res, next) => {
-// 	try{
-// 		console.log("[ SODAS GET ACCESS TOKEN ]");
-// 		let response = await call_request_api.get_access_token();
-// 		if(n_debug_mode) console.log(response);
-// 		res.send( response );
-// 	}catch(e){
-// 		console.log(e);
-// 		res.send(response);
-// 	}
-// });
 
 // 버젼 부터 가지고 와서 선택
 router.get("/v1/reference-model/taxonomy/version/list", async (req, res, next) => {
@@ -31,13 +19,13 @@ router.get("/v1/reference-model/taxonomy/version/list", async (req, res, next) =
 		option.url  				    = call_request_api.taxonomy_get_version_list_url;
 		option.headers.Authorization 	= access_token;
 
-		console.log("[ SODAS TAXONOMY GET VERSION LIST ]");
+		log.debug("[ SODAS TAXONOMY GET VERSION LIST ]");
 
 		let response 					= await call_request_api.call_api(option);
-		if(n_debug_mode) console.log(response);
+
 		res.send(response);
 	}catch(e){
-		console.log(e);
+		log.error(JSON.stringify(e));
 		res.send({success:false});
 	}	
 });
@@ -54,13 +42,13 @@ router.get("/v1/reference-model/taxonomy/category/list", async (req, res, next) 
 		option.headers.Authorization 	= access_token;
 		option.qs						=  { versionId: versionId };
 
-		console.log("[ SODAS TAXONOMY CATAGORY GET LIST ]");
+		log.debug("[ SODAS TAXONOMY CATAGORY GET LIST ]");
 	
 		let response 					= await call_request_api.call_api(option);
-		if(n_debug_mode) console.log(response);
+
 		res.send(response);
 	}catch(e){
-		console.log(e);
+		log.error(JSON.stringify(e));
 		res.send({success:false});
 	}	
 });
@@ -78,15 +66,13 @@ router.get("/v1/resource/dataset/get", async (req, res, next) => {
 		option.headers.Authorization 	= access_token;
 		option.qs						= params;
 
-		//console.log(option);
-		console.log("[ SODAS RESOURCE GET LIST ]");
+		log.debug("[ SODAS RESOURCE GET LIST ]");
 	
 		let response 					= await call_request_api.call_api(option);
-		if(n_debug_mode) console.log(response);
-		
+
 		res.send( response );
 	}catch(e){
-		console.log(e);
+		log.error(JSON.stringify(e));
 		res.send({success:false});
 	}
 });
@@ -94,7 +80,6 @@ router.get("/v1/resource/dataset/get", async (req, res, next) => {
 // 메타데이터 리스트
 router.get("/v1/resource/dataset/list", async (req, res, next) => {
 	try{
-		console.log( req.query );
 		let params						= {};
 		let keyword 					= req.query.s_keyword;
 		let offset 						= req.query.offset; 
@@ -106,18 +91,17 @@ router.get("/v1/resource/dataset/list", async (req, res, next) => {
 		option.headers.Authorization 	= access_token;
 		params.offset					= offset;
 		params.limit					= limit;
-		if(keyword)	params.keyword 		=  keyword;
+		if(keyword)	params.keyword 		= keyword;
 		
 		option.qs						= params;
 
-		//console.log(option);
-		console.log("[ SODAS RESOURCE GET LIST ]");
+		log.debug("[ SODAS RESOURCE GET LIST ]");
 	
 		let response 					= await call_request_api.call_api(option);
-		if(n_debug_mode) console.log(response);
+
 		res.send( response );
 	}catch(e){
-		console.log(e);
+		log.error(JSON.stringify(e));
 		res.send({success:false});
 	}
 });
@@ -125,7 +109,6 @@ router.get("/v1/resource/dataset/list", async (req, res, next) => {
 //메타데이터 등록
 router.post("/v1/resource/dataset/save", async (req, res, next) => {
 	try{
-		console.log( req.body );
 		let params						= req.body;
 		let access_token 				= await call_request_api.get_access_token();
 		let option 						= call_request_api.get_request_option();
@@ -133,8 +116,7 @@ router.post("/v1/resource/dataset/save", async (req, res, next) => {
 		option.method 					= 'POST';
 		option.url  				    = call_request_api.resource_save_url;
 		option.headers.Authorization 	= access_token;
-		//option.headers['Content-Type']  = 'application/x-www-form-urlencoded';
-
+		
 		var taxonomy 					= {};
 		taxonomy.nodeId					= params.category_list;
 		taxonomy.nodeType 				= "taxonomy";
@@ -149,25 +131,23 @@ router.post("/v1/resource/dataset/save", async (req, res, next) => {
 		params.downDateType				= "years";
 		params.version					= "1.0";
 		params.ownerId					= "default_org";
-		//params.organizationId			= "org1"; //api 문서에 없음 Unhandled rejection StatusCodeError: 404 - {"statusCode":404,"errorCode":10014,"flag":"ORGANIZATION_NOT_FOUND","message":"Organization does not exist"}
-		//params.orgId					= "11"; //api 문서에 없음 Unhandled rejection StatusCodeError: 404 - {"statusCode":404,"errorCode":10014,"flag":"ORGANIZATION_NOT_FOUND","message":"Organization does not exist"}
-
+		
 		delete params.taxonomy_version;
 		delete params.category_list;
 
-		//option.form						= params;
-		option.body						= params ;
+		option.form						= params;
 
-		console.log(option);
-		//console.log(option);
-		console.log("[ SODAS RESOURCE SAVE ]");
+
+		log.debug("[ SODAS RESOURCE SAVE ]");
 	
 		let response 					= await call_request_api.call_api(option);
-		if(n_debug_mode) console.log(response);
-		if(response.id) res.send( {success:true} );
+		if(response.id) {
+			res.send( {success:true} );
+			log.debug(response);
+		}
 		else res.send( {success:false} );
 	}catch(e){
-		console.log(e);
+		log.error(JSON.stringify(e));
 		res.send({success:false});
 	}
 });
@@ -175,7 +155,6 @@ router.post("/v1/resource/dataset/save", async (req, res, next) => {
 //메타데이터 수정
 router.post("/v1/resource/dataset/update", async (req, res, next) => {
 	try{
-		console.log( req.body );
 		let params						= {};
 		let access_token 				= await call_request_api.get_access_token();
 		let option 						= call_request_api.get_request_option();
@@ -192,11 +171,7 @@ router.post("/v1/resource/dataset/update", async (req, res, next) => {
 		params.downDate					= "10";
 		params.downDateType				= "years";
 		params.version					= "1.0";
-		//params.default_org				= "1.0";
 		params.ownerId					= "default_org";
-		// params.creatorId				= n_user_id;
-		//params.organizationId					= "org1"; //api 문서에 없음 Unhandled rejection StatusCodeError: 404 - {"statusCode":404,"errorCode":10014,"flag":"ORGANIZATION_NOT_FOUND","message":"Organization does not exist"}
-		//params.orgId					= "11"; //api 문서에 없음 Unhandled rejection StatusCodeError: 404 - {"statusCode":404,"errorCode":10014,"flag":"ORGANIZATION_NOT_FOUND","message":"Organization does not exist"}
 
 		params.id						 	= req.body.m_id							;
 		params.title						= req.body.m_title						;	
@@ -217,30 +192,18 @@ router.post("/v1/resource/dataset/update", async (req, res, next) => {
 		params.temporalEnd				 	= req.body.m_temporalEnd				;	
 		params.conformsTo				 	= req.body.m_conformsTo					;
 
-		// delete params.taxonomy_version;
-		// delete params.category_list;
-		// delete params.issued;
-		// delete params.modified;
-		// delete params.isFree;
-		// delete params.extras;
-		// delete params.license;
-		// delete params.method;
-		
-		//console.log(params);
-		//option.body						= params;
-		//Object.prototype.hasOwnProperty.call(params , formData )
-		option.form				=  JSON.parse(JSON.stringify(params)) ;
+		option.form				=  params;
 
-		console.log(option);
-		//console.log(option);
-		console.log("[ SODAS RESOURCE SAVE ]");
-	
+		log.debug("[ SODAS RESOURCE SAVE ]");
+
 		let response 					= await call_request_api.call_api(option);
-		if(n_debug_mode) console.log(response);
-		if(response.result && response.result == "success") res.send({success:true});
+		if(response.result && response.result == "success"){
+			res.send({success:true});
+			log.debug(JSON.stringify( response.result) );
+		}
 		else res.send({success:false})
 	}catch(e){
-		console.log(e);
+		log.error(e);
 		res.send({success:false});
 	}
 });
@@ -262,7 +225,6 @@ router.get("/repo_list", async (req, res, next) => {
 		query +=" ORDER BY REPO_NO";
 	var queryResult = await callDb(query);
 	if(queryResult){
-		console.log(queryResult);
 		res.send(queryResult.rows);
 	}else{
 		res.send({});
@@ -270,7 +232,6 @@ router.get("/repo_list", async (req, res, next) => {
 });
 
 router.get('/list', async (req, res, next) => {
-	console.log(req.query);
 	var title = req.query.s_title;
 	var publisher_id = req.query.s_publisher_id;
 	var owner_id = req.query.s_owner_id;
@@ -326,7 +287,6 @@ router.get('/list', async (req, res, next) => {
 
 	var queryResult = await callDb(query);
 	if(queryResult){
-		console.log(queryResult);
 		res.send(queryResult.rows);
 	}else{
 		res.send({});
@@ -385,7 +345,6 @@ router.get('/detail', async (req, res, next) => {
 	
 	var queryResult = await callDb(query,[resource_id]);
 	if(queryResult){
-		console.log(queryResult);
 		res.send(queryResult.rows);
 	}else{
 		res.send({});
@@ -451,7 +410,6 @@ router.post('/save', async (req, res, next) => {
 	var params = [uid,title,publisher_id,owner_id,creator_id,language,landing_page,description,type,conforms_to,version,version_description,landing_page_url,true,true,state,image_path,is_personal,extras,remove_type,dq_index,spatial_resolution_in_meters,temporal_resolution,spatial_uri,temporal_start,temporal_end,accrual_periodicity,was_generated_by,publisher_spatial_uri,source_type,endpoint_description,endpoint_url,serves_dataset,access_rights,license,method,uri,'request', dataset_uuid];
 	var queryResult = await callDb(insert, params);
 	if(queryResult){
-		console.log(queryResult);
 		res.send({success:true});
 	}else{
 		res.send({success:false});
@@ -544,16 +502,14 @@ router.post('/update', async (req, res, next) => {
 		update += " WHERE ID = $37"
 	var params = [title,publisher_id,owner_id,creator_id,language,landing_page,description,type,conforms_to,version,version_description,landing_page_url,is_free,is_public,state,image_path,is_personal,extras,remove_type,dq_index,spatial_resolution_in_meters,temporal_resolution,spatial_uri,temporal_start,temporal_end,accrual_periodicity,was_generated_by,publisher_spatial_uri,source_type,endpoint_description,endpoint_url,serves_dataset,access_rights,license,method,uri, id];
 	var queryResult = await callDb(update, params);
-	console.log(queryResult);
 	if(queryResult){
-		console.log(queryResult);
 		res.send({success:true});
 	}else{
 		res.send({success:false});
 	}
 });
 
-router.post('/delete', async function(req, res, next) {
+router.post('/delete', async (req, res, next) => {
 	console.log(req.body);
 	var id = req.body.id; 
 
@@ -561,23 +517,28 @@ router.post('/delete', async function(req, res, next) {
 	var queryResult = await callDb(update, [id]);
 
 	if(queryResult){
-		console.log(queryResult);
 		res.send({success:true});
 	}else{
 		res.send({success:false});
 	}
 });
 
-async function  callDb(query, params){
+var callDb = async (query, params)=>{
 	var queryResult;
 	try {
+		log.info(JSON.stringify(query));
 		// synchronous code     
-		if(params)  queryResult = await dao.query(query ,params);
+		if(params) {
+			log.info(JSON.stringify( params ) );
+			queryResult = await dao.query(query ,params);
+		}
 		else  queryResult = await dao.query(query);
+		log.debug(JSON.stringify(queryResult));
+
 		return queryResult;
 	} catch(e) {
-		//exception handled here   
-		console.log(e.message);
+		//exception handled here
+		log.error(JSON.stringify(e));
 		return 0;  
 	} 
 };

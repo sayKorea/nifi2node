@@ -30,14 +30,14 @@
 
 	});
 		
-	var make_header = ()=>{
+	var make_header = () =>{
 		var header = ["No","센터ID","저장소명","저장소타입","저장소소스경로","저장소타켓경로","저장소설명","생성자","생성일자"];
-		$.each(header, function(i,v){
+		$.each(header,(i,v)=>{
 			$("#ghead").append("<th>"+v+"</th>");
 		});
 	};
 
-	var register_popup = ()=>{
+	var register_popup = () =>{
 		var modal = $(".modal");
 		var closeButton = $(".close-button");
 		//modal.classList.toggle("show-modal");
@@ -154,7 +154,7 @@
 		});
 	};
 
-	var close_layer = () =>{
+	var close_layer = () => {
 		$("#fm01p")[0].reset();
 		$(".modal").removeClass("show-modal");
 	};

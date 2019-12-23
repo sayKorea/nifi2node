@@ -4,15 +4,13 @@
 	var pageItems = 20; 
 	var current_page = 1; 
 	var userid = "<%= user_id %>";
-	$(function(){
+	$(()=>{
 		var items = 20;
 		pageObj = $("#pagination").pagination({
 			items: 0,
 			itemsOnPage: pageItems,
 			cssStyle: 'light-theme',
 			onPageClick : function(p,e){
-				console.log(p);
-				current_page = p;
 				resource_retrieve(p);
 			}
 		});
@@ -67,8 +65,8 @@
 	var make_header = ()=>{
 		// var header = ["No","상품명","제공기업명","제공기업ID","설명","상품상태","다운수","등록일자","최근수정일" ];
 		// var size   = ["10","300","100","200","600","100","60","100","100"];
-		var header = ["No","상품명","설명","상품상태","다운수","등록일자","최근수정일" ];
-		var size   = ["10","300","600","100","60","100","100"];
+		var header = ["No","상품명","설명","상품상태","등록일자","최근수정일" ];
+		var size   = ["10","300","600","100","100","100"];
 		$.each(header, (i,v) =>{
 			$("#ghead").append("<th style='width:"+size[i]+"px;'>"+v+"</th>");
 		});
@@ -137,6 +135,7 @@
 
 	// 메타데이터 조회
 	var resource_retrieve = (num) => {
+		current_page = num;
 		$.ajax({
 			url       : "/resource/v1/resource/dataset/list?"+$("#fm01").serialize(),
 			type      : "GET",
@@ -146,6 +145,7 @@
 				
 				if(data){
 					var append = "";
+					if(num == 1) pageObj.pagination('drawPage', 1);
 					pageObj.pagination('updateItems', data.total);
 
 					//title, ownerNm,ownerId,description,approvalState,downloadcount,issued,modified
@@ -167,7 +167,7 @@
 						} else{
 							append += "<td>"+r.approvalState+"</td>";
 						}
-						append += "<td>"+r.downloadcount+"</td>";
+						//append += "<td>"+r.downloadcount+"</td>";
 						append += "<td>"+(r.issued==null?"":r.issued.substring(0,10))+"</td>";
 						append += "<td>"+(r.modified==null?"":r.modified.substring(0,10))+"</td>";	
 						append += "</tr>"
@@ -195,7 +195,7 @@
 			url			: "/resource/v1/resource/dataset/save",
 			type		: "POST",
 			data		: $("#fm01p :input").filter((i, e)=>{return $(e).val() != '';}).serialize(),
-			success: function(data) {
+			success: (data) => {
 				console.log(data);
 				if(data.success){
 					alert("상품 저장 성공!");
@@ -227,7 +227,7 @@
 					alert("수정 실패!");
 				}
 			},
-			error:function(request,status,error){
+			error:(request,status,error) => {
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		});
@@ -240,7 +240,7 @@
 			type      : "POST",
 			async	  : false,
 			data	  : {id:id},
-			success: function(data) {
+			success: (data) => {
 				console.log(data);
 				if(data.success){
 					alert("삭제 완료!");
@@ -250,7 +250,7 @@
 					alert("삭제 실패!");
 				}
 			},
-			error:function(request,status,error){
+			error: (request,status,error) => {
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		});
@@ -266,6 +266,7 @@
 			data	  : {id:id},
 			success:(data) => {
 				console.log(data);
+				// 2019/12/13일 DB 변경
 				if(data){
 					$("#m_id").val(data.id);
 					$("#m_title").val(data.title);
@@ -282,8 +283,7 @@
 					$("#m_versionDescription").val(data.versionDescription);
 					$("#m_landingPageUrl").val(data.landingPageUrl);
 
-					console.log(data.isFree);
-					$("#m_priceType").val(data.isFree);
+					$("#m_priceType").val(data.priceType);
 
 					// if(data.is_free == "free"){
 					// 	$("#m_priceType").val("free");
@@ -322,7 +322,7 @@
 
 				// 	$("#m_approval_state").val(data.approval_state);
 
-					$("#m_extras").val(JSON.stringify( data.extras ));
+					$("#m_extras").val(JSON.stringify( JSON.parse(data.extras) ));
 
 				// 	$("#m_remove_type").val(data.remove_type);
 				// 	$("#m_dq_index").val(data.dq_index);
@@ -349,7 +349,7 @@
 				 	$("#update_modal").addClass("show-modal");
 				 }
 			},
-			error:function(request,status,error){
+			error:(request,status,error) => {
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		});
@@ -461,10 +461,8 @@
 							<th>언어</th>
 							<td>
 								<select name="language">
-									<option value="kr">한국</option>
-									<option value="us">미국</option>
-									<option value="jp">일본</option>
-									<option value="cn">중국</option>
+									<option value="ko">한국</option>
+									<option value="en">미국</option>
 								</select>
 							</td>
 							<!-- <th>상품분류</th>
@@ -663,10 +661,8 @@
 							<th>언어</th>
 							<td>
 								<select id="m_language" name="m_language">
-									<option value="kr">한국</option>
-									<option value="us">미국</option>
-									<option value="jp">일본</option>
-									<option value="cn">중국</option>
+									<option value="ko">한국</option>
+									<option value="en">미국</option>
 								</select>
 							</td>
 							<!-- <th>상품분류</th>

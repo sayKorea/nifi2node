@@ -12,7 +12,7 @@
 <script type="text/javascript" src="/javascripts/jquery/jquery.3.4.1.min.js"></script>
 <script type="text/javascript" src="/javascripts/jquery/jquery.simplePagination.js"></script>	
 <script>
-	$(function(){
+	$(()=>{
 		$("#leftMenu > a").on("click",function(){
 			var cshow = $("#leftMenu").find(".w3-show").attr("id");
 			$("#leftMenu div").removeClass("w3-show");
@@ -38,14 +38,16 @@
 				url       : url,
 				type      : "GET",
 				async	  : false,
-				success: function(html) {
-					$("#contents").empty().append(html);
+				success:(html) => {
+					console.log(html);
+					if(html.indexOf('<html lang="ko">') > -1){
+						location.replace("/");
+					}else{
+						$("#contents").empty().append(html);
+					}
 				}
 			});
-
 		});
-
-
 	});
 
 // 	function w3_open() {
