@@ -322,7 +322,13 @@
 
 				// 	$("#m_approval_state").val(data.approval_state);
 
-					$("#m_extras").val(JSON.stringify( JSON.parse(data.extras) ));
+
+					try{
+						JSON.parse(data.extras);
+						$("#m_extras").val(JSON.stringify( JSON.parse(data.extras) ));
+					}catch(e){
+						$("#m_extras").val("");
+					}
 
 				// 	$("#m_remove_type").val(data.remove_type);
 				// 	$("#m_dq_index").val(data.dq_index);
@@ -332,7 +338,7 @@
 					// $("#m_spatialUri").val(data.spatial_uri);
 					$("#m_temporalStart").val(data.temporalStart);
 					$("#m_temporalEnd").val(data.temporalEnd);
-					$("#accrualPeriodicity").val(data.accrualPeriodicity);
+					$("#m_accrualPeriodicity").val(data.accrualPeriodicity);
 				// 	$("#m_was_generated_by").val(data.was_generated_by);
 				// 	$("#m_publisher_spatial_uri").val(data.publisher_spatial_uri);
 				// 	$("#m_source_type").val(data.source_type);
@@ -347,7 +353,7 @@
 				// 	$("#m_serves_dataset").val(data.serves_dataset);
 					
 				 	$("#update_modal").addClass("show-modal");
-				 }
+				}
 			},
 			error:(request,status,error) => {
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);

@@ -28,7 +28,7 @@ router.get("/v1/resource/dataset/distribution/list", async (req, res, next) => {
 	}	
 });
 
-// 배포 상세
+// 배포 상세dddd
 router.get("/v1/resource/dataset/distribution/get", async (req, res, next) => {
 	try{
 		let distribution_id				= req.query.distribution_id;

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Login Page - Product Admin Template</title>
     <!-- <link rel="stylesheet" href="/stylesheets/login/robot.css"/> -->
-    <link rel="stylesheet" href="/stylesheets/login/fontawesome.min.css" />
+    <!-- <link rel="stylesheet" href="/public/stylesheets/login/fontawesome.min.css" /> -->
     <link rel="stylesheet" href="/stylesheets/login/bootstrap.min.css" />
 	<link rel="stylesheet" href="/stylesheets/login/templatemo-style.css">
 	<script src="/javascripts/jquery/jquery.3.4.1.min.js" type="text/javascript"></script>
@@ -55,12 +55,31 @@
 			$("#join").click(function(){
 				alert("가입");
 			});
+
+
+			$("#upload").click(function(e) {
+				// 검색 값 체크
+				var params = $("#uform").serialize();
+				
+				// $.post("/uploads", params, function(data) {
+				// 	if(data.success) {
+				// 		alert("성공적으로 검색되었습니다.");
+				// 	} else {
+				// 		alert("검색 값이 잘못되었습니다.");
+				// 	return false;
+				// 	}
+				// });
+			});
 		});
 	</script>
   </head>
 
   <body>
-
+	<form id="uform" method="post" action="/uploads" enctype="multipart/form-data" target="uploadsIframe">
+		<input type="file" id="mfile" name="mfile"/>
+		<input type="submit" value="업로드">
+	</form>
+	<iframe name="uploadsIframe" style="display:none;"></iframe>
     <div class="container tm-mt-big tm-mb-big">
       <div class="row">
         <div class="col-12 mx-auto tm-login-col">

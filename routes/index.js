@@ -6,7 +6,7 @@ const fs 		= require('fs');
 const log 		= require("../common/logger");
 const session 	= require('express-session');
 /* GET Login page. */
-router.get('/2', async function(req, res, next) {
+router.get('/2', async (req, res, next) => {
 	try{
 		var database_test = await callDb("SELECT CURRENT_DATE");
 		log.debug("## Database Initialize Test");
@@ -27,28 +27,28 @@ router.get('/2', async function(req, res, next) {
 });
 
 /* GET Login page. */
-router.get('/', async function(req, res, next) {
+router.get('/', async (req, res, next) => {
 	try{
 		var database_test = await callDb("SELECT CURRENT_DATE");
 		log.debug("## Database Initialize Test");
-		if(database_test.rowCount != 1){
-			res.render('error/error.html');
+		if(!database_test || database_test.rowCount != 1){
+			console.log("## Database ERROR!");
+			
+			return res.render('error/error.html');
+		}else{
+			log.debug ("## SERVER IP : " + ip.address() );
+		return  res.render('login/login.html');
 		}
-
-		log.debug ("## SERVER IP : " + ip.address() );
-		// log.debug ("## CLIENT IP : " + getUserIP(req) );
-	// res.render('login/login.html');
+	
 	}catch(e) {
 		//exception handled here  
 		console.log(e.message);
-		res.render('error/error.html');
+		return res.render('error/error.html');
 	} 
-	
-	res.render('login/login.html');
 });
 
 /* GET Login. */
-router.get('/login', function(req, res, next) {
+router.get('/login', (req, res, next) => {
 	var userid = req.query.userid;
 	var password = req.query.password;
 	var params = [userid, password];
@@ -65,26 +65,26 @@ router.get('/login', function(req, res, next) {
 });
 
 /* GET Login page. */
-router.get('/main', function(req, res, next) {
+router.get('/main', (req, res, next) => {
   	res.render('main/main.html');
 });
 
 /* GET Login page. */
-router.get('/logout', function(req, res, next) {
+router.get('/logout', (req, res, next) => {
 	res.render('login/login.html');
 });
 
-async function  callDb(query, params){
+var callDb = async (query, params) => {
 	var queryResult;
 	try {
 		// synchronous code     
-		if(params) queryResult = queryResult = await dao.query(query ,params);
+		if(params) queryResult = await dao.query(query ,params);
 		else queryResult = await dao.query(query);
 		return queryResult;
 	} catch(e) {
 		//exception handled here  
 		log.debug(e.message);
-		return 0;  
+		return false;  
 	} 
 };
 

@@ -66,10 +66,10 @@ router.get("/v1/resource/dataset/get", async (req, res, next) => {
 		option.headers.Authorization 	= access_token;
 		option.qs						= params;
 
-		log.debug("[ SODAS RESOURCE GET LIST ]");
+		log.debug("[ SODAS RESOURCE GET ]");
 	
 		let response 					= await call_request_api.call_api(option);
-
+		console.log();
 		res.send( response );
 	}catch(e){
 		log.error(JSON.stringify(e));
@@ -94,9 +94,9 @@ router.get("/v1/resource/dataset/list", async (req, res, next) => {
 		if(keyword)	params.keyword 		= keyword;
 		
 		option.qs						= params;
-
+		
 		log.debug("[ SODAS RESOURCE GET LIST ]");
-	
+		
 		let response 					= await call_request_api.call_api(option);
 
 		res.send( response );
@@ -112,7 +112,7 @@ router.post("/v1/resource/dataset/save", async (req, res, next) => {
 		let params						= req.body;
 		let access_token 				= await call_request_api.get_access_token();
 		let option 						= call_request_api.get_request_option();
-
+		
 		option.method 					= 'POST';
 		option.url  				    = call_request_api.resource_save_url;
 		option.headers.Authorization 	= access_token;
@@ -122,7 +122,7 @@ router.post("/v1/resource/dataset/save", async (req, res, next) => {
 		taxonomy.nodeType 				= "taxonomy";
 		params.taxonomy					= JSON.stringify(taxonomy);
 		if(params.etcValue){
-			params.etcValue				= params.extras.trim()!=""?JSON.stringify( params.extras ):"{}";
+			params.etcValue				= params.extras.trim()!=""?JSON.stringify( params.extras ):"";
 		}else{
 			params.etcValue				= "{}";
 		}
@@ -136,7 +136,6 @@ router.post("/v1/resource/dataset/save", async (req, res, next) => {
 		delete params.category_list;
 
 		option.form						= params;
-
 
 		log.debug("[ SODAS RESOURCE SAVE ]");
 	
