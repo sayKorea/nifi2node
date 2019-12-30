@@ -7,7 +7,7 @@ const log 				= require("../../common/logger");
 
 // 메타데이터 화면
 router.get("/", (req, res, next) => {
-	res.render("resource/resource.html", {user_id:n_user_id});
+	res.render("resource/resource.html", {user_id:g_user_id});
 });
 
 // 버젼 부터 가지고 와서 선택
@@ -69,7 +69,6 @@ router.get("/v1/resource/dataset/get", async (req, res, next) => {
 		log.debug("[ SODAS RESOURCE GET ]");
 	
 		let response 					= await call_request_api.call_api(option);
-		console.log();
 		res.send( response );
 	}catch(e){
 		log.error(JSON.stringify(e));
@@ -130,10 +129,16 @@ router.post("/v1/resource/dataset/save", async (req, res, next) => {
 		params.downDate					= "10";
 		params.downDateType				= "years";
 		params.version					= "1.0";
-		params.ownerId					= "default_org";
-		
+
+		params.publisherId				= g_center_id;
+		params.ownerId					= g_user_id.split('_')[0];;
+		params.creatorId				= g_user_id;
+
+		// console.log(params);
+
 		delete params.taxonomy_version;
 		delete params.category_list;
+		delete params.keyword_type;
 
 		option.form						= params;
 
@@ -170,7 +175,7 @@ router.post("/v1/resource/dataset/update", async (req, res, next) => {
 		params.downDate					= "10";
 		params.downDateType				= "years";
 		params.version					= "1.0";
-		params.ownerId					= "default_org";
+		// params.ownerId					= "default_org";
 
 		params.id						 	= req.body.m_id							;
 		params.title						= req.body.m_title						;	
@@ -190,10 +195,11 @@ router.post("/v1/resource/dataset/update", async (req, res, next) => {
 		params.temporalStart				= req.body.m_temporalStart				;	
 		params.temporalEnd				 	= req.body.m_temporalEnd				;	
 		params.conformsTo				 	= req.body.m_conformsTo					;
+		params.keyword				 		= req.body.m_keyword
 
 		option.form				=  params;
 
-		log.debug("[ SODAS RESOURCE SAVE ]");
+		log.debug("[ SODAS RESOURCE UPDATE ]");
 
 		let response 					= await call_request_api.call_api(option);
 		if(response.result && response.result == "success"){

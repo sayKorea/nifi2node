@@ -4,6 +4,19 @@
 	var pageItems = 20; 
 	var current_page = 1; 
 	var userid = "<%= user_id %>";
+
+	var keyword_row_template  = " <tr>";
+		keyword_row_template += " 	<td class='text_center'>#keyword_num#</td>";
+		keyword_row_template += " 	<td class='text_center'><input id='keyword_field_name' placeholder='키워드를 입력 하세요' field_val></td>";
+		keyword_row_template += " 	<td class='text_center'>";
+		keyword_row_template += " 		<select id='keyword_type' name='keyword_type'>";
+		keyword_row_template += " 			<option value='platform'>Platform</option>";
+		keyword_row_template += " 		</select>";
+		keyword_row_template += " 	</td>";
+		keyword_row_template += " 	<td><button type='button' onclick='keyword_del_row(this)'>삭제</button></td>";
+		keyword_row_template += " </tr>";
+		
+
 	$(()=>{
 		var items = 20;
 		pageObj = $("#pagination").pagination({
@@ -14,7 +27,7 @@
 				resource_retrieve(p);
 			}
 		});
-		
+	
 		//그리드 아이템 수 변경 10 => 20으로
 		//pageObj.pagination('updateItemsOnPage', 5);
 
@@ -46,6 +59,11 @@
 			$(".modal-content").scrollTop(0);
 			// $("#ownerId").val(userid);
 			// $("#publisherId").val(userid);
+
+			var currentDay = get_current_day;
+			$("#temporalStart").val(currentDay);
+			$("#temporalEnd").val(currentDay);
+
 			$("#insert_modal").addClass("show-modal");
 		});
 		//상품 저장
@@ -141,7 +159,7 @@
 			type      : "GET",
 			data	  : {offset:(num-1)*pageItems,limit:pageItems },
 			success: (data) => {
-				console.log(data);
+				//console.log(data);
 				
 				if(data){
 					var append = "";
@@ -191,15 +209,21 @@
 			return false;
 		}
 
+		var vgj = keyword_get_json("keyword_table");
+		console.log(vgj);
+		if(vgj)$("#keyword").val(vgj);
+		else return false;
+
 		$.ajax({
 			url			: "/resource/v1/resource/dataset/save",
 			type		: "POST",
 			data		: $("#fm01p :input").filter((i, e)=>{return $(e).val() != '';}).serialize(),
 			success: (data) => {
-				console.log(data);
+				//console.log(data);
 				if(data.success){
 					alert("상품 저장 성공!");
 					$(".modal").removeClass("show-modal");
+					keyword_init();
 					resource_retrieve(1);
 				}else{
 					alert("상품 저장 실패!");
@@ -213,6 +237,13 @@
 
 	// 메타데이터 수정
 	var resource_update = () => {
+		var vgj = keyword_get_json("keyword_update_table");
+		console.log(vgj);
+		if(vgj)$("#m_keyword").val(vgj);
+		else return false;
+		
+		console.log($("#fm02p").serialize());
+
 		$.ajax({
 			url       : "/resource/v1/resource/dataset/update",
 			type      : "POST",
@@ -222,6 +253,7 @@
 				console.log(data);
 				if(data.success){
 					alert("수정 성공!");
+				
 					$(".modal").removeClass("show-modal");
 				}else{
 					alert("수정 실패!");
@@ -275,6 +307,7 @@
 					$("#m_language").val(data.language);
 					$("#m_landingPage").val(data.landingPage);
 					$("#m_description").val(data.description);
+					$("#m_descriptionDetail").val(data.descriptionDetail);
 					$("#m_type").val(data.type);
 					$("#m_issued").val(data.issued);
 					$("#m_modified").val(data.modified);
@@ -352,6 +385,8 @@
 				// 	$("#m_view_cnt").val(data.view_cnt);
 				// 	$("#m_serves_dataset").val(data.serves_dataset);
 					
+					keyword_update_add_list(data.keyword);
+
 				 	$("#update_modal").addClass("show-modal");
 				}
 			},
@@ -368,6 +403,95 @@
 		$("#insert_modal , #update_modal").removeClass("show-modal");
 		//	clearTimeout(loop_timer);
 	};
+
+	var keyword_add = () =>{
+		var vrt = keyword_row_template;
+		var row_num = $("#keyword_table tr").length;
+		vrt = vrt.replace("#keyword_num#", row_num);
+		$("#keyword_table").append(vrt);
+	};
+
+	var keyword_del_row = (t) => {
+		var table = $(t).parent().parent().parent();
+		$(t).parent().parent().remove();
+		$(table).find("tr:gt(0)").each((i, e)=>{
+			$(e).find("td:eq(0)").text(i+1);
+		});
+	};
+
+	var keyword_init = () => {
+		$("#keyword_table tr:gt(0)").remove();
+	};
+
+	var keyword_update_init = () => {
+		$("#keyword_update_table tr:gt(0)").remove();
+	};
+
+	var keyword_get_json = (table_name) => {
+		var rtn = true;
+		var vjt = [];
+
+		$("#"+table_name+" tr:gt(0)").each((i,e) =>{
+			var json_row = {};
+			var field_obj = $(e).find("#keyword_field_name");
+			var field = field_obj.val();
+			if(!field || field.trim() == ""){
+				alert("키워드를 입력 하세요.");
+				$(field_obj).focus();
+				rtn = false;
+				return false;
+			}
+
+			var data_type = $(e).find("#keyword_type").val();
+
+			// [{"keywordId": "test", "keywordType": "platform"}]
+
+			json_row.keywordId = field;
+			json_row.keywordType = data_type;
+	
+			vjt.push(json_row);
+		});
+
+		if(rtn){
+			return JSON.stringify(vjt);
+		}else{
+			return false;
+		}
+	};
+
+	var keyword_update_add = () =>{
+		var vrt = keyword_row_template;
+		var row_num = $("#keyword_update_table tr").length;
+		vrt = vrt.replace("#keyword_num#", row_num);
+		$("#keyword_update_table").append(vrt);
+	};
+
+	var keyword_update_add_list = (keyword) =>{
+		keyword_update_init();
+		if(!keyword) return;
+
+		var v_t;	
+		if(keyword){	
+			$.each(keyword,(i,r)=>{
+				v_t = keyword_row_template;
+				v_t = v_t.replace("#keyword_num#", i+1);
+				v_t = v_t.replace("field_val", "value='"+r.keywordId+"'");
+				v_t = v_t.replace(r.keywordType+"'>", r.keywordType+"' selected>");
+				$("#keyword_update_table").append(v_t);
+			});
+		}
+	};
+
+	var get_current_day = () =>{	
+		var now = new Date();
+		var year= now.getFullYear();
+		var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
+		var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
+		var currentDay = year + '-' + mon + '-' + day;
+		return currentDay;
+	};
+
+	
 </script>
 <!-- SCRIPT END-->
 
@@ -421,6 +545,11 @@
 	.pop_tabla td input {border:1px solid #ddd; padding:5px 10px; width:85%; background-color: white;}
 	.pop_tabla td select {border:1px solid #ddd; padding:5px 10px; background-color: white; }
 	.pop_tabla td textarea {border:1px solid #ddd; padding:5px 10px; background-color: white;}
+	.pop_tabla .text_center { text-align:center;}
+	.table_bt01 {text-align:center; float:left;}
+	.table_bt01 a{border:1px solid #009fe9; background:#009fe9; color:#fff; display:inline-block; padding:14px 40px; text-decoration:none; font-size:13px;}
+	.table_bt02 {text-align:center; float:left;}
+	.table_bt02 a{border:1px solid #009fe9; color:#009fe9; display:inline-block; padding:14px 40px; text-decoration:none; font-size:13px;}
 </style>
 
 <div id="insert_modal" class="modal" style="z-index:10;">
@@ -443,13 +572,13 @@
 						</tr>
 						<tr>
 							<th>상품명<span class="point_color">*</span></th>
-							<td><input id="title" type="text"  name="title" placeholder="상품명" required></td>
+							<td colspan="7"><input id="title" type="text"  name="title" placeholder="상품명" required style="width:97.7%;"></tdcolspan="7>
 							<!-- <th>상품등록자</th>
 							<td><input id="publisherId" type="text"  name="publisherId" placeholder="상품등록자" disabled></td> -->
 							<!-- <th>제공기업<span class="point_color">*</span></th>
 							<td><input id="ownerId" type="text"  name="ownerId" placeholder="제공기업"  required disabled></td> -->
-							<th>상품생성자</th>
-							<td><input id="creatorId" type="text"  name="creatorId" placeholder="상품생성자" ></td>
+							<!-- <th>상품생성자</th>
+							<td><input id="creatorId" type="text"  name="creatorId" placeholder="상품생성자" ></td> -->
 						</tr>
 						<tr>
 							<th>상품설명</th>
@@ -481,6 +610,10 @@
 							<td ><input id="modified" type="text"  name="modified" placeholder="수정일자"></td> -->
 							<th>버젼</th>
 							<td><input id="version" type="text"  name="version" placeholder="버전"></td>
+							<!-- <th>키워드</th> -->
+							<!-- <td> -->
+								<input id="keyword" type="hidden"  name="keyword" placeholder="키워드">
+							<!-- </td> -->
 						</tr>
 						<!-- <tr>
 							<th>버젼설명</th>
@@ -623,8 +756,22 @@
 					</table>
 			
 					<div style="float:right;">
-						<p style="text-align:center; float:left;"><a href="javascript:close_layer();" style="border:1px solid #009fe9; color:#009fe9; display:inline-block; padding:14px 40px; text-decoration:none; font-size:13px;"><strong>취소</strong></a></p>
-						<p style="text-align:center; float:left; margin-left:20px;"><a href="javascript:resource_save();" style="border:1px solid #009fe9; background:#009fe9; color:#fff; display:inline-block; padding:14px 40px; text-decoration:none; font-size:13px;"><strong>저장</strong></a></p>
+						<p class="table_bt01"><a href="javascript:keyword_add();"><strong>추가</strong></a></p>
+						<p class="table_bt02" style="margin-left:7px;"><a href="javascript:keyword_init();"><strong>초기화</strong></a></p>
+					</div>
+					<p style="font-size:20px; color:#222; font-weight:bold; margin-top:30px;">키워드</p>
+					<table id="keyword_table" cellpadding="0" cellspacing="0" class="pop_tabla">
+						<tr>
+							<th style="width:10%;">번호</th>
+							<th style="width:53%;">키워드</th>
+							<th style="width:15%;">타입</th>
+							<th style="width:7%;">삭제</th>
+						</tr>
+					</table>
+					<div style="float:right;">
+						<!-- <p style="font-size:20px; color:#222; font-weight:bold; margin-top:80px; ">데이터 목록</p> -->
+						<p class="table_bt01"><a href="javascript:close_layer();" style="background-color: gray;"><strong>닫기</strong></a></p>
+						<p class="table_bt01"><a href="javascript:resource_save();" style="margin-left:7px;"><strong>등록</strong></a></p>
 					</div>
 				</div>
 			</div>				
@@ -653,11 +800,11 @@
 						</tr>
 						<tr>
 							<th>상품설명</th>
-							<td colspan="7"><input id="m_description" type="text"  name="m_description" placeholder="상품이미지 URL" style="width:97.7%;"></td>
+							<td colspan="7"><input id="m_description" type="text"  name="m_description" placeholder="상품설명" style="width:97.7%;"></td>
 						</tr>
 						<tr>
 							<th>상품상세설명</th>
-							<td colspan="7"><input id="m_descriptionDetail" type="text"  name="m_descriptionDetail" placeholder="상품이미지 URL" style="width:97.7%;"></td>
+							<td colspan="7"><input id="m_descriptionDetail" type="text"  name="m_descriptionDetail" placeholder="상품상세설명" style="width:97.7%;"></td>
 						</tr>
 						<tr>
 							<th>랜딩페이지</th>
@@ -822,6 +969,21 @@
 						</tr>
 					</table>
 			
+					<div style="float:right;">
+						<p class="table_bt01"><a href="javascript:keyword_update_add();"><strong>추가</strong></a></p>
+						<p class="table_bt02" style="margin-left:7px;"><a href="javascript:keyword_update_init();"><strong>초기화</strong></a></p>
+					</div>
+					<input id="m_keyword" name="m_keyword" type="hidden">
+					<p style="font-size:20px; color:#222; font-weight:bold; margin-top:30px;">키워드</p>
+					<table id="keyword_update_table" cellpadding="0" cellspacing="0" class="pop_tabla">
+						<tr>
+							<th style="width:10%;">번호</th>
+							<th style="width:53%;">키워드</th>
+							<th style="width:15%;">타입</th>
+							<th style="width:7%;">삭제</th>
+						</tr>
+					</table>
+
 					<div style="float:right;">
 						<p style="text-align:center; float:left;"><a href="javascript:close_layer();" style="border:1px solid #009fe9; color:#009fe9; display:inline-block; padding:14px 40px; text-decoration:none; font-size:13px;"><strong>취소</strong></a></p>
 						<p style="text-align:center; float:left; margin-left:20px;"><a href="javascript:resource_update();" style="border:1px solid #009fe9; background:#009fe9; color:#fff; display:inline-block; padding:14px 40px; text-decoration:none; font-size:13px;"><strong>수정</strong></a></p>

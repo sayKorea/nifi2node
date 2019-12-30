@@ -12,9 +12,8 @@
 	<script src="/javascripts/jquery/jquery.3.4.1.min.js" type="text/javascript"></script>
 	<script src="/javascripts/jquery/bootstrap.min.js" type="text/javascript"></script>
 	<script type="text/javascript">
-		$(function(){
-
-			$("#login").click(function(){
+		$(()=>{
+			$("#login").click(()=>{
 				var userid = $("#userid").val();
 				var password = $("#password").val();
 
@@ -30,55 +29,60 @@
 					return;
 				}
 
+				// $.ajax({
+				// 	url       : "/login",
+				// 	type      : "GET",
+				// 	async	  : false,  
+				// 	dataType  : "json",
+				// 	data      : $("#fm01").serialize(),
+				// 	success: (data) => {
+				// 		console.log(data);
+				// 		var cnt = data[0].cnt;
+				// 		if(cnt == "0"){
+				// 			alert("로그인 실패");
+				// 			return;
+				// 		}else if(cnt == "1"){
+				// 			alert("로그인 성공");
+				// 			location.replace("/main");
+				// 		}else{
+				// 			alert("에러~~~");
+				// 			return;
+				// 		}
+				// 	}
+				// });
+
 				$.ajax({
 					url       : "/login",
 					type      : "GET",
 					async	  : false,  
 					dataType  : "json",
 					data      : $("#fm01").serialize(),
-					success: function(data) {
+					success: (data) => {
 						console.log(data);
-						var cnt = data[0].cnt;
-						if(cnt == "0"){
+						var rtn = data.success;
+						if(!rtn){
 							alert("로그인 실패");
 							return;
-						}else if(cnt == "1"){
+						}else{
 							alert("로그인 성공");
 							location.replace("/main");
-						}else{
-							alert("에러~~~");
-							return;
 						}
 					}
 				});
+
 			});
-			$("#join").click(function(){
+			$("#join").click(()=>{
 				alert("가입");
-			});
-
-
-			$("#upload").click(function(e) {
-				// 검색 값 체크
-				var params = $("#uform").serialize();
-				
-				// $.post("/uploads", params, function(data) {
-				// 	if(data.success) {
-				// 		alert("성공적으로 검색되었습니다.");
-				// 	} else {
-				// 		alert("검색 값이 잘못되었습니다.");
-				// 	return false;
-				// 	}
-				// });
 			});
 		});
 	</script>
   </head>
 
   <body>
-	<form id="uform" method="post" action="/uploads" enctype="multipart/form-data" target="uploadsIframe">
+	<!-- <form id="uform" method="post" action="/uploads" enctype="multipart/form-data" target="uploadsIframe">
 		<input type="file" id="mfile" name="mfile"/>
 		<input type="submit" value="업로드">
-	</form>
+	</form> -->
 	<iframe name="uploadsIframe" style="display:none;"></iframe>
     <div class="container tm-mt-big tm-mb-big">
       <div class="row">

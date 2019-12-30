@@ -1,8 +1,14 @@
 <!-- SCRIPT -->
 <script>
-	var user_id = "<%= user_id %>";
-	var center_id = "<%= center_id %>";
 	$(()=>{
+		// var pageObj = $("#pagination").pagination({
+		// 	items: 1,
+		// 	itemsOnPage: 20,
+		// 	cssStyle: 'light-theme',
+		// 	onPageClick : function(p,e){
+		// 		console.log(p);
+		// 	}
+		// });
 		//GRID 생성
 		make_header();
 
@@ -32,8 +38,14 @@
 	};
 
 	var insert_popup = () =>{
-		$("#insert_modal").addClass("show-modal");
+		var modal = $(".modal");
+		var closeButton = $(".close-button");
+		//modal.classList.toggle("show-modal");
+		$(".modal").addClass("show-modal");
+		
 	};
+
+	
 
 	var repo_retrieve = (num) => {
 		console.log($("#fm01").serialize());
@@ -54,7 +66,7 @@
 						append += "<tr>";
 						append += "<td>"+r.repo_no+"</td>";
 						append += "<td>"+r.repo_center_id+"</td>";
-						append += "<td><a href='javascript:repo_detail(\""+r.repo_no+"\")'>"+r.repo_nm+"</a></td>";
+						append += "<td>"+r.repo_nm+"</td>";
 						append += "<td>"+r.repo_type+"</td>";
 						append += "<td>"+r.repo_source_path+"</td>";
 						append += "<td>"+r.repo_target_path+"</td>";
@@ -63,37 +75,8 @@
 						append += "<td>"+r.reg_dt+"</td>";
 						append += "<td><button onclick='javascript:repo_del(\""+r.repo_no+"\")' type='button'>삭제</button></td>";
 						append += "</tr>"
-						
 					});
 					$("#ghead").after(append);
-				}
-			},
-			error:(request,status,error)=>{
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			}
-		});
-	};
-
-	var repo_detail = (repo_no) => {
-		console.log($("#fm01").serialize());
-		$.ajax({
-			url       : "/repo/detail",
-			type      : "GET",
-			async	  : false,
-			data	  : {repo_no:repo_no},
-			success: (data) => {
-				console.log(data);
-				if(data){
-					$(".modal-content").scrollTop(0);
-					$("#m_repo_no").val(data[0].repo_no);
-					$("#m_repo_center_id").val(data[0].repo_center_id);
-					$("#m_repo_nm").val(data[0].repo_nm);
-					$("#m_repo_source_path").val(data[0].repo_source_path);
-					$("#m_repo_target_path").val(data[0].repo_target_path);
-					$("#m_repo_desc").val(data[0].repo_desc);
-					$("#update_modal").addClass("show-modal");
-				} else{
-					alert("항목이 존재 하지 않습니다.");
 				}
 			},
 			error:(request,status,error)=>{
@@ -151,7 +134,7 @@
 		});
 	};
 
-	var repo_del = () => {
+	var repo_del = (repo_no) => {
 		console.log(repo_no);
 		$.ajax({
 			url       : "/repo/del",
@@ -172,31 +155,9 @@
 			}
 		});
 	};
-	var repo_update = (repo_no) => {
-		console.log(repo_no);
-		$.ajax({
-			url       : "/repo/update",
-			type      : "POST",
-			async	  : false,
-			data	  : $("#fm02p").serialize(),
-			success: (data) => {
-				console.log(data);
-				if(data.success){
-					alert("저장소 수정 완료!");
-					repo_retrieve(1);
-					close_layer();
-				}else{
-					alert("저장소 수정 실패!");
-				}
-			},
-			error:(request,status,error)=>{
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			}
-		});
-	};
+
 	var close_layer = () => {
 		$("#fm01p")[0].reset();
-		$("#fm02p")[0].reset();
 		$(".modal").removeClass("show-modal");
 	};
 </script>
@@ -214,11 +175,11 @@
 							<label for="s_repo_nm" style="margin-left:10px;float:left;margin-top:5px;">저장소명</label>
 							<input id="s_repo_nm" name="s_repo_nm" type="text"  class="field-style field-split align-left" placeholder="저장소명" />
 							<label for="s_repo_type" style="margin-left:10px;margin-top:5px;">저장소타입</label>
-							<!-- <select id="s_repo_type" name="s_repo_type" class="" style="height:27px;padding:0px;margin:3px;">
+							<select id="s_repo_type" name="s_repo_type" class="" style="height:27px;padding:0px;margin:3px;">
 								<option value="">전체</option>
 								<option value="public">외부</option>
 								<option value="private">내부</option>
-							</select> -->
+							</select>
 						</div>
 					</li>
 					<!-- <li>
@@ -264,8 +225,8 @@
 	.table_bt02 {text-align:center; float:left;}
 	.table_bt02 a{border:1px solid #009fe9; color:#009fe9; display:inline-block; padding:14px 40px; text-decoration:none; font-size:13px;}
 </style>
-<div id="insert_modal" class="modal" style="z-index:10;">
-	<div class="modal-content" style="width:750px;height:450px;float:left;">
+<div class="modal" style="z-index:10;">
+	<div class="modal-content" style="width:750px;height:500px;float:left;">
 		<span class="close-button">&times;</span>
 		<h1 class="title">저장소등록</h1>
 		<form id="fm01p" style="margin: 0 auto;">
@@ -273,9 +234,9 @@
 				<div style="margin:0 30px 20px 30px;">
 					<table cellpadding="0" cellspacing="0" class="pop_tabla">
 						<tr>
-							<th>센터ID</th>
+							<th>센터ID<span class="point_color">*</span></th>
 							<td colspan="3">
-								<input id="repo_center_id" type="text"  name="repo_center_id" placeholder="센터ID를 입력 하세요" value="<%= center_id %>" required readonly>	
+								<input id="repo_center_id" type="text"  name="repo_center_id" placeholder="센터ID를 입력 하세요" required >	
 							</td>
 						</tr>
 						<tr>
@@ -294,7 +255,7 @@
 							<th>저장소 설명</th>
 							<td colspan="3"><input id="repo_desc" type="text"  name="repo_desc" placeholder="저장소 설명을 입력 하세요"></td>
 						</tr>
-						<!-- <tr>
+						<tr>
 							<th>저장소 타입 <span class="point_color">*</span></th>
 							<td colspan="3">
 								<select id="repo_type" name="repo_type">
@@ -302,61 +263,11 @@
 									<option value="private">내부</option>
 								</select>
 							</td>
-						</tr> -->
+						</tr>
 					</table>
 					<div style="float:right;">
 						<p class="table_bt01"><a href="javascript:close_layer();" style="background-color: gray;"><strong>닫기</strong></a></p>
 						<p class="table_bt01" style="margin-left:7px;"><a href="javascript:repo_save();"><strong>등록</strong></a></p>
-					</div>
-				</div>
-			</div>
-		</form>
-	</div>
-</div>
-<div id="update_modal" class="modal" style="z-index:10;">
-	<div class="modal-content" style="width:750px;height:450px;float:left;">
-		<span class="close-button">&times;</span>
-		<h1 class="title">저장소수정</h1>
-		<form id="fm02p" style="margin: 0 auto;">
-			<div style="width:700px;">
-				<div style="margin:0 30px 20px 30px;">
-					<table cellpadding="0" cellspacing="0" class="pop_tabla">
-						<input id="m_repo_no" name="m_repo_no" type="hidden">
-						<tr>
-							<th>센터ID<span class="point_color">*</span></th>
-							<td colspan="3">
-								<input id="m_repo_center_id" type="text"  name="m_repo_center_id" placeholder="센터ID를 입력 하세요" required >	
-							</td>
-						</tr>
-						<tr>
-							<th>저장소명 <span class="point_color">*</span></th>
-							<td colspan="3"><input id="m_repo_nm" type="text"  name="m_repo_nm" placeholder="저장소명 입력 하세요" required></td>
-						</tr>
-						<tr>
-							<th>저장소 소스경로 <span class="point_color">*</span></th>
-							<td colspan="3"><input id="m_repo_source_path" type="text"  name="m_repo_source_path" placeholder="저장소 소스경로를 입력 하세요" required></td>
-						</tr>
-						<tr>
-							<th>저장소 타켓경로 <span class="point_color">*</span></th>
-							<td colspan="3"><input id="m_repo_target_path" type="text"  name="m_repo_target_path" placeholder="저장소 타켓경로를 입력 하세요" required></td>
-						</tr>
-						<tr>
-							<th>저장소 설명</th>
-							<td colspan="3"><input id="m_repo_desc" type="text"  name="m_repo_desc" placeholder="저장소 설명을 입력 하세요"></td>
-						</tr>
-						<!-- <tr>
-							<th>저장소 타입 <span class="point_color">*</span></th>
-							<td colspan="3">
-								<select id="repo_type" name="repo_type">
-									<option value="public">외부</option>
-									<option value="private">내부</option>
-								</select>
-							</td>
-						</tr> -->
-					</table>
-					<div style="float:right;">
-						<p class="table_bt01"><a href="javascript:close_layer();" style="background-color: gray;"><strong>닫기</strong></a></p>
-						<p class="table_bt01" style="margin-left:7px;"><a href="javascript:repo_update();"><strong>수정</strong></a></p>
 					</div>
 				</div>
 			</div>

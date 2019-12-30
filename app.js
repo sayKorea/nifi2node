@@ -9,10 +9,16 @@ const app 			= express();
 const log 			= require("./common/logger");
 
 // Global Variable
-global.n_debug_mode = "false";
-global.n_user_id 	= "sodas_admin";
-global.n_password 	= "so8087";
-global.n_active_type = process.argv[2];
+// Center
+
+// global.g_user_id 	= "sodas_admin";
+// global.g_password 	= "so8087";
+global.g_user_id 	= "";
+global.g_password 	= "";
+global.g_center_id	= "default_org";
+
+global.g_debug_mode = "false";
+global.g_active_type = process.argv[2];
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -46,17 +52,20 @@ app.use(function(req, res, next) {
 	let url = req.url.toLowerCase();
 	log.debug("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 	log.debug("┃ Host 			: "+req.headers.host);
+	log.debug("┃ URL			: "+req.url);
 	log.debug("┃ Referer 		: "+req.headers.referer);
 	log.debug("┃ User-agent 		: "+req.headers["user-agent"]);
 	log.debug("┃ Accept			: "+req.headers.accept);
 	log.debug("┃ Accept Encoding		: "+req.headers["accept-encoding"]);
 	log.debug("┃ Accept Language		: "+req.headers["accept-language"]);
-	log.debug("┃ URL			: "+req.url);
 	log.debug("┃ Method			: "+req.method);
 	log.debug("┃ Params			: "+JSON.stringify( req.params) );
 	log.debug("┃ Query			: "+JSON.stringify( req.query) );
 	log.debug("┃ Body			: "+JSON.stringify( req.body));
 	log.debug("┃ Client IP		: "+client_ip );
+	if(g_user_id && g_user_id.trim() != "" ){
+		log.debug("┃ Login User		: "+g_user_id );	
+	}
 	log.debug("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 	var ha 				= req.headers.accept;
 	var exclude_path 	= req._parsedOriginalUrl.pathname;
@@ -102,17 +111,18 @@ app.all('*',(req,res) => res.status(404).send('<h1> 요청 페이지 없음 </h1
 // 	next(createError(404));
 // });
 
-// error handler
-// app.use(function (err, req, res, next) {
-// 	console.log("app.use(function (err, req, res, next) {");
-// 	// set locals, only providing error in development
-// 	res.locals.message = err.message;
-// 	res.locals.error = req.app.get('env') === 'dev' ? err : {};
+//error handler
+app.use(function (err, req, res, next) {
+	console.log("app.use(function (err, req, res, next) {");
+	// set locals, only providing error in development
+	res.locals.message = err.message;
+	res.locals.error = req.app.get('env') === 'dev' ? err : {};
+	console.log(err);
+	// render the error page
+	res.status(err.status || 500);
+	res.render('error/error');
+});
 
-// 	// render the error page
-// 	res.status(err.status || 500);
-// 	res.render('error');
-// });
 
 function getUserIP(req){
     var ipAddress;

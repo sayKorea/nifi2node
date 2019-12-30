@@ -11,12 +11,19 @@ const pool = new Pool ({
 	// database: "sodasdb",
 
 	// 내부 Virtual Machine
-	host: "192.168.1.94", 
-	port: 5432,
-	user: "pgdba", 
-	password: "qweasd123!@#",
-	database: "pgdb",
+	// host: "192.168.1.94", 
+	// port: 5432,
+	// user: "pgdba", 
+	// password: "qweasd123!@#",
+	// database: "pgdb",
 
+	// 내부 Virtual Machine
+	host: "101.101.166.237", 
+	port: 5432,
+	user: "sodas_dev_user", 
+	password: "sodas_dev_secret",
+	database: "sodas_dev",
+			
 	// host: "10.39.142.85", 
 	////////////////////////////////////
 	// 문화

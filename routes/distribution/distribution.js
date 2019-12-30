@@ -5,7 +5,7 @@ const log 				= require("../../common/logger");
 
 // 배포 화면
 router.get("/", (req, res, next) => {
-	res.render("distribution/distribution.html", {user_id:n_user_id});
+	res.render("distribution/distribution.html", {user_id:g_user_id});
 });
 
 // 배포 리스트
@@ -59,8 +59,9 @@ router.post("/v1/resource/dataset/distribution/save", async (req, res, next) => 
 		option.headers.Authorization 	= access_token;
 
 		params.sampleType				= "01";
-		params.dataType					= "link";
+		params.dataType					= "nifi";
 		params.url						= "http://localhost:8080/";
+		params.fileName					= params.repo_target+"/"+params.source_file_name;
 
 		delete  params.resource_title;
 		delete  params.repo_id;

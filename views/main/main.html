@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link type="text/css" rel="stylesheet" href="/stylesheets/main/w3.css">
 <!-- <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+<link type="text/css" rel="stylesheet" href="/stylesheets/login/font-awesome.min.css"/>
 <link type="text/css" rel="stylesheet" href="/stylesheets/paging/simplePagination.css"/>
 <link type="text/css" rel="stylesheet" href="/stylesheets/main/style.css"/>
 <link type="text/css" rel="stylesheet" href="/stylesheets/form.css"/>
@@ -39,7 +40,6 @@
 				type      : "GET",
 				async	  : false,
 				success:(html) => {
-					console.log(html);
 					if(html.indexOf('<html lang="ko">') > -1){
 						location.replace("/");
 					}else{
@@ -97,6 +97,8 @@
 			<div id="distribution-sub" class="w3-bar-block w3-hide w3-padding-large w3-medium">
 				<a href="javascript:void(0)" class="w3-bar-item w3-button" title="배포 목록" url="/distribution">목록</a>
 			</div>
+
+			<!-- OLD -->
 			<!-- <a id="metadata" href="javascript:void(0)"  class="w3-button w3-block w3-white w3-left-align">
 				메타데이터  <i class="fa fa-caret-down"></i>
 			</a>
@@ -134,7 +136,7 @@
 	<header class="w3-container w3-xlarge" style="background-color:whitesmoke;">
 		<p id="menuNm" class="w3-left">MAIN</p>
 		<p class="w3-right">
-			관리자<!-- admin <a href="javascript:location.href='/logout';"> <span style="color:darkslategray">Logout</span></a> -->
+			관리자<a href="javascript:location.href='/logout';"> <span style="color:darkslategray">Logout</span></a>
 		</p>
 	</header>
 	<!-- BODY CONTENT -->

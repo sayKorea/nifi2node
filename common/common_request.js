@@ -59,6 +59,8 @@ api_structure.call_api = async(option) =>{
 				// console.log(r);
 				// console.log(b);
 				log.error(JSON.stringify(e));
+				log.error(JSON.stringify(b));
+				log.error(JSON.stringify(r));
 			}
 			if (!e && ( r.statusCode == 200 || r.statusCode == 201 )) {
 				log.info(JSON.stringify(b));
@@ -75,7 +77,7 @@ api_structure.get_access_token = async (s) => {
 		let option = api_structure.get_request_option();
 		option.method = 'POST';
 		option.url  += api_structure.tenant_post_user_url;
-		option.body = {"id":n_user_id, "password":n_password};
+		option.body = {"id":g_user_id, "password":g_password};
 		let response = await api_structure.call_api(option);
 		if(response){
 			log.info("[ SODAS USER GET TOKEN ]");
@@ -84,6 +86,7 @@ api_structure.get_access_token = async (s) => {
 				return response.access_token;
 			}
 		}else{
+			log.error(JSON.stringify(response));
 			return response;
 		}
 	}catch(e){

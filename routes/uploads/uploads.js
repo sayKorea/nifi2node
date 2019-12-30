@@ -4,17 +4,16 @@ const log 		= require("../../common/logger");
 const multer 	= require("multer");
 const fStorage 	= require("multer-ftp");
 const sStorage 	= require("multer-sftp");
+const Client 		= require("ssh2-sftp-client");
 const path 		= require("path");
-const SftpUpload= require('sftp-upload');
-const fs 		= require('fs');
-
+const SftpUpload= require("sftp-upload");
+const fs 		= require("fs");
+const cps		= require("child_process").spawn;
 const lDir		= "uploads/";
 const rDir		= "./app/uploads/";
 
-let Client = require("ssh2-sftp-client");
-
 const local = multer({
-	dest: "uploads/", limits: { fileSize: 5 * 1024 * 1024 * 1024 },
+	dest: "/", limits: { fileSize: 5 * 1024 * 1024 * 1024 },
 	storage: multer.diskStorage({
 		destination: function (req, file, cb) {
 			cb(null, lDir);
@@ -40,26 +39,21 @@ const local = multer({
 // 	})
 // }).single("mfile");
 
-const sftp = multer({
-	storage: new sStorage({
-		basepath: "/app/uploads",
-		sftp: {
-			  host: "192.168.1.94",
-			  port: 22,
-			  username: "master",
-			  password: "qweasd123!@#"
-		},
-		destination: "./app",
-		filename: function (req, file, cb) {
-			cb(null, file.originalname);
-		}
-	})
-}).single("mfile");
-
-
-
-  
-
+// const sftp = multer({
+// 	storage: new sStorage({
+// 		basepath: "/app/uploads",
+// 		sftp: {
+// 			  host: "192.168.1.94",
+// 			  port: 22,
+// 			  username: "master",
+// 			  password: "qweasd123!@#"
+// 		},
+// 		destination: "./app",
+// 		filename: function (req, file, cb) {
+// 			cb(null, file.originalname);
+// 		}
+// 	})
+// }).single("mfile");
 
 //const upload = multer();
 
@@ -99,13 +93,11 @@ let exe_upload = async(req, res) =>{
 		local(req, res, err => {
 			if (err) {
 				//console.log("Error uploading file - " + err);
-				
 				reject(err);
 			} else {
 				resolve(req.file);
 			}
 		});
-
 	});
 };
 
@@ -148,26 +140,94 @@ router.post("/", async(req, res, next) => {
 	let pt = path.join(__dirname, "../../uploads/",fileName);
 	let sftp = new Client();
 
-	
 	const file = fs.createWriteStream(pt);
 
 	console.log(file);
 
 	sftp.connect({
-		host: '192.168.1.94',
+		host: '192.168.1.94', 
 		port: '22',
 		username: 'master',
 		password: 'qweasd123!@#',
 		debug:true
 	}).then(() => {
-		return sftp.put(pt, "./app/uploads/"+fileName,[false],null);
+		return sftp.put(pt, "/app/uploads/"+fileName,[false],null);
 	}).then(data => {
 		console.log(data, 'the data info');
-		sftp.end();
+		sftp.end().then(r =>{
+			var ls = cps("ls", ["/app/uploads/","-a"]);
+
+			ls.stdout.on('data', function(data) {
+				console.log('stdout: ' + data);
+			});
+			
+			ls.stderr.on('data', function(data) {
+				console.log('stderr: ' + data);
+			});
+			
+			ls.on('exit', function(code) {
+				console.log('exit: ' + code);
+			});
+		}).then(r =>{
+			var ls = cps("ps", ["-ef"]),
+			grep = cps('grep', ['node']);
+
+			ls.stdout.on('data', function(data) {
+				grep.stdin.write(data);
+				//console.log('stdout: ' + data);
+			});
+			
+			ls.stderr.on('data', function(data) {
+				console.log('stderr: ' + data);
+			});
+			
+			ls.on('exit', function(code) {
+				console.log('exit: ' + code);
+				grep.stdin.end();
+			});
+			
+			grep.stdout.on('data', function (data) { 
+				console.log('' + data); 
+				var ps = data.toString();
+				var logArray = ps.split("\n");
+				
+				console.log(ps);
+				console.log(logArray);
+				
+				logArray.forEach((e,i,a) =>{
+					if(e =="" ) return true;
+					console.log(i+"  "+ e);
+				});
+			}); 
+			grep.stderr.on('data', function (data) { 
+				console.log('grep stderr: ' + data); 
+			}); 
+			grep.on('exit', function (code) { if (code !== 0) { 
+				console.log('grep process exited with code ' + code); } 
+			});
+		});
 	}).catch(err => {
 		console.log(err, 'catch error');
 		sftp.end();
 	});
+
+	
+
+	// sftp.connect({
+	// 	host: '192.168.1.94', 
+	// 	port: '22',
+	// 	username: 'master',
+	// 	password: 'qweasd123!@#',
+	// 	debug:true
+	// }).then(() => {
+	// 	return sftp.put(pt, "/app/uploads/"+fileName,[false],null);
+	// }).then(data => {
+	// 	console.log(data, 'the data info');
+	// 	sftp.end();
+	// }).catch(err => {
+	// 	console.log(err, 'catch error');
+	// 	sftp.end();
+	// });
 
 	// sftp.connect({
 	// 	host: '192.168.1.94',
@@ -209,26 +269,6 @@ router.post("/", async(req, res, next) => {
 	// } catch(e){
 	// 	console.log(e);
 	// }
-	res.send({success:true});
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 module.exports = router;
