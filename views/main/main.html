@@ -76,14 +76,19 @@
 			<h3 class="w3-wide"><img src="" onclick="javascript:location.hreg='/logout'"></h3>
 		</div>
 		<div id="leftMenu" class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
-			
-			<a id="storgae" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align">
+			<a id="center-info" href="javascript:void(0)"  class="w3-button w3-block w3-white w3-left-align">
+				센터 설정  <i class="fa fa-caret-down"></i>
+			</a>
+			<div id="center-info-sub" class="w3-bar-block w3-hide w3-padding-large w3-medium">
+				<a href="javascript:void(0)" class="w3-bar-item w3-button" title="센터정보" url="/admin">설정</a>
+			</div>
+			<!-- <a id="storgae" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align">
 				저장소 <i class="fa fa-caret-down"></i>
 			</a>
 			<div id="storgae-sub" class="w3-bar-block w3-hide w3-padding-large w3-medium">
 				<a href="javascript:void(0)" class="w3-bar-item w3-button" title="저장소 목록" url="/repo">목록</a>
-				<!-- <a href="javascript:void(0)" class="w3-bar-item w3-button" title="저장소 이력" url="/repo/his">이력</a> -->
-			</div>
+				<a href="javascript:void(0)" class="w3-bar-item w3-button" title="저장소 이력" url="/repo/his">이력</a>
+			</div> -->
 
 			<a id="resource" href="javascript:void(0)"  class="w3-button w3-block w3-white w3-left-align">
 				메타데이터  <i class="fa fa-caret-down"></i>
@@ -136,7 +141,7 @@
 	<header class="w3-container w3-xlarge" style="background-color:whitesmoke;">
 		<p id="menuNm" class="w3-left">MAIN</p>
 		<p class="w3-right">
-			관리자<a href="javascript:location.href='/logout';"> <span style="color:darkslategray">Logout</span></a>
+			<%= user_id %><a href="javascript:location.href='/logout';"> <span style="color:darkslategray">Logout</span></a>
 		</p>
 	</header>
 	<!-- BODY CONTENT -->

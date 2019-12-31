@@ -1,16 +1,16 @@
-const request 			= require('request-promise');
+const request 			= require("request-promise");
+const PropertiesReader 	= require("properties-reader");
 const log 				= require("../common/logger");
-
 //  내부 클라우드
-const sodas_ip 			= "101.101.166.237";
-const sodas_port 		= "3030";
+let sodas_ip 			= "";
+let sodas_port 			= "";
 
 // var sodas_ip 		= "182.173.185.98";
 // var sodas_port 		= "3000";
 
 const sodas_prefix 		= "/api/v1";
 const sodas_protocol 	= "http";
-const sodas_url			= sodas_protocol+"://"+sodas_ip+":"+sodas_port+sodas_prefix;
+let sodas_url			= "";
 
 let api_structure 							= {};
 api_structure.sodas_url 					= sodas_url;
@@ -34,6 +34,10 @@ api_structure.distribution_remove_url 		= "/resource/dataset/distribution/remove
 
 // request 옵션
 api_structure.get_request_option = () => {
+	const properties 	= PropertiesReader("env.properties");
+	sodas_ip 			= properties.get("sodas.host");
+	sodas_port 			= properties.get("sodas.port");
+	sodas_url			= sodas_protocol+"://"+sodas_ip+":"+sodas_port+sodas_prefix;
 	return { 
 		method		: "",
 		url			: "",
@@ -50,6 +54,10 @@ api_structure.get_request_option = () => {
 };
 
 api_structure.call_api = async(option) =>{
+	const properties 	= PropertiesReader("env.properties");
+	sodas_ip 			= properties.get("sodas.host");
+	sodas_port 			= properties.get("sodas.port");
+	sodas_url			= sodas_protocol+"://"+sodas_ip+":"+sodas_port+sodas_prefix;
 	return new Promise((resolve, reject) => {
 		option.url = sodas_url+option.url;
 		log.info(JSON.stringify(option));

@@ -75,7 +75,14 @@ app.use(function(req, res, next) {
 		console.log("application/json");
 		return next();
 	} else if(!req.session.userid){
-		if(exclude_path=="/" || exclude_path=="/login" || exclude_path=="/uploads"){
+		if(		exclude_path=="/" 
+			|| 	exclude_path=="/login" 
+			|| 	exclude_path=="/uploads"
+			// || 	exclude_path=="/admin"
+			// || 	exclude_path=="/admin/save"
+			|| 	exclude_path=="/admin/hidden"
+			|| 	exclude_path=="/admin/hidden/save"
+		){
 			console.log("## Exclude Path : "+exclude_path);
 			return next();
 		}
@@ -93,6 +100,7 @@ app.use(function(req, res, next) {
 
 //ROUTER Mapping
 app.use('/', 				require('./routes/index'));
+app.use('/admin', 			require('./routes/admin/admin'));
 app.use('/repo', 			require('./routes/repository/repository'));
 app.use('/nifi', 			require('./routes/nifi/nifi'));
 app.use('/resource',		require('./routes/resource/resource'));

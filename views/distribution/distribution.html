@@ -51,7 +51,7 @@
 		});
 
 		// 저장소 조회
-		repository_retrieve();
+		// repository_retrieve();
 		//상품 조회
 		$("#searchBtn").click((e)=>{
 			resource_retrieve(1);
@@ -86,36 +86,36 @@
 		});
 	};
 
-	//저장소 조회
-	var repository_retrieve = () => {
-		$.ajax({
-			url       : "/repo/list",
-			type      : "GET",
-			success: (data) => {
-				//console.log(data);
-				if(data){
-					$.each(data, (i,r)=>{
-						$("#repo_id").append("<option value='"+r.repo_no+"'>"+r.repo_nm+"</option>");
-					});
-					repo_list = data;
+	// //저장소 조회
+	// var repository_retrieve = () => {
+	// 	$.ajax({
+	// 		url       : "/repo/list",
+	// 		type      : "GET",
+	// 		success: (data) => {
+	// 			//console.log(data);
+	// 			if(data){
+	// 				$.each(data, (i,r)=>{
+	// 					$("#repo_id").append("<option value='"+r.repo_no+"'>"+r.repo_nm+"</option>");
+	// 				});
+	// 				repo_list = data;
 
-					$("#repo_id").change((e)=>{
-						var repo_no = $("#repo_id").val();
-						$.each(repo_list, (i,r)=>{
-							if(r.repo_no == repo_no){
-								$("#repo_source").val(r.repo_source_path);
-								$("#repo_target").val(r.repo_target_path);
-								return false;
-							}
-						});
-					});
-				}
-			},
-			error: (request,status,error) => {
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			}
-		});
-	};
+	// 				$("#repo_id").change((e)=>{
+	// 					var repo_no = $("#repo_id").val();
+	// 					$.each(repo_list, (i,r)=>{
+	// 						if(r.repo_no == repo_no){
+	// 							$("#repo_source").val(r.repo_source_path);
+	// 							$("#repo_target").val(r.repo_target_path);
+	// 							return false;
+	// 						}
+	// 					});
+	// 				});
+	// 			}
+	// 		},
+	// 		error: (request,status,error) => {
+	// 			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	// 		}
+	// 	});
+	// };
 
 	// 메타데이터 조회
 	var resource_retrieve = (num) => {
@@ -185,6 +185,22 @@
 
 	// 배포 수정
 	var distribution_update = () => {
+		if($("#m_byteSize").val().trim() == ""){
+			alert("파일 사이즈를 입력 하세요!");
+			$("#m_byteSize").focus();
+			return false;
+		}
+		if($("#m_format").val().trim() == ""){
+			alert("포맷을 입력하세요!");
+			$("#m_format").focus();
+			return false;
+		}
+		if($("#license").val().trim() == ""){
+			alert("라이센스를 입력하세요!");
+			$("#m_license").focus();
+			return false;
+		}
+
 		var vgj = validation_get_json("validation_update_table");
 		console.log(vgj);
 		if(vgj)$("#m_extras").val(vgj);
@@ -287,6 +303,11 @@
 			$("#source_file_name").focus();
 			return false;
 		}
+		if($("#byteSize").val().trim() == ""){
+			alert("파일 사이즈를 입력 하세요!");
+			$("#byteSize").focus();
+			return false;
+		}
 		if($("#repo_source").val().trim() == ""){
 			alert("소스 경로를 입력하세요!");
 			$("#repo_source").focus();
@@ -295,6 +316,16 @@
 		if($("#repo_target").val().trim() == ""){
 			alert("타켓 경로를 입력하세요!");
 			$("#repo_target").focus();
+			return false;
+		}
+		if($("#format").val().trim() == ""){
+			alert("포맷을 입력하세요!");
+			$("#format").focus();
+			return false;
+		}
+		if($("#license").val().trim() == ""){
+			alert("라이센스를 입력하세요!");
+			$("#license").focus();
 			return false;
 		}
 
@@ -331,7 +362,6 @@
 								$("#fm01p")[0].reset();
 								$("#resource_title").val(datasetTitle);
 								$("#datasetId").val(datasetId);
-								$("#repo_id").trigger("change");
 								validation_init();
 							}else{
 								alert("배포 저장 실패!");
@@ -353,15 +383,19 @@
 
 	// 배포 등록 popup show
 	var insert_distribution = (resource_id, resource_title) =>{
-		if(!repo_list[0]){
-			alert("저장소가 등록후 다시 시도 하십시오!");
+		// if(!repo_list[0]){
+		// 	alert("저장소가 등록후 다시 시도 하십시오!");
+		// }
+		var source_path = "<%= source_path %>";
+		if(!source_path && source_path.trim() != ""){
+			alert("저장소가 설정 되어 있지 않습니다!");
+			return false;
 		}
-
 		$("#fm01p")[0].reset();
 		$(".modal-content").scrollTop(0);
 		
-		$("#repo_source").val(repo_list[0].repo_source_path);
-		$("#repo_target").val(repo_list[0].repo_target_path);
+		// $("#repo_source").val(repo_list[0].repo_source_path);
+		// $("#repo_target").val(repo_list[0].repo_target_path);
 		$("#datasetId").val(resource_id);
 		$("#resource_title").val(resource_title);
 		$("#distribution_add_info tr").not('tr:first').remove();
@@ -566,29 +600,27 @@
 							<td colspan="7"><input id="title" type="text"  name="title" placeholder="배포명을 입력 하세요"></td>
 						</tr>
 						<tr>
-							<th>데이터 저장소</th>
-							<td colspan="3">
-								<select id="repo_id" name="repo_id"> </select>
-							</td>
-							<th>파일명<span class="point_color">*</span></th>
-							<td colspan="3"><input id="source_file_name" type="text"  name="source_file_name" placeholder="파일명을 입력 하세요.ex)aaa.csv"></td colspan="3">	
+							<th>파일명 <span class="point_color">*</span></th>
+							<td colspan="3"><input id="source_file_name" type="text"  name="source_file_name" placeholder="파일명을 입력 하세요.ex)aaa.csv">
+							<th>파일 사이즈 <span class="point_color">*</span></th>
+							<td colspan="3"><input id="byteSize" type="text"  name="byteSize" placeholder="파일 사이즈를 입력하세요." value="0"></td>
 						</tr>
 						<tr>
 							<th>소스경로</th>
-							<td colspan="3"><input id="repo_source" type="text"  name="repo_source" readonly></td colspan="3">
+							<td colspan="3"><input id="repo_source" type="text"  name="repo_source" readonly value="<%= source_path %>"></td>
 							<th>타켓경로</th>
-							<td colspan="3"><input id="repo_target" type="text"  name="repo_target" readonly></td>
+							<td colspan="3"><input id="repo_target" type="text"  name="repo_target" readonly value="<%= target_path %>"></td>
 						</tr>
 						<tr>
 							<th>미디어 타입</th>
 							<td colspan="3"><input id="mediaType" type="text"  name="mediaType" placeholder="미디어 타입을 입력 하세요"></td>
-							<th>포맷</th>
+							<th>포맷<span class="point_color">*</span></th>
 							<td colspan="3"><input id="format" type="text"  name="format" placeholder="배포 포맷을 입력하세요." ></td colspan="7">
 						</tr>
 						<tr>
 							<th>저작권</th>
 							<td colspan="3"><input id="rights" type="text"  name="rights" placeholder="저작권을 입력 하세요"></td>
-							<th>라이선스</th>
+							<th>라이선스<span class="point_color">*</span></th>
 							<td colspan="3"><input id="license" type="text"  name="license" placeholder="라이센스를 입력 하세요"></td>
 						</tr>
 						<tr>
@@ -603,12 +635,12 @@
 								<textarea id="description" name="description" placeholder="설명을 입력하세요" style="width:95%; height:100px; "></textarea>
 							</td>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<th>기준규정</th>
 							<td colspan="7"><input id="conformsTo" type="text"  name="conformsTo" placeholder="기준규정을 입력 하세요"></tdcolspan="3">
-							<!-- <th>Access Right</th>
-							<td><input id="" type="text"  name="" placeholder="접근권한을 입력하세요"></td> -->
-						</tr>
+							<th>Access Right</th>
+							<td><input id="" type="text"  name="" placeholder="접근권한을 입력하세요"></td>
+						</tr> -->
 					</table>
 					
 					<div style="float:right;">
@@ -625,24 +657,6 @@
 							<th style="width:15%;">데이터 NULL 허용</th>
 							<th style="width:5%;">삭제</th>
 						</tr>
-						<!-- <tr>
-							<td class="text_center">1</td>
-							<td class="text_center"><input></td>
-							<td class="text_center">
-								<select id="data_type" name="data_type">
-									<option value="string">string</option>
-									<option value="integer">integer</option>
-									<option value="integer">double</option>
-								</select>
-							</td>
-							<td class="text_center">
-								<select id="data_null" name="data_null">
-									<option value="Y">Y</option>
-									<option value="N">N</option>
-								</select>
-							</td>
-							<td><button onclick="validation_del_row(this)">삭제</button></td>
-						</tr> -->
 					</table>
 
 					<div style="float:right;">
@@ -683,19 +697,21 @@
 							<td colspan="7"><input id="m_title" type="text"  name="m_title" readonly></td>
 						</tr>
 						<tr>
-							<th>파일경로</th>
-							<td colspan="7"><input id="m_fileName" type="text"  name="m_fileName" readonly></td>
+							<th>파일경로 <span class="point_color">*</span></th>
+							<td colspan="3"><input id="m_fileName" type="text"  name="m_fileName" readonly></td>
+							<th>파일 사이즈 <span class="point_color">*</span></th>
+							<td colspan="3"><input id="m_byteSize" type="text"  name="m_byteSize" placeholder="파일 사이즈를 입력하세요." value="0"></td>
 						</tr>
 						<tr>
 							<th>미디어 타입</th>
 							<td colspan="3"><input id="m_mediaType" type="text"  name="m_mediaType" placeholder="미디어 타입을 입력 하세요" ></td>
-							<th>포맷</th>
-							<td colspan="3"><input id="m_format" type="text"  name="m_format" placeholder="배포 포맷을 입력하세요." ></td colspan="7">
+							<th>포맷 <span class="point_color">*</span></th>
+							<td colspan="3"><input id="m_format" type="text"  name="m_format" placeholder="파일 포맷을 입력하세요." ></td colspan="7">
 						</tr>
 						<tr>
-							<th>저작권</th>
+							<th>저작권 <span class="point_color">*</span></th>
 							<td colspan="3"><input id="m_rights" type="text"  name="m_rights" placeholder="저작권을 입력 하세요" ></td>
-							<th>라이선스</th>
+							<th>라이선스 <span class="point_color">*</span></th>
 							<td colspan="3"><input id="m_license" type="text"  name="m_license" placeholder="라이센스를 입력 하세요" ></td>
 						</tr>
 						<tr>
@@ -710,12 +726,12 @@
 								<textarea id="m_description" name="m_description" placeholder="설명을 입력하세요" style="width:95%; height:100px; "></textarea>
 							</td>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<th>기준규정</th>
 							<td colspan="7"><input id="m_conformsTo" type="text"  name="m_conformsTo" placeholder="기준규정을 입력 하세요"></tdcolspan="3">
-							<!-- <th>Access Right</th>
-							<td><input id="" type="text"  name="" placeholder="접근권한을 입력하세요"></td> -->
-						</tr>
+							<th>Access Right</th>
+							<td><input id="" type="text"  name="" placeholder="접근권한을 입력하세요"></td> 
+						</tr>-->
 					</table>
 					
 					<div style="float:right;">
@@ -732,24 +748,6 @@
 							<th style="width:15%;">데이터 NULL 허용</th>
 							<th style="width:7%;">삭제</th>
 						</tr>
-						<!-- <tr>
-							<td class="text_center">1</td>
-							<td class="text_center"><input></td>
-							<td class="text_center">
-								<select id="data_type" name="data_type">
-									<option value="string">string</option>
-									<option value="integer">integer</option>
-									<option value="integer">double</option>
-								</select>
-							</td>
-							<td class="text_center">
-								<select id="data_null" name="data_null">
-									<option value="Y">Y</option>
-									<option value="N">N</option>
-								</select>
-							</td>
-							<td><button onclick="validation_del_row(this)">삭제</button></td>
-						</tr> -->
 					</table>
 					<div style="float:right;">
 						<!-- <p style="font-size:20px; color:#222; font-weight:bold; margin-top:80px; ">데이터 목록</p> -->

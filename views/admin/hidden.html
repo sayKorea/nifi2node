@@ -1,0 +1,137 @@
+<html>
+	<head>
+<script type="text/javascript" src="/javascripts/jquery/jquery.3.4.1.min.js"></script>
+<!-- SCRIPT -->
+<script>
+	$(()=>{});
+
+	var hidden_info_save = () => {
+		console.log(($("#fm01p").serialize()));
+		var db_host 	= $("#db_host").val();
+		var db_port 	= $("#db_port").val();
+		var db_user 	= $("#db_user").val();
+		var db_pass 	= $("#db_pass").val();
+		var db_name 	= $("#db_name").val();
+		var sodas_host 	= $("#sodas_host").val();
+		var sodas_port 	= $("#sodas_port").val();
+
+		if(!db_host || db_host.trim() == ""){
+			alert("데이터베이스 호스트를 입력하세요.");
+			$("#db_host").focus();
+			return false;
+		}
+		if(!db_port || db_port.trim() == ""){
+			alert("데이터베이스 포트를 입력하세요.");
+			$("#db_host").focus();
+			return false;
+		}
+		if(!db_user || db_user.trim() == ""){
+			alert("데이터베이스 유저를 입력하세요.");
+			$("#db_user").focus();
+			return false;
+		}
+		if(!db_pass || db_pass.trim() == ""){
+			alert("데이터베이스 비밀번호를 입력하세요.");
+			$("#db_pass").focus();
+			return false;
+		}
+		if(!db_name || db_name.trim() == ""){
+			alert("데이터베이스 명을 입력하세요.");
+			$("#db_name").focus();
+			return false;
+		}
+		if(!sodas_host || sodas_host.trim() == ""){
+			alert("SODAS 호스트을 입력하세요.");
+			$("#sodas_host").focus();
+			return false;
+		}
+		if(!sodas_port || sodas_port.trim() == ""){
+			alert("SODAS 포트를 입력하세요.");
+			$("#sodas_port").focus();
+			return false;
+		}
+		$.ajax({
+			url       : "/admin/hidden/save",
+			type      : "POST",
+			async	  : false,
+			data	  : $("#fm01p").serialize(),
+			success:(data) => {
+				console.log(data);
+				if(data.success){
+					alert("Hidden 정보 수정 완료!");
+				}else{
+					alert("Hidden 정보 수정 실패!");
+				}
+			},
+			error:(request,status,error)=>{
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	};
+</script>
+<!-- SCRIPT END-->
+<style>
+	.pop_tabla  {width:100%; border-top:2px solid #000; border-bottom:1px solid #000; font-size:12px;}
+	.pop_tabla th {background:#f4f4f4; border-bottom:1px solid #ddd;padding:10px;  text-align:center; width:140px;}
+	.pop_tabla th .point_color{color:#ef1111;}
+	.pop_tabla td {border-bottom:1px solid #ddd; padding:10px; background-color: white;}
+	.pop_tabla td input {border:1px solid #ddd; padding:5px 10px; width:85%; background-color: white;}
+	.pop_tabla td select {border:1px solid #ddd; padding:5px 10px; background-color: white; }
+	.pop_tabla td textarea {border:1px solid #ddd; padding:5px 10px; background-color: white;}
+	.pop_tabla .text_center { text-align:center;}
+	.table_bt01 {text-align:center; float:left;}
+	.table_bt01 a{border:1px solid #009fe9; background:#009fe9; color:#fff; display:inline-block; padding:14px 40px; text-decoration:none; font-size:13px;}
+	.table_bt02 {text-align:center; float:left;}
+	.table_bt02 a{border:1px solid #009fe9; color:#009fe9; display:inline-block; padding:14px 40px; text-decoration:none; font-size:13px;}
+</style>
+</head>
+<!-- DATA GRID -->
+<section>
+	<div class="w3-row-padding" style="height:800px;">
+		<form id="fm01p" style="margin: 0 auto;">
+			<div style="width:100%;">
+				<div style="margin:0 0px 0px 0px;">
+					<h2>Database Info</h2>
+					<table cellpadding="0" cellspacing="0" class="pop_tabla">
+						<tr>
+							<th>Database Host<span class="point_color">*</span></th>
+							<td colspan="3"> <input id="db_host" type="text"  name="db_host" placeholder="데이터베이스 호스트" required value="<%= db_host %>">	</td>
+						</tr>
+						<tr>
+							<th>Database Port<span class="point_color">*</span></th>
+							<td colspan="3"><input id="db_port" type="text"  name="db_port" placeholder="데이터베이스 포트" required value="<%= db_port %>"></td>
+						</tr>
+						<tr>
+							<th>Database User <span class="point_color">*</span></th>
+							<td colspan="3"><input id="db_user" type="text"  name="db_user" placeholder="데이터베이스 유저" required value="<%= db_user %>"></td>
+						</tr>
+						<tr>
+							<th>Database pass <span class="point_color">*</span></th>
+							<td colspan="3"><input id="db_pass" type="text"  name="db_pass" placeholder="데이터베이스 패스워드" required value="<%= db_pass %>"></td>
+						</tr>
+						<tr>
+							<th>Database name <span class="point_color">*</span></th>
+							<td colspan="3"><input id="db_name" type="text"  name="db_name" placeholder="데이터베이스 명" required value="<%= db_name %>"></td>
+						</tr>
+					</table>
+					<h2>SODAS Info</h2>
+					<table cellpadding="0" cellspacing="0" class="pop_tabla">
+						<tr>
+							<th>SODAS Host<span class="point_color">*</span></th>
+							<td colspan="3"> <input id="sodas_host" type="text"  name="sodas_host" placeholder="SODAS 호스트" required value="<%= sodas_host %>">	</td>
+						</tr>
+						<tr>
+							<th>SODAS Port<span class="point_color">*</span></th>
+							<td colspan="3"><input id="sodas_port" type="text"  name="sodas_port" placeholder="SODAS 포트" required value="<%= sodas_port %>"></td>
+						</tr>
+					</table>
+					<div style="float:right;">
+						<p class="table_bt01" style="margin-left:7px;"><a href="javascript:hidden_info_save();"><strong>수정</strong></a></p>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</section>
+<!-- DATA GRID END-->
+</html>

@@ -89,7 +89,7 @@ router.get('/login', async (req, res, next) => {
 
 /* GET Login page. */
 router.get('/main', (req, res, next) => {
-  	res.render('main/main.html');
+  	res.render('main/main.html',{user_id:g_user_id});
 });
 
 /* GET Login page. */

@@ -1,10 +1,12 @@
-const express 	= require('express');
-const dao 		= require('../../common/common_dao');
-const uuid 		= require('uuid4');
-const router 	= express.Router();
-const request 	= require('request-promise');
-const log 		= require("../../common/logger");
-const ip 		= require("ip");
+const express 			= require("express");
+const request 			= require("request-promise");
+const uuid 				= require("uuid4");
+const ip 				= require("ip");
+const router 			= express.Router();
+const PropertiesReader 	= require("properties-reader");
+const dao 				= require("../../common/common_dao");
+const log 				= require("../../common/logger");
+
 const nifiPort 	= "20000";
 const webPort	= "18080";
 const debug_log = true;
@@ -47,6 +49,8 @@ router.get('/test', async (req, res, next) => {
 
 router.get('/process_set', async (req, res, next) => {
 	try {
+		const properties 		= PropertiesReader("env.properties");
+		console.log(req.query);
 		host 				= ip.address();
 		webHost 			= host+":"+webPort;
 		nifiHost 			= host+":"+nifiPort;
@@ -55,7 +59,7 @@ router.get('/process_set', async (req, res, next) => {
 		target_path 		= req.query.target_path;
 		resource_id 		= req.query.resource_id;
 		source_file_name 	= req.query.source_file_name;
-		
+
 		log.debug("NIFI HOST : "+nifiHost);
 		log.debug("WEB HOST : "+webHost);
 		log.debug("SOURCE PATH : "+source_path);

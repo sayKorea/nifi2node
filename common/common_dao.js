@@ -1,5 +1,6 @@
 const pg = require('pg');
-const prop = require('./dbproperties.js');
+const PropertiesReader 	= require('properties-reader');
+const properties = PropertiesReader("env.properties");
 const {Pool, Client} = require('pg');
 
 const pool = new Pool ({
@@ -18,11 +19,11 @@ const pool = new Pool ({
 	// database: "pgdb",
 
 	// 내부 Virtual Machine
-	host: "101.101.166.237", 
-	port: 5432,
-	user: "sodas_dev_user", 
-	password: "sodas_dev_secret",
-	database: "sodas_dev",
+	host: properties.get("db.host"), 
+	port: properties.get("db.port"),
+	user: properties.get("db.user"), 
+	password: properties.get("db.pass"),
+	database: properties.get("db.name"),
 			
 	// host: "10.39.142.85", 
 	////////////////////////////////////

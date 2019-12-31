@@ -1,216 +1,48 @@
 <!-- SCRIPT -->
 <script>
-	$(()=>{
-		// var pageObj = $("#pagination").pagination({
-		// 	items: 1,
-		// 	itemsOnPage: 20,
-		// 	cssStyle: 'light-theme',
-		// 	onPageClick : function(p,e){
-		// 		console.log(p);
-		// 	}
-		// });
-		//GRID 생성
-		make_header();
+	$(()=>{});
 
-		$(".close-button, #mCancel").click((e)=>{
-			close_layer();
-		});
-
-		$("#searchBtn").click((e)=>{
-			repo_retrieve(1);
-		});
-
-		$("#insertRepo").click((e)=>{
-			insert_popup();
-		});
-
-		$("#mSave").click((e)=>{
-			repo_save();
-		});
-
-	});
-		
-	var make_header = () =>{
-		var header = ["No","센터ID","저장소명","저장소타입","저장소소스경로","저장소타켓경로","저장소설명","생성자","생성일자"];
-		$.each(header,(i,v)=>{
-			$("#ghead").append("<th>"+v+"</th>");
-		});
-	};
-
-	var insert_popup = () =>{
-		var modal = $(".modal");
-		var closeButton = $(".close-button");
-		//modal.classList.toggle("show-modal");
-		$(".modal").addClass("show-modal");
-		
-	};
-
-	
-
-	var repo_retrieve = (num) => {
-		console.log($("#fm01").serialize());
-		$.ajax({
-			url       : "/repo/list",
-			type      : "GET",
-			async	  : false,
-			data	  : $("#fm01").serialize(),
-			success: (data) => {
-				console.log(data);
-				$("#gTable tr").not('tr:first').remove();
-				//console.log(data);
-				//$("#contents").empty().append(html);
-				if(data){
-					var append = "";
-					//REPO_ID,REPO_NM,REPO_DESC,REPO_TYPE,REPO_VOLUME,ACC_TOKEN,REG_ID,REG_DT,MOD_ID,MOD_DT
-					$.each(data,(i,r)=>{
-						append += "<tr>";
-						append += "<td>"+r.repo_no+"</td>";
-						append += "<td>"+r.repo_center_id+"</td>";
-						append += "<td>"+r.repo_nm+"</td>";
-						append += "<td>"+r.repo_type+"</td>";
-						append += "<td>"+r.repo_source_path+"</td>";
-						append += "<td>"+r.repo_target_path+"</td>";
-						append += "<td>"+r.repo_desc+"</td>";
-						append += "<td>"+r.reg_id+"</td>";
-						append += "<td>"+r.reg_dt+"</td>";
-						append += "<td><button onclick='javascript:repo_del(\""+r.repo_no+"\")' type='button'>삭제</button></td>";
-						append += "</tr>"
-					});
-					$("#ghead").after(append);
-				}
-			},
-			error:(request,status,error)=>{
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			}
-		});
-	};
-
-	var repo_save = () => {
+	var center_info_save = () => {
 		console.log(($("#fm01p").serialize()));
-		var repo_nm = $("#repo_nm").val();
-		var repo_center_id = $("#repo_center_id").val();
-		var repo_source_path = $("#repo_source_path").val();
-		var repo_target_path = $("#repo_target_path").val();
+		var center_id = $("#center_id").val();
+		var source_path = $("#source_path").val();
+		var target_path = $("#target_path").val();
 
-		if(!repo_center_id || repo_center_id.trim() == ""){
+		if(!center_id || center_id.trim() == ""){
 			alert("센터ID를 입력하세요.");
-			$("#repo_center_id").focus();
+			$("#center_id").focus();
 			return false;
 		}
-		if(!repo_nm || repo_nm.trim() == ""){
-			alert("저장소명을 입력하세요.");
-			$("#repo_nm").focus();
+		if(!source_path || source_path.trim() == ""){
+			alert("센터 소스경로를 입력하세요.");
+			$("#source_path").focus();
 			return false;
 		}
-		if(!repo_source_path || repo_source_path.trim() == ""){
-			alert("저장소 소스경로를  입력하세요.");
-			$("#repo_source_path").focus();
-			return false;
-		}
-		if(!repo_target_path || repo_target_path.trim() == ""){
-			alert("저장소 타켓경로를  입력하세요.");
-			$("#repo_target_path").focus();
+		if(!target_path || target_path.trim() == ""){
+			alert("포탈 저장경로를  입력하세요.");
+			$("#target_path").focus();
 			return false;
 		}
 		$.ajax({
-			url       : "/repo/save",
+			url       : "/admin/save",
 			type      : "POST",
 			async	  : false,
 			data	  : $("#fm01p").serialize(),
 			success:(data) => {
 				console.log(data);
 				if(data.success){
-					alert("저장소 저장 성공!");
-					$(".modal").removeClass("show-modal");
-					repo_retrieve(1);
-					$("#fm01p")[0].reset();
+					alert("센터 정보 수정 완료!");
 				}else{
-					alert("저장소 저장 실패!");
+					alert("센터 정보 수정 실패!");
 				}
 			},
 			error:(request,status,error)=>{
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		});
-	};
-
-	var repo_del = (repo_no) => {
-		console.log(repo_no);
-		$.ajax({
-			url       : "/repo/del",
-			type      : "POST",
-			async	  : false,
-			data	  : {repo_no:repo_no},
-			success: (data) => {
-				console.log(data);
-				if(data.success){
-					alert("저장소 삭제 완료!");
-					repo_retrieve(1);
-				}else{
-					alert("저장소 삭제 실패!");
-				}
-			},
-			error:(request,status,error)=>{
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			}
-		});
-	};
-
-	var close_layer = () => {
-		$("#fm01p")[0].reset();
-		$(".modal").removeClass("show-modal");
 	};
 </script>
 <!-- SCRIPT END-->
-
-<!-- DATA GRID -->
-<section>
-	<!-- CONTDITION -->
-	<div class="w3-row-padding" style="width:100%;height:60px;">
-		<div style="width:90%;float:left;">
-			<form id="fm01" class="form-style-9">
-				<ul>
-					<li>
-						<div class="float:left;">
-							<label for="s_repo_nm" style="margin-left:10px;float:left;margin-top:5px;">저장소명</label>
-							<input id="s_repo_nm" name="s_repo_nm" type="text"  class="field-style field-split align-left" placeholder="저장소명" />
-							<label for="s_repo_type" style="margin-left:10px;margin-top:5px;">저장소타입</label>
-							<select id="s_repo_type" name="s_repo_type" class="" style="height:27px;padding:0px;margin:3px;">
-								<option value="">전체</option>
-								<option value="public">외부</option>
-								<option value="private">내부</option>
-							</select>
-						</div>
-					</li>
-					<!-- <li>
-						<input type="text" name="field3" class="field-style field-split align-left" placeholder="Phone" />
-						<input type="url" name="field4" class="field-style field-split align-right" placeholder="Website" />
-					</li>
-					<li>
-						<input type="text" name="field3" class="field-style field-full align-none" placeholder="Subject" />
-					</li> -->
-				</ul>
-			</form>
-		</div>
-		<!-- <div style="width:10%;float:right;padding:15px;"><button style="width:100px;height:80px;" type="button">조회</button></div> -->
-		<!-- <div style="width:10%;float:right;padding:15px;"><button id="searchBtn" style="width:100px;height:40px;" type="button">조회</button></div> -->
-		<div style="width:10%;float:right;padding-left:15px;padding-top:10px;"><button id="searchBtn" style="width:100px;height:40px;" type="button">조회</button></div>
-	</div>
-	<!-- CONTDITION END -->
-
-	<div class="w3-row-padding" style="height:800px;">
-		<div style="float:right;margin-top:10px;"><button id="insertRepo">저장소등록</button></div>
-		<div style="margin-top:10px;border:1px solid rgba(100, 101, 105, 0.2); width:100%;height:700px;overflow:auto;">
-			<table id="gTable"  style="width:1400px;">
-				<tr id="ghead"></tr>
-			</table>
-			<div id="pagination" style="position:absolute; left:50%; margin-left:-50px;margin-top:10px;">
-		</div>
-	</div>
-</section>
-<!-- DATA GRID END-->
-<!-- Layer Popup-->
-	<!-- 팝업 될 레이어 --> 
 <style>
 	.pop_tabla  {width:100%; border-top:2px solid #000; border-bottom:1px solid #000; font-size:12px;}
 	.pop_tabla th {background:#f4f4f4; border-bottom:1px solid #ddd;padding:10px;  text-align:center; width:140px;}
@@ -225,53 +57,34 @@
 	.table_bt02 {text-align:center; float:left;}
 	.table_bt02 a{border:1px solid #009fe9; color:#009fe9; display:inline-block; padding:14px 40px; text-decoration:none; font-size:13px;}
 </style>
-<div class="modal" style="z-index:10;">
-	<div class="modal-content" style="width:750px;height:500px;float:left;">
-		<span class="close-button">&times;</span>
-		<h1 class="title">저장소등록</h1>
+<!-- DATA GRID -->
+<section>
+	<div class="w3-row-padding" style="height:800px;">
 		<form id="fm01p" style="margin: 0 auto;">
-			<div style="width:700px;">
-				<div style="margin:0 30px 20px 30px;">
+			<div style="width:100%;">
+				<div style="margin:0 0px 0px 0px;">
 					<table cellpadding="0" cellspacing="0" class="pop_tabla">
 						<tr>
 							<th>센터ID<span class="point_color">*</span></th>
 							<td colspan="3">
-								<input id="repo_center_id" type="text"  name="repo_center_id" placeholder="센터ID를 입력 하세요" required >	
+								<input id="center_id" type="text"  name="center_id" placeholder="센터ID를 입력 하세요.(xxx_org)" required value="<%= center_id %>">	
 							</td>
 						</tr>
 						<tr>
-							<th>저장소명 <span class="point_color">*</span></th>
-							<td colspan="3"><input id="repo_nm" type="text"  name="repo_nm" placeholder="저장소명 입력 하세요" required></td>
+							<th>센터 소스경로 <span class="point_color">*</span></th>
+							<td colspan="3"><input id="source_path" type="text"  name="source_path" placeholder="센터 소스경로를 입력 하세요" required value="<%= source_path %>"></td>
 						</tr>
 						<tr>
-							<th>저장소 소스경로 <span class="point_color">*</span></th>
-							<td colspan="3"><input id="repo_source_path" type="text"  name="repo_source_path" placeholder="저장소 소스경로를 입력 하세요" required></td>
-						</tr>
-						<tr>
-							<th>저장소 타켓경로 <span class="point_color">*</span></th>
-							<td colspan="3"><input id="repo_target_path" type="text"  name="repo_target_path" placeholder="저장소 타켓경로를 입력 하세요" required></td>
-						</tr>
-						<tr>
-							<th>저장소 설명</th>
-							<td colspan="3"><input id="repo_desc" type="text"  name="repo_desc" placeholder="저장소 설명을 입력 하세요"></td>
-						</tr>
-						<tr>
-							<th>저장소 타입 <span class="point_color">*</span></th>
-							<td colspan="3">
-								<select id="repo_type" name="repo_type">
-									<option value="public">외부</option>
-									<option value="private">내부</option>
-								</select>
-							</td>
+							<th>포탈 저장경로 <span class="point_color">*</span></th>
+							<td colspan="3"><input id="target_path" type="text"  name="target_path" placeholder="포탈 저장경로를 입력 하세요" required value="<%= target_path %>"></td>
 						</tr>
 					</table>
 					<div style="float:right;">
-						<p class="table_bt01"><a href="javascript:close_layer();" style="background-color: gray;"><strong>닫기</strong></a></p>
-						<p class="table_bt01" style="margin-left:7px;"><a href="javascript:repo_save();"><strong>등록</strong></a></p>
+						<p class="table_bt01" style="margin-left:7px;"><a href="javascript:center_info_save();"><strong>수정</strong></a></p>
 					</div>
 				</div>
 			</div>
 		</form>
 	</div>
-</div>
-<!-- Layer Popup End-->
+</section>
+<!-- DATA GRID END-->

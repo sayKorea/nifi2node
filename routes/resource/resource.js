@@ -1,8 +1,8 @@
 const express 			= require('express');
+const uuid 				= require('uuid4');
 const router 			= express.Router();
 const dao 				= require('../../common/common_dao');
 const call_request_api 	= require('../../common/common_request');
-const uuid 				= require('uuid4');
 const log 				= require("../../common/logger");
 
 // 메타데이터 화면
@@ -120,15 +120,17 @@ router.post("/v1/resource/dataset/save", async (req, res, next) => {
 		taxonomy.nodeId					= params.category_list;
 		taxonomy.nodeType 				= "taxonomy";
 		params.taxonomy					= JSON.stringify(taxonomy);
-		if(params.etcValue){
-			params.etcValue				= params.extras.trim()!=""?JSON.stringify( params.extras ):"";
-		}else{
-			params.etcValue				= "{}";
-		}
-		params.userPrice				= 0;
-		params.downDate					= "10";
-		params.downDateType				= "years";
-		params.version					= "1.0";
+		// if(params.etcValue){
+		// 	params.etcValue				= params.extras.trim()!=""?JSON.stringify( params.extras ):"";
+		// }else{
+		 	params.etcValue				= "{}";
+		// }
+
+		// 가격을 넣지 않으므로 관련된 필드 전체 주석처리
+		// params.userPrice				= 0;
+		// params.downDate					= "10";
+		// params.downDateType				= "years";
+		//params.version					= "1.0";
 
 		params.publisherId				= g_center_id;
 		params.ownerId					= g_user_id.split('_')[0];;
@@ -159,27 +161,25 @@ router.post("/v1/resource/dataset/save", async (req, res, next) => {
 //메타데이터 수정
 router.post("/v1/resource/dataset/update", async (req, res, next) => {
 	try{
-		let params						= {};
-		let access_token 				= await call_request_api.get_access_token();
-		let option 						= call_request_api.get_request_option();
+		let params							= {};
+		let access_token 					= await call_request_api.get_access_token();
+		let option 							= call_request_api.get_request_option();
 
-		option.method 					= 'POST';
-		option.url  				    = call_request_api.resource_update_url;
-		option.headers.Authorization 	= access_token;
-		option.headers['Content-Type']  = 'application/x-www-form-urlencoded';
+		option.method 						= 'POST';
+		option.url  				    	= call_request_api.resource_update_url;
+		option.headers.Authorization 		= access_token;
+		//option.headers['Content-Type']  	= 'application/x-www-form-urlencoded';
 
-		var taxonomy 					= {};
-		params.taxonomy					= JSON.stringify(taxonomy);
-		params.etcValue					= req.body.m_extras.trim()!=""?JSON.stringify( req.body.m_extras ):{};
-		params.userPrice				= 0;
-		params.downDate					= "10";
-		params.downDateType				= "years";
-		params.version					= "1.0";
-		// params.ownerId					= "default_org";
+		var taxonomy 						= {};
+		params.taxonomy						= JSON.stringify(taxonomy);
+		//params.etcValue					= req.body.m_extras.trim()!=""?JSON.stringify( req.body.m_extras ):{};
+		params.userPrice					= 0;
+		params.downDate						= "10";
+		params.downDateType					= "years";
+		params.version						= "1.0";
 
 		params.id						 	= req.body.m_id							;
 		params.title						= req.body.m_title						;	
-		params.creatorId					= req.body.m_creatorId					;	
 		params.description				 	= req.body.m_description				;	
 		params.descriptionDetail			= req.body.m_descriptionDetail			;	
 		params.landingPage				 	= req.body.m_landingPage				;	
@@ -188,7 +188,7 @@ router.post("/v1/resource/dataset/update", async (req, res, next) => {
 		params.priceType					= req.body.m_priceType					;	
 		params.isPublic						= req.body.m_isPublic					;	
 		params.isPersonal				 	= req.body.m_isPersonal					;
-		params.extras					 	= req.body.m_extras						;
+		//params.extras					 	= req.body.m_extras						;
 		params.spatialResolutionInMeters 	= req.body.m_spatialResolutionInMeters	;	
 		params.temporalResolution		 	= req.body.m_temporalResolution			;
 		params.accrualPeriodicity		 	= req.body.m_accrualPeriodicity			;
@@ -197,7 +197,11 @@ router.post("/v1/resource/dataset/update", async (req, res, next) => {
 		params.conformsTo				 	= req.body.m_conformsTo					;
 		params.keyword				 		= req.body.m_keyword
 
-		option.form				=  params;
+		params.publisherId					= g_center_id;
+		params.ownerId						= g_user_id.split('_')[0];;
+		params.creatorId					= g_user_id;
+
+		option.form							=  params;
 
 		log.debug("[ SODAS RESOURCE UPDATE ]");
 

@@ -1,11 +1,20 @@
 const express 			= require('express');
+const PropertiesReader 	= require('properties-reader');
+
 const router 			= express.Router();
 const call_request_api 	= require('../../common/common_request');
 const log 				= require("../../common/logger");
 
 // 배포 화면
 router.get("/", (req, res, next) => {
-	res.render("distribution/distribution.html", {user_id:g_user_id});
+	const properties 		= PropertiesReader("env.properties");
+	var center_info = {};
+	center_info.center_id = properties.get("center.id");
+	center_info.source_path = properties.get("center.source_path");
+	center_info.target_path = properties.get("center.target_path");
+	log.debug(JSON.stringify(center_info));
+
+	res.render("distribution/distribution.html", center_info);
 });
 
 // 배포 리스트

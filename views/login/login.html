@@ -28,29 +28,6 @@
 					$("#password").focus();
 					return;
 				}
-
-				// $.ajax({
-				// 	url       : "/login",
-				// 	type      : "GET",
-				// 	async	  : false,  
-				// 	dataType  : "json",
-				// 	data      : $("#fm01").serialize(),
-				// 	success: (data) => {
-				// 		console.log(data);
-				// 		var cnt = data[0].cnt;
-				// 		if(cnt == "0"){
-				// 			alert("로그인 실패");
-				// 			return;
-				// 		}else if(cnt == "1"){
-				// 			alert("로그인 성공");
-				// 			location.replace("/main");
-				// 		}else{
-				// 			alert("에러~~~");
-				// 			return;
-				// 		}
-				// 	}
-				// });
-
 				$.ajax({
 					url       : "/login",
 					type      : "GET",
@@ -71,9 +48,6 @@
 				});
 
 			});
-			$("#join").click(()=>{
-				alert("가입");
-			});
 		});
 	</script>
   </head>
@@ -90,7 +64,7 @@
           <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
             <div class="row">
               <div class="col-12 text-center">
-                <h2 class="tm-block-title mb-4">Welcome to Interface, Login</h2>
+                <h2 class="tm-block-title mb-4">Interface UI Login</h2>
               </div>
             </div>
             <div class="row mt-2">
@@ -108,9 +82,6 @@
                     	<button id="login" type="button" class="btn btn-primary btn-block text-uppercase">
                       		Login
 						</button>
-						<!-- <button id="join" type="button"  class="btn btn-primary btn-block text-uppercase">
-							Join
-					  	</button> -->
                   </div>
                 </form>
               </div>
