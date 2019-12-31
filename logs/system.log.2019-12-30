@@ -6890,3 +6890,1071 @@
 2019-12-30 15:33:44 [DEBUG] - [ SODAS RESOURCE GET LIST ]
 2019-12-30 15:33:44 [INFO] - {"method":"GET","url":"http://101.101.166.237:3030/api/v1/resource/dataset/list","json":true,"headers":{"Connection":"keep-alive","Host":"101.101.166.237","Accept":"*/*","Authorization":"eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ3TVZoYkZrNkE3QzZxRGk1UUVDVUVuSG9GckdxSmkteWJ4QS05MG03bGhJIn0.eyJqdGkiOiI2MzNjZTdkMy04MDYzLTRkMzctOTFlYS1hZjQ1ZTk5NDI4NjMiLCJleHAiOjE1Nzc3MzA4MjMsIm5iZiI6MCwiaWF0IjoxNTc3Njg3NjIzLCJpc3MiOiJodHRwczovL2F1dGguZGF0YW51cmkuY28ua3I6ODQ0OS9hdXRoL3JlYWxtcy9tYXN0ZXIiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiYTM1NTJlMTItMGE3NS00MjAxLTkyYWItYWM1Y2UxOGU0OTNjIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicGxhdGZvcm0iLCJhdXRoX3RpbWUiOjAsInNlc3Npb25fc3RhdGUiOiJjMjRkZTQ5Mi0wYWYzLTRmYzMtYWQ3Zi1lZWM4MTAxZGYwYjEiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIi8qIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwicGxhdGZvcm1fYWRtaW4iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJncm91cF9tZW1iZXJzaGlwIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iLCJwbGF0Zm9ybV9hZG1pbiJdLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJhcmEga28iLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzb2Rhc19hZG1pbiIsImdpdmVuX25hbWUiOiJhcmEiLCJmYW1pbHlfbmFtZSI6ImtvIiwiZW1haWwiOiJzb2Rhc19hZG1pbkBzb2Rhcy5ldHJpLnJlLmtyIiwiZ3JvdXAiOlsiZGVmYXVsdF9vcmciXX0.gobL3S-PFHnsX70wMf48SnUdgK28jUrCLhHwIXuyFBJdObdax6xqBgwbMKPrVkmChYa_oMomP3fXk5dtskM3n611HVKwtWenNSBPJ1GtYOtLBFZSK-7_DXF00HftqK_3uUQJqmqhelxK1GrZEhrQ-2Ckz8LtwraMXbGI8ZiULQQd8PBtnyen3ipxwAvpHYa7T8Mp5WD4A0l32ZhEkb9pUQnK9P8xSCfISFm8MNW_s1M4eEWBQrioVNI68A9U0ZzHNT4zNt5jugsSqAdpq8LieNKv6hXv5CzdXlha6L5OLxZEzmkjnOm-o4eaI0XOI3BTBQ18X3cjuZICr1oNZEwXlg"},"body":{},"qs":{"offset":"0","limit":"20"}}
 2019-12-30 15:33:44 [INFO] - {"total":2393,"datasets":[{"id":"c29226d7-c6db-4fc4-9f1c-b0c072e0fe86","title":"일간 버즈량 및 긍부정 버즈량 정보","imagePath":"","description":"환경분야 키워드 15개(하천, 호소, 지하수, 상수도, 하수도, 물재난, 대기, 폐기물, 화학물질, 기상변화, 기후변화, 지질, 지형, 토양, 생태계)에 대한 소셜미디어 채널별 일간 버즈량 및 일간 긍정/부정/중립 버즈량","issued":"2019-11-17T15:00:00.000Z","extras":"null","ownerId":"default_org","ownerNm":"default_org","modified":"2019-12-20T09:14:28.241Z","approvalState":"accept","state":"","favoriteCnt":"1","dataType":"","viewCnt":0,"temporalEnd":"","isVoucher":"N","priceType":"free","downloadCount":"0","supplyEnd":null,"average":"7.0000000000000000","taxonomy":null,"isFavorite":true,"stateModified":null},{"id":"45cacc61-ba82-4c84-8671-c5ab010c9c90","title":"감성어 주간 버즈 정보","imagePath":"","description":"환경분야 키워드 15개(하천, 호소, 지하수, 상수도, 하수도, 물재난, 대기, 폐기물, 화학물질, 기상변화, 기후변화, 지질, 지형, 토양, 생태계)에 대한 소셜미디어 채널별 주간 감성어 및 버즈량","issued":"2019-11-17T15:00:00.000Z","extras":null,"ownerId":"jhkoo@skku.edu","ownerNm":null,"modified":"2019-12-08T15:00:00.000Z","approvalState":"accept","state":"","favoriteCnt":"1","dataType":"","viewCnt":0,"temporalEnd":"","isVoucher":"N","priceType":"free","downloadCount":"0","supplyEnd":null,"average":null,"taxonomy":null,"isFavorite":true,"stateModified":null},{"id":"dc628c7b-0ac3-437f-9978-0a8ee183fd2b","title":"주간 버즈량 및 긍부정 버즈량 정보","imagePath":"","description":"환경분야 키워드 15개(하천, 호소, 지하수, 상수도, 하수도, 물재난, 대기, 폐기물, 화학물질, 기상변화, 기후변화, 지질, 지형, 토양, 생태계)에 대한 소셜미디어 채널별 주간 버즈량 및 주간 긍정/부정/중립 버즈량","issued":"2019-11-17T15:00:00.000Z","extras":null,"ownerId":"jhkoo@skku.edu","ownerNm":null,"modified":"2019-12-08T15:00:00.000Z","approvalState":"accept","state":"","favoriteCnt":"0","dataType":"","viewCnt":0,"temporalEnd":"","isVoucher":"N","priceType":"free","downloadCount":"0","supplyEnd":null,"average":null,"taxonomy":null,"isFavorite":false,"stateModified":null},{"id":"bee10554-e71a-49b1-bb72-40040fff0daa","title":"지역별 일일 버즈 정보","imagePath":"","description":"환경분야 키워드 15개(하천, 호소, 지하수, 상수도, 하수도, 물재난, 대기, 폐기물, 화학물질, 기상변화, 기후변화, 지질, 지형, 토양, 생태계)에 대한 소셜미디어 채널별, 지역별(시/군/구) 일간 버즈량","issued":"2019-11-17T15:00:00.000Z","extras":null,"ownerId":"jhkoo@skku.edu","ownerNm":null,"modified":"2019-12-08T15:00:00.000Z","approvalState":"accept","state":"","favoriteCnt":"0","dataType":"","viewCnt":0,"temporalEnd":"","isVoucher":"N","priceType":"free","downloadCount":"2","supplyEnd":null,"average":null,"taxonomy":null,"isFavorite":false,"stateModified":null},{"id":"b1093812-1405-4f96-b890-a56490c381df","title":"연관어 일일 버즈 정보","imagePath":"","description":"환경분야 키워드 15개(하천, 호소, 지하수, 상수도, 하수도, 물재난, 대기, 폐기물, 화학물질, 기상변화, 기후변화, 지질, 지형, 토양, 생태계)에 대한 소셜미디어 채널별 일간 연관어 및 버즈량","issued":"2019-11-17T15:00:00.000Z","extras":null,"ownerId":"jhkoo@skku.edu","ownerNm":null,"modified":"2019-12-08T15:00:00.000Z","approvalState":"accept","state":"","favoriteCnt":"0","dataType":"3","viewCnt":0,"temporalEnd":"","isVoucher":"N","priceType":"free","downloadCount":"0","supplyEnd":null,"average":null,"taxonomy":null,"isFavorite":false,"stateModified":null},{"id":"3dd66a16-de2f-489f-a572-e5b3b7135dfa","title":"감성어 일일 버즈 정보","imagePath":"","description":"환경분야 키워드 15개(하천, 호소, 지하수, 상수도, 하수도, 물재난, 대기, 폐기물, 화학물질, 기상변화, 기후변화, 지질, 지형, 토양, 생태계)에 대한 소셜미디어 채널별 일간 감성어 및 버즈량","issued":"2019-11-17T15:00:00.000Z","extras":null,"ownerId":"jhkoo@skku.edu","ownerNm":null,"modified":"2019-12-08T15:00:00.000Z","approvalState":"accept","state":"","favoriteCnt":"0","dataType":"xlsx","viewCnt":0,"temporalEnd":"","isVoucher":"N","priceType":"free","downloadCount":"2","supplyEnd":null,"average":null,"taxonomy":null,"isFavorite":false,"stateModified":null},{"id":"c1c5e82d-09ff-417e-8cb9-fedbad3ba5de","title":"연관어 주간 버즈 정보","imagePath":"","description":"환경분야 키워드 15개(하천, 호소, 지하수, 상수도, 하수도, 물재난, 대기, 폐기물, 화학물질, 기상변화, 기후변화, 지질, 지형, 토양, 생태계)에 대한 소셜미디어 채널별 주간 연관어 및 버즈량","issued":"2019-11-17T15:00:00.000Z","extras":null,"ownerId":"jhkoo@skku.edu","ownerNm":null,"modified":"2019-12-08T15:00:00.000Z","approvalState":"accept","state":"","favoriteCnt":"1","dataType":"","viewCnt":1,"temporalEnd":"","isVoucher":"N","priceType":"free","downloadCount":"0","supplyEnd":null,"average":null,"taxonomy":null,"isFavorite":true,"stateModified":null},{"id":"64213233-7b19-4074-a46c-c240792b509d","title":"지역별 주간 버즈 정보","imagePath":"","description":"환경분야 키워드 15개(하천, 호소, 지하수, 상수도, 하수도, 물재난, 대기, 폐기물, 화학물질, 기상변화, 기후변화, 지질, 지형, 토양, 생태계)에 대한 소셜미디어 채널별, 지역별(시/군/구) 주간 버즈량","issued":"2019-11-17T15:00:00.000Z","extras":"\"null\"","ownerId":"default_org","ownerNm":"default_org","modified":"2019-12-20T09:10:35.789Z","approvalState":"accept","state":"","favoriteCnt":"0","dataType":"","viewCnt":0,"temporalEnd":"","isVoucher":"N","priceType":"free","downloadCount":"0","supplyEnd":null,"average":null,"taxonomy":null,"isFavorite":false,"stateModified":null},{"id":"05ad9304-e4d9-4a29-8bee-4ad7d085899e","title":"화학물질 규제정보","imagePath":"","description":"화학물질에 대한 일본, 미국, 유럽의 화학물질규제 정보입니다.","issued":"2019-12-03T15:00:00.000Z","extras":null,"ownerId":"mhlim@greenecos.co.kr","ownerNm":null,"modified":"2019-12-03T15:00:00.000Z","approvalState":"accept","state":"GE7","favoriteCnt":"0","dataType":"","viewCnt":0,"temporalEnd":"","isVoucher":"N","priceType":"free","downloadCount":"0","supplyEnd":null,"average":null,"taxonomy":null,"isFavorite":false,"stateModified":null},{"id":"a15bd653-4597-498a-88cf-9c91925923fa","title":"[조사값]악취정보(조사정보)","imagePath":"","description":"환경영향평가 및 사후환경영향조사 악취정보(조사정보) 조사값","issued":"2019-12-03T15:00:00.000Z","extras":null,"ownerId":"hjjeon@kei.kr","ownerNm":null,"modified":"2019-12-03T15:00:00.000Z","approvalState":"accept","state":"KE15","favoriteCnt":"0","dataType":"","viewCnt":0,"temporalEnd":"","isVoucher":"N","priceType":"free","downloadCount":"0","supplyEnd":null,"average":null,"taxonomy":null,"isFavorite":false,"stateModified":null},{"id":"fbf92343-d5de-4746-a882-bba88e2f3731","title":"[조사지점]토양정보(조사정보)","imagePath":"","description":"환경영향평가 및 사후환경영향조사 토양정보(조사정보) 조사지점","issued":"2019-12-03T15:00:00.000Z","extras":null,"ownerId":"hjjeon@kei.kr","ownerNm":null,"modified":"2019-12-03T15:00:00.000Z","approvalState":"accept","state":"KE06","favoriteCnt":"0","dataType":"","viewCnt":0,"temporalEnd":"","isVoucher":"N","priceType":"free","downloadCount":"0","supplyEnd":null,"average":null,"taxonomy":null,"isFavorite":false,"stateModified":null},{"id":"57d1b3dc-1c9b-4efd-accf-2a6458a67de3","title":"[조사값]지형지질정보(능선축정보)","imagePath":"","description":"환경영향평가 및 사후환경영향조사 지형지질정보(능선축정보) 조사값","issued":"2019-12-03T15:00:00.000Z","extras":null,"ownerId":"hjjeon@kei.kr","ownerNm":null,"modified":"2019-12-03T15:00:00.000Z","approvalState":"accept","state":"KE35","favoriteCnt":"0","dataType":"","viewCnt":0,"temporalEnd":"","isVoucher":"N","priceType":"free","downloadCount":"0","supplyEnd":null,"average":null,"taxonomy":null,"isFavorite":false,"stateModified":null},{"id":"2b38dcd4-862a-48fb-bd6e-92c191124a7a","title":"화학제품 사용정보","imagePath":"","description":"응답자별 사용 생활화학제품정보, 사용방법, 사용량, 빈도, 사용시간, 사용공간 등 사용패턴 정보입니다.","issued":"2019-12-03T15:00:00.000Z","extras":null,"ownerId":"mhlim@greenecos.co.kr","ownerNm":null,"modified":"2019-12-03T15:00:00.000Z","approvalState":"accept","state":"GE13","favoriteCnt":"0","dataType":"","viewCnt":0,"temporalEnd":"","isVoucher":"N","priceType":"free","downloadCount":"0","supplyEnd":null,"average":null,"taxonomy":null,"isFavorite":false,"stateModified":null},{"id":"60a6731e-51b1-409a-8920-c409c820cfd3","title":"[조사값]인구주거정보(예측정보)","imagePath":"","description":"환경영향평가 및 사후환경영향조사 인구주거정보(예측정보) 조사값","issued":"2019-12-03T15:00:00.000Z","extras":null,"ownerId":"hjjeon@kei.kr","ownerNm":null,"modified":"2019-12-03T15:00:00.000Z","approvalState":"accept","state":"KE46","favoriteCnt":"0","dataType":"","viewCnt":0,"temporalEnd":"","isVoucher":"N","priceType":"free","downloadCount":"0","supplyEnd":null,"average":null,"taxonomy":null,"isFavorite":false,"stateModified":null},{"id":"af36b50a-e4eb-41eb-b67e-1ebdb708898b","title":"전국자연환경조사(식물상)","imagePath":"","description":"제4차 전국자연환경조사 결과 생성된 전국 단위 식물상 정보 및 서식지(환경) 정보. 국내에 생육하는 관속식물의 분포 현황을 파악하였다. 해양을 제외한 전 국토를 대상으로 1:25,000 도엽을 대표할 만한 산지와 수변지역을 중심으로 실시하였다. ","issued":"2019-12-03T15:00:00.000Z","extras":null,"ownerId":"kwonys@nie.re.kr","ownerNm":null,"modified":"2019-12-03T15:00:00.000Z","approvalState":"accept","state":"nie3","favoriteCnt":"0","dataType":"","viewCnt":0,"temporalEnd":"","isVoucher":"N","priceType":"free","downloadCount":"0","supplyEnd":null,"average":null,"taxonomy":null,"isFavorite":false,"stateModified":null},{"id":"06ef513e-8e3d-4133-a23d-e87ac1ca2d19","title":"화학제품 성분물질 정보","imagePath":"","description":"안전확인대상 생활화학제품에 대한 제품별 성분물질 정보입니다.","issued":"2019-12-03T15:00:00.000Z","extras":null,"ownerId":"mhlim@greenecos.co.kr","ownerNm":null,"modified":"2019-12-03T15:00:00.000Z","approvalState":"accept","state":"GE9","favoriteCnt":"0","dataType":"","viewCnt":0,"temporalEnd":"","isVoucher":"N","priceType":"free","downloadCount":"0","supplyEnd":null,"average":null,"taxonomy":null,"isFavorite":false,"stateModified":null},{"id":"8a4fcae9-130a-4c0d-bdec-09046b109a8d","title":"[조사지점]수질정보(수질정보)","imagePath":"","description":"환경영향평가 및 사후환경영향조사 수질정보(수질정보) 조사지점","issued":"2019-12-03T15:00:00.000Z","extras":null,"ownerId":"hjjeon@kei.kr","ownerNm":null,"modified":"2019-12-03T15:00:00.000Z","approvalState":"accept","state":"KE04","favoriteCnt":"0","dataType":"","viewCnt":0,"temporalEnd":"","isVoucher":"N","priceType":"free","downloadCount":"0","supplyEnd":null,"average":null,"taxonomy":null,"isFavorite":false,"stateModified":null},{"id":"6c8312e2-71ab-479d-bd61-6f274d518fd9","title":"[조사값]해양환경정보(동식물정보)","imagePath":"","description":"환경영향평가 및 사후환경영향조사 해양환경정보(동식물정보) 조사값","issued":"2019-12-03T15:00:00.000Z","extras":null,"ownerId":"hjjeon@kei.kr","ownerNm":null,"modified":"2019-12-03T15:00:00.000Z","approvalState":"accept","state":"KE24","favoriteCnt":"0","dataType":"","viewCnt":0,"temporalEnd":"","isVoucher":"N","priceType":"free","downloadCount":"0","supplyEnd":null,"average":null,"taxonomy":null,"isFavorite":false,"stateModified":null},{"id":"358199b0-3bf5-4d32-aa3a-d953453e5dd9","title":"[조사값]지형지질정보(광산정보)","imagePath":"","description":"환경영향평가 및 사후환경영향조사 지형지질정보(광산정보) 조사값","issued":"2019-12-03T15:00:00.000Z","extras":null,"ownerId":"hjjeon@kei.kr","ownerNm":null,"modified":"2019-12-03T15:00:00.000Z","approvalState":"accept","state":"KE34","favoriteCnt":"0","dataType":"","viewCnt":0,"temporalEnd":"","isVoucher":"N","priceType":"free","downloadCount":"0","supplyEnd":null,"average":null,"taxonomy":null,"isFavorite":false,"stateModified":null},{"id":"cf1cd237-95b0-4164-8310-2d0e7a90e192","title":"전국자연환경조사(저서무척추동물)","imagePath":"","description":"제4차 전국자연환경조사 결과 생성된 전국 단위 저서무척추동물 종 정보 및 서식지(환경) 정보. 국내 서식하는 저서무척추동물의 분포 및 서식현황 (출현시기, 출현지점, 멸종위기종, 기후변화 생물지표종, 분포특이종 등) 을 파악하고 기존의 조사 방법으로 자료를 얻기 힘든 습지나 논과 같은 서식지의 종 목록을 확보하여 생물다양성을 증진하고자 하였다. ","issued":"2019-12-03T15:00:00.000Z","extras":null,"ownerId":"kwonys@nie.re.kr","ownerNm":null,"modified":"2019-12-03T15:00:00.000Z","approvalState":"accept","state":"nie4","favoriteCnt":"0","dataType":"","viewCnt":0,"temporalEnd":"","isVoucher":"N","priceType":"free","downloadCount":"0","supplyEnd":null,"average":null,"taxonomy":null,"isFavorite":false,"stateModified":null}]}
+2019-12-30 16:56:21 [DEBUG] - Application Version 1.0
+2019-12-30 16:56:21 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 16:56:21 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 16:56:21 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 16:56:21 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 16:56:21 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 16:56:21 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 16:56:21 [DEBUG] - Listening on port 18080
+2019-12-30 18:59:24 [DEBUG] - Application Version 1.0
+2019-12-30 18:59:24 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 18:59:24 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 18:59:24 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 18:59:24 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 18:59:24 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 18:59:24 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 18:59:24 [DEBUG] - Listening on port 18080
+2019-12-30 19:17:31 [DEBUG] - Application Version 1.0
+2019-12-30 19:17:31 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:17:31 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:17:31 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:17:31 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:17:31 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:17:31 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:17:31 [DEBUG] - Listening on port 18080
+2019-12-30 19:17:39 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:17:39 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:17:39 [DEBUG] - ┃ URL			: /
+2019-12-30 19:17:39 [DEBUG] - ┃ Referer 		: undefined
+2019-12-30 19:17:39 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:17:39 [DEBUG] - ┃ Accept			: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2019-12-30 19:17:39 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:17:39 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:17:39 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:17:39 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:17:39 [DEBUG] - ┃ Query			: {}
+2019-12-30 19:17:39 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:17:39 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:17:39 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:17:39 [DEBUG] - ## Database Initialize Test
+2019-12-30 19:17:39 [DEBUG] - ## SERVER IP : 192.168.1.12
+2019-12-30 19:17:42 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:17:42 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:17:42 [DEBUG] - ┃ URL			: /login?userid=sodas_admin&password=so8087
+2019-12-30 19:17:42 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/
+2019-12-30 19:17:42 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:17:42 [DEBUG] - ┃ Accept			: application/json, text/javascript, */*; q=0.01
+2019-12-30 19:17:42 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:17:42 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:17:42 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:17:42 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:17:42 [DEBUG] - ┃ Query			: {"userid":"sodas_admin","password":"so8087"}
+2019-12-30 19:17:42 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:17:42 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:17:42 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:17:42 [INFO] - {"method":"POST","url":"http://101.101.166.237:3030/api/v1/tenant/user/login","json":true,"headers":{"Connection":"keep-alive","Host":"101.101.166.237","Accept":"*/*","Authorization":""},"body":{"id":"sodas_admin","password":"so8087"}}
+2019-12-30 19:17:42 [INFO] - {"access_token":"eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ3TVZoYkZrNkE3QzZxRGk1UUVDVUVuSG9GckdxSmkteWJ4QS05MG03bGhJIn0.eyJqdGkiOiIwYTljMWY4Ny01YjIzLTQwZjItYmFkOS1iNmY5NmU5ZDMyMTkiLCJleHAiOjE1Nzc3NDQyNjEsIm5iZiI6MCwiaWF0IjoxNTc3NzAxMDYxLCJpc3MiOiJodHRwczovL2F1dGguZGF0YW51cmkuY28ua3I6ODQ0OS9hdXRoL3JlYWxtcy9tYXN0ZXIiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiYTM1NTJlMTItMGE3NS00MjAxLTkyYWItYWM1Y2UxOGU0OTNjIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicGxhdGZvcm0iLCJhdXRoX3RpbWUiOjAsInNlc3Npb25fc3RhdGUiOiJlNWEzZDk5Mi02NDkxLTRkZTgtOWUwNC1hMTYwMDkxODFjYzciLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIi8qIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwicGxhdGZvcm1fYWRtaW4iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJncm91cF9tZW1iZXJzaGlwIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iLCJwbGF0Zm9ybV9hZG1pbiJdLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJhcmEga28iLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzb2Rhc19hZG1pbiIsImdpdmVuX25hbWUiOiJhcmEiLCJmYW1pbHlfbmFtZSI6ImtvIiwiZW1haWwiOiJzb2Rhc19hZG1pbkBzb2Rhcy5ldHJpLnJlLmtyIiwiZ3JvdXAiOlsiZGVmYXVsdF9vcmciXX0.FjlM-VwSVqKPssYL_jP1ug_JsKnqkWcdMMO7e3HO7rWQnMdMev1M8_ToBL_E9YLmpxJd6UGxSzyJBHwyAYBbQA1dqxYwJBpLQaW1buRvyavjHbRZ4D76qtYyxeMoPjoXbf5Qu6VvCNka8dVlpP8AGzNyz2Mvsyop_OPfymG3yyxahaa_0iEdoP_0ydYtfOg9V9QS74QxOZT-MIJ_t1wsbTk26F_oU83bUwUfjjG5XFL1ku8dij-PJ2EBEF2iONFBtNToyi-vNRRkXsAY5XWwxPlM1NHzMUvD_1OBp9_zIcK6lwJjo-kQ_IfF84vZMEXcgbXnHlD1xMp0d175OoxrcA","expires_in":43200,"refresh_expires_in":43200,"refresh_token":"eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJhZjE0YmNjOS1hYmQyLTQyYTktYTZhNi00Njc2M2NkMmI5MTgifQ.eyJqdGkiOiJhM2JiZWFkNi1kZGYwLTQ1ZDUtYmU5Ny0xZTMyN2IyOWYxMzkiLCJleHAiOjE1Nzc3NDQyNjEsIm5iZiI6MCwiaWF0IjoxNTc3NzAxMDYxLCJpc3MiOiJodHRwczovL2F1dGguZGF0YW51cmkuY28ua3I6ODQ0OS9hdXRoL3JlYWxtcy9tYXN0ZXIiLCJhdWQiOiJodHRwczovL2F1dGguZGF0YW51cmkuY28ua3I6ODQ0OS9hdXRoL3JlYWxtcy9tYXN0ZXIiLCJzdWIiOiJhMzU1MmUxMi0wYTc1LTQyMDEtOTJhYi1hYzVjZTE4ZTQ5M2MiLCJ0eXAiOiJSZWZyZXNoIiwiYXpwIjoicGxhdGZvcm0iLCJhdXRoX3RpbWUiOjAsInNlc3Npb25fc3RhdGUiOiJlNWEzZDk5Mi02NDkxLTRkZTgtOWUwNC1hMTYwMDkxODFjYzciLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsInBsYXRmb3JtX2FkbWluIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJlbWFpbCBwcm9maWxlIn0.Mt5z-C8Xh64NYt1Vep3T_J1Q24Fbp1ru2vYBPdGZp_s","token_type":"bearer","not-before-policy":0,"session_state":"e5a3d992-6491-4de8-9e04-a16009181cc7","scope":"email profile"}
+2019-12-30 19:17:42 [INFO] - [ SODAS USER GET TOKEN ]
+2019-12-30 19:17:42 [INFO] - eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ3TVZoYkZrNkE3QzZxRGk1UUVDVUVuSG9GckdxSmkteWJ4QS05MG03bGhJIn0.eyJqdGkiOiIwYTljMWY4Ny01YjIzLTQwZjItYmFkOS1iNmY5NmU5ZDMyMTkiLCJleHAiOjE1Nzc3NDQyNjEsIm5iZiI6MCwiaWF0IjoxNTc3NzAxMDYxLCJpc3MiOiJodHRwczovL2F1dGguZGF0YW51cmkuY28ua3I6ODQ0OS9hdXRoL3JlYWxtcy9tYXN0ZXIiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiYTM1NTJlMTItMGE3NS00MjAxLTkyYWItYWM1Y2UxOGU0OTNjIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicGxhdGZvcm0iLCJhdXRoX3RpbWUiOjAsInNlc3Npb25fc3RhdGUiOiJlNWEzZDk5Mi02NDkxLTRkZTgtOWUwNC1hMTYwMDkxODFjYzciLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIi8qIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwicGxhdGZvcm1fYWRtaW4iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJncm91cF9tZW1iZXJzaGlwIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iLCJwbGF0Zm9ybV9hZG1pbiJdLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJhcmEga28iLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzb2Rhc19hZG1pbiIsImdpdmVuX25hbWUiOiJhcmEiLCJmYW1pbHlfbmFtZSI6ImtvIiwiZW1haWwiOiJzb2Rhc19hZG1pbkBzb2Rhcy5ldHJpLnJlLmtyIiwiZ3JvdXAiOlsiZGVmYXVsdF9vcmciXX0.FjlM-VwSVqKPssYL_jP1ug_JsKnqkWcdMMO7e3HO7rWQnMdMev1M8_ToBL_E9YLmpxJd6UGxSzyJBHwyAYBbQA1dqxYwJBpLQaW1buRvyavjHbRZ4D76qtYyxeMoPjoXbf5Qu6VvCNka8dVlpP8AGzNyz2Mvsyop_OPfymG3yyxahaa_0iEdoP_0ydYtfOg9V9QS74QxOZT-MIJ_t1wsbTk26F_oU83bUwUfjjG5XFL1ku8dij-PJ2EBEF2iONFBtNToyi-vNRRkXsAY5XWwxPlM1NHzMUvD_1OBp9_zIcK6lwJjo-kQ_IfF84vZMEXcgbXnHlD1xMp0d175OoxrcA
+2019-12-30 19:17:42 [INFO] - login id : sodas_admin
+2019-12-30 19:17:42 [INFO] - center id : default_org
+2019-12-30 19:17:44 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:17:44 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:17:44 [DEBUG] - ┃ URL			: /main
+2019-12-30 19:17:44 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/
+2019-12-30 19:17:44 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:17:44 [DEBUG] - ┃ Accept			: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2019-12-30 19:17:44 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:17:44 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:17:44 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:17:44 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:17:44 [DEBUG] - ┃ Query			: {}
+2019-12-30 19:17:44 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:17:44 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:17:44 [DEBUG] - ┃ Login User		: sodas_admin
+2019-12-30 19:17:44 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:17:44 [DEBUG] - ## Current Session user : sodas_admin
+2019-12-30 19:17:45 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:17:45 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:17:45 [DEBUG] - ┃ URL			: /logout
+2019-12-30 19:17:45 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/main
+2019-12-30 19:17:45 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:17:45 [DEBUG] - ┃ Accept			: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2019-12-30 19:17:45 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:17:45 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:17:45 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:17:45 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:17:45 [DEBUG] - ┃ Query			: {}
+2019-12-30 19:17:45 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:17:45 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:17:45 [DEBUG] - ┃ Login User		: sodas_admin
+2019-12-30 19:17:45 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:17:45 [DEBUG] - ## Current Session user : sodas_admin
+2019-12-30 19:17:48 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:17:48 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:17:48 [DEBUG] - ┃ URL			: /login?userid=admin&password=1234
+2019-12-30 19:17:48 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/logout
+2019-12-30 19:17:48 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:17:48 [DEBUG] - ┃ Accept			: application/json, text/javascript, */*; q=0.01
+2019-12-30 19:17:48 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:17:48 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:17:48 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:17:48 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:17:48 [DEBUG] - ┃ Query			: {"userid":"admin","password":"1234"}
+2019-12-30 19:17:48 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:17:48 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:17:48 [DEBUG] - ┃ Login User		: sodas_admin
+2019-12-30 19:17:48 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:17:48 [INFO] - {"method":"POST","url":"http://101.101.166.237:3030/api/v1/tenant/user/login","json":true,"headers":{"Connection":"keep-alive","Host":"101.101.166.237","Accept":"*/*","Authorization":""},"body":{"id":"admin","password":"1234"}}
+2019-12-30 19:17:48 [ERROR] - {"success":false}
+2019-12-30 19:17:48 [INFO] - login id : admin
+2019-12-30 19:17:48 [INFO] - center id : default_org
+2019-12-30 19:17:50 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:17:50 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:17:50 [DEBUG] - ┃ URL			: /main
+2019-12-30 19:17:50 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/logout
+2019-12-30 19:17:50 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:17:50 [DEBUG] - ┃ Accept			: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2019-12-30 19:17:50 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:17:50 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:17:50 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:17:50 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:17:50 [DEBUG] - ┃ Query			: {}
+2019-12-30 19:17:50 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:17:50 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:17:50 [DEBUG] - ┃ Login User		: admin
+2019-12-30 19:17:50 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:17:50 [DEBUG] - ## Current Session user : admin
+2019-12-30 19:17:54 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:17:54 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:17:54 [DEBUG] - ┃ URL			: /repo
+2019-12-30 19:17:54 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/main
+2019-12-30 19:17:54 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:17:54 [DEBUG] - ┃ Accept			: */*
+2019-12-30 19:17:54 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:17:54 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:17:54 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:17:54 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:17:54 [DEBUG] - ┃ Query			: {}
+2019-12-30 19:17:54 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:17:54 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:17:54 [DEBUG] - ┃ Login User		: admin
+2019-12-30 19:17:54 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:17:54 [DEBUG] - ## Current Session user : admin
+2019-12-30 19:17:54 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:17:54 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:17:54 [DEBUG] - ┃ URL			: /repo
+2019-12-30 19:17:54 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/main
+2019-12-30 19:17:54 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:17:54 [DEBUG] - ┃ Accept			: */*
+2019-12-30 19:17:54 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:17:54 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:17:54 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:17:54 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:17:54 [DEBUG] - ┃ Query			: {}
+2019-12-30 19:17:54 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:17:54 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:17:54 [DEBUG] - ┃ Login User		: admin
+2019-12-30 19:17:54 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:17:54 [DEBUG] - ## Current Session user : admin
+2019-12-30 19:17:55 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:17:55 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:17:55 [DEBUG] - ┃ URL			: /repo/list?s_repo_nm=
+2019-12-30 19:17:55 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/main
+2019-12-30 19:17:55 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:17:55 [DEBUG] - ┃ Accept			: */*
+2019-12-30 19:17:55 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:17:55 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:17:55 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:17:55 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:17:55 [DEBUG] - ┃ Query			: {"s_repo_nm":""}
+2019-12-30 19:17:55 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:17:55 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:17:55 [DEBUG] - ┃ Login User		: admin
+2019-12-30 19:17:55 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:17:55 [DEBUG] - ## Current Session user : admin
+2019-12-30 19:17:55 [INFO] -  SELECT  REPO_NO 		, REPO_CENTER_ID 		, REPO_NM 		, REPO_DESC 		, CASE WHEN REPO_TYPE='public' THEN '외부' 		       WHEN REPO_TYPE='private' THEN '내부'  		       ELSE '' END AS REPO_TYPE 		, REPO_VOLUME 		, REPO_SOURCE_PATH 		, REPO_TARGET_PATH 		, REG_ID 		, TO_CHAR(REG_DT, 'YYYY-MM-DD') AS REG_DT 		, MOD_ID 		, MOD_DT FROM REPOSITORY WHERE 1=1 ORDER BY REPO_NO DESC
+2019-12-30 19:17:55 [DEBUG] - {"command":"SELECT","rowCount":1,"oid":null,"rows":[{"repo_no":1,"repo_center_id":"default_org","repo_nm":"테스트","repo_desc":"테스트1234","repo_type":"","repo_volume":null,"repo_source_path":"/source","repo_target_path":"/target","reg_id":"sodas_admin","reg_dt":"2019-12-27","mod_id":null,"mod_dt":null}],"fields":[{"name":"repo_no","tableID":21300,"columnID":1,"dataTypeID":23,"dataTypeSize":4,"dataTypeModifier":-1,"format":"text"},{"name":"repo_center_id","tableID":21300,"columnID":2,"dataTypeID":25,"dataTypeSize":-1,"dataTypeModifier":-1,"format":"text"},{"name":"repo_nm","tableID":21300,"columnID":3,"dataTypeID":25,"dataTypeSize":-1,"dataTypeModifier":-1,"format":"text"},{"name":"repo_desc","tableID":21300,"columnID":4,"dataTypeID":25,"dataTypeSize":-1,"dataTypeModifier":-1,"format":"text"},{"name":"repo_type","tableID":0,"columnID":0,"dataTypeID":25,"dataTypeSize":-1,"dataTypeModifier":-1,"format":"text"},{"name":"repo_volume","tableID":21300,"columnID":6,"dataTypeID":25,"dataTypeSize":-1,"dataTypeModifier":-1,"format":"text"},{"name":"repo_source_path","tableID":21300,"columnID":7,"dataTypeID":25,"dataTypeSize":-1,"dataTypeModifier":-1,"format":"text"},{"name":"repo_target_path","tableID":21300,"columnID":8,"dataTypeID":25,"dataTypeSize":-1,"dataTypeModifier":-1,"format":"text"},{"name":"reg_id","tableID":21300,"columnID":10,"dataTypeID":25,"dataTypeSize":-1,"dataTypeModifier":-1,"format":"text"},{"name":"reg_dt","tableID":0,"columnID":0,"dataTypeID":25,"dataTypeSize":-1,"dataTypeModifier":-1,"format":"text"},{"name":"mod_id","tableID":21300,"columnID":12,"dataTypeID":25,"dataTypeSize":-1,"dataTypeModifier":-1,"format":"text"},{"name":"mod_dt","tableID":21300,"columnID":13,"dataTypeID":1082,"dataTypeSize":4,"dataTypeModifier":-1,"format":"text"}],"_parsers":[null,null,null,null,null,null,null,null,null,null,null,null],"_types":{"_types":{"arrayParser":{},"builtins":{"BOOL":16,"BYTEA":17,"CHAR":18,"INT8":20,"INT2":21,"INT4":23,"REGPROC":24,"TEXT":25,"OID":26,"TID":27,"XID":28,"CID":29,"JSON":114,"XML":142,"PG_NODE_TREE":194,"SMGR":210,"PATH":602,"POLYGON":604,"CIDR":650,"FLOAT4":700,"FLOAT8":701,"ABSTIME":702,"RELTIME":703,"TINTERVAL":704,"CIRCLE":718,"MACADDR8":774,"MONEY":790,"MACADDR":829,"INET":869,"ACLITEM":1033,"BPCHAR":1042,"VARCHAR":1043,"DATE":1082,"TIME":1083,"TIMESTAMP":1114,"TIMESTAMPTZ":1184,"INTERVAL":1186,"TIMETZ":1266,"BIT":1560,"VARBIT":1562,"NUMERIC":1700,"REFCURSOR":1790,"REGPROCEDURE":2202,"REGOPER":2203,"REGOPERATOR":2204,"REGCLASS":2205,"REGTYPE":2206,"UUID":2950,"TXID_SNAPSHOT":2970,"PG_LSN":3220,"PG_NDISTINCT":3361,"PG_DEPENDENCIES":3402,"TSVECTOR":3614,"TSQUERY":3615,"GTSVECTOR":3642,"REGCONFIG":3734,"REGDICTIONARY":3769,"JSONB":3802,"REGNAMESPACE":4089,"REGROLE":4096}},"text":{},"binary":{}},"RowCtor":null,"rowAsArray":false}
+2019-12-30 19:17:56 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:17:56 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:17:56 [DEBUG] - ┃ URL			: /resource
+2019-12-30 19:17:56 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/main
+2019-12-30 19:17:56 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:17:56 [DEBUG] - ┃ Accept			: */*
+2019-12-30 19:17:56 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:17:56 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:17:56 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:17:56 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:17:56 [DEBUG] - ┃ Query			: {}
+2019-12-30 19:17:56 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:17:56 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:17:56 [DEBUG] - ┃ Login User		: admin
+2019-12-30 19:17:56 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:17:56 [DEBUG] - ## Current Session user : admin
+2019-12-30 19:17:57 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:17:57 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:17:57 [DEBUG] - ┃ URL			: /resource/v1/reference-model/taxonomy/version/list
+2019-12-30 19:17:57 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/main
+2019-12-30 19:17:57 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:17:57 [DEBUG] - ┃ Accept			: */*
+2019-12-30 19:17:57 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:17:57 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:17:57 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:17:57 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:17:57 [DEBUG] - ┃ Query			: {}
+2019-12-30 19:17:57 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:17:57 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:17:57 [DEBUG] - ┃ Login User		: admin
+2019-12-30 19:17:57 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:17:57 [DEBUG] - ## Current Session user : admin
+2019-12-30 19:17:57 [INFO] - {"method":"POST","url":"http://101.101.166.237:3030/api/v1/tenant/user/login","json":true,"headers":{"Connection":"keep-alive","Host":"101.101.166.237","Accept":"*/*","Authorization":""},"body":{"id":"admin","password":"1234"}}
+2019-12-30 19:17:57 [ERROR] - {"success":false}
+2019-12-30 19:17:57 [DEBUG] - [ SODAS TAXONOMY GET VERSION LIST ]
+2019-12-30 19:17:57 [INFO] - {"method":"GET","url":"http://101.101.166.237:3030/api/v1/reference-model/taxonomy/version/list","json":true,"headers":{"Connection":"keep-alive","Host":"101.101.166.237","Accept":"*/*","Authorization":{"success":false}},"body":{}}
+2019-12-30 19:17:57 [ERROR] - {"success":false}
+2019-12-30 19:17:57 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:17:57 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:17:57 [DEBUG] - ┃ URL			: /resource/v1/reference-model/taxonomy/category/list?versionId=
+2019-12-30 19:17:57 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/main
+2019-12-30 19:17:57 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:17:57 [DEBUG] - ┃ Accept			: */*
+2019-12-30 19:17:57 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:17:57 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:17:57 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:17:57 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:17:57 [DEBUG] - ┃ Query			: {"versionId":""}
+2019-12-30 19:17:57 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:17:57 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:17:57 [DEBUG] - ┃ Login User		: admin
+2019-12-30 19:17:57 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:17:57 [DEBUG] - ## Current Session user : admin
+2019-12-30 19:17:57 [INFO] - {"method":"POST","url":"http://101.101.166.237:3030/api/v1/tenant/user/login","json":true,"headers":{"Connection":"keep-alive","Host":"101.101.166.237","Accept":"*/*","Authorization":""},"body":{"id":"admin","password":"1234"}}
+2019-12-30 19:17:57 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:17:57 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:17:57 [DEBUG] - ┃ URL			: /resource/v1/resource/dataset/list?s_keyword=&offset=0&limit=20
+2019-12-30 19:17:57 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/main
+2019-12-30 19:17:57 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:17:57 [DEBUG] - ┃ Accept			: */*
+2019-12-30 19:17:57 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:17:57 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:17:57 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:17:57 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:17:57 [DEBUG] - ┃ Query			: {"s_keyword":"","offset":"0","limit":"20"}
+2019-12-30 19:17:57 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:17:57 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:17:57 [DEBUG] - ┃ Login User		: admin
+2019-12-30 19:17:57 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:17:57 [DEBUG] - ## Current Session user : admin
+2019-12-30 19:17:57 [INFO] - {"method":"POST","url":"http://101.101.166.237:3030/api/v1/tenant/user/login","json":true,"headers":{"Connection":"keep-alive","Host":"101.101.166.237","Accept":"*/*","Authorization":""},"body":{"id":"admin","password":"1234"}}
+2019-12-30 19:17:57 [ERROR] - {"success":false}
+2019-12-30 19:17:57 [DEBUG] - [ SODAS TAXONOMY CATAGORY GET LIST ]
+2019-12-30 19:17:57 [INFO] - {"method":"GET","url":"http://101.101.166.237:3030/api/v1/reference-model/taxonomy/category/list","json":true,"headers":{"Connection":"keep-alive","Host":"101.101.166.237","Accept":"*/*","Authorization":{"success":false}},"body":{},"qs":{"versionId":""}}
+2019-12-30 19:17:58 [ERROR] - {"success":false}
+2019-12-30 19:17:58 [ERROR] - {"success":false}
+2019-12-30 19:17:58 [DEBUG] - [ SODAS RESOURCE GET LIST ]
+2019-12-30 19:17:58 [INFO] - {"method":"GET","url":"http://101.101.166.237:3030/api/v1/resource/dataset/list","json":true,"headers":{"Connection":"keep-alive","Host":"101.101.166.237","Accept":"*/*","Authorization":{"success":false}},"body":{},"qs":{"offset":"0","limit":"20"}}
+2019-12-30 19:17:58 [ERROR] - {"success":false}
+2019-12-30 19:17:59 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:17:59 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:17:59 [DEBUG] - ┃ URL			: /resource/v1/resource/dataset/list?s_keyword=&offset=0&limit=20
+2019-12-30 19:17:59 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/main
+2019-12-30 19:17:59 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:17:59 [DEBUG] - ┃ Accept			: */*
+2019-12-30 19:17:59 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:17:59 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:17:59 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:17:59 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:17:59 [DEBUG] - ┃ Query			: {"s_keyword":"","offset":"0","limit":"20"}
+2019-12-30 19:17:59 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:17:59 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:17:59 [DEBUG] - ┃ Login User		: admin
+2019-12-30 19:17:59 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:17:59 [DEBUG] - ## Current Session user : admin
+2019-12-30 19:17:59 [INFO] - {"method":"POST","url":"http://101.101.166.237:3030/api/v1/tenant/user/login","json":true,"headers":{"Connection":"keep-alive","Host":"101.101.166.237","Accept":"*/*","Authorization":""},"body":{"id":"admin","password":"1234"}}
+2019-12-30 19:17:59 [ERROR] - {"success":false}
+2019-12-30 19:17:59 [DEBUG] - [ SODAS RESOURCE GET LIST ]
+2019-12-30 19:17:59 [INFO] - {"method":"GET","url":"http://101.101.166.237:3030/api/v1/resource/dataset/list","json":true,"headers":{"Connection":"keep-alive","Host":"101.101.166.237","Accept":"*/*","Authorization":{"success":false}},"body":{},"qs":{"offset":"0","limit":"20"}}
+2019-12-30 19:17:59 [ERROR] - {"success":false}
+2019-12-30 19:18:01 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:18:01 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:18:01 [DEBUG] - ┃ URL			: /distribution
+2019-12-30 19:18:01 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/main
+2019-12-30 19:18:01 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:18:01 [DEBUG] - ┃ Accept			: */*
+2019-12-30 19:18:01 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:18:01 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:18:01 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:18:01 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:18:01 [DEBUG] - ┃ Query			: {}
+2019-12-30 19:18:01 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:18:01 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:18:01 [DEBUG] - ┃ Login User		: admin
+2019-12-30 19:18:01 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:18:01 [DEBUG] - ## Current Session user : admin
+2019-12-30 19:18:01 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:18:01 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:18:01 [DEBUG] - ┃ URL			: /repo/list
+2019-12-30 19:18:01 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/main
+2019-12-30 19:18:01 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:18:01 [DEBUG] - ┃ Accept			: */*
+2019-12-30 19:18:01 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:18:01 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:18:01 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:18:01 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:18:01 [DEBUG] - ┃ Query			: {}
+2019-12-30 19:18:01 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:18:01 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:18:01 [DEBUG] - ┃ Login User		: admin
+2019-12-30 19:18:01 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:18:01 [DEBUG] - ## Current Session user : admin
+2019-12-30 19:18:01 [INFO] -  SELECT  REPO_NO 		, REPO_CENTER_ID 		, REPO_NM 		, REPO_DESC 		, CASE WHEN REPO_TYPE='public' THEN '외부' 		       WHEN REPO_TYPE='private' THEN '내부'  		       ELSE '' END AS REPO_TYPE 		, REPO_VOLUME 		, REPO_SOURCE_PATH 		, REPO_TARGET_PATH 		, REG_ID 		, TO_CHAR(REG_DT, 'YYYY-MM-DD') AS REG_DT 		, MOD_ID 		, MOD_DT FROM REPOSITORY WHERE 1=1 ORDER BY REPO_NO DESC
+2019-12-30 19:18:01 [DEBUG] - {"command":"SELECT","rowCount":1,"oid":null,"rows":[{"repo_no":1,"repo_center_id":"default_org","repo_nm":"테스트","repo_desc":"테스트1234","repo_type":"","repo_volume":null,"repo_source_path":"/source","repo_target_path":"/target","reg_id":"sodas_admin","reg_dt":"2019-12-27","mod_id":null,"mod_dt":null}],"fields":[{"name":"repo_no","tableID":21300,"columnID":1,"dataTypeID":23,"dataTypeSize":4,"dataTypeModifier":-1,"format":"text"},{"name":"repo_center_id","tableID":21300,"columnID":2,"dataTypeID":25,"dataTypeSize":-1,"dataTypeModifier":-1,"format":"text"},{"name":"repo_nm","tableID":21300,"columnID":3,"dataTypeID":25,"dataTypeSize":-1,"dataTypeModifier":-1,"format":"text"},{"name":"repo_desc","tableID":21300,"columnID":4,"dataTypeID":25,"dataTypeSize":-1,"dataTypeModifier":-1,"format":"text"},{"name":"repo_type","tableID":0,"columnID":0,"dataTypeID":25,"dataTypeSize":-1,"dataTypeModifier":-1,"format":"text"},{"name":"repo_volume","tableID":21300,"columnID":6,"dataTypeID":25,"dataTypeSize":-1,"dataTypeModifier":-1,"format":"text"},{"name":"repo_source_path","tableID":21300,"columnID":7,"dataTypeID":25,"dataTypeSize":-1,"dataTypeModifier":-1,"format":"text"},{"name":"repo_target_path","tableID":21300,"columnID":8,"dataTypeID":25,"dataTypeSize":-1,"dataTypeModifier":-1,"format":"text"},{"name":"reg_id","tableID":21300,"columnID":10,"dataTypeID":25,"dataTypeSize":-1,"dataTypeModifier":-1,"format":"text"},{"name":"reg_dt","tableID":0,"columnID":0,"dataTypeID":25,"dataTypeSize":-1,"dataTypeModifier":-1,"format":"text"},{"name":"mod_id","tableID":21300,"columnID":12,"dataTypeID":25,"dataTypeSize":-1,"dataTypeModifier":-1,"format":"text"},{"name":"mod_dt","tableID":21300,"columnID":13,"dataTypeID":1082,"dataTypeSize":4,"dataTypeModifier":-1,"format":"text"}],"_parsers":[null,null,null,null,null,null,null,null,null,null,null,null],"_types":{"_types":{"arrayParser":{},"builtins":{"BOOL":16,"BYTEA":17,"CHAR":18,"INT8":20,"INT2":21,"INT4":23,"REGPROC":24,"TEXT":25,"OID":26,"TID":27,"XID":28,"CID":29,"JSON":114,"XML":142,"PG_NODE_TREE":194,"SMGR":210,"PATH":602,"POLYGON":604,"CIDR":650,"FLOAT4":700,"FLOAT8":701,"ABSTIME":702,"RELTIME":703,"TINTERVAL":704,"CIRCLE":718,"MACADDR8":774,"MONEY":790,"MACADDR":829,"INET":869,"ACLITEM":1033,"BPCHAR":1042,"VARCHAR":1043,"DATE":1082,"TIME":1083,"TIMESTAMP":1114,"TIMESTAMPTZ":1184,"INTERVAL":1186,"TIMETZ":1266,"BIT":1560,"VARBIT":1562,"NUMERIC":1700,"REFCURSOR":1790,"REGPROCEDURE":2202,"REGOPER":2203,"REGOPERATOR":2204,"REGCLASS":2205,"REGTYPE":2206,"UUID":2950,"TXID_SNAPSHOT":2970,"PG_LSN":3220,"PG_NDISTINCT":3361,"PG_DEPENDENCIES":3402,"TSVECTOR":3614,"TSQUERY":3615,"GTSVECTOR":3642,"REGCONFIG":3734,"REGDICTIONARY":3769,"JSONB":3802,"REGNAMESPACE":4089,"REGROLE":4096}},"text":{},"binary":{}},"RowCtor":null,"rowAsArray":false}
+2019-12-30 19:18:02 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:18:02 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:18:02 [DEBUG] - ┃ URL			: /resource/v1/resource/dataset/list?s_keyword=&offset=0&limit=4
+2019-12-30 19:18:02 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/main
+2019-12-30 19:18:02 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:18:02 [DEBUG] - ┃ Accept			: */*
+2019-12-30 19:18:02 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:18:02 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:18:02 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:18:02 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:18:02 [DEBUG] - ┃ Query			: {"s_keyword":"","offset":"0","limit":"4"}
+2019-12-30 19:18:02 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:18:02 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:18:02 [DEBUG] - ┃ Login User		: admin
+2019-12-30 19:18:02 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:18:02 [DEBUG] - ## Current Session user : admin
+2019-12-30 19:18:02 [INFO] - {"method":"POST","url":"http://101.101.166.237:3030/api/v1/tenant/user/login","json":true,"headers":{"Connection":"keep-alive","Host":"101.101.166.237","Accept":"*/*","Authorization":""},"body":{"id":"admin","password":"1234"}}
+2019-12-30 19:18:02 [ERROR] - {"success":false}
+2019-12-30 19:18:02 [DEBUG] - [ SODAS RESOURCE GET LIST ]
+2019-12-30 19:18:02 [INFO] - {"method":"GET","url":"http://101.101.166.237:3030/api/v1/resource/dataset/list","json":true,"headers":{"Connection":"keep-alive","Host":"101.101.166.237","Accept":"*/*","Authorization":{"success":false}},"body":{},"qs":{"offset":"0","limit":"4"}}
+2019-12-30 19:18:02 [ERROR] - {"success":false}
+2019-12-30 19:18:04 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:18:04 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:18:04 [DEBUG] - ┃ URL			: /repo
+2019-12-30 19:18:04 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/main
+2019-12-30 19:18:04 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:18:04 [DEBUG] - ┃ Accept			: */*
+2019-12-30 19:18:04 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:18:04 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:18:04 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:18:04 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:18:04 [DEBUG] - ┃ Query			: {}
+2019-12-30 19:18:04 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:18:04 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:18:04 [DEBUG] - ┃ Login User		: admin
+2019-12-30 19:18:04 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:18:04 [DEBUG] - ## Current Session user : admin
+2019-12-30 19:18:05 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:18:05 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:18:05 [DEBUG] - ┃ URL			: /repo/list?s_repo_nm=
+2019-12-30 19:18:05 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/main
+2019-12-30 19:18:05 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:18:05 [DEBUG] - ┃ Accept			: */*
+2019-12-30 19:18:05 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:18:05 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:18:05 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:18:05 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:18:05 [DEBUG] - ┃ Query			: {"s_repo_nm":""}
+2019-12-30 19:18:05 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:18:05 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:18:05 [DEBUG] - ┃ Login User		: admin
+2019-12-30 19:18:05 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:18:05 [DEBUG] - ## Current Session user : admin
+2019-12-30 19:18:05 [INFO] -  SELECT  REPO_NO 		, REPO_CENTER_ID 		, REPO_NM 		, REPO_DESC 		, CASE WHEN REPO_TYPE='public' THEN '외부' 		       WHEN REPO_TYPE='private' THEN '내부'  		       ELSE '' END AS REPO_TYPE 		, REPO_VOLUME 		, REPO_SOURCE_PATH 		, REPO_TARGET_PATH 		, REG_ID 		, TO_CHAR(REG_DT, 'YYYY-MM-DD') AS REG_DT 		, MOD_ID 		, MOD_DT FROM REPOSITORY WHERE 1=1 ORDER BY REPO_NO DESC
+2019-12-30 19:18:05 [DEBUG] - {"command":"SELECT","rowCount":1,"oid":null,"rows":[{"repo_no":1,"repo_center_id":"default_org","repo_nm":"테스트","repo_desc":"테스트1234","repo_type":"","repo_volume":null,"repo_source_path":"/source","repo_target_path":"/target","reg_id":"sodas_admin","reg_dt":"2019-12-27","mod_id":null,"mod_dt":null}],"fields":[{"name":"repo_no","tableID":21300,"columnID":1,"dataTypeID":23,"dataTypeSize":4,"dataTypeModifier":-1,"format":"text"},{"name":"repo_center_id","tableID":21300,"columnID":2,"dataTypeID":25,"dataTypeSize":-1,"dataTypeModifier":-1,"format":"text"},{"name":"repo_nm","tableID":21300,"columnID":3,"dataTypeID":25,"dataTypeSize":-1,"dataTypeModifier":-1,"format":"text"},{"name":"repo_desc","tableID":21300,"columnID":4,"dataTypeID":25,"dataTypeSize":-1,"dataTypeModifier":-1,"format":"text"},{"name":"repo_type","tableID":0,"columnID":0,"dataTypeID":25,"dataTypeSize":-1,"dataTypeModifier":-1,"format":"text"},{"name":"repo_volume","tableID":21300,"columnID":6,"dataTypeID":25,"dataTypeSize":-1,"dataTypeModifier":-1,"format":"text"},{"name":"repo_source_path","tableID":21300,"columnID":7,"dataTypeID":25,"dataTypeSize":-1,"dataTypeModifier":-1,"format":"text"},{"name":"repo_target_path","tableID":21300,"columnID":8,"dataTypeID":25,"dataTypeSize":-1,"dataTypeModifier":-1,"format":"text"},{"name":"reg_id","tableID":21300,"columnID":10,"dataTypeID":25,"dataTypeSize":-1,"dataTypeModifier":-1,"format":"text"},{"name":"reg_dt","tableID":0,"columnID":0,"dataTypeID":25,"dataTypeSize":-1,"dataTypeModifier":-1,"format":"text"},{"name":"mod_id","tableID":21300,"columnID":12,"dataTypeID":25,"dataTypeSize":-1,"dataTypeModifier":-1,"format":"text"},{"name":"mod_dt","tableID":21300,"columnID":13,"dataTypeID":1082,"dataTypeSize":4,"dataTypeModifier":-1,"format":"text"}],"_parsers":[null,null,null,null,null,null,null,null,null,null,null,null],"_types":{"_types":{"arrayParser":{},"builtins":{"BOOL":16,"BYTEA":17,"CHAR":18,"INT8":20,"INT2":21,"INT4":23,"REGPROC":24,"TEXT":25,"OID":26,"TID":27,"XID":28,"CID":29,"JSON":114,"XML":142,"PG_NODE_TREE":194,"SMGR":210,"PATH":602,"POLYGON":604,"CIDR":650,"FLOAT4":700,"FLOAT8":701,"ABSTIME":702,"RELTIME":703,"TINTERVAL":704,"CIRCLE":718,"MACADDR8":774,"MONEY":790,"MACADDR":829,"INET":869,"ACLITEM":1033,"BPCHAR":1042,"VARCHAR":1043,"DATE":1082,"TIME":1083,"TIMESTAMP":1114,"TIMESTAMPTZ":1184,"INTERVAL":1186,"TIMETZ":1266,"BIT":1560,"VARBIT":1562,"NUMERIC":1700,"REFCURSOR":1790,"REGPROCEDURE":2202,"REGOPER":2203,"REGOPERATOR":2204,"REGCLASS":2205,"REGTYPE":2206,"UUID":2950,"TXID_SNAPSHOT":2970,"PG_LSN":3220,"PG_NDISTINCT":3361,"PG_DEPENDENCIES":3402,"TSVECTOR":3614,"TSQUERY":3615,"GTSVECTOR":3642,"REGCONFIG":3734,"REGDICTIONARY":3769,"JSONB":3802,"REGNAMESPACE":4089,"REGROLE":4096}},"text":{},"binary":{}},"RowCtor":null,"rowAsArray":false}
+2019-12-30 19:18:25 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:18:25 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:18:25 [DEBUG] - ┃ URL			: /logout
+2019-12-30 19:18:25 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/main
+2019-12-30 19:18:25 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:18:25 [DEBUG] - ┃ Accept			: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2019-12-30 19:18:25 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:18:25 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:18:25 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:18:25 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:18:25 [DEBUG] - ┃ Query			: {}
+2019-12-30 19:18:25 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:18:25 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:18:25 [DEBUG] - ┃ Login User		: admin
+2019-12-30 19:18:25 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:18:25 [DEBUG] - ## Current Session user : admin
+2019-12-30 19:19:01 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:19:01 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:19:01 [DEBUG] - ┃ URL			: /login?userid=1&password=1
+2019-12-30 19:19:01 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/logout
+2019-12-30 19:19:01 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:19:01 [DEBUG] - ┃ Accept			: application/json, text/javascript, */*; q=0.01
+2019-12-30 19:19:01 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:19:01 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:19:01 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:19:01 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:19:01 [DEBUG] - ┃ Query			: {"userid":"1","password":"1"}
+2019-12-30 19:19:01 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:19:01 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:19:01 [DEBUG] - ┃ Login User		: admin
+2019-12-30 19:19:01 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:19:01 [INFO] - {"method":"POST","url":"http://101.101.166.237:3030/api/v1/tenant/user/login","json":true,"headers":{"Connection":"keep-alive","Host":"101.101.166.237","Accept":"*/*","Authorization":""},"body":{"id":"1","password":"1"}}
+2019-12-30 19:19:01 [ERROR] - {"success":false}
+2019-12-30 19:19:01 [INFO] - login id : 1
+2019-12-30 19:19:01 [INFO] - center id : default_org
+2019-12-30 19:21:20 [DEBUG] - Application Version 1.0
+2019-12-30 19:21:20 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:21:20 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:21:20 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:21:20 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:21:20 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:21:20 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:21:20 [DEBUG] - Listening on port 18080
+2019-12-30 19:21:27 [DEBUG] - Application Version 1.0
+2019-12-30 19:21:27 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:21:27 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:21:27 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:21:27 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:21:27 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:21:27 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:21:27 [DEBUG] - Listening on port 18080
+2019-12-30 19:21:38 [DEBUG] - Application Version 1.0
+2019-12-30 19:21:38 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:21:38 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:21:38 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:21:38 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:21:38 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:21:38 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:21:38 [DEBUG] - Listening on port 18080
+2019-12-30 19:21:41 [DEBUG] - Application Version 1.0
+2019-12-30 19:21:41 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:21:41 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:21:41 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:21:41 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:21:41 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:21:41 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:21:41 [DEBUG] - Listening on port 18080
+2019-12-30 19:21:47 [DEBUG] - Application Version 1.0
+2019-12-30 19:21:47 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:21:47 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:21:47 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:21:47 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:21:47 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:21:47 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:21:47 [DEBUG] - Listening on port 18080
+2019-12-30 19:21:47 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:21:47 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:21:47 [DEBUG] - ┃ URL			: /main
+2019-12-30 19:21:47 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/logout
+2019-12-30 19:21:47 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:21:47 [DEBUG] - ┃ Accept			: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2019-12-30 19:21:47 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:21:47 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:21:47 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:21:47 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:21:47 [DEBUG] - ┃ Query			: {}
+2019-12-30 19:21:47 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:21:47 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:21:47 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:21:47 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:21:47 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:21:47 [DEBUG] - ┃ URL			: /
+2019-12-30 19:21:47 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/logout
+2019-12-30 19:21:47 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:21:47 [DEBUG] - ┃ Accept			: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2019-12-30 19:21:47 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:21:47 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:21:47 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:21:47 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:21:47 [DEBUG] - ┃ Query			: {}
+2019-12-30 19:21:47 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:21:47 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:21:47 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:21:47 [DEBUG] - ## Database Initialize Test
+2019-12-30 19:21:47 [DEBUG] - ## SERVER IP : 192.168.1.12
+2019-12-30 19:21:54 [DEBUG] - Application Version 1.0
+2019-12-30 19:21:54 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:21:54 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:21:54 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:21:54 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:21:54 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:21:54 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:21:54 [DEBUG] - Listening on port 18080
+2019-12-30 19:21:56 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:21:56 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:21:56 [DEBUG] - ┃ URL			: /login?userid=1&password=2
+2019-12-30 19:21:56 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/
+2019-12-30 19:21:56 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:21:56 [DEBUG] - ┃ Accept			: application/json, text/javascript, */*; q=0.01
+2019-12-30 19:21:56 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:21:56 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:21:56 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:21:56 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:21:56 [DEBUG] - ┃ Query			: {"userid":"1","password":"2"}
+2019-12-30 19:21:56 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:21:56 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:21:56 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:21:56 [INFO] - {"method":"POST","url":"http://101.101.166.237:3030/api/v1/tenant/user/login","json":true,"headers":{"Connection":"keep-alive","Host":"101.101.166.237","Accept":"*/*","Authorization":""},"body":{"id":"1","password":"2"}}
+2019-12-30 19:21:56 [ERROR] - {"success":false}
+2019-12-30 19:21:56 [INFO] - login id : 1
+2019-12-30 19:21:56 [INFO] - center id : default_org
+2019-12-30 19:22:04 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:22:04 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:22:04 [DEBUG] - ┃ URL			: /main
+2019-12-30 19:22:04 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/
+2019-12-30 19:22:04 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:22:04 [DEBUG] - ┃ Accept			: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2019-12-30 19:22:04 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:22:04 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:22:04 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:22:04 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:22:04 [DEBUG] - ┃ Query			: {}
+2019-12-30 19:22:04 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:22:04 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:22:04 [DEBUG] - ┃ Login User		: 1
+2019-12-30 19:22:04 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:22:04 [DEBUG] - ## Current Session user : 1
+2019-12-30 19:22:26 [DEBUG] - Application Version 1.0
+2019-12-30 19:22:26 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:22:26 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:22:26 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:22:26 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:22:26 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:22:26 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:22:26 [DEBUG] - Listening on port 18080
+2019-12-30 19:22:30 [DEBUG] - Application Version 1.0
+2019-12-30 19:22:30 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:22:30 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:22:30 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:22:31 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:22:31 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:22:31 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:22:31 [DEBUG] - Listening on port 18080
+2019-12-30 19:22:36 [DEBUG] - Application Version 1.0
+2019-12-30 19:22:36 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:22:36 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:22:36 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:22:36 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:22:36 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:22:36 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:22:36 [DEBUG] - Listening on port 18080
+2019-12-30 19:22:38 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:22:38 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:22:38 [DEBUG] - ┃ URL			: /logout
+2019-12-30 19:22:38 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/main
+2019-12-30 19:22:38 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:22:38 [DEBUG] - ┃ Accept			: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2019-12-30 19:22:38 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:22:38 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:22:38 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:22:38 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:22:38 [DEBUG] - ┃ Query			: {}
+2019-12-30 19:22:38 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:22:38 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:22:38 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:22:38 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:22:38 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:22:38 [DEBUG] - ┃ URL			: /
+2019-12-30 19:22:38 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/main
+2019-12-30 19:22:38 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:22:38 [DEBUG] - ┃ Accept			: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2019-12-30 19:22:38 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:22:38 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:22:38 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:22:38 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:22:38 [DEBUG] - ┃ Query			: {}
+2019-12-30 19:22:38 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:22:38 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:22:38 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:22:38 [DEBUG] - ## Database Initialize Test
+2019-12-30 19:22:38 [DEBUG] - ## SERVER IP : 192.168.1.12
+2019-12-30 19:22:40 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:22:40 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:22:40 [DEBUG] - ┃ URL			: /
+2019-12-30 19:22:40 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/main
+2019-12-30 19:22:40 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:22:40 [DEBUG] - ┃ Accept			: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2019-12-30 19:22:40 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:22:40 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:22:40 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:22:40 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:22:40 [DEBUG] - ┃ Query			: {}
+2019-12-30 19:22:40 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:22:40 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:22:40 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:22:40 [DEBUG] - ## Database Initialize Test
+2019-12-30 19:22:40 [DEBUG] - ## SERVER IP : 192.168.1.12
+2019-12-30 19:22:46 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:22:46 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:22:46 [DEBUG] - ┃ URL			: /login?userid=1&password=1
+2019-12-30 19:22:46 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/
+2019-12-30 19:22:46 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:22:46 [DEBUG] - ┃ Accept			: application/json, text/javascript, */*; q=0.01
+2019-12-30 19:22:46 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:22:46 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:22:46 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:22:46 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:22:46 [DEBUG] - ┃ Query			: {"userid":"1","password":"1"}
+2019-12-30 19:22:46 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:22:46 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:22:46 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:22:46 [INFO] - {"method":"POST","url":"http://101.101.166.237:3030/api/v1/tenant/user/login","json":true,"headers":{"Connection":"keep-alive","Host":"101.101.166.237","Accept":"*/*","Authorization":""},"body":{"id":"1","password":"1"}}
+2019-12-30 19:22:46 [ERROR] - {"success":false}
+2019-12-30 19:22:59 [DEBUG] - Application Version 1.0
+2019-12-30 19:22:59 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:22:59 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:22:59 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:22:59 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:22:59 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:22:59 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:22:59 [DEBUG] - Listening on port 18080
+2019-12-30 19:23:00 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:23:00 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:23:00 [DEBUG] - ┃ URL			: /
+2019-12-30 19:23:00 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/main
+2019-12-30 19:23:00 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:23:00 [DEBUG] - ┃ Accept			: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2019-12-30 19:23:00 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:23:00 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:23:00 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:23:00 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:23:00 [DEBUG] - ┃ Query			: {}
+2019-12-30 19:23:00 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:23:00 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:23:00 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:23:00 [DEBUG] - ## Database Initialize Test
+2019-12-30 19:23:00 [DEBUG] - ## SERVER IP : 192.168.1.12
+2019-12-30 19:23:04 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:23:04 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:23:04 [DEBUG] - ┃ URL			: /login?userid=1&password=1
+2019-12-30 19:23:04 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/
+2019-12-30 19:23:04 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:23:04 [DEBUG] - ┃ Accept			: application/json, text/javascript, */*; q=0.01
+2019-12-30 19:23:04 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:23:04 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:23:04 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:23:04 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:23:04 [DEBUG] - ┃ Query			: {"userid":"1","password":"1"}
+2019-12-30 19:23:04 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:23:04 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:23:04 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:23:04 [INFO] - {"method":"POST","url":"http://101.101.166.237:3030/api/v1/tenant/user/login","json":true,"headers":{"Connection":"keep-alive","Host":"101.101.166.237","Accept":"*/*","Authorization":""},"body":{"id":"1","password":"1"}}
+2019-12-30 19:23:04 [ERROR] - {"success":false}
+2019-12-30 19:23:04 [INFO] - login id : 1
+2019-12-30 19:23:04 [INFO] - center id : default_org
+2019-12-30 19:23:39 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:23:39 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:23:39 [DEBUG] - ┃ URL			: /main
+2019-12-30 19:23:39 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/
+2019-12-30 19:23:39 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:23:39 [DEBUG] - ┃ Accept			: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2019-12-30 19:23:39 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:23:39 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:23:39 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:23:39 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:23:39 [DEBUG] - ┃ Query			: {}
+2019-12-30 19:23:39 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:23:39 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:23:39 [DEBUG] - ┃ Login User		: 1
+2019-12-30 19:23:39 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:23:39 [DEBUG] - ## Current Session user : 1
+2019-12-30 19:23:40 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:23:40 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:23:40 [DEBUG] - ┃ URL			: /logout
+2019-12-30 19:23:40 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/main
+2019-12-30 19:23:40 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:23:40 [DEBUG] - ┃ Accept			: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2019-12-30 19:23:40 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:23:40 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:23:40 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:23:40 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:23:40 [DEBUG] - ┃ Query			: {}
+2019-12-30 19:23:40 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:23:40 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:23:40 [DEBUG] - ┃ Login User		: 1
+2019-12-30 19:23:40 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:23:40 [DEBUG] - ## Current Session user : 1
+2019-12-30 19:23:46 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:23:46 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:23:46 [DEBUG] - ┃ URL			: /login?userid=sodas_admin&password=so8087
+2019-12-30 19:23:46 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/logout
+2019-12-30 19:23:46 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:23:46 [DEBUG] - ┃ Accept			: application/json, text/javascript, */*; q=0.01
+2019-12-30 19:23:46 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:23:46 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:23:46 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:23:46 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:23:46 [DEBUG] - ┃ Query			: {"userid":"sodas_admin","password":"so8087"}
+2019-12-30 19:23:46 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:23:46 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:23:46 [DEBUG] - ┃ Login User		: 1
+2019-12-30 19:23:46 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:23:46 [INFO] - {"method":"POST","url":"http://101.101.166.237:3030/api/v1/tenant/user/login","json":true,"headers":{"Connection":"keep-alive","Host":"101.101.166.237","Accept":"*/*","Authorization":""},"body":{"id":"sodas_admin","password":"so8087"}}
+2019-12-30 19:23:46 [INFO] - {"access_token":"eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ3TVZoYkZrNkE3QzZxRGk1UUVDVUVuSG9GckdxSmkteWJ4QS05MG03bGhJIn0.eyJqdGkiOiI0MWQzNjdmMS0wOTk0LTQwMDYtYWM1MC05MWM0YTE3MTk3YjkiLCJleHAiOjE1Nzc3NDQ2MjUsIm5iZiI6MCwiaWF0IjoxNTc3NzAxNDI1LCJpc3MiOiJodHRwczovL2F1dGguZGF0YW51cmkuY28ua3I6ODQ0OS9hdXRoL3JlYWxtcy9tYXN0ZXIiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiYTM1NTJlMTItMGE3NS00MjAxLTkyYWItYWM1Y2UxOGU0OTNjIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicGxhdGZvcm0iLCJhdXRoX3RpbWUiOjAsInNlc3Npb25fc3RhdGUiOiJjODQ0NjUzYy0zNWEzLTQ2OGUtYTcxZS00NTYxYjhmMjEwZGQiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIi8qIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwicGxhdGZvcm1fYWRtaW4iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJncm91cF9tZW1iZXJzaGlwIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iLCJwbGF0Zm9ybV9hZG1pbiJdLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJhcmEga28iLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzb2Rhc19hZG1pbiIsImdpdmVuX25hbWUiOiJhcmEiLCJmYW1pbHlfbmFtZSI6ImtvIiwiZW1haWwiOiJzb2Rhc19hZG1pbkBzb2Rhcy5ldHJpLnJlLmtyIiwiZ3JvdXAiOlsiZGVmYXVsdF9vcmciXX0.Jjs1i90_X15XA4qNrkl36elaNkk2Xqg-4bI8ZHcA19ga1RC3KV63o-uMtQuTzwiJO4WpmQmrQsoJw0KqTv_x2rPP27mCEVx6Peygd6IXB-yVhGwbFLzX0O-0Zl7QCrHvFcbeFM_LykPF2vup5I7P7XCjwRQ-MMPX9HpqM2TKrnBR3PoxftRYGTSFM4Rgl078xo2tfiEnhVVGEi9Xh1NNYFBGVXJGeHUYi8ISPLPV4d8oFX7PpaORa7ls0rpresrfYbzETY7MHNrBdqSggBAbsaa5h1GDArBw59stbbn8VfdOMCLOdQW7EYYPxez4ukSaR6NHw4C49thHYYcPjSkpTQ","expires_in":43200,"refresh_expires_in":43200,"refresh_token":"eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJhZjE0YmNjOS1hYmQyLTQyYTktYTZhNi00Njc2M2NkMmI5MTgifQ.eyJqdGkiOiIyZWY2YjA4MS1jZjVlLTRkMTEtYWFiZC02Yjg1MzA0MWE5NjciLCJleHAiOjE1Nzc3NDQ2MjUsIm5iZiI6MCwiaWF0IjoxNTc3NzAxNDI1LCJpc3MiOiJodHRwczovL2F1dGguZGF0YW51cmkuY28ua3I6ODQ0OS9hdXRoL3JlYWxtcy9tYXN0ZXIiLCJhdWQiOiJodHRwczovL2F1dGguZGF0YW51cmkuY28ua3I6ODQ0OS9hdXRoL3JlYWxtcy9tYXN0ZXIiLCJzdWIiOiJhMzU1MmUxMi0wYTc1LTQyMDEtOTJhYi1hYzVjZTE4ZTQ5M2MiLCJ0eXAiOiJSZWZyZXNoIiwiYXpwIjoicGxhdGZvcm0iLCJhdXRoX3RpbWUiOjAsInNlc3Npb25fc3RhdGUiOiJjODQ0NjUzYy0zNWEzLTQ2OGUtYTcxZS00NTYxYjhmMjEwZGQiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsInBsYXRmb3JtX2FkbWluIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJlbWFpbCBwcm9maWxlIn0.lnzo0sqTSVwPCLZypLbLLGGbE7WK_woyljdAvlYX4H0","token_type":"bearer","not-before-policy":0,"session_state":"c844653c-35a3-468e-a71e-4561b8f210dd","scope":"email profile"}
+2019-12-30 19:23:46 [INFO] - [ SODAS USER GET TOKEN ]
+2019-12-30 19:23:46 [INFO] - eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ3TVZoYkZrNkE3QzZxRGk1UUVDVUVuSG9GckdxSmkteWJ4QS05MG03bGhJIn0.eyJqdGkiOiI0MWQzNjdmMS0wOTk0LTQwMDYtYWM1MC05MWM0YTE3MTk3YjkiLCJleHAiOjE1Nzc3NDQ2MjUsIm5iZiI6MCwiaWF0IjoxNTc3NzAxNDI1LCJpc3MiOiJodHRwczovL2F1dGguZGF0YW51cmkuY28ua3I6ODQ0OS9hdXRoL3JlYWxtcy9tYXN0ZXIiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiYTM1NTJlMTItMGE3NS00MjAxLTkyYWItYWM1Y2UxOGU0OTNjIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicGxhdGZvcm0iLCJhdXRoX3RpbWUiOjAsInNlc3Npb25fc3RhdGUiOiJjODQ0NjUzYy0zNWEzLTQ2OGUtYTcxZS00NTYxYjhmMjEwZGQiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIi8qIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwicGxhdGZvcm1fYWRtaW4iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJncm91cF9tZW1iZXJzaGlwIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iLCJwbGF0Zm9ybV9hZG1pbiJdLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJhcmEga28iLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzb2Rhc19hZG1pbiIsImdpdmVuX25hbWUiOiJhcmEiLCJmYW1pbHlfbmFtZSI6ImtvIiwiZW1haWwiOiJzb2Rhc19hZG1pbkBzb2Rhcy5ldHJpLnJlLmtyIiwiZ3JvdXAiOlsiZGVmYXVsdF9vcmciXX0.Jjs1i90_X15XA4qNrkl36elaNkk2Xqg-4bI8ZHcA19ga1RC3KV63o-uMtQuTzwiJO4WpmQmrQsoJw0KqTv_x2rPP27mCEVx6Peygd6IXB-yVhGwbFLzX0O-0Zl7QCrHvFcbeFM_LykPF2vup5I7P7XCjwRQ-MMPX9HpqM2TKrnBR3PoxftRYGTSFM4Rgl078xo2tfiEnhVVGEi9Xh1NNYFBGVXJGeHUYi8ISPLPV4d8oFX7PpaORa7ls0rpresrfYbzETY7MHNrBdqSggBAbsaa5h1GDArBw59stbbn8VfdOMCLOdQW7EYYPxez4ukSaR6NHw4C49thHYYcPjSkpTQ
+2019-12-30 19:23:46 [INFO] - login id : sodas_admin
+2019-12-30 19:23:46 [INFO] - center id : default_org
+2019-12-30 19:24:10 [DEBUG] - Application Version 1.0
+2019-12-30 19:24:10 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:24:10 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:24:10 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:24:10 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:24:10 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:24:10 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:24:10 [DEBUG] - Listening on port 18080
+2019-12-30 19:24:11 [DEBUG] - Application Version 1.0
+2019-12-30 19:24:11 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:24:11 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:24:11 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:24:11 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:24:11 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:24:11 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:24:11 [DEBUG] - Listening on port 18080
+2019-12-30 19:24:14 [DEBUG] - Application Version 1.0
+2019-12-30 19:24:14 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:24:14 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:24:14 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:24:14 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:24:14 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:24:14 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:24:14 [DEBUG] - Listening on port 18080
+2019-12-30 19:24:16 [DEBUG] - Application Version 1.0
+2019-12-30 19:24:16 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:24:16 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:24:16 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:24:16 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:24:16 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:24:16 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:24:16 [DEBUG] - Listening on port 18080
+2019-12-30 19:24:20 [DEBUG] - Application Version 1.0
+2019-12-30 19:24:20 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:24:20 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:24:20 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:24:20 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:24:20 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:24:20 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:24:20 [DEBUG] - Listening on port 18080
+2019-12-30 19:24:23 [DEBUG] - Application Version 1.0
+2019-12-30 19:24:23 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:24:23 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:24:23 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:24:23 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:24:23 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:24:23 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:24:23 [DEBUG] - Listening on port 18080
+2019-12-30 19:24:27 [DEBUG] - Application Version 1.0
+2019-12-30 19:24:27 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:24:27 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:24:27 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:24:27 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:24:27 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:24:27 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:24:27 [DEBUG] - Listening on port 18080
+2019-12-30 19:24:27 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:24:27 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:24:27 [DEBUG] - ┃ URL			: /main
+2019-12-30 19:24:27 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/logout
+2019-12-30 19:24:27 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:24:27 [DEBUG] - ┃ Accept			: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2019-12-30 19:24:27 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:24:27 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:24:27 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:24:27 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:24:27 [DEBUG] - ┃ Query			: {}
+2019-12-30 19:24:27 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:24:27 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:24:27 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:24:27 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:24:27 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:24:27 [DEBUG] - ┃ URL			: /
+2019-12-30 19:24:27 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/logout
+2019-12-30 19:24:27 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:24:27 [DEBUG] - ┃ Accept			: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2019-12-30 19:24:27 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:24:27 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:24:27 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:24:27 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:24:27 [DEBUG] - ┃ Query			: {}
+2019-12-30 19:24:27 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:24:27 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:24:27 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:24:27 [DEBUG] - ## Database Initialize Test
+2019-12-30 19:24:27 [DEBUG] - ## SERVER IP : 192.168.1.12
+2019-12-30 19:24:33 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:24:33 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:24:33 [DEBUG] - ┃ URL			: /login?userid=1&password=1
+2019-12-30 19:24:33 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/
+2019-12-30 19:24:33 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:24:33 [DEBUG] - ┃ Accept			: application/json, text/javascript, */*; q=0.01
+2019-12-30 19:24:33 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:24:33 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:24:33 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:24:33 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:24:33 [DEBUG] - ┃ Query			: {"userid":"1","password":"1"}
+2019-12-30 19:24:33 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:24:33 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:24:33 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:24:33 [INFO] - {"method":"POST","url":"http://101.101.166.237:3030/api/v1/tenant/user/login","json":true,"headers":{"Connection":"keep-alive","Host":"101.101.166.237","Accept":"*/*","Authorization":""},"body":{"id":"1","password":"1"}}
+2019-12-30 19:24:33 [ERROR] - {"success":false}
+2019-12-30 19:24:49 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:24:49 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:24:49 [DEBUG] - ┃ URL			: /login?userid=sodas_admin&password=so8087
+2019-12-30 19:24:49 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/
+2019-12-30 19:24:49 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:24:49 [DEBUG] - ┃ Accept			: application/json, text/javascript, */*; q=0.01
+2019-12-30 19:24:49 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:24:49 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:24:49 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:24:49 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:24:49 [DEBUG] - ┃ Query			: {"userid":"sodas_admin","password":"so8087"}
+2019-12-30 19:24:49 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:24:49 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:24:49 [DEBUG] - ┃ Login User		: 1
+2019-12-30 19:24:49 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:24:49 [INFO] - {"method":"POST","url":"http://101.101.166.237:3030/api/v1/tenant/user/login","json":true,"headers":{"Connection":"keep-alive","Host":"101.101.166.237","Accept":"*/*","Authorization":""},"body":{"id":"sodas_admin","password":"so8087"}}
+2019-12-30 19:24:50 [INFO] - {"access_token":"eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ3TVZoYkZrNkE3QzZxRGk1UUVDVUVuSG9GckdxSmkteWJ4QS05MG03bGhJIn0.eyJqdGkiOiJmNGVhZTM3MC0wMzUyLTRjOTgtODc0ZC0yYmY3MjIyZmMwZWEiLCJleHAiOjE1Nzc3NDQ2ODgsIm5iZiI6MCwiaWF0IjoxNTc3NzAxNDg4LCJpc3MiOiJodHRwczovL2F1dGguZGF0YW51cmkuY28ua3I6ODQ0OS9hdXRoL3JlYWxtcy9tYXN0ZXIiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiYTM1NTJlMTItMGE3NS00MjAxLTkyYWItYWM1Y2UxOGU0OTNjIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicGxhdGZvcm0iLCJhdXRoX3RpbWUiOjAsInNlc3Npb25fc3RhdGUiOiI3ZTA0YjY3My03MDllLTQ5NWItYmMyNC02YmE1ZDM1ZWYwMTgiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIi8qIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwicGxhdGZvcm1fYWRtaW4iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJncm91cF9tZW1iZXJzaGlwIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iLCJwbGF0Zm9ybV9hZG1pbiJdLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJhcmEga28iLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzb2Rhc19hZG1pbiIsImdpdmVuX25hbWUiOiJhcmEiLCJmYW1pbHlfbmFtZSI6ImtvIiwiZW1haWwiOiJzb2Rhc19hZG1pbkBzb2Rhcy5ldHJpLnJlLmtyIiwiZ3JvdXAiOlsiZGVmYXVsdF9vcmciXX0.PxTFisquPhmiEceALanmRGT2e_AlV1JAqfVEloAyYsXYqKT7DsZuEcXhrxBN3oZGEhHreInEUlJSRINzr-T8LidEW--HuiRFqw_5mNJltFdsP3BN3SS1kZTGa28aGTKDNJVbq90BtD47ZsguGyPxn3v448iMFWx9z5g0Kk-U2DLJjB80aB1L9pC5_LHplDD21GtSkSz2O9cdEXikYX0aJyT6qZjnFOZdKLpdKlaAMK-wgOMDCS-NnDx3PyfX3YROVt28DMLuZ4YNGP-cH17tO75tT2rZKYYOptWBO31LusClHfd4v7H5LGb9Am2yG5Oj2mY0QLGmhi3VSkREdaefJw","expires_in":43200,"refresh_expires_in":43200,"refresh_token":"eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJhZjE0YmNjOS1hYmQyLTQyYTktYTZhNi00Njc2M2NkMmI5MTgifQ.eyJqdGkiOiIwZjYzYjE5NC1iNzljLTQ4ZWEtODg4OC1hOGFmMDE4MWNiYzMiLCJleHAiOjE1Nzc3NDQ2ODgsIm5iZiI6MCwiaWF0IjoxNTc3NzAxNDg4LCJpc3MiOiJodHRwczovL2F1dGguZGF0YW51cmkuY28ua3I6ODQ0OS9hdXRoL3JlYWxtcy9tYXN0ZXIiLCJhdWQiOiJodHRwczovL2F1dGguZGF0YW51cmkuY28ua3I6ODQ0OS9hdXRoL3JlYWxtcy9tYXN0ZXIiLCJzdWIiOiJhMzU1MmUxMi0wYTc1LTQyMDEtOTJhYi1hYzVjZTE4ZTQ5M2MiLCJ0eXAiOiJSZWZyZXNoIiwiYXpwIjoicGxhdGZvcm0iLCJhdXRoX3RpbWUiOjAsInNlc3Npb25fc3RhdGUiOiI3ZTA0YjY3My03MDllLTQ5NWItYmMyNC02YmE1ZDM1ZWYwMTgiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsInBsYXRmb3JtX2FkbWluIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJlbWFpbCBwcm9maWxlIn0.N1LAGMl_Fl0zgL7Cj0hBRkK2rp21u8YHNJbzSgZKAyw","token_type":"bearer","not-before-policy":0,"session_state":"7e04b673-709e-495b-bc24-6ba5d35ef018","scope":"email profile"}
+2019-12-30 19:24:50 [INFO] - [ SODAS USER GET TOKEN ]
+2019-12-30 19:24:50 [INFO] - eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ3TVZoYkZrNkE3QzZxRGk1UUVDVUVuSG9GckdxSmkteWJ4QS05MG03bGhJIn0.eyJqdGkiOiJmNGVhZTM3MC0wMzUyLTRjOTgtODc0ZC0yYmY3MjIyZmMwZWEiLCJleHAiOjE1Nzc3NDQ2ODgsIm5iZiI6MCwiaWF0IjoxNTc3NzAxNDg4LCJpc3MiOiJodHRwczovL2F1dGguZGF0YW51cmkuY28ua3I6ODQ0OS9hdXRoL3JlYWxtcy9tYXN0ZXIiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiYTM1NTJlMTItMGE3NS00MjAxLTkyYWItYWM1Y2UxOGU0OTNjIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicGxhdGZvcm0iLCJhdXRoX3RpbWUiOjAsInNlc3Npb25fc3RhdGUiOiI3ZTA0YjY3My03MDllLTQ5NWItYmMyNC02YmE1ZDM1ZWYwMTgiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIi8qIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwicGxhdGZvcm1fYWRtaW4iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJncm91cF9tZW1iZXJzaGlwIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iLCJwbGF0Zm9ybV9hZG1pbiJdLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJhcmEga28iLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzb2Rhc19hZG1pbiIsImdpdmVuX25hbWUiOiJhcmEiLCJmYW1pbHlfbmFtZSI6ImtvIiwiZW1haWwiOiJzb2Rhc19hZG1pbkBzb2Rhcy5ldHJpLnJlLmtyIiwiZ3JvdXAiOlsiZGVmYXVsdF9vcmciXX0.PxTFisquPhmiEceALanmRGT2e_AlV1JAqfVEloAyYsXYqKT7DsZuEcXhrxBN3oZGEhHreInEUlJSRINzr-T8LidEW--HuiRFqw_5mNJltFdsP3BN3SS1kZTGa28aGTKDNJVbq90BtD47ZsguGyPxn3v448iMFWx9z5g0Kk-U2DLJjB80aB1L9pC5_LHplDD21GtSkSz2O9cdEXikYX0aJyT6qZjnFOZdKLpdKlaAMK-wgOMDCS-NnDx3PyfX3YROVt28DMLuZ4YNGP-cH17tO75tT2rZKYYOptWBO31LusClHfd4v7H5LGb9Am2yG5Oj2mY0QLGmhi3VSkREdaefJw
+2019-12-30 19:26:02 [DEBUG] - Application Version 1.0
+2019-12-30 19:26:02 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:26:02 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:26:02 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:26:02 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:26:02 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:26:02 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:26:02 [DEBUG] - Listening on port 18080
+2019-12-30 19:26:06 [DEBUG] - Application Version 1.0
+2019-12-30 19:26:06 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:26:06 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:26:06 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:26:06 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:26:06 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:26:06 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:26:06 [DEBUG] - Listening on port 18080
+2019-12-30 19:26:10 [DEBUG] - Application Version 1.0
+2019-12-30 19:26:10 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:26:10 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:26:10 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:26:10 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:26:10 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:26:10 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:26:10 [DEBUG] - Listening on port 18080
+2019-12-30 19:26:12 [DEBUG] - Application Version 1.0
+2019-12-30 19:26:12 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:26:12 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:26:12 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:26:12 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:26:12 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:26:12 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:26:12 [DEBUG] - Listening on port 18080
+2019-12-30 19:26:15 [DEBUG] - Application Version 1.0
+2019-12-30 19:26:15 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:26:15 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:26:15 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:26:15 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:26:15 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:26:15 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:26:15 [DEBUG] - Listening on port 18080
+2019-12-30 19:26:18 [DEBUG] - Application Version 1.0
+2019-12-30 19:26:18 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:26:18 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:26:18 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:26:18 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:26:18 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:26:18 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:26:18 [DEBUG] - Listening on port 18080
+2019-12-30 19:26:23 [DEBUG] - Application Version 1.0
+2019-12-30 19:26:23 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:26:23 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:26:23 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:26:23 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:26:23 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:26:23 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:26:23 [DEBUG] - Listening on port 18080
+2019-12-30 19:26:27 [DEBUG] - Application Version 1.0
+2019-12-30 19:26:27 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:26:27 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:26:27 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:26:27 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:26:27 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:26:27 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:26:27 [DEBUG] - Listening on port 18080
+2019-12-30 19:26:35 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:26:35 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:26:35 [DEBUG] - ┃ URL			: /login?userid=1&password=1
+2019-12-30 19:26:35 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/
+2019-12-30 19:26:35 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:26:35 [DEBUG] - ┃ Accept			: application/json, text/javascript, */*; q=0.01
+2019-12-30 19:26:35 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:26:35 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:26:35 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:26:35 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:26:35 [DEBUG] - ┃ Query			: {"userid":"1","password":"1"}
+2019-12-30 19:26:35 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:26:35 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:26:35 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:26:35 [INFO] - {"method":"POST","url":"http://101.101.166.237:3030/api/v1/tenant/user/login","json":true,"headers":{"Connection":"keep-alive","Host":"101.101.166.237","Accept":"*/*","Authorization":""},"body":{"id":"1","password":"1"}}
+2019-12-30 19:26:35 [ERROR] - {"success":false}
+2019-12-30 19:27:03 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:27:03 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:27:03 [DEBUG] - ┃ URL			: /login?userid=sodas_admin&password=so8087
+2019-12-30 19:27:03 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/
+2019-12-30 19:27:03 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:27:03 [DEBUG] - ┃ Accept			: application/json, text/javascript, */*; q=0.01
+2019-12-30 19:27:03 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:27:03 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:27:03 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:27:03 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:27:03 [DEBUG] - ┃ Query			: {"userid":"sodas_admin","password":"so8087"}
+2019-12-30 19:27:03 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:27:03 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:27:03 [DEBUG] - ┃ Login User		: 1
+2019-12-30 19:27:03 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:27:03 [INFO] - {"method":"POST","url":"http://101.101.166.237:3030/api/v1/tenant/user/login","json":true,"headers":{"Connection":"keep-alive","Host":"101.101.166.237","Accept":"*/*","Authorization":""},"body":{"id":"sodas_admin","password":"so8087"}}
+2019-12-30 19:27:04 [INFO] - {"access_token":"eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ3TVZoYkZrNkE3QzZxRGk1UUVDVUVuSG9GckdxSmkteWJ4QS05MG03bGhJIn0.eyJqdGkiOiI3NTc3MTNjNS05YmJjLTQxMTMtODdmYi1lYjlkZmE2YmRjZjYiLCJleHAiOjE1Nzc3NDQ4MjIsIm5iZiI6MCwiaWF0IjoxNTc3NzAxNjIyLCJpc3MiOiJodHRwczovL2F1dGguZGF0YW51cmkuY28ua3I6ODQ0OS9hdXRoL3JlYWxtcy9tYXN0ZXIiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiYTM1NTJlMTItMGE3NS00MjAxLTkyYWItYWM1Y2UxOGU0OTNjIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicGxhdGZvcm0iLCJhdXRoX3RpbWUiOjAsInNlc3Npb25fc3RhdGUiOiI3NjE5ODJjOC01MGEwLTQwNTktOTkzZi1mODdkNDg1ZmYwNmUiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIi8qIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwicGxhdGZvcm1fYWRtaW4iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJncm91cF9tZW1iZXJzaGlwIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iLCJwbGF0Zm9ybV9hZG1pbiJdLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJhcmEga28iLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzb2Rhc19hZG1pbiIsImdpdmVuX25hbWUiOiJhcmEiLCJmYW1pbHlfbmFtZSI6ImtvIiwiZW1haWwiOiJzb2Rhc19hZG1pbkBzb2Rhcy5ldHJpLnJlLmtyIiwiZ3JvdXAiOlsiZGVmYXVsdF9vcmciXX0.NUt8F4dGJ8sWkaKodaTUzpb6_jMaeWyEnb8RqD5ywTv_0F8k-Fnu2wt70uLh11Yf7S6aYbHbphjcTCjwzmtNKafqvzC07cmEVKKI80ub_Z8Ptta1jxWlaABDW1VRH5_frBh1ThmfuKbZ76OkWm2vrdJjX8crf4bf6IGmqwf1DUg5EhqwDkhDXbNlGl08Swz45i0fZ5rX4SC_X5YVN82hvivocBaf7JvWbZCKiyR06LcK6F-Ma0ptFnlZ3LGE6BWTIxvFM5hGfev309co220SwsMQZS3VIintFOhGNdaXWEI0zEyCZtq0YEBbbEZRw5CLykpQuLjT73515zBpcMOC-w","expires_in":43200,"refresh_expires_in":43200,"refresh_token":"eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJhZjE0YmNjOS1hYmQyLTQyYTktYTZhNi00Njc2M2NkMmI5MTgifQ.eyJqdGkiOiIzZThiYzE4MC0xMGQ4LTRiNDUtYjU4Zi0yNGU5YTRhZDc1NzgiLCJleHAiOjE1Nzc3NDQ4MjIsIm5iZiI6MCwiaWF0IjoxNTc3NzAxNjIyLCJpc3MiOiJodHRwczovL2F1dGguZGF0YW51cmkuY28ua3I6ODQ0OS9hdXRoL3JlYWxtcy9tYXN0ZXIiLCJhdWQiOiJodHRwczovL2F1dGguZGF0YW51cmkuY28ua3I6ODQ0OS9hdXRoL3JlYWxtcy9tYXN0ZXIiLCJzdWIiOiJhMzU1MmUxMi0wYTc1LTQyMDEtOTJhYi1hYzVjZTE4ZTQ5M2MiLCJ0eXAiOiJSZWZyZXNoIiwiYXpwIjoicGxhdGZvcm0iLCJhdXRoX3RpbWUiOjAsInNlc3Npb25fc3RhdGUiOiI3NjE5ODJjOC01MGEwLTQwNTktOTkzZi1mODdkNDg1ZmYwNmUiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsInBsYXRmb3JtX2FkbWluIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJlbWFpbCBwcm9maWxlIn0.hHqauP7Iv2T7tuLnpp0fROdYArmNu35_pV4mmC6pWE8","token_type":"bearer","not-before-policy":0,"session_state":"761982c8-50a0-4059-993f-f87d485ff06e","scope":"email profile"}
+2019-12-30 19:27:04 [INFO] - [ SODAS USER GET TOKEN ]
+2019-12-30 19:27:04 [INFO] - eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ3TVZoYkZrNkE3QzZxRGk1UUVDVUVuSG9GckdxSmkteWJ4QS05MG03bGhJIn0.eyJqdGkiOiI3NTc3MTNjNS05YmJjLTQxMTMtODdmYi1lYjlkZmE2YmRjZjYiLCJleHAiOjE1Nzc3NDQ4MjIsIm5iZiI6MCwiaWF0IjoxNTc3NzAxNjIyLCJpc3MiOiJodHRwczovL2F1dGguZGF0YW51cmkuY28ua3I6ODQ0OS9hdXRoL3JlYWxtcy9tYXN0ZXIiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiYTM1NTJlMTItMGE3NS00MjAxLTkyYWItYWM1Y2UxOGU0OTNjIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicGxhdGZvcm0iLCJhdXRoX3RpbWUiOjAsInNlc3Npb25fc3RhdGUiOiI3NjE5ODJjOC01MGEwLTQwNTktOTkzZi1mODdkNDg1ZmYwNmUiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIi8qIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwicGxhdGZvcm1fYWRtaW4iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJncm91cF9tZW1iZXJzaGlwIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iLCJwbGF0Zm9ybV9hZG1pbiJdLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJhcmEga28iLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzb2Rhc19hZG1pbiIsImdpdmVuX25hbWUiOiJhcmEiLCJmYW1pbHlfbmFtZSI6ImtvIiwiZW1haWwiOiJzb2Rhc19hZG1pbkBzb2Rhcy5ldHJpLnJlLmtyIiwiZ3JvdXAiOlsiZGVmYXVsdF9vcmciXX0.NUt8F4dGJ8sWkaKodaTUzpb6_jMaeWyEnb8RqD5ywTv_0F8k-Fnu2wt70uLh11Yf7S6aYbHbphjcTCjwzmtNKafqvzC07cmEVKKI80ub_Z8Ptta1jxWlaABDW1VRH5_frBh1ThmfuKbZ76OkWm2vrdJjX8crf4bf6IGmqwf1DUg5EhqwDkhDXbNlGl08Swz45i0fZ5rX4SC_X5YVN82hvivocBaf7JvWbZCKiyR06LcK6F-Ma0ptFnlZ3LGE6BWTIxvFM5hGfev309co220SwsMQZS3VIintFOhGNdaXWEI0zEyCZtq0YEBbbEZRw5CLykpQuLjT73515zBpcMOC-w
+2019-12-30 19:27:04 [INFO] - login id : sodas_admin
+2019-12-30 19:27:04 [INFO] - center id : default_org
+2019-12-30 19:27:08 [DEBUG] - ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:27:08 [DEBUG] - ┃ Host 			: 192.168.1.12:18080
+2019-12-30 19:27:08 [DEBUG] - ┃ URL			: /main
+2019-12-30 19:27:08 [DEBUG] - ┃ Referer 		: http://192.168.1.12:18080/
+2019-12-30 19:27:08 [DEBUG] - ┃ User-agent 		: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+2019-12-30 19:27:08 [DEBUG] - ┃ Accept			: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2019-12-30 19:27:08 [DEBUG] - ┃ Accept Encoding		: gzip, deflate
+2019-12-30 19:27:08 [DEBUG] - ┃ Accept Language		: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+2019-12-30 19:27:08 [DEBUG] - ┃ Method			: GET
+2019-12-30 19:27:08 [DEBUG] - ┃ Params			: {}
+2019-12-30 19:27:08 [DEBUG] - ┃ Query			: {}
+2019-12-30 19:27:08 [DEBUG] - ┃ Body			: {}
+2019-12-30 19:27:08 [DEBUG] - ┃ Client IP		: 192.168.1.12
+2019-12-30 19:27:08 [DEBUG] - ┃ Login User		: sodas_admin
+2019-12-30 19:27:08 [DEBUG] - ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2019-12-30 19:27:08 [DEBUG] - ## Current Session user : sodas_admin
+2019-12-30 19:27:16 [DEBUG] - Application Version 1.0
+2019-12-30 19:27:16 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:27:16 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:27:16 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:27:16 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:27:16 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:27:16 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:27:16 [DEBUG] - Listening on port 18080
+2019-12-30 19:27:18 [DEBUG] - Application Version 1.0
+2019-12-30 19:27:18 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:27:18 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:27:18 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:27:18 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:27:18 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:27:18 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:27:18 [DEBUG] - Listening on port 18080
+2019-12-30 19:27:19 [DEBUG] - Application Version 1.0
+2019-12-30 19:27:19 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:27:19 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:27:19 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:27:19 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:27:19 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:27:19 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:27:19 [DEBUG] - Listening on port 18080
+2019-12-30 19:27:22 [DEBUG] - Application Version 1.0
+2019-12-30 19:27:22 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:27:22 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:27:22 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:27:22 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:27:22 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:27:22 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:27:22 [DEBUG] - Listening on port 18080
+2019-12-30 19:27:41 [DEBUG] - Application Version 1.0
+2019-12-30 19:27:41 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:27:41 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:27:41 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:27:41 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:27:41 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:27:41 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:27:41 [DEBUG] - Listening on port 18080
+2019-12-30 19:27:42 [DEBUG] - Application Version 1.0
+2019-12-30 19:27:42 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:27:42 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:27:42 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:27:42 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:27:42 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:27:42 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:27:42 [DEBUG] - Listening on port 18080
+2019-12-30 19:32:33 [DEBUG] - Application Version 1.0
+2019-12-30 19:32:33 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:32:33 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:32:33 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:32:33 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:32:33 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:32:33 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:32:33 [DEBUG] - Listening on port 18080
+2019-12-30 19:32:42 [DEBUG] - Application Version 1.0
+2019-12-30 19:32:42 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:32:42 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:32:42 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:32:42 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:32:42 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:32:42 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:32:42 [DEBUG] - Listening on port 18080
+2019-12-30 19:32:44 [DEBUG] - Application Version 1.0
+2019-12-30 19:32:44 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:32:44 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:32:44 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:32:44 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:32:44 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:32:44 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:32:44 [DEBUG] - Listening on port 18080
+2019-12-30 19:32:46 [DEBUG] - Application Version 1.0
+2019-12-30 19:32:46 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:32:46 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:32:46 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:32:46 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:32:46 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:32:46 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:32:46 [DEBUG] - Listening on port 18080
+2019-12-30 19:36:12 [DEBUG] - Application Version 1.0
+2019-12-30 19:36:12 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:36:12 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:36:12 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:36:12 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:36:12 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:36:12 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:36:12 [DEBUG] - Listening on port 18080
+2019-12-30 19:36:14 [DEBUG] - Application Version 1.0
+2019-12-30 19:36:14 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:36:14 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:36:15 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:36:15 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:36:15 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:36:15 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:36:15 [DEBUG] - Listening on port 18080
+2019-12-30 19:45:53 [DEBUG] - Application Version 1.0
+2019-12-30 19:45:53 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:45:53 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:45:53 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:45:53 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:45:53 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:45:53 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:45:53 [DEBUG] - Listening on port 18080
+2019-12-30 19:45:54 [DEBUG] - Application Version 1.0
+2019-12-30 19:45:54 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:45:54 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:45:54 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:45:54 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:45:54 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:45:54 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:45:54 [DEBUG] - Listening on port 18080
+2019-12-30 19:45:56 [DEBUG] - Application Version 1.0
+2019-12-30 19:45:56 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:45:56 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:45:56 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:45:56 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:45:56 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:45:56 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:45:56 [DEBUG] - Listening on port 18080
+2019-12-30 19:45:57 [DEBUG] - Application Version 1.0
+2019-12-30 19:45:57 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:45:57 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:45:57 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:45:57 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:45:57 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:45:57 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:45:57 [DEBUG] - Listening on port 18080
+2019-12-30 19:46:04 [DEBUG] - Application Version 1.0
+2019-12-30 19:46:04 [INFO] - ██████╗ ███████╗██╗   ██╗        
+2019-12-30 19:46:04 [INFO] - ██╔══██╗██╔════╝██║   ██║        
+2019-12-30 19:46:04 [INFO] - ██║  ██║█████╗  ██║   ██║        
+2019-12-30 19:46:04 [INFO] - ██║  ██║██╔══╝  ╚██╗ ██╔╝        
+2019-12-30 19:46:04 [INFO] - ██████╔╝███████╗ ╚████╔╝         
+2019-12-30 19:46:04 [INFO] - ╚═════╝ ╚══════╝  ╚═══╝          
+2019-12-30 19:46:04 [DEBUG] - Listening on port 18080

@@ -54,10 +54,9 @@ router.get('/login', async (req, res, next) => {
 	g_password = req.query.password;
 
 	try{
-		let access_token = await call_request_api.get_access_token();
-		
-		console.log(access_token);
-		if(access_token){
+		let sodas = await call_request_api.get_access_token();
+		console.log(sodas);
+		if(sodas && sodas.length > 50){
 			log.info("login id : "+g_user_id);
 			log.info("center id : "+g_center_id);
 			req.session.userid = g_user_id;

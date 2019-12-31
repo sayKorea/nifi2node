@@ -6,7 +6,7 @@
     "start": "node ./bin/www",
     "server_dev": "nodemon ./bin/www dev",
     "server_stg": "nodemon ./bin/www stg",
-    "server_prod": "nodemon ./bin/www prod"
+	"server_prod": "nodemon ./bin/www prod"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -38,13 +38,5 @@
   },
   "devDependencies": {
     "nodemon": "^1.19.4"
-  },
-  "apps": [
-    {
-      "name": "api-app",
-      "script": "./api.js",
-      "instances": 4,
-      "exec_mode": "cluster"
-    }
-  ]
+  }
 }
