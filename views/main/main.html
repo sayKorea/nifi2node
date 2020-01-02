@@ -2,14 +2,12 @@
 <html>
 <title>Interface</title>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 <link type="text/css" rel="stylesheet" href="/stylesheets/main/w3.css">
-<!-- <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-<link type="text/css" rel="stylesheet" href="/stylesheets/login/font-awesome.min.css"/>
 <link type="text/css" rel="stylesheet" href="/stylesheets/paging/simplePagination.css"/>
 <link type="text/css" rel="stylesheet" href="/stylesheets/main/style.css"/>
 <link type="text/css" rel="stylesheet" href="/stylesheets/form.css"/>
-
 <script type="text/javascript" src="/javascripts/jquery/jquery.3.4.1.min.js"></script>
 <script type="text/javascript" src="/javascripts/jquery/jquery.simplePagination.js"></script>	
 <script>
@@ -141,7 +139,8 @@
 	<header class="w3-container w3-xlarge" style="background-color:whitesmoke;">
 		<p id="menuNm" class="w3-left">MAIN</p>
 		<p class="w3-right">
-			<%= user_id %><a href="javascript:location.href='/logout';"> <span style="color:darkslategray">Logout</span></a>
+			<%= user_id %>(님) 환영합니다. 
+			<a href="javascript:location.href='/logout';"> <span style="color:darkslategray">Logout</span></a>
 		</p>
 	</header>
 	<!-- BODY CONTENT -->

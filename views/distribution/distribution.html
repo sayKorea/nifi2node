@@ -368,6 +368,7 @@
 							}
 						},
 						error:(request,status,error) => {
+							console.log(request);
 							alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 						}
 					});
@@ -376,6 +377,7 @@
 				}
 			},
 			error:(request,status,error)=>{
+				console.log(request);
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		});
@@ -625,7 +627,7 @@
 						</tr>
 						<tr>
 							<th>공간해상도</th>
-							<td colspan="3"><input id="spatialResolutionInMeters" type="text"  name="spatialResolutionInMeters" placeholder="간해상도를 입력 하세요"></td colspan="3">
+							<td colspan="3"><input id="spatialResolutionInMeters" type="text"  name="spatialResolutionInMeters" placeholder="공간해상도를 입력 하세요"></td colspan="3">
 							<th>시간해상도</th>
 							<td colspan="3"><input id="temporalResolution" type="text"  name="temporalResolution" placeholder="시간해상도를 입력하세요"></td colspan="3">
 						</tr>
@@ -716,7 +718,7 @@
 						</tr>
 						<tr>
 							<th>공간해상도</th>
-							<td colspan="3"><input id="m_spatialResolutionInMeters" type="text"  name="m_spatialResolutionInMeters" placeholder="간해상도를 입력 하세요"></td colspan="3">
+							<td colspan="3"><input id="m_spatialResolutionInMeters" type="text"  name="m_spatialResolutionInMeters" placeholder="공간해상도를 입력 하세요"></td colspan="3">
 							<th>시간해상도</th>
 							<td colspan="3"><input id="m_temporalResolution" type="text"  name="m_temporalResolution" placeholder="시간해상도를 입력하세요"></td colspan="3">
 						</tr>

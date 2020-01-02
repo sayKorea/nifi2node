@@ -9,7 +9,7 @@
 		var target_path = $("#target_path").val();
 
 		if(!center_id || center_id.trim() == ""){
-			alert("센터ID를 입력하세요.");
+			alert("센터 ID를 입력하세요.");
 			$("#center_id").focus();
 			return false;
 		}
@@ -65,18 +65,18 @@
 				<div style="margin:0 0px 0px 0px;">
 					<table cellpadding="0" cellspacing="0" class="pop_tabla">
 						<tr>
-							<th>센터ID<span class="point_color">*</span></th>
+							<th>센터 ID<span class="point_color">*</span></th>
 							<td colspan="3">
-								<input id="center_id" type="text"  name="center_id" placeholder="센터ID를 입력 하세요.(xxx_org)" required value="<%= center_id %>">	
+								<input id="center_id" type="text"  name="center_id" placeholder="센터ID를 입력 하세요.(xxx_org)" required value="<%= center_id %>" style="width:97.7%;">	
 							</td>
 						</tr>
 						<tr>
 							<th>센터 소스경로 <span class="point_color">*</span></th>
-							<td colspan="3"><input id="source_path" type="text"  name="source_path" placeholder="센터 소스경로를 입력 하세요" required value="<%= source_path %>"></td>
+							<td colspan="3"><input id="source_path" type="text"  name="source_path" placeholder="센터 소스경로를 입력 하세요" required value="<%= source_path %>" style="width:97.7%;"></td>
 						</tr>
 						<tr>
 							<th>포탈 저장경로 <span class="point_color">*</span></th>
-							<td colspan="3"><input id="target_path" type="text"  name="target_path" placeholder="포탈 저장경로를 입력 하세요" required value="<%= target_path %>"></td>
+							<td colspan="3"><input id="target_path" type="text"  name="target_path" placeholder="포탈 저장경로를 입력 하세요" required value="<%= target_path %>" style="width:97.7%;"></td>
 						</tr>
 					</table>
 					<div style="float:right;">

@@ -1,32 +1,12 @@
 const express 			= require('express');
-const dao 				= require('../common/common_dao');
 const router 			= express.Router();
 const ip 				= require('ip');
+const os 				= require('os');
 const fs 				= require('fs');
-const log 				= require("../common/logger");
 const session 			= require('express-session');
+const dao 				= require('../common/common_dao');
+const log 				= require("../common/logger");
 const call_request_api 	= require('../common/common_request');
-
-/* GET Login page. */
-router.get('/etc', async (req, res, next) => {
-	try{
-		var database_test = await callDb("SELECT CURRENT_DATE");
-		log.debug("## Database Initialize Test");
-		if(database_test.rowCount != 1){
-			res.render('error/error.html');
-		}
-
-		log.debug ("## SERVER IP : " + ip.address() );
-		// log.debug ("## CLIENT IP : " + getUserIP(req) );
-	// res.render('login/login.html');
-	}catch(e) {
-		//exception handled here  
-		console.log(e.message);
-		res.render('error/error.html');
-	}
-	
-	res.render('main/main.html');
-});
 
 /* GET Login page. */
 router.get('/', async (req, res, next) => {
@@ -34,16 +14,18 @@ router.get('/', async (req, res, next) => {
 		var database_test = await callDb("SELECT CURRENT_DATE");
 		log.debug("## Database Initialize Test");
 		if(!database_test || database_test.rowCount != 1){
-			console.log("## Database ERROR!");
-			return res.render('error/error.html');
+			log.error("## Database ERROR!");
+			var error_title = "DB Connect error!";
+			var error_message = "Check database Please!";
+			return res.render("error/error.html",{error_title:error_title,error_message:error_message});
 		}else{
 			log.debug ("## SERVER IP : " + ip.address() );
-			return  res.render('login/login.html');
+			return  res.render("login/login.html");
 		}
 	}catch(e) {
 		//exception handled here  
-		console.log(e.message);
-		return res.render('error/error.html');
+		log.debug(JSON.stringify(e));
+		return res.render("error/error.html");
 	} 
 });
 
@@ -107,7 +89,7 @@ var callDb = async (query, params) => {
 		return queryResult;
 	} catch(e) {
 		//exception handled here  
-		log.debug(e.message);
+		log.debug(JSON.stringify(e));
 		return false;  
 	} 
 };

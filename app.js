@@ -1,10 +1,9 @@
-const createError 	= require('http-errors');
-const express 		= require('express');
-const session 		= require('express-session');
-const path 			= require('path');
-const cookieParser 	= require('cookie-parser');
-const cors 			= require('cors');
-const favicon	 	= require('serve-favicon');
+const createError 	= require("http-errors");
+const express 		= require("express");
+const session 		= require("express-session");
+const path 			= require("path");
+const cors 			= require("cors");
+const favicon	 	= require("serve-favicon");
 const app 			= express();
 const log 			= require("./common/logger");
 
@@ -28,7 +27,6 @@ app.engine('html', require('ejs').renderFile);
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public/images', 'favicon.ico')));
 
@@ -78,12 +76,13 @@ app.use(function(req, res, next) {
 		if(		exclude_path=="/" 
 			|| 	exclude_path=="/login" 
 			|| 	exclude_path=="/uploads"
+			|| 	exclude_path=="/uploads/getFiles"
 			// || 	exclude_path=="/admin"
 			// || 	exclude_path=="/admin/save"
 			|| 	exclude_path=="/admin/hidden"
 			|| 	exclude_path=="/admin/hidden/save"
 		){
-			console.log("## Exclude Path : "+exclude_path);
+			log.debug("## Exclude Path : "+exclude_path);
 			return next();
 		}
 		return res.redirect('/');

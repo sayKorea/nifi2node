@@ -7,6 +7,9 @@
 
 	var hidden_info_save = () => {
 		console.log(($("#fm01p").serialize()));
+		var center_id 	= $("#center_id").val();
+		var source_path = $("#source_path").val();
+		var target_path = $("#target_path").val();
 		var db_host 	= $("#db_host").val();
 		var db_port 	= $("#db_port").val();
 		var db_user 	= $("#db_user").val();
@@ -15,6 +18,21 @@
 		var sodas_host 	= $("#sodas_host").val();
 		var sodas_port 	= $("#sodas_port").val();
 
+		if(!center_id || center_id.trim() == ""){
+			alert("센터 ID를 입력하세요.");
+			$("#center_id").focus();
+			return false;
+		}
+		if(!source_path || source_path.trim() == ""){
+			alert("센터 소스경로를 입력하세요.");
+			$("#source_path").focus();
+			return false;
+		}
+		if(!target_path || target_path.trim() == ""){
+			alert("포탈 저장경로를  입력하세요.");
+			$("#target_path").focus();
+			return false;
+		}
 		if(!db_host || db_host.trim() == ""){
 			alert("데이터베이스 호스트를 입력하세요.");
 			$("#db_host").focus();
@@ -91,38 +109,53 @@
 		<form id="fm01p" style="margin: 0 auto;">
 			<div style="width:100%;">
 				<div style="margin:0 0px 0px 0px;">
+					<h2>Center Info</h2>
+					<table cellpadding="0" cellspacing="0" class="pop_tabla">
+						<tr>
+							<th>센터 ID<span class="point_color">*</span></th>
+							<td colspan="3"> <input id="center_id" type="text"  name="center_id" placeholder="센터ID를 입력 하세요.(xxx_org)" required value="<%= center_id %>" style="width:97.7%;"></td>
+						</tr>
+						<tr>
+							<th>센터 소스경로 <span class="point_color">*</span></th>
+							<td colspan="3"><input id="source_path" type="text"  name="source_path" placeholder="센터 소스경로를 입력 하세요" required value="<%= source_path %>" style="width:97.7%;"></td>
+						</tr>
+						<tr>
+							<th>포탈 저장경로 <span class="point_color">*</span></th>
+							<td colspan="3"><input id="target_path" type="text"  name="target_path" placeholder="포탈 저장경로를 입력 하세요" required value="<%= target_path %>" style="width:97.7%;"></td>
+						</tr>
+					</table>
 					<h2>Database Info</h2>
 					<table cellpadding="0" cellspacing="0" class="pop_tabla">
 						<tr>
 							<th>Database Host<span class="point_color">*</span></th>
-							<td colspan="3"> <input id="db_host" type="text"  name="db_host" placeholder="데이터베이스 호스트" required value="<%= db_host %>">	</td>
+							<td colspan="3"> <input id="db_host" type="text"  name="db_host" placeholder="데이터베이스 호스트" required value="<%= db_host %>" style="width:97.7%;">	</td>
 						</tr>
 						<tr>
 							<th>Database Port<span class="point_color">*</span></th>
-							<td colspan="3"><input id="db_port" type="text"  name="db_port" placeholder="데이터베이스 포트" required value="<%= db_port %>"></td>
+							<td colspan="3"><input id="db_port" type="text"  name="db_port" placeholder="데이터베이스 포트" required value="<%= db_port %>" style="width:97.7%;"></td>
 						</tr>
 						<tr>
 							<th>Database User <span class="point_color">*</span></th>
-							<td colspan="3"><input id="db_user" type="text"  name="db_user" placeholder="데이터베이스 유저" required value="<%= db_user %>"></td>
+							<td colspan="3"><input id="db_user" type="text"  name="db_user" placeholder="데이터베이스 유저" required value="<%= db_user %>" style="width:97.7%;"></td>
 						</tr>
 						<tr>
 							<th>Database pass <span class="point_color">*</span></th>
-							<td colspan="3"><input id="db_pass" type="text"  name="db_pass" placeholder="데이터베이스 패스워드" required value="<%= db_pass %>"></td>
+							<td colspan="3"><input id="db_pass" type="text"  name="db_pass" placeholder="데이터베이스 패스워드" required value="<%= db_pass %>" style="width:97.7%;"></td>
 						</tr>
 						<tr>
 							<th>Database name <span class="point_color">*</span></th>
-							<td colspan="3"><input id="db_name" type="text"  name="db_name" placeholder="데이터베이스 명" required value="<%= db_name %>"></td>
+							<td colspan="3"><input id="db_name" type="text"  name="db_name" placeholder="데이터베이스 명" required value="<%= db_name %>" style="width:97.7%;"></td>
 						</tr>
 					</table>
 					<h2>SODAS Info</h2>
 					<table cellpadding="0" cellspacing="0" class="pop_tabla">
 						<tr>
 							<th>SODAS Host<span class="point_color">*</span></th>
-							<td colspan="3"> <input id="sodas_host" type="text"  name="sodas_host" placeholder="SODAS 호스트" required value="<%= sodas_host %>">	</td>
+							<td colspan="3"> <input id="sodas_host" type="text"  name="sodas_host" placeholder="SODAS 호스트" required value="<%= sodas_host %>" style="width:97.7%;">	</td>
 						</tr>
 						<tr>
 							<th>SODAS Port<span class="point_color">*</span></th>
-							<td colspan="3"><input id="sodas_port" type="text"  name="sodas_port" placeholder="SODAS 포트" required value="<%= sodas_port %>"></td>
+							<td colspan="3"><input id="sodas_port" type="text"  name="sodas_port" placeholder="SODAS 포트" required value="<%= sodas_port %>" style="width:97.7%;"></td>
 						</tr>
 					</table>
 					<div style="float:right;">

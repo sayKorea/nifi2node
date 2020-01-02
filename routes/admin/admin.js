@@ -40,6 +40,9 @@ router.get("/hidden", (req, res, next) => {
 	const properties = PropertiesReader("env.properties");
 
 	var hidden_info = {};
+	hidden_info.center_id 	= properties.get("center.id");
+	hidden_info.source_path = properties.get("center.source_path");
+	hidden_info.target_path = properties.get("center.target_path");
 	hidden_info.db_host 	= properties.get("db.host");
 	hidden_info.db_port 	= properties.get("db.port");
 	hidden_info.db_user 	= properties.get("db.user");
@@ -55,6 +58,9 @@ router.post("/hidden/save", async (req, res, next) => {
 	try{
 		console.log( req.body );
 		const properties = PropertiesReader("env.properties");
+		properties.set("center.id", req.body.center_id);
+		properties.set("center.source_path", req.body.source_path);
+		properties.set("center.target_path", req.body.target_path);
 		properties.set("db.host", req.body.db_host);
 		properties.set("db.port", req.body.db_port);
 		properties.set("db.user", req.body.db_user);

@@ -500,17 +500,16 @@ router.get('/process_set', async (req, res, next) => {
 			queryResult = await callDb(insert ,params);//dao.query(insert ,params);
 			//log.debug(queryResult);
 		}
-		res.send({success:true});return true;
+		return res.send({success:true});;
 	} catch (error) {
 		//NIFI FAIL
 		var insert  = " INSERT INTO DATA_LOAD_DETAIL(DATASET_UUID, PROCESS_NAME, PROCESS_TYPE, PROCESS_SUCCESS, PROCESS_START_TIME)";
 			insert += " VALUES ($1, $2, $3, $4, CURRENT_DATE)";
-		var params = [resource_id, 'nifi setting', '', 'fail!'];
+		var params = [resource_id, 'nifi setting', '', 'fail'];
 		queryResult = await callDb(insert ,params);//dao.query(insert ,params);
-		//log.debug(queryResult);
 
 		log.debug(error);
-	 	res.status(500).send({success:false});return false;
+	 	return res.status(500).send({success:false});;
 	}
 	
 });
@@ -567,11 +566,11 @@ router.get('/process_log', async (req, res, next) => {
 
 			if(responese){
 				log.debug("[ Process Group Properties Stop Success!]");
-				//log.debug(responese);
+				log.debug( JSON.stringify(responese));
 			}
 			res.send({success:true});return true;
 		} catch (error) {
-			//log.debug(error);
+			log.debug(JSON.stringify(error));
 			res.status(500).send({success:false});return false;
 		}
 	}else{
@@ -586,16 +585,16 @@ var callDb = async (query, params) => {
 		if(params) {
 			queryResult = await dao.query(query ,params);
 			log.debug(params)
-			log.debug(queryResult)
+			log.debug(JSON.stringify(queryResult))
 		}else  {
 			queryResult = await dao.query(query);
-			log.debug(queryResult);
+			log.debug(JSON.stringify(queryResult));
 		}
 		return queryResult;
 	} catch(e) {
 		//exception handled here   
-		console.log(e.message);
-		return 0;  
+		log.error(JSON.stringify(e));
+		return false;  
 	} 
 };
 
@@ -603,14 +602,13 @@ var callDb = async (query, params) => {
 	return new Promise((resolve, reject) => {
 		request(option, function (e, r, b) {
 			if (e){
-				log.error(e);
+				log.error(JSON.stringify(e));
 				reject({ success:false  });
 			}else{
-				log.error(b);
+				log.deubg(JSON.stringify(b));
 				resolve(b);
 			} 
 		});
-
 	});
 };
 
