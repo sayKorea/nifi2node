@@ -1,3 +1,4 @@
+'use strict'
 const createError 	= require("http-errors");
 const express 		= require("express");
 const session 		= require("express-session");
@@ -6,23 +7,28 @@ const cors 			= require("cors");
 const favicon	 	= require("serve-favicon");
 const app 			= express();
 const log 			= require("./common/logger");
+const helmet 		= require('helmet');
 
 // Global Variable
-// Center
-
-// global.g_user_id 	= "sodas_admin";
+// global.g_user_id 	= "sodas_admin"; 
 // global.g_password 	= "so8087";
-global.g_user_id 	= "";
-global.g_password 	= "";
-global.g_center_id	= "default_org";
-
-global.g_debug_mode = "false";
-global.g_active_type = process.argv[2];
+global.g_user_id 		= ""
+global.g_password 		= ""
+global.g_center_id		= "";
+global.g_debug_mode 	= "false";
+global.g_active_type 	= process.argv[2];
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
+
+// Secure
+app.use(helmet())
+app.use(helmet.noCache());
+app.use(helmet.noSniff());
+app.disable('x-powered-by');
+app.set('trust proxy', 1);
 
 app.use(cors());
 app.use(express.json());
@@ -37,6 +43,10 @@ app.use(session({
 }));
 
 app.use(function(req, res, next) {
+	res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+    res.header('Expires', '-1');
+	res.header('Pragma', 'no-cache');
+	
 	if(!req.headers.accept) return next();
 
 	var client_ip = req.connection.remoteAddress;
@@ -61,13 +71,14 @@ app.use(function(req, res, next) {
 	log.debug("┃ Query			: "+JSON.stringify( req.query) );
 	log.debug("┃ Body			: "+JSON.stringify( req.body));
 	log.debug("┃ Client IP		: "+client_ip );
-	if(g_user_id && g_user_id.trim() != "" ){
-		log.debug("┃ Login User		: "+g_user_id );	
-	}
+	log.debug("┃ Login User		: "+req.session.userid );	
 	log.debug("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 	var ha 				= req.headers.accept;
 	var exclude_path 	= req._parsedOriginalUrl.pathname;
 	
+	if(req.session.userid && req.session.userid.trim()==""){
+		g_user_id = "";
+	}
 	
 	if(ha && (ha.indexOf("application/json") > -1 || ha.indexOf("text/javascript") > -1)){
 		console.log("application/json");
@@ -107,49 +118,9 @@ app.use('/distribution',	require('./routes/distribution/distribution'));
 app.use('/uploads',			require('./routes/uploads/uploads'));
 // app.use('/users', 	require('./routes/users/users'));
 // app.use('/auth', 	require('./routes/auth/auth'));
-// app.use('/org', 	require('./routes/org/org'));
+// app.use('/org', 		require('./routes/org/org'));
 // app.use('/meta', 	require('./routes/meta/meta'));
 // app.use('/load', 	require('./routes/load/load'));
 app.all('*',(req,res) => res.status(404).send('<h1> 요청 페이지 없음 </h1>'));
-
-// catch 404 and forward to error handler
-// app.use(function (req, res, next) {
-// 	console.log("app.use(function (req, res, next) {");
-// 	next(createError(404));
-// });
-
-//error handler
-app.use(function (err, req, res, next) {
-	console.log("app.use(function (err, req, res, next) {");
-	// set locals, only providing error in development
-	res.locals.message = err.message;
-	res.locals.error = req.app.get('env') === 'dev' ? err : {};
-	console.log(err);
-	// render the error page
-	res.status(err.status || 500);
-	res.render('error/error');
-});
-
-
-function getUserIP(req){
-    var ipAddress;
-
-	if(!!req.hasOwnProperty('sessionID')){
-        ipAddress = req.headers['x-forwarded-for'];
-    } else{
-        // if(!ipAddress){
-            var forwardedIpsStr = req.header('x-forwarded-for');
-
-            if(forwardedIpsStr){
-                var forwardedIps = forwardedIpsStr.split(',');
-                ipAddress = forwardedIps[0];
-            }
-            if(!ipAddress){
-                ipAddress = req.connection.remoteAddress;
-            }
-        // }
-    }
-    return ipAddress;
-};
 
 module.exports = app;

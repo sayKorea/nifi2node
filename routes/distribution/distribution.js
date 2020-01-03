@@ -1,3 +1,4 @@
+'use strict'
 const express 			= require('express');
 const PropertiesReader 	= require('properties-reader');
 

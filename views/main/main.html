@@ -1,35 +1,23 @@
 <!DOCTYPE html>
-<html>
-<title>Interface</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<html lang="ko">
+<link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/fonts.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/stylesheets/paging/simplePagination.css"/>
 <link type="text/css" rel="stylesheet" href="/stylesheets/main/w3.css">
-<link type="text/css" rel="stylesheet" href="/stylesheets/paging/simplePagination.css"/>
 <link type="text/css" rel="stylesheet" href="/stylesheets/main/style.css"/>
 <link type="text/css" rel="stylesheet" href="/stylesheets/form.css"/>
 <script type="text/javascript" src="/javascripts/jquery/jquery.3.4.1.min.js"></script>
-<script type="text/javascript" src="/javascripts/jquery/jquery.simplePagination.js"></script>	
+<script type="text/javascript" src="/javascripts/jquery/jquery.simplePagination.js"></script>
+<head>
+	<meta charset="UTF-8">
+	<title>데이터 연계시스템</title>
 <script>
 	$(()=>{
-		$("#leftMenu > a").on("click",function(){
+		$(".one_depth_item > a").on("click",function(){
 			var cshow = $("#leftMenu").find(".w3-show").attr("id");
-			$("#leftMenu div").removeClass("w3-show");
-			if((this.id+"-sub") != cshow){
-				$("#"+this.id+"-sub").addClass("w3-show");
-			}
-		});
-
-		$("#leftMenu > div > a").on("click",function(){
-			var cshow = $("#leftMenu").find(".w3-show").attr("id");
-			$("#leftMenu div a")
-				.removeClass("w3-light-grey")
-				.find("i").remove();
-			
-			$(this)
-				.addClass("w3-light-grey")
-				.prepend("<i class='fa fa-caret-right w3-margin-right'></i>");
-
+			$(".one_depth_item").removeClass("active");
+			$(this).parent().addClass("active");
 			$("#menuNm").text($(this).attr("title"));
 
 			var url = $(this).attr("url");
@@ -46,105 +34,37 @@
 				}
 			});
 		});
+
+		$("#logo").click(()=>{
+			location.replace("/");
+		});
 	});
-
-// 	function w3_open() {
-//   document.getElementById("mySidebar").style.display = "block";
-//   document.getElementById("myOverlay").style.display = "block";
-// }
- 
-// function w3_close() {
-//   document.getElementById("mySidebar").style.display = "none";
-//   document.getElementById("myOverlay").style.display = "none";
-// }
-
-	var bar_open = () => {
-		$("#m_sidebar, #m_overlay").show();
-	};
-
-	var bar_close = () => {
-		$("#m_sidebar, #m_overlay").hide();
-	};
 </script>
-<body class="w3-content" style="max-width:1400px">
-	<!-- Sidebar/menu -->
-	<nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px;border-right: 1px solid rgba(100, 101, 105, 0.2);" id="m_sidebar">
-		<div class="w3-container w3-display-container w3-padding-16">
-			<i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
-			<h3 class="w3-wide"><img src="" onclick="javascript:location.hreg='/logout'"></h3>
-		</div>
-		<div id="leftMenu" class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
-			<a id="center-info" href="javascript:void(0)"  class="w3-button w3-block w3-white w3-left-align">
-				센터 설정  <i class="fa fa-caret-down"></i>
-			</a>
-			<div id="center-info-sub" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-				<a href="javascript:void(0)" class="w3-bar-item w3-button" title="센터정보" url="/admin">설정</a>
+</head>
+<body>
+	<div class="side_wrap">
+		<h1><img id="logo" src="/images/logo.png" alt="로고"></h1>
+		<ul class="one_depth">
+			<!-- <li class="one_depth_item active"><a href="javascript:void(0);">저장소</a>
+				 <ul class="two_depth">
+				 	<li class="two_depth_item"><a href="">목록</a></li>
+				 </ul>
+			</li> -->
+			<li class="one_depth_item"><a href="javascript:void(0);" title="센터정보" url="/admin">센터 정보</a></li>
+			<li class="one_depth_item"><a href="javascript:void(0);" title="메타데이터 [Resource]" url="/resource">메티데이터</a></li>
+			<li class="one_depth_item"><a href="javascript:void(0);" title="배포 [Distribution]" url="/distribution">배포</a></li>
+		</ul>
+	</div>
+	<div class="sub_content">
+		<div class="sub_header">	
+			<h2 id="menuNm">메인</h2>
+			<div class="user_util">
+				<span class="user_name"><%= user_id %>님 환영합니다.</span>
+				<a href="javascript:location.replace('/logout')" class="user_login_btn">LOGOUT</a>
 			</div>
-			<!-- <a id="storgae" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align">
-				저장소 <i class="fa fa-caret-down"></i>
-			</a>
-			<div id="storgae-sub" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-				<a href="javascript:void(0)" class="w3-bar-item w3-button" title="저장소 목록" url="/repo">목록</a>
-				<a href="javascript:void(0)" class="w3-bar-item w3-button" title="저장소 이력" url="/repo/his">이력</a>
-			</div> -->
+		</div>	
+		<div id="contents" class="sub_page"></div>
+	</div>
 
-			<a id="resource" href="javascript:void(0)"  class="w3-button w3-block w3-white w3-left-align">
-				메타데이터  <i class="fa fa-caret-down"></i>
-			</a>
-			<div id="resource-sub" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-				<a href="javascript:void(0)" class="w3-bar-item w3-button" title="메타데이터 목록" url="/resource">목록</a>
-			</div>
-			<a id="distribution" href="javascript:void(0)"  class="w3-button w3-block w3-white w3-left-align">
-				배포  <i class="fa fa-caret-down"></i>
-			</a>
-			<div id="distribution-sub" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-				<a href="javascript:void(0)" class="w3-bar-item w3-button" title="배포 목록" url="/distribution">목록</a>
-			</div>
-
-			<!-- OLD -->
-			<!-- <a id="metadata" href="javascript:void(0)"  class="w3-button w3-block w3-white w3-left-align">
-				메타데이터  <i class="fa fa-caret-down"></i>
-			</a>
-			<div id="metadata-sub" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-				<a href="javascript:void(0)" class="w3-bar-item w3-button" title="메타 목록" url="/meta">목록</a>
-				<a href="javascript:void(0)" class="w3-bar-item w3-button" title="메타 이력" url="/meta/his">이력</a>
-			</div> -->
-
-			<!-- <a id="dataload" href="javascript:void(0)"  class="w3-button w3-block w3-white w3-left-align">
-				적재  <i class="fa fa-caret-down"></i>
-			</a>
-			<div id="dataload-sub" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-				<a href="javascript:void(0)" class="w3-bar-item w3-button" title="적재 목록" url="/load">목록</a>
-				 <a href="javascript:void(0)" class="w3-bar-item w3-button" title="적재 이력" url="/load/his">이력</a>
-			</div> -->
-		</div>
-	</nav>
-
-	<!-- Top menu on small screens -->
-	<header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
-		<div class="w3-bar-item w3-padding-24 w3-wide">Datanuri Interface Management</div>
-		<a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="bar_open()"><i class="fa fa-bars"></i></a>
-	</header>
-
-	<!-- Overlay effect when opening sidebar on small screens -->
-	<div class="w3-overlay w3-hide-large" onclick="bar_close()" style="cursor:pointer" title="close side menu" id="m_overlay"></div>
-
-	<!-- !PAGE CONTENT! -->
-	<div class="w3-main" style="margin-left:250px">
-
-	<!-- Push down content on small screens -->
-	<!-- <div class="w3-hide-large" style="margin-top:83px"></div> -->
-	
-	<!-- Top header -->
-	<header class="w3-container w3-xlarge" style="background-color:whitesmoke;">
-		<p id="menuNm" class="w3-left">MAIN</p>
-		<p class="w3-right">
-			<%= user_id %>(님) 환영합니다. 
-			<a href="javascript:location.href='/logout';"> <span style="color:darkslategray">Logout</span></a>
-		</p>
-	</header>
-	<!-- BODY CONTENT -->
-	<div id="contents"></div>
-	<!-- BODY CONTENT END-->
 </body>
 </html>

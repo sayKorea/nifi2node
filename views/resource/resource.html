@@ -80,6 +80,19 @@
 		});
 	});
 
+	var insert_popup = () => {
+		$("#fm01p")[0].reset();
+		$(".modal-content").scrollTop(0);
+		// $("#ownerId").val(userid);
+		// $("#publisherId").val(userid);
+
+		var currentDay = get_current_day;
+		$("#temporalStart").val(currentDay);
+		$("#temporalEnd").val(currentDay);
+
+		$("#insert_modal").addClass("show-modal");
+	};
+
 	var make_header = ()=>{
 		// var header = ["No","상품명","제공기업명","제공기업ID","설명","상품상태","다운수","등록일자","최근수정일" ];
 		// var size   = ["10","300","100","200","600","100","60","100","100"];
@@ -172,7 +185,7 @@
 					$.each(data.datasets, (i,r)=>{
 						append += "<tr>";
 						append += "<td><a href='javascript:resource_detail(\""+r.id+"\")'>"+((i+((current_page-1)*pageItems))+1)+"</a></td>";
-						append += "<td><a href='javascript:resource_detail(\""+r.id+"\")'>"+r.title+"</a></td>";
+						append += "<td style='text-decoration:underline;'><a href='javascript:resource_detail(\""+r.id+"\")'>"+r.title+"</a></td>";
 						// append += "<td>"+r.ownerNm+"</td>";
 						// append += "<td>"+r.ownerId+"</td>";
 						append += "<td>"+r.description+"</td>";
@@ -529,7 +542,7 @@
 								<option value="">전체</option>
 							</select> 고과장이 빼라고 했음 -->
 							<label for="s_keyword" style="margin-left:10px;margin-top:5px;">상품명</label>
-							<input id="s_keyword" name="s_keyword" type="text" style="width:400px;" class="field-style field-split" placeholder="상품명" />
+							<input id="s_keyword" name="s_keyword" type="text" style="width:700px;" class="field-style field-split" placeholder="상품명" />
 						</div>
 					</li>
 				</ul>
@@ -541,7 +554,8 @@
 	<!-- CONTDITION END -->
 
 	<div class="w3-row-padding" style="height:900px;">
-		<div style="float:right;margin-top:10px;"><button id="insert_popup">상품등록</button></div>
+		<!-- <div style="float:right;margin-top:10px;"><button id="insert_popup">상품등록</button></div> -->
+		<p class="table_bt01" style="float:right;"><a href="javascript:insert_popup();" style="padding: 10px 25px;">상품등록</a></p>
 		<div style="margin-top:10px;border:1px solid rgba(100, 101, 105, 0.2); width:100%;height:680px;overflow:auto;">
 			<table id="gTable" style="width:2500px;">
 				<tr id="ghead"></tr>
@@ -569,7 +583,7 @@
 </style>
 
 <div id="insert_modal" class="modal" style="z-index:10;">
-	<div class="modal-content" style="height:850px;width:1250px;overflow:auto;">
+	<div class="modal-content" style="height:800px;width:1250px;overflow:auto;">
 		<span class="close-button">&times;</span>
 		<h1 class="title">메타등록</h1>
 		<form id="fm01p" style="margin: 0 auto; width: 1220px;">
@@ -777,11 +791,11 @@
 						</tr> -->
 					</table>
 			
-					<div style="float:right;">
-						<p class="table_bt01"><a href="javascript:keyword_add();"><strong>추가</strong></a></p>
-						<p class="table_bt02" style="margin-left:7px;"><a href="javascript:keyword_init();"><strong>초기화</strong></a></p>
+					<div style="float:right;padding-top:10px;">
+						<p class="table_bt01"><a href="javascript:keyword_add();" style="margin-left:7px;"><strong>추가</strong></a></p>
+						<p class="table_bt02"><a href="javascript:keyword_init();" style="margin-left:7px;padding: 14px 35px;"><strong>초기화</strong></a></p>
 					</div>
-					<p style="font-size:20px; color:#222; font-weight:bold; margin-top:30px;">키워드</p>
+					<p style="font-size:20px; color:#222; font-weight:bold; margin-top:40px;">키워드</p>
 					<table id="keyword_table" cellpadding="0" cellspacing="0" class="pop_tabla">
 						<tr>
 							<th style="width:10%;">번호</th>
@@ -790,7 +804,7 @@
 							<th style="width:7%;">삭제</th>
 						</tr>
 					</table>
-					<div style="float:right;">
+					<div style="float:right;padding-top:10px;">
 						<!-- <p style="font-size:20px; color:#222; font-weight:bold; margin-top:80px; ">데이터 목록</p> -->
 						<p class="table_bt01"><a href="javascript:close_layer();" style="background-color: gray;"><strong>닫기</strong></a></p>
 						<p class="table_bt01"><a href="javascript:resource_save();" style="margin-left:7px;"><strong>등록</strong></a></p>
@@ -802,7 +816,7 @@
 </div>
 
 <div id="update_modal" class="modal" style="z-index:10;">
-	<div class="modal-content" style="height:850px;width:1250px;overflow:auto;">
+	<div class="modal-content" style="height:800px;width:1250px;overflow:auto;">
 		<span class="close-button">&times;</span>
 		<h1 class="title">메타수정</h1>
 		<form id="fm02p" style="margin: 0 auto; width: 1220px;">
@@ -834,7 +848,7 @@
 						</tr>
 						<tr>
 							<th>라이센스 <span class="point_color">*</span></th>
-							<td colspan="7"><input id="m_license" type="text"  name="license" placeholder="라이센스" style="width:97.7%;"></td>
+							<td colspan="7"><input id="m_license" type="text"  name="m_license" placeholder="라이센스" style="width:97.7%;"></td>
 							<!-- <th>권한<span class="point_color">*</span></th>
 							<td><input id="m_rights" type="text"  name="rights" placeholder="권한" value="0"></td> -->
 						</tr>
@@ -999,7 +1013,7 @@
 			
 					<div style="float:right;">
 						<p class="table_bt01"><a href="javascript:keyword_update_add();"><strong>추가</strong></a></p>
-						<p class="table_bt02" style="margin-left:7px;"><a href="javascript:keyword_update_init();"><strong>초기화</strong></a></p>
+						<p class="table_bt02" ><a href="javascript:keyword_update_init();" style="margin-left:7px;padding:14px 35px;"><strong>초기화</strong></a></p>
 					</div>
 					<input id="m_keyword" name="m_keyword" type="hidden">
 					<p style="font-size:20px; color:#222; font-weight:bold; margin-top:30px;">키워드</p>
@@ -1012,9 +1026,9 @@
 						</tr>
 					</table>
 
-					<div style="float:right;">
-						<p style="text-align:center; float:left;"><a href="javascript:close_layer();" style="border:1px solid #009fe9; color:#009fe9; display:inline-block; padding:14px 40px; text-decoration:none; font-size:13px;"><strong>취소</strong></a></p>
-						<p style="text-align:center; float:left; margin-left:20px;"><a href="javascript:resource_update();" style="border:1px solid #009fe9; background:#009fe9; color:#fff; display:inline-block; padding:14px 40px; text-decoration:none; font-size:13px;"><strong>수정</strong></a></p>
+					<div style="float:right;padding-top:10px;">
+						<p style="text-align:center; float:left;"><a href="javascript:close_layer();" style="background-color: gray;border:1px solid gray; color:white; display:inline-block; padding:14px 40px; text-decoration:none; font-size:13px;"><strong>취소</strong></a></p>
+						<p style="text-align:center; float:left; margin-left:7px;"><a href="javascript:resource_update();" style="border:1px solid #009fe9; background:#009fe9; color:#fff; display:inline-block; padding:14px 40px; text-decoration:none; font-size:13px;"><strong>수정</strong></a></p>
 					</div>
 				</div>
 			</div>				

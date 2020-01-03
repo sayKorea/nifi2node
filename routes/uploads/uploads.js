@@ -1,29 +1,12 @@
+'use strict'
 const express 			= require("express");
 const PropertiesReader 	= require("properties-reader");
 const multer 			= require("multer");
-const fStorage 			= require("multer-ftp");
-const sStorage 			= require("multer-sftp");
-const Client 			= require("ssh2-sftp-client");
-const path 				= require("path");
-const SftpUpload		= require("sftp-upload");
 const router 			= express.Router();
 const log 				= require("../../common/logger");
 const cf 				= require("../../common/common_function");
 
-
-// const local = multer({
-// 	dest: "/", limits: { fileSize: 5 * 1024 * 1024 * 1024 },
-// 	storage: multer.diskStorage({
-// 		destination: function (req, file, cb) {
-// 			cb(null, lDir);
-// 		},
-// 		filename: function (req, file, cb) {
-// 			cb(null, file.originalname);
-// 		}
-// 	})
-// }).single("mfile");
-
-let exe_upload = async(req, res, local) =>{
+const exe_upload = async(req, res, local) =>{
 	return new Promise((resolve, reject) => {
 		local(req, res, err => {
 			if (err) {
@@ -38,7 +21,7 @@ let exe_upload = async(req, res, local) =>{
 router.post("/", async(req, res, next) => {
 	try{
 		const properties 		= PropertiesReader("env.properties");
-		let file_source_path 	= properties.get("center.source_path");
+		const file_source_path 	= properties.get("center.source_path");
 		const local = multer({
 			dest: "/", limits: { fileSize: 5 * 1024 * 1024 * 1024 },
 			storage: multer.diskStorage({
@@ -59,17 +42,9 @@ router.post("/", async(req, res, next) => {
 		log.debug("## Upload Server Path	: "+ rtn.destination);
 		log.debug("## Upload Local Path 	: "+ rtn.path);
 		log.debug("## Upload File Name 	: "+ rtn.filename);
-		log.debug("## Upload File Size 	: "+ rtn.size+" bytes");
+		log.debug("## Upload File Size 	: "+ cf.comma(rtn.size)+" bytes");
 		log.debug("## Upload File Mime 	: "+ rtn.mimetype);
 		
-		// let exist_file = file_source_path+rtn.filename;
-		// fs.existsAsync = (exist_file)=>{
-		// 	return fs.openAsync(exist_file, "r").then(function(stats){
-		// 	  	return res.send({success:true});
-		// 	}).catch(function(stats){
-		// 		return res.send({success:false});
-		// 	})
-		// };
 		res.send({success:true});
 	}catch(e){
 		log.debug(JSON.stringify(e));

@@ -38,6 +38,21 @@ common_function.get_dir_list = async(path, option) =>{
 	}
 };
 
+common_function.comma = (int) =>{
+    var len, point, str; 
+    int = int + ""; 
+    point = int.length % 3 ;
+    len = int.length; 
+    str = int.substring(0, point); 
+    while (point < len) { 
+        if (str != "") str += ","; 
+        str += int.substring(point, point + 3); 
+        point += 3; 
+    } 
+    return str;
+
+}
+
 let get_file_list = async (path) => {
 	let list;
 	try {

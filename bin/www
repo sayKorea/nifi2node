@@ -4,15 +4,13 @@
  * Module dependencies.
  */
 "use strict"
-const app_ver 	= "1.0";
 //const sPort = "9443";
 const sPort 	= "18080";
-//const sServerName = "Node Express RestApi Project Server";
-
-const app 		= require('../app');
-const http 		= require('http');
-const log 		= require("../common/logger");
-const session 	= require('express-session');
+const http 				= require("http");
+const session 			= require("express-session");
+const PropertiesReader 	= require("properties-reader");
+const app 				= require("../app");
+const log 				= require("../common/logger");
 
 /**
  * Get port from environment and store in Express.
@@ -31,7 +29,9 @@ var server 	= http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 server.listen(port, function () {
-	log.debug("Application Version "+app_ver);
+	const properties 		= PropertiesReader("env.properties");
+	log.info(properties.get("app.name")+ " ver " +properties.get("app.version"))
+	
 	if(process.argv[2] === "dev"){
 		log.info("██████╗ ███████╗██╗   ██╗        ");
 		log.info("██╔══██╗██╔════╝██║   ██║        ");

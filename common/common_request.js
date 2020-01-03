@@ -70,7 +70,8 @@ api_structure.call_api = async(option) =>{
 				log.error(JSON.stringify(b));
 				log.error(JSON.stringify(r));
 			}
-			if (!e && ( r.statusCode == 200 || r.statusCode == 201 )) {
+			log.debug("API StatusCode "+r.statusCode);
+			if (!e && ( r.statusCode == 200 ||r.statusCode == 201 )) {
 				log.info(JSON.stringify(b));
 				resolve(b);
 			} else {

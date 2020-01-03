@@ -1,3 +1,4 @@
+'use strict'
 const express 	= require('express');
 const dao 		= require('../../common/common_dao');
 const uuid 		= require('uuid4');

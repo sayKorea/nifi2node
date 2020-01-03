@@ -135,14 +135,20 @@
 					$.each(data.datasets, (i,r)=>{
 						append += "<tr>";
 						append += "<td>"+((i+((current_page-1)*pageItems))+1)+"</td>";
-						append += "<td><a href='javascript:distribution_retrieve(\""+r.id+"\")'>"+r.title+"</a></td>";
+						append += "<td style='text-decoration:underline;'><a href='javascript:distribution_retrieve(\""+r.id+"\")'>"+r.title+"</a></td>";
 						append += "<td>"+r.description+"</td>";
+
 						if(r.approvalState === "accept"){
 							append += "<td>승인완료</td>";
 						} else if(r.approvalState === "rejct"){
 							append += "<td>반려</td>";
+						} else if(r.approvalState === "return"){
+							append += "<td>반려</td>";
+						} else{
+							append += "<td>"+r.approvalState+"</td>";
 						}
-						append += "<td style='100'><button onclick='javascript:insert_distribution(\""+r.id+"\",\""+r.title+"\")' type='button'>배포등록</button></td>";
+
+						append += "<td style=''><button style='height:40px;width:80px;background-color:gray;border:inset;color:white;padding:0px 0px 0px 0px;' onclick='javascript:insert_distribution(\""+r.id+"\",\""+r.title+"\")' type='button'>배포등록</button></td>";
 						append += "</tr>"
 					});
 					$("#ghead").after(append);
@@ -168,7 +174,7 @@
 					$.each(data.distributions, (i,r)=>{
 						append += "<tr>";
 						append += "<td>"+(i+1)+"</td>";
-						append += "<td><a href='javascript:distribution_detail(\""+r.id+"\")'>"+r.title+"</a></td>";
+						append += "<td style='text-decoration:underline;'><a href='javascript:distribution_detail(\""+r.id+"\")'>"+r.title+"</a></td>";
 						//append += "<td>"+r.title+"</td>";
 						append += "<td>"+r.description+"</td>";
 						append += "<td>"+r.issued+"</td>";
@@ -195,7 +201,12 @@
 			$("#m_format").focus();
 			return false;
 		}
-		if($("#license").val().trim() == ""){
+		if($("#m_rights").val().trim() == ""){
+			alert("저작권을 입력하세요!");
+			$("#m_rights").focus();
+			return false;
+		}
+		if($("#m_license").val().trim() == ""){
 			alert("라이센스를 입력하세요!");
 			$("#m_license").focus();
 			return false;
@@ -266,6 +277,7 @@
 					$("#m_id").val(data.id);
 					$("#m_title").val(data.title);
 					$("#m_fileName").val(data.fileName);
+					$("#m_byteSize").val(data.byteSize);
 					$("#m_mediaType").val(data.mediaType);
 					$("#m_format").val(data.format);
 					$("#m_rights").val(data.rights);
@@ -316,6 +328,11 @@
 		if($("#repo_target").val().trim() == ""){
 			alert("타켓 경로를 입력하세요!");
 			$("#repo_target").focus();
+			return false;
+		}
+		if($("#rights").val().trim() == ""){
+			alert("저작권을 입력하세요!");
+			$("#rights").focus();
 			return false;
 		}
 		if($("#format").val().trim() == ""){
@@ -538,7 +555,7 @@
 					<li>
 						<div style="float:left;">
 							<label for="s_keyword" style="margin-left:10px;margin-top:5px;">상품명</label>
-							<input id="s_keyword" name="s_keyword" type="text" style="width:400px;" class="field-style field-split" placeholder="상품명" />
+							<input id="s_keyword" name="s_keyword" type="text" style="width:700px;" class="field-style field-split" placeholder="상품명" />
 						</div>
 					</li>
 				</ul>
@@ -549,14 +566,14 @@
 	</div>
 	<!-- CONTDITION END -->
 	<h3 class="title">메타 항목</h1>
-	<div style="margin-top:10px;border:1px solid rgba(100, 101, 105, 0.2); width:100%;height:350px;overflow:auto;">
+	<div style="margin-top:10px;border:1px solid rgba(100, 101, 105, 0.2); width:100%;height:390px;overflow:auto;">
 		<table id="gTable" style="width:1500px;">
 			<tr id="ghead"></tr>
 		</table>
 		<div id="pagination" style="position:absolute; left:50%; margin-left:-50px;margin-top:10px;"></div>
 	</div>
 	<h3 class="title">배포 항목</h3>
-	<div style="margin-top:10px;border:1px solid rgba(100, 101, 105, 0.2); width:100%;height:300px;overflow:auto;">
+	<div style="margin-top:10px;border:1px solid rgba(100, 101, 105, 0.2); width:100%;height:260px;overflow:auto;">
 		<table id="gTable2" style="width:1400px;">
 			<tr id="ghead2"></tr>
 		</table>
@@ -581,7 +598,7 @@
 	.table_bt02 a{border:1px solid #009fe9; color:#009fe9; display:inline-block; padding:14px 40px; text-decoration:none; font-size:13px;}
 </style>
 <div id="insertModal" class="modal" style="z-index:10;">
-	<div class="modal-content" style="height:850px;width:1400px;overflow:auto;">
+	<div class="modal-content" style="height:750px;width:1400px;overflow:auto;">
 		<span class="close-button">&times;</span>
 		<h1 class="title">데이터(배포)등록</h1>
 		<!-- var header = ["No","저장소명","메타명","메타설명","소스경로","소스API","타켓경로","타켓API","검증포맷" ]; -->
@@ -620,7 +637,7 @@
 							<td colspan="3"><input id="format" type="text"  name="format" placeholder="배포 포맷을 입력하세요." ></td colspan="7">
 						</tr>
 						<tr>
-							<th>저작권</th>
+							<th>저작권<span class="point_color">*</span></th>
 							<td colspan="3"><input id="rights" type="text"  name="rights" placeholder="저작권을 입력 하세요"></td>
 							<th>라이선스<span class="point_color">*</span></th>
 							<td colspan="3"><input id="license" type="text"  name="license" placeholder="라이센스를 입력 하세요"></td>
@@ -645,9 +662,8 @@
 						</tr> -->
 					</table>
 					
-					<div style="float:right;">
+					<!-- <div style="float:right;">
 						<p class="table_bt01"><a href="javascript:validation_add();"><strong>추가</strong></a></p>
-						<!-- <p class="table_bt02" style="margin-left:20px;"><a href="javascript:validation_get_json();"><strong>json</strong></a></p> -->
 						<p class="table_bt02" style="margin-left:7px;"><a href="javascript:validation_init();"><strong>초기화</strong></a></p>
 					</div>
 					<p style="font-size:20px; color:#222; font-weight:bold; margin-top:30px;">데이터 필드 정의</p>
@@ -659,11 +675,12 @@
 							<th style="width:15%;">데이터 NULL 허용</th>
 							<th style="width:5%;">삭제</th>
 						</tr>
-					</table>
+					</table> -->
 
-					<div style="float:right;">
+					<div style="float:right;padding-top:10px;padding-bottom:10px;">
 						<p class="table_bt01"><a href="javascript:execute_data_load();"><strong>연계</strong></a></p>
 					</div>
+					<p style="font-size:20px; color:#222; font-weight:bold; margin-top:40px;">배포 리스트</p>
 					<table id="distribution_add_info"  cellpadding="0" cellspacing="0" class="pop_tabla">
 						<tr>
 							<th>데이터명</th>
@@ -673,7 +690,7 @@
 							<th>저작권</th>
 						</tr>
 					</table>
-					<div style="float:right;">
+					<div style="float:right;padding-top:10px;">
 						<!-- <p style="font-size:20px; color:#222; font-weight:bold; margin-top:80px; ">데이터 목록</p> -->
 						<p class="table_bt01"><a href="javascript:close_layer();" style="background-color: gray;"><strong>닫기</strong></a></p>
 					</div>
@@ -684,7 +701,7 @@
 </div>
 
 <div id="updateModal" class="modal" style="z-index:10;">
-	<div class="modal-content" style="height:700px;width:1150px;overflow:auto;">
+	<div class="modal-content" style="height:550px;width:1150px;overflow:auto;">
 		<span class="close-button">&times;</span>
 		<h1 class="title">데이터(배포)수정</h1>
 		<!-- var header = ["No","저장소명","메타명","메타설명","소스경로","소스API","타켓경로","타켓API","검증포맷" ]; -->
@@ -736,9 +753,8 @@
 						</tr>-->
 					</table>
 					
-					<div style="float:right;">
+					<!-- <div style="float:right;">
 						<p class="table_bt01"><a href="javascript:validation_update_add();"><strong>추가</strong></a></p>
-						<!-- <p class="table_bt02" style="margin-left:20px;"><a href="javascript:validation_get_json();"><strong>json</strong></a></p> -->
 						<p class="table_bt02" style="margin-left:7px;"><a href="javascript:validation_update_init();"><strong>초기화</strong></a></p>
 					</div>
 					<p style="font-size:20px; color:#222; font-weight:bold; margin-top:30px;">데이터 필드 정의</p>
@@ -750,8 +766,8 @@
 							<th style="width:15%;">데이터 NULL 허용</th>
 							<th style="width:7%;">삭제</th>
 						</tr>
-					</table>
-					<div style="float:right;">
+					</table> -->
+					<div style="float:right;padding-top:10px;">
 						<!-- <p style="font-size:20px; color:#222; font-weight:bold; margin-top:80px; ">데이터 목록</p> -->
 						<p class="table_bt01"><a href="javascript:close_layer();" style="background-color: gray;"><strong>닫기</strong></a></p>
 						<p class="table_bt01"><a href="javascript:distribution_update();" style="margin-left:7px;"><strong>수정</strong></a></p>

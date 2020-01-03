@@ -1,9 +1,11 @@
+'use strict'
 const express 			= require('express');
 const router 			= express.Router();
 const ip 				= require('ip');
 const os 				= require('os');
 const fs 				= require('fs');
 const session 			= require('express-session');
+const PropertiesReader 	= require("properties-reader");
 const dao 				= require('../common/common_dao');
 const log 				= require("../common/logger");
 const call_request_api 	= require('../common/common_request');
@@ -31,6 +33,8 @@ router.get('/', async (req, res, next) => {
 
 /* GET Login. */
 router.get('/login', async (req, res, next) => {
+	const properties 		= PropertiesReader("env.properties");
+
 	console.log(req.query);
 	g_user_id = req.query.userid;
 	g_password = req.query.password;
@@ -39,6 +43,7 @@ router.get('/login', async (req, res, next) => {
 		let sodas = await call_request_api.get_access_token();
 		console.log(sodas);
 		if(sodas && sodas.length > 50){
+			g_center_id = properties.get("center.id");
 			log.info("login id : "+g_user_id);
 			log.info("center id : "+g_center_id);
 			req.session.userid = g_user_id;
@@ -92,27 +97,6 @@ var callDb = async (query, params) => {
 		log.debug(JSON.stringify(e));
 		return false;  
 	} 
-};
-
-function getUserIP(req){
-    var ipAddress;
-
-	if(!!req.hasOwnProperty('sessionID')){
-        ipAddress = req.headers['x-forwarded-for'];
-    } else{
-        // if(!ipAddress){
-            var forwardedIpsStr = req.header('x-forwarded-for');
-
-            if(forwardedIpsStr){
-                var forwardedIps = forwardedIpsStr.split(',');
-                ipAddress = forwardedIps[0];
-            }
-            if(!ipAddress){
-                ipAddress = req.connection.remoteAddress;
-            }
-        // }
-    }
-    return ipAddress;
 };
 
 module.exports = router;

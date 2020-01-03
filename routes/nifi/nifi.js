@@ -1,3 +1,4 @@
+'use strict'
 const express 			= require("express");
 const request 			= require("request-promise");
 const uuid 				= require("uuid4");

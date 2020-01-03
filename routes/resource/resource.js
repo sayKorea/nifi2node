@@ -1,3 +1,4 @@
+'use strict'
 const express 			= require('express');
 const uuid 				= require('uuid4');
 const router 			= express.Router();
@@ -136,7 +137,7 @@ router.post("/v1/resource/dataset/save", async (req, res, next) => {
 		params.ownerId					= g_user_id.split('_')[0];;
 		params.creatorId				= g_user_id;
 
-		// console.log(params);
+		console.log(params);
 
 		delete params.taxonomy_version;
 		delete params.category_list;
@@ -149,7 +150,7 @@ router.post("/v1/resource/dataset/save", async (req, res, next) => {
 		let response 					= await call_request_api.call_api(option);
 		if(response.id) {
 			res.send( {success:true} );
-			log.debug(response);
+			log.debug(JSON.stringify(response));
 		}
 		else res.send( {success:false} );
 	}catch(e){
@@ -173,10 +174,10 @@ router.post("/v1/resource/dataset/update", async (req, res, next) => {
 		var taxonomy 						= {};
 		params.taxonomy						= JSON.stringify(taxonomy);
 		//params.etcValue					= req.body.m_extras.trim()!=""?JSON.stringify( req.body.m_extras ):{};
-		params.userPrice					= 0;
-		params.downDate						= "10";
-		params.downDateType					= "years";
-		params.version						= "1.0";
+		//params.userPrice					= 0;
+		//params.downDate						= "10";
+		//params.downDateType					= "years";
+		//params.version						= "1.0";
 
 		params.id						 	= req.body.m_id							;
 		params.title						= req.body.m_title						;	
@@ -196,7 +197,7 @@ router.post("/v1/resource/dataset/update", async (req, res, next) => {
 		params.temporalEnd				 	= req.body.m_temporalEnd				;	
 		params.conformsTo				 	= req.body.m_conformsTo					;
 		params.keyword				 		= req.body.m_keyword
-
+		params.license						= req.body.m_license
 		params.publisherId					= g_center_id;
 		params.ownerId						= g_user_id.split('_')[0];;
 		params.creatorId					= g_user_id;

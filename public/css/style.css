@@ -1,0 +1,160 @@
+/*로그인*/
+.login_wrap{
+	position: relative;
+	background: #283c82;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;	
+}
+.login_content{
+	position: absolute;
+	top:50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 690px;
+	text-align: center;
+}
+.login_content .login_nav{
+	padding:50px 100px 60px 100px;
+	margin-top: 90px;
+	background: #fff;
+}
+.login_logo span{
+    display: block;
+    font-size: 25px;
+    color: #fff;
+    margin-top: 10px;	
+}
+.login_nav h2{
+    color: #283c82;
+    padding-top: 80px;
+    font-size: 20px;	
+    margin-bottom: 48px;
+    background: url(../images/icon_login.png)no-repeat center top;
+}
+.login_nav input{
+	width: 100%;
+	padding:0 24px;
+	height: 60px;
+	line-height: 58px;
+	color:#777;
+	font-size: 18px;
+}
+.login_nav .login_btn{
+	background: #40a4eb;
+    color: #fff;
+}
+
+/*페이지 레이아웃*/
+.sub_header{
+	position: relative;
+	height: 75px;
+	border-bottom: 1px solid #aaa;
+}
+.sub_header h2{
+	float: left;
+	font-weight: 500;
+	font-size: 20px;
+	line-height: 75px;
+	padding-left:20px;
+	color:#283c82;
+}
+.sub_header .user_util{
+	float:right;
+}
+.side_wrap{
+	clear: both;
+	float: left;
+	width: 260px;
+    height: 100vh;	
+    background: #283c82;
+}
+.side_wrap h1{
+	position: relative;
+	width: 260px;
+    float: left;
+    background: #283c82;
+    height: 100%;	
+    height: 75px;
+}
+.side_wrap h1 img{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);	
+}
+.sub_content{
+	float: left;
+	width: calc(100% - 260px);
+	height: 100vh;
+}
+.sub_page{
+	min-height: calc(100vh - 75px);
+	padding: 15px;
+}
+
+/*메뉴*/
+.one_depth_item{
+	line-height: 58px;
+	font-size:18px;
+	border-bottom: 1px solid #5e6da1;
+}
+.one_depth_item a {
+	display: block;
+}
+.one_depth_item > a {
+	padding-left: 30px;
+	padding-right:10px;
+	color:#fff;
+}
+.one_depth_item.active > a{
+	background: #fff;
+	color:#283c82;
+	font-weight: 700;
+}
+.one_depth_item.active .two_depth{
+	display: block;
+}
+.two_depth_item{
+	font-size:16px;
+	background: #eaeaea;
+}
+.two_depth_item > a{
+	position: relative;
+	padding-left: 40px;
+	padding-right:10px;
+	color:#333;
+}
+.two_depth_item > a::before{
+	content: "";
+	position: absolute;
+	left: 30px;
+	top:50%;
+	width: 3px;
+	height: 3px;
+	background: #40a4eb;      
+}
+
+/*페이지 로그인*/
+.user_util{
+	position: absolute;
+	right: 30px;
+	top:50%;
+	margin-top: -20px;
+}
+.user_name{
+	display: inline-block;
+	font-size: 14px;
+	color: #333;
+	margin-right: 15px;
+}
+.user_login_btn {
+	display: inline-block;
+	font-size: 14px;
+	border:1px solid #aaa;
+	color: #777;
+	line-height: 38px;
+	width: 92px;
+	text-align: center;
+	border-radius: 19px;
+}
