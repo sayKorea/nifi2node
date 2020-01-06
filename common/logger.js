@@ -1,9 +1,11 @@
 const winston = require('winston');
 require('winston-daily-rotate-file');
 require('date-utils');
- 
+const PropertiesReader 	= require("properties-reader");
+const properties 		= PropertiesReader("env.properties");
+
 const logger = winston.createLogger({
-    level: 'debug', // 최소 레벨
+    level: properties.get("app.log_level"), // 최소 레벨
     // 파일저장
     transports: [
         new winston.transports.DailyRotateFile({

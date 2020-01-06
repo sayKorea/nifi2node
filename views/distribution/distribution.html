@@ -162,6 +162,7 @@
 
 	// 배포 조회
 	var distribution_retrieve = (dataset_id) => {
+		datasetId = dataset_id;
 		$.ajax({
 			url       : "/distribution/v1/resource/dataset/distribution/list",
 			type      : "GET",
@@ -178,6 +179,7 @@
 						//append += "<td>"+r.title+"</td>";
 						append += "<td>"+r.description+"</td>";
 						append += "<td>"+r.issued+"</td>";
+						append += "<td class='delete' style='display:none;'><button style='height:40px;width:80px;background-color:gray;border:inset;color:white;padding:0px 0px 0px 0px;' onclick='javascript:distribution_remove(\""+r.id+"\")' type='button'>삭제</button></td>";
 						append += "</tr>"
 					});
 					$("#ghead2").after(append);
@@ -238,18 +240,16 @@
 	};
 
 	// 배포 삭제
-	var distribution_delete = (id) => {
+	var distribution_remove = (id) => {
 		$.ajax({
 			url       : "/distribution/v1/resource/dataset/distribution/remove",
 			type      : "POST",
-			//async	  : false,
 			data	  : {id:id},
 			success: (data) => {
 				console.log(data);
 				if(data.success){
-					alert("배포 삭제 완료!");
-					$(".modal").removeClass("show-modal");
-					resource_retrieve(1);
+					alert("삭제 완료!");
+					distribution_retrieve(datasetId);
 				}else{
 					alert("삭제 실패!");
 				}
@@ -570,8 +570,8 @@
 		<table id="gTable" style="width:1500px;">
 			<tr id="ghead"></tr>
 		</table>
-		<div id="pagination" style="position:absolute; left:50%; margin-left:-50px;margin-top:10px;"></div>
 	</div>
+	<div id="pagination" style="position:absolute; left:50%; margin-left:-50px;margin-top:10px;"></div>
 	<h3 class="title">배포 항목</h3>
 	<div style="margin-top:10px;border:1px solid rgba(100, 101, 105, 0.2); width:100%;height:260px;overflow:auto;">
 		<table id="gTable2" style="width:1400px;">

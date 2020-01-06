@@ -109,22 +109,23 @@ router.get("/v1/resource/dataset/list", async (req, res, next) => {
 //메타데이터 등록
 router.post("/v1/resource/dataset/save", async (req, res, next) => {
 	try{
-		let params						= req.body;
-		let access_token 				= await call_request_api.get_access_token();
-		let option 						= call_request_api.get_request_option();
+		let params							= req.body;
+		let access_token 					= await call_request_api.get_access_token();
+		let option 							= call_request_api.get_request_option();
+		let price							= req.body.price;
+
+		option.method 						= 'POST';
+		option.url  				    	= call_request_api.resource_save_url;
+		option.headers.Authorization 		= access_token;
 		
-		option.method 					= 'POST';
-		option.url  				    = call_request_api.resource_save_url;
-		option.headers.Authorization 	= access_token;
-		
-		var taxonomy 					= {};
-		taxonomy.nodeId					= params.category_list;
-		taxonomy.nodeType 				= "taxonomy";
-		params.taxonomy					= JSON.stringify(taxonomy);
+		var taxonomy 						= {};
+		taxonomy.nodeId						= params.category_list;
+		taxonomy.nodeType 					= "taxonomy";
+		params.taxonomy						= JSON.stringify(taxonomy);
 		// if(params.etcValue){
 		// 	params.etcValue				= params.extras.trim()!=""?JSON.stringify( params.extras ):"";
 		// }else{
-		 	params.etcValue				= "{}";
+		 	params.etcValue					= "{}";
 		// }
 
 		// 가격을 넣지 않으므로 관련된 필드 전체 주석처리
@@ -133,24 +134,36 @@ router.post("/v1/resource/dataset/save", async (req, res, next) => {
 		// params.downDateType				= "years";
 		//params.version					= "1.0";
 
-		params.publisherId				= g_center_id;
-		params.ownerId					= g_user_id.split('_')[0];;
-		params.creatorId				= g_user_id;
+		params.publisherId					= g_center_id;
+		params.ownerId						= g_user_id.split('_')[0];;
+		params.creatorId					= g_user_id;
 
 		console.log(params);
 
 		delete params.taxonomy_version;
 		delete params.category_list;
 		delete params.keyword_type;
+		delete params.price;
 
-		option.form						= params;
+		option.form							= params;
 
 		log.debug("[ SODAS RESOURCE SAVE ]");
 	
-		let response 					= await call_request_api.call_api(option);
-		if(response.id) {
-			res.send( {success:true} );
-			log.debug(JSON.stringify(response));
+		let response 						= await call_request_api.call_api(option);
+		if(response.id){
+			if(req.body.priceType == "charge"){
+				
+				response 						= await call_request_api.price_condtion_save(response.id,price,"resource", "dataset");
+				console.log(response);
+				if(response.success){
+					res.send( {success:true} );
+				}
+				else{
+					res.send( {success:false} );
+				}
+			}else{
+				res.send( {success:true} );
+			}
 		}
 		else res.send( {success:false} );
 	}catch(e){
@@ -165,13 +178,14 @@ router.post("/v1/resource/dataset/update", async (req, res, next) => {
 		let params							= {};
 		let access_token 					= await call_request_api.get_access_token();
 		let option 							= call_request_api.get_request_option();
+		let price							= req.body.m_userPrice;
 
 		option.method 						= 'POST';
 		option.url  				    	= call_request_api.resource_update_url;
 		option.headers.Authorization 		= access_token;
 		//option.headers['Content-Type']  	= 'application/x-www-form-urlencoded';
 
-		var taxonomy 						= {};
+		let taxonomy 						= {};
 		params.taxonomy						= JSON.stringify(taxonomy);
 		//params.etcValue					= req.body.m_extras.trim()!=""?JSON.stringify( req.body.m_extras ):{};
 		//params.userPrice					= 0;
@@ -207,18 +221,51 @@ router.post("/v1/resource/dataset/update", async (req, res, next) => {
 		log.debug("[ SODAS RESOURCE UPDATE ]");
 
 		let response 					= await call_request_api.call_api(option);
-		if(response.result && response.result == "success"){
-			res.send({success:true});
-			log.debug(JSON.stringify( response.result) );
+		if(!response.result || response.result != "success") {
+			return res.send({success:false})
 		}
-		else res.send({success:false})
+
+		if(req.body.m_priceType != "charge"){
+			return res.send( {success:true}  );
+		}
+
+		response 	= await call_request_api.price_condtion_update(req.body.m_id,price,"resource", "dataset");
+		if(!response.success){
+			return res.send( {success:false} );
+		}
+		
+		return res.send( {success:true} );
 	}catch(e){
 		log.error(e);
 		res.send({success:false});
 	}
 });
 
+//메타데이터 삭제
+router.post("/v1/resource/dataset/remove", async (req, res, next) => {
+	try{
+		let params						= req.body;
+		let access_token 				= await call_request_api.get_access_token();
+		let option 						= call_request_api.get_request_option();
+		
+		option.method 					= 'POST';
+		option.url  				    = call_request_api.resource_remove_url;
+		option.headers.Authorization 	= access_token;
 
+		console.log(params);
+
+		option.form						= params;
+
+		log.debug("[ SODAS RESOURCE REMOVE ]");
+	
+		let response 					= await call_request_api.call_api(option);
+		if(response.result && response.result == "success") res.send({success:true});
+		else res.send({success:false});
+	}catch(e){
+		log.error(JSON.stringify(e));
+		res.send({success:false});
+	}
+});
 
 //###################################이하 하위 소스는 Sodas 수정 전 내부 디비 사용 버젼############################################
 router.get("/his", (req, res, next) => {
@@ -226,14 +273,14 @@ router.get("/his", (req, res, next) => {
 });
 
 router.get("/repo_list", async (req, res, next) => {
-	var query = " SELECT  REPO_NO AS CD";
+	let query = " SELECT  REPO_NO AS CD";
 		query +=" 		, REPO_ID AS CDID";
 		query +=" 		, REPO_NM AS CDNM";
 		query +=" 		, REPO_DESC AS CDDESC";
 		query +=" FROM REPOSITORY";
 		query +=" WHERE 1=1";
 		query +=" ORDER BY REPO_NO";
-	var queryResult = await callDb(query);
+	let queryResult = await callDb(query);
 	if(queryResult){
 		res.send(queryResult.rows);
 	}else{
@@ -242,11 +289,11 @@ router.get("/repo_list", async (req, res, next) => {
 });
 
 router.get('/list', async (req, res, next) => {
-	var title = req.query.s_title;
-	var publisher_id = req.query.s_publisher_id;
-	var owner_id = req.query.s_owner_id;
+	let title = req.query.s_title;
+	let publisher_id = req.query.s_publisher_id;
+	let owner_id = req.query.s_owner_id;
 
-	var query  = " SELECT     ID                                  ";
+	let query  = " SELECT     ID                                  ";
 		query += " 			, TITLE                               ";
 		query += " 			, PUBLISHER_ID                        ";
 		query += " 			, OWNER_ID                            ";
@@ -295,7 +342,7 @@ router.get('/list', async (req, res, next) => {
 	if(owner_id && owner_id != "") query +=" AND OWNER_ID LIKE '%"+ owner_id +"%'";
 	query +=" ORDER BY ISSUED";
 
-	var queryResult = await callDb(query);
+	let queryResult = await callDb(query);
 	if(queryResult){
 		res.send(queryResult.rows);
 	}else{
@@ -304,9 +351,9 @@ router.get('/list', async (req, res, next) => {
 });
 
 router.get('/detail', async (req, res, next) => {
-	var resource_id = req.query.resource_id;
+	let resource_id = req.query.resource_id;
 
-	var query  = " SELECT     ID                               	  ";
+	let query  = " SELECT     ID                               	  ";
 		query += " 			, TITLE                               ";
 		query += " 			, PUBLISHER_ID                        ";
 		query += " 			, OWNER_ID                            ";
@@ -353,7 +400,7 @@ router.get('/detail', async (req, res, next) => {
 	if(resource_id && resource_id != "") query +=" AND ID = $1";
 	query +=" ORDER BY ISSUED";
 	
-	var queryResult = await callDb(query,[resource_id]);
+	let queryResult = await callDb(query,[resource_id]);
 	if(queryResult){
 		res.send(queryResult.rows);
 	}else{
@@ -364,61 +411,61 @@ router.get('/detail', async (req, res, next) => {
 
 router.post('/save', async (req, res, next) => {
 	console.log(req.body);
-	var id                                 = req.body.id                          ;
-	var title                              = req.body.title                       ;
-	var publisher_id                       = req.body.publisher_id                ;
-	var owner_id                           = req.body.owner_id                    ;
-	var creator_id                         = req.body.creator_id                  ;
-	var language                           = req.body.language                    ;
-	var landing_page                       = req.body.landing_page                ;
-	var description                        = req.body.description                 ;
-	var type                               = req.body.type                        ;
-	var issued                             = req.body.issued                      ;
-	var modified                           = req.body.modified                    ;
-	var conforms_to                        = req.body.conforms_to                 ;
-	var version                            = req.body.version                     ;
-	var version_description                = req.body.version_description         ;
-	var landing_page_url                   = req.body.landing_page_url            ;
-	var is_free                            = req.body.is_free                     ;
-	var is_public                          = req.body.is_public                   ;
-	var state                              = req.body.state                       ;
-	var image_path                         = req.body.image_path                  ;
-	var is_personal                        = req.body.is_personal                 ;
-	var approval_state                     = req.body.approval_state              ;
-	var extras                             = req.body.extras.trim()!=""?JSON.stringify( req.body.extras ):'{}'         			  ;
-	var remove_type                        = req.body.remove_type                 ;
-	var dq_index                           = req.body.dq_index                    ;
-	var measure_date                       = req.body.measure_date                ;
-	var spatial_resolution_in_meters       = req.body.spatial_resolution_in_meters;
-	var temporal_resolution                = req.body.temporal_resolution         ;
-	var spatial_uri                        = req.body.spatial_uri                 ;
-	var temporal_start                     = req.body.temporal_start              ;
-	var temporal_end                       = req.body.temporal_end                ;
-	var accrual_periodicity                = req.body.accrual_periodicity         ;
-	var was_generated_by                   = req.body.was_generated_by            ;
-	var publisher_spatial_uri              = req.body.publisher_spatial_uri       ;
-	var source_type                        = req.body.source_type                 ;
-	var endpoint_description               = req.body.endpoint_description        ;
-	var endpoint_url                       = req.body.endpoint_url                ;
-	var serves_dataset                     = req.body.serves_dataset              ;
-	var access_rights                      = req.body.access_rights               ;
-	var license                            = req.body.license                     ;
-	var method                             = req.body.method                      ;
-	var uri                                = req.body.uri                         ; 
-	var dataset_uuid                        = req.body.dataset_uuid               ;    
+	let id                                 = req.body.id                          ;
+	let title                              = req.body.title                       ;
+	let publisher_id                       = req.body.publisher_id                ;
+	let owner_id                           = req.body.owner_id                    ;
+	let creator_id                         = req.body.creator_id                  ;
+	let language                           = req.body.language                    ;
+	let landing_page                       = req.body.landing_page                ;
+	let description                        = req.body.description                 ;
+	let type                               = req.body.type                        ;
+	let issued                             = req.body.issued                      ;
+	let modified                           = req.body.modified                    ;
+	let conforms_to                        = req.body.conforms_to                 ;
+	let version                            = req.body.version                     ;
+	let version_description                = req.body.version_description         ;
+	let landing_page_url                   = req.body.landing_page_url            ;
+	let is_free                            = req.body.is_free                     ;
+	let is_public                          = req.body.is_public                   ;
+	let state                              = req.body.state                       ;
+	let image_path                         = req.body.image_path                  ;
+	let is_personal                        = req.body.is_personal                 ;
+	let approval_state                     = req.body.approval_state              ;
+	let extras                             = req.body.extras.trim()!=""?JSON.stringify( req.body.extras ):'{}'         			  ;
+	let remove_type                        = req.body.remove_type                 ;
+	let dq_index                           = req.body.dq_index                    ;
+	let measure_date                       = req.body.measure_date                ;
+	let spatial_resolution_in_meters       = req.body.spatial_resolution_in_meters;
+	let temporal_resolution                = req.body.temporal_resolution         ;
+	let spatial_uri                        = req.body.spatial_uri                 ;
+	let temporal_start                     = req.body.temporal_start              ;
+	let temporal_end                       = req.body.temporal_end                ;
+	let accrual_periodicity                = req.body.accrual_periodicity         ;
+	let was_generated_by                   = req.body.was_generated_by            ;
+	let publisher_spatial_uri              = req.body.publisher_spatial_uri       ;
+	let source_type                        = req.body.source_type                 ;
+	let endpoint_description               = req.body.endpoint_description        ;
+	let endpoint_url                       = req.body.endpoint_url                ;
+	let serves_dataset                     = req.body.serves_dataset              ;
+	let access_rights                      = req.body.access_rights               ;
+	let license                            = req.body.license                     ;
+	let method                             = req.body.method                      ;
+	let uri                                = req.body.uri                         ; 
+	let dataset_uuid                        = req.body.dataset_uuid               ;    
 
 	//없는 필드 추가
-	var is_voucher						= 'Y';
-	var view_cnt						= 1000;
-	var	is_public						= true;
-	var	is_personal						= true;
+	let is_voucher						= 'Y';
+	let view_cnt						= 1000;
+		is_public						= true;
+		is_personal						= true;
 
-	var insert  = " INSERT INTO RESOURCE(ID,TITLE,PUBLISHER_ID,OWNER_ID,CREATOR_ID,LANGUAGE,LANDING_PAGE,DESCRIPTION,TYPE,ISSUED,MODIFIED,CONFORMS_TO,VERSION,VERSION_DESCRIPTION,LANDING_PAGE_URL,IS_FREE,IS_PUBLIC,STATE,IMAGE_PATH,IS_PERSONAL,EXTRAS,REMOVE_TYPE,DQ_INDEX,MEASURE_DATE,SPATIAL_RESOLUTION_IN_METERS,TEMPORAL_RESOLUTION,SPATIAL_URI,TEMPORAL_START,TEMPORAL_END,ACCRUAL_PERIODICITY,WAS_GENERATED_BY,PUBLISHER_SPATIAL_URI,SOURCE_TYPE,ENDPOINT_DESCRIPTION,ENDPOINT_URL,SERVES_DATASET,ACCESS_RIGHTS,LICENSE,METHOD,URI,APPROVAL_STATE,DATASET_UUID)";
+	let insert  = " INSERT INTO RESOURCE(ID,TITLE,PUBLISHER_ID,OWNER_ID,CREATOR_ID,LANGUAGE,LANDING_PAGE,DESCRIPTION,TYPE,ISSUED,MODIFIED,CONFORMS_TO,VERSION,VERSION_DESCRIPTION,LANDING_PAGE_URL,IS_FREE,IS_PUBLIC,STATE,IMAGE_PATH,IS_PERSONAL,EXTRAS,REMOVE_TYPE,DQ_INDEX,MEASURE_DATE,SPATIAL_RESOLUTION_IN_METERS,TEMPORAL_RESOLUTION,SPATIAL_URI,TEMPORAL_START,TEMPORAL_END,ACCRUAL_PERIODICITY,WAS_GENERATED_BY,PUBLISHER_SPATIAL_URI,SOURCE_TYPE,ENDPOINT_DESCRIPTION,ENDPOINT_URL,SERVES_DATASET,ACCESS_RIGHTS,LICENSE,METHOD,URI,APPROVAL_STATE,DATASET_UUID)";
 		insert += " VALUES ($1 ,$2 ,$3 ,$4 ,$5 ,$6 ,$7 ,$8 ,$9 ,CURRENT_TIMESTAMP ,CURRENT_TIMESTAMP ,$10 ,$11 ,$12 ,$13 ,$14 ,$15 ,$16 ,$17 ,$18 ,$19 ,$20 ,$21 ,CURRENT_TIMESTAMP, $22,$23 ,$24 ,$25 ,$26 ,$27 ,$28 ,$29 ,$30 ,$31 ,$32 ,$33 ,$34 ,$35 ,$36 ,$37 ,$38, $39)";
-	var uid = uuid();
+	let uid = uuid();
 	
-	var params = [uid,title,publisher_id,owner_id,creator_id,language,landing_page,description,type,conforms_to,version,version_description,landing_page_url,true,true,state,image_path,is_personal,extras,remove_type,dq_index,spatial_resolution_in_meters,temporal_resolution,spatial_uri,temporal_start,temporal_end,accrual_periodicity,was_generated_by,publisher_spatial_uri,source_type,endpoint_description,endpoint_url,serves_dataset,access_rights,license,method,uri,'request', dataset_uuid];
-	var queryResult = await callDb(insert, params);
+	let params = [uid,title,publisher_id,owner_id,creator_id,language,landing_page,description,type,conforms_to,version,version_description,landing_page_url,true,true,state,image_path,is_personal,extras,remove_type,dq_index,spatial_resolution_in_meters,temporal_resolution,spatial_uri,temporal_start,temporal_end,accrual_periodicity,was_generated_by,publisher_spatial_uri,source_type,endpoint_description,endpoint_url,serves_dataset,access_rights,license,method,uri,'request', dataset_uuid];
+	let queryResult = await callDb(insert, params);
 	if(queryResult){
 		res.send({success:true});
 	}else{
@@ -429,49 +476,49 @@ router.post('/save', async (req, res, next) => {
 
 router.post('/update', async (req, res, next) => {
 	console.log(req.body);
-	var id                                 = req.body.m_id                         ; 
-	var title                              = req.body.m_title                      ; 
-	var publisher_id                       = req.body.m_publisher_id               ; 
-	var owner_id                           = req.body.m_owner_id                   ; 
-	var creator_id                         = req.body.m_creator_id                 ; 
-	var language                           = req.body.m_language                   ; 
-	var landing_page                       = req.body.m_landing_page               ; 
-	var description                        = req.body.m_description                ; 
-	var type                               = req.body.m_type                       ; 
-	var issued                             = req.body.m_issued                     ; 
-	var modified                           = req.body.m_modified                   ; 
-	var conforms_to                        = req.body.m_conforms_to                ; 
-	var version                            = req.body.m_version                    ; 
-	var version_description                = req.body.m_version_description        ; 
-	var landing_page_url                   = req.body.m_landing_page_url           ; 
-	var is_free                            = req.body.m_is_free=="free"?true:false ;                     
-	var is_public                          = req.body.m_is_public=="public"?true:false; 
-	var state                              = req.body.m_state                      ; 
-	var image_path                         = req.body.m_image_path                 ; 
-	var is_personal                        = req.body.m_is_personal=="personal"?true:false; 
-	var approval_state                     = req.body.m_approval_state             ; 
-	var extras                             = req.body.m_extras.trim()!=""?JSON.stringify( req.body.m_extras ):'{}'                     ; 
-	var remove_type                        = req.body.m_remove_type                ; 
-	var dq_index                           = req.body.m_dq_index                   ; 
-	var measure_date                       = req.body.m_measure_date               ; 
-	var spatial_resolution_in_meters       = req.body.m_spatial_resolution_in_meters;
-	var temporal_resolution                = req.body.m_temporal_resolution        ; 
-	var spatial_uri                        = req.body.m_spatial_uri                ; 
-	var temporal_start                     = req.body.m_temporal_start             ; 
-	var temporal_end                       = req.body.m_temporal_end               ; 
-	var accrual_periodicity                = req.body.m_accrual_periodicity        ; 
-	var was_generated_by                   = req.body.m_was_generated_by           ; 
-	var publisher_spatial_uri              = req.body.m_publisher_spatial_uri      ; 
-	var source_type                        = req.body.m_source_type                ; 
-	var endpoint_description               = req.body.m_endpoint_description       ; 
-	var endpoint_url                       = req.body.m_endpoint_url               ; 
-	var serves_dataset                     = req.body.m_serves_dataset             ; 
-	var access_rights                      = req.body.m_access_rights              ; 
-	var license                            = req.body.m_license                    ; 
-	var method                             = req.body.m_method                     ; 
-	var uri                                = req.body.m_uri                        ;
+	let id                                 = req.body.m_id                         ; 
+	let title                              = req.body.m_title                      ; 
+	let publisher_id                       = req.body.m_publisher_id               ; 
+	let owner_id                           = req.body.m_owner_id                   ; 
+	let creator_id                         = req.body.m_creator_id                 ; 
+	let language                           = req.body.m_language                   ; 
+	let landing_page                       = req.body.m_landing_page               ; 
+	let description                        = req.body.m_description                ; 
+	let type                               = req.body.m_type                       ; 
+	let issued                             = req.body.m_issued                     ; 
+	let modified                           = req.body.m_modified                   ; 
+	let conforms_to                        = req.body.m_conforms_to                ; 
+	let version                            = req.body.m_version                    ; 
+	let version_description                = req.body.m_version_description        ; 
+	let landing_page_url                   = req.body.m_landing_page_url           ; 
+	let is_free                            = req.body.m_is_free=="free"?true:false ;                     
+	let is_public                          = req.body.m_is_public=="public"?true:false; 
+	let state                              = req.body.m_state                      ; 
+	let image_path                         = req.body.m_image_path                 ; 
+	let is_personal                        = req.body.m_is_personal=="personal"?true:false; 
+	let approval_state                     = req.body.m_approval_state             ; 
+	let extras                             = req.body.m_extras.trim()!=""?JSON.stringify( req.body.m_extras ):'{}'                     ; 
+	let remove_type                        = req.body.m_remove_type                ; 
+	let dq_index                           = req.body.m_dq_index                   ; 
+	let measure_date                       = req.body.m_measure_date               ; 
+	let spatial_resolution_in_meters       = req.body.m_spatial_resolution_in_meters;
+	let temporal_resolution                = req.body.m_temporal_resolution        ; 
+	let spatial_uri                        = req.body.m_spatial_uri                ; 
+	let temporal_start                     = req.body.m_temporal_start             ; 
+	let temporal_end                       = req.body.m_temporal_end               ; 
+	let accrual_periodicity                = req.body.m_accrual_periodicity        ; 
+	let was_generated_by                   = req.body.m_was_generated_by           ; 
+	let publisher_spatial_uri              = req.body.m_publisher_spatial_uri      ; 
+	let source_type                        = req.body.m_source_type                ; 
+	let endpoint_description               = req.body.m_endpoint_description       ; 
+	let endpoint_url                       = req.body.m_endpoint_url               ; 
+	let serves_dataset                     = req.body.m_serves_dataset             ; 
+	let access_rights                      = req.body.m_access_rights              ; 
+	let license                            = req.body.m_license                    ; 
+	let method                             = req.body.m_method                     ; 
+	let uri                                = req.body.m_uri                        ;
 
-	var update  = "UPDATE RESOURCE SET                	";
+	let update  = "UPDATE RESOURCE SET                	";
 		update += " 	TITLE						  = $1 	,";
 		update += " 	PUBLISHER_ID				  = $2 	,";
 		update += " 	OWNER_ID					  = $3 	,";
@@ -510,8 +557,8 @@ router.post('/update', async (req, res, next) => {
 		update += " 	METHOD						  = $35	,";
 		update += " 	URI							  = $36	";
 		update += " WHERE ID = $37"
-	var params = [title,publisher_id,owner_id,creator_id,language,landing_page,description,type,conforms_to,version,version_description,landing_page_url,is_free,is_public,state,image_path,is_personal,extras,remove_type,dq_index,spatial_resolution_in_meters,temporal_resolution,spatial_uri,temporal_start,temporal_end,accrual_periodicity,was_generated_by,publisher_spatial_uri,source_type,endpoint_description,endpoint_url,serves_dataset,access_rights,license,method,uri, id];
-	var queryResult = await callDb(update, params);
+	let params = [title,publisher_id,owner_id,creator_id,language,landing_page,description,type,conforms_to,version,version_description,landing_page_url,is_free,is_public,state,image_path,is_personal,extras,remove_type,dq_index,spatial_resolution_in_meters,temporal_resolution,spatial_uri,temporal_start,temporal_end,accrual_periodicity,was_generated_by,publisher_spatial_uri,source_type,endpoint_description,endpoint_url,serves_dataset,access_rights,license,method,uri, id];
+	let queryResult = await callDb(update, params);
 	if(queryResult){
 		res.send({success:true});
 	}else{
@@ -521,10 +568,10 @@ router.post('/update', async (req, res, next) => {
 
 router.post('/delete', async (req, res, next) => {
 	console.log(req.body);
-	var id = req.body.id; 
+	let id = req.body.id; 
 
-	var update  = "DELETE FROM RESOURCE WHERE ID=$1";
-	var queryResult = await callDb(update, [id]);
+	let update  = "DELETE FROM RESOURCE WHERE ID=$1";
+	let queryResult = await callDb(update, [id]);
 
 	if(queryResult){
 		res.send({success:true});
@@ -534,7 +581,7 @@ router.post('/delete', async (req, res, next) => {
 });
 
 var callDb = async (query, params)=>{
-	var queryResult;
+	let queryResult;
 	try {
 		log.info(JSON.stringify(query));
 		// synchronous code     

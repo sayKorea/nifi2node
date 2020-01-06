@@ -1,0 +1,1 @@
+var show_delete_btn = () =>{$(".delete").show();};

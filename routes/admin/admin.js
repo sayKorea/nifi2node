@@ -22,6 +22,7 @@ router.post("/save", async (req, res, next) => {
 		properties.set("center.id", req.body.center_id);
 		properties.set("center.source_path", req.body.source_path);
 		properties.set("center.target_path", req.body.target_path);
+		g_center_id = req.body.center_id;
 		properties.save("env.properties",function then(err,data){
 			if(err) {
 				console.log(err);
@@ -41,16 +42,27 @@ router.get("/hidden", (req, res, next) => {
 	const properties = PropertiesReader("env.properties");
 
 	var hidden_info = {};
-	hidden_info.center_id 	= properties.get("center.id");
-	hidden_info.source_path = properties.get("center.source_path");
-	hidden_info.target_path = properties.get("center.target_path");
-	hidden_info.db_host 	= properties.get("db.host");
-	hidden_info.db_port 	= properties.get("db.port");
-	hidden_info.db_user 	= properties.get("db.user");
-	hidden_info.db_pass	 	= properties.get("db.pass");
-	hidden_info.db_name 	= properties.get("db.name");
-	hidden_info.sodas_host 	= properties.get("sodas.host");
-	hidden_info.sodas_port 	= properties.get("sodas.port");
+	//Application
+	hidden_info.app_version 	= properties.get("app.version");
+	hidden_info.app_name 		= properties.get("app.name");
+	hidden_info.app_log_level 	= properties.get("app.log_level");
+
+	//Center
+	hidden_info.center_id 		= properties.get("center.id");
+	hidden_info.source_path 	= properties.get("center.source_path");
+	hidden_info.target_path 	= properties.get("center.target_path");
+
+	//Database
+	hidden_info.db_host 		= properties.get("db.host");
+	hidden_info.db_port 		= properties.get("db.port");
+	hidden_info.db_user 		= properties.get("db.user");
+	hidden_info.db_pass	 		= properties.get("db.pass");
+	hidden_info.db_name 		= properties.get("db.name");
+
+	//Sodas
+	hidden_info.sodas_host 		= properties.get("sodas.host");
+	hidden_info.sodas_port 		= properties.get("sodas.port");
+
 	log.debug(JSON.stringify(hidden_info));
 	res.render("admin/hidden.html", hidden_info);
 });
@@ -59,6 +71,7 @@ router.post("/hidden/save", async (req, res, next) => {
 	try{
 		console.log( req.body );
 		const properties = PropertiesReader("env.properties");
+		properties.set("app.log_level", req.body.log_level);
 		properties.set("center.id", req.body.center_id);
 		properties.set("center.source_path", req.body.source_path);
 		properties.set("center.target_path", req.body.target_path);

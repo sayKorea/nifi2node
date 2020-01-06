@@ -3,10 +3,13 @@
 <script type="text/javascript" src="/javascripts/jquery/jquery.3.4.1.min.js"></script>
 <!-- SCRIPT -->
 <script>
-	$(()=>{});
+	$(()=>{
+		$("#log_level").val("<%= app_log_level %>");
+	});
 
 	var hidden_info_save = () => {
 		console.log(($("#fm01p").serialize()));
+		var log_level 	= $("#log_level").val();
 		var center_id 	= $("#center_id").val();
 		var source_path = $("#source_path").val();
 		var target_path = $("#target_path").val();
@@ -17,6 +20,12 @@
 		var db_name 	= $("#db_name").val();
 		var sodas_host 	= $("#sodas_host").val();
 		var sodas_port 	= $("#sodas_port").val();
+
+		if(!log_level || log_level.trim() == ""){
+			alert("로그레벨을 입력하세요.");
+			$("#log_level").focus();
+			return false;
+		}
 
 		if(!center_id || center_id.trim() == ""){
 			alert("센터 ID를 입력하세요.");
@@ -89,8 +98,8 @@
 </script>
 <!-- SCRIPT END-->
 <style>
-	.pop_tabla  {width:100%; border-top:2px solid #000; border-bottom:1px solid #000; font-size:12px;}
-	.pop_tabla th {background:#f4f4f4; border-bottom:1px solid #ddd;padding:10px;  text-align:center; width:140px;}
+	.pop_tabla  {width:100%; border-top:2px solid #000; border-bottom:1px solid #000; font-size:18px;}
+	.pop_tabla th {background:#f4f4f4; border-bottom:1px solid #ddd;padding:10px;  text-align:right; width:190px;}
 	.pop_tabla th .point_color{color:#ef1111;}
 	.pop_tabla td {border-bottom:1px solid #ddd; padding:10px; background-color: white;}
 	.pop_tabla td input {border:1px solid #ddd; padding:5px 10px; width:85%; background-color: white;}
@@ -98,7 +107,7 @@
 	.pop_tabla td textarea {border:1px solid #ddd; padding:5px 10px; background-color: white;}
 	.pop_tabla .text_center { text-align:center;}
 	.table_bt01 {text-align:center; float:left;}
-	.table_bt01 a{border:1px solid #009fe9; background:#009fe9; color:#fff; display:inline-block; padding:14px 40px; text-decoration:none; font-size:13px;}
+	.table_bt01 a{border:1px solid #009fe9; background:#009fe9; color:#fff; display:inline-block; padding:14px 40px; text-decoration:none; font-size:15px;}
 	.table_bt02 {text-align:center; float:left;}
 	.table_bt02 a{border:1px solid #009fe9; color:#009fe9; display:inline-block; padding:14px 40px; text-decoration:none; font-size:13px;}
 </style>
@@ -109,29 +118,53 @@
 		<form id="fm01p" style="margin: 0 auto;">
 			<div style="width:100%;">
 				<div style="margin:0 0px 0px 0px;">
-					<h2>Center Info</h2>
+					<h2> [ Application Info ]</h2>
 					<table cellpadding="0" cellspacing="0" class="pop_tabla">
 						<tr>
-							<th>센터 ID<span class="point_color">*</span></th>
+							<th>Version <span class="point_color"> *</span></th>
+							<td colspan="3"><%= app_version %></td>
+						</tr>
+						<tr>
+							<th>Name <span class="point_color"> *</span></th>
+							<td colspan="3"><%= app_name %></td>
+						</tr>
+						<tr>
+							<th>Log Level <span class="point_color">*</span></th>
+							<td colspan="3"> 
+								<select id="log_level" name="log_level">
+									<option value="debug">DEBUG</option>
+									<option value="info">INFO</option>
+									<option value="warn">WARN</option>
+									<option value="error">ERROR</option>
+								</select>
+								<span>[ Requires server restart ]</span>
+							</td>
+							<!-- <td colspan="3"> <input id="log_level" type="text"  name="log_level" placeholder="로그 레벨을 입력하세요(debug, info, error)" required value="<%= app_log_level %>" style="width:97.7%;"></td> -->
+						</tr>
+					</table>
+					<h2>[ Center Info ]</h2>
+					<table cellpadding="0" cellspacing="0" class="pop_tabla">
+						<tr>
+							<th>Center ID <span class="point_color">*</span></th>
 							<td colspan="3"> <input id="center_id" type="text"  name="center_id" placeholder="센터ID를 입력 하세요.(xxx_org)" required value="<%= center_id %>" style="width:97.7%;"></td>
 						</tr>
 						<tr>
-							<th>센터 소스경로 <span class="point_color">*</span></th>
+							<th>Center Source Path <span class="point_color">*</span></th>
 							<td colspan="3"><input id="source_path" type="text"  name="source_path" placeholder="센터 소스경로를 입력 하세요" required value="<%= source_path %>" style="width:97.7%;"></td>
 						</tr>
 						<tr>
-							<th>포탈 저장경로 <span class="point_color">*</span></th>
+							<th>Potal Storage Path <span class="point_color">*</span></th>
 							<td colspan="3"><input id="target_path" type="text"  name="target_path" placeholder="포탈 저장경로를 입력 하세요" required value="<%= target_path %>" style="width:97.7%;"></td>
 						</tr>
 					</table>
-					<h2>Database Info</h2>
+					<h2>[ Database Info ]</h2>
 					<table cellpadding="0" cellspacing="0" class="pop_tabla">
 						<tr>
-							<th>Database Host<span class="point_color">*</span></th>
+							<th>Database Host <span class="point_color">*</span></th>
 							<td colspan="3"> <input id="db_host" type="text"  name="db_host" placeholder="데이터베이스 호스트" required value="<%= db_host %>" style="width:97.7%;">	</td>
 						</tr>
 						<tr>
-							<th>Database Port<span class="point_color">*</span></th>
+							<th>Database Port <span class="point_color">*</span></th>
 							<td colspan="3"><input id="db_port" type="text"  name="db_port" placeholder="데이터베이스 포트" required value="<%= db_port %>" style="width:97.7%;"></td>
 						</tr>
 						<tr>
@@ -147,14 +180,14 @@
 							<td colspan="3"><input id="db_name" type="text"  name="db_name" placeholder="데이터베이스 명" required value="<%= db_name %>" style="width:97.7%;"></td>
 						</tr>
 					</table>
-					<h2>SODAS Info</h2>
+					<h2>[ SODAS Info ]</h2>
 					<table cellpadding="0" cellspacing="0" class="pop_tabla">
 						<tr>
-							<th>SODAS Host<span class="point_color">*</span></th>
+							<th>SODAS Host <span class="point_color">*</span></th>
 							<td colspan="3"> <input id="sodas_host" type="text"  name="sodas_host" placeholder="SODAS 호스트" required value="<%= sodas_host %>" style="width:97.7%;">	</td>
 						</tr>
 						<tr>
-							<th>SODAS Port<span class="point_color">*</span></th>
+							<th>SODAS Port <span class="point_color">*</span></th>
 							<td colspan="3"><input id="sodas_port" type="text"  name="sodas_port" placeholder="SODAS 포트" required value="<%= sodas_port %>" style="width:97.7%;"></td>
 						</tr>
 					</table>

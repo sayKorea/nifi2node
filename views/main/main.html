@@ -9,11 +9,13 @@
 <link type="text/css" rel="stylesheet" href="/stylesheets/form.css"/>
 <script type="text/javascript" src="/javascripts/jquery/jquery.3.4.1.min.js"></script>
 <script type="text/javascript" src="/javascripts/jquery/jquery.simplePagination.js"></script>
+<script type="text/javascript" src="/javascripts/main.js"></script>
 <head>
 	<meta charset="UTF-8">
 	<title>데이터 연계시스템</title>
 <script>
 	$(()=>{
+		
 		$(".one_depth_item > a").on("click",function(){
 			var cshow = $("#leftMenu").find(".w3-show").attr("id");
 			$(".one_depth_item").removeClass("active");
@@ -39,19 +41,15 @@
 			location.replace("/");
 		});
 	});
+	
 </script>
 </head>
 <body>
 	<div class="side_wrap">
-		<h1><img id="logo" src="/images/logo.png" alt="로고"></h1>
+		<h5 style="color: #283c82;height:60px;">_</h5>
 		<ul class="one_depth">
-			<!-- <li class="one_depth_item active"><a href="javascript:void(0);">저장소</a>
-				 <ul class="two_depth">
-				 	<li class="two_depth_item"><a href="">목록</a></li>
-				 </ul>
-			</li> -->
 			<li class="one_depth_item"><a href="javascript:void(0);" title="센터정보" url="/admin">센터 정보</a></li>
-			<li class="one_depth_item"><a href="javascript:void(0);" title="메타데이터 [Resource]" url="/resource">메티데이터</a></li>
+			<li class="one_depth_item"><a href="javascript:void(0);" title="메타데이터 [Resource]" url="/resource">메타데이터</a></li>
 			<li class="one_depth_item"><a href="javascript:void(0);" title="배포 [Distribution]" url="/distribution">배포</a></li>
 		</ul>
 	</div>

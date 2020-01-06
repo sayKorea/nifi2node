@@ -86,11 +86,8 @@ router.post("/v1/resource/dataset/distribution/save", async (req, res, next) => 
 		log.debug("[ SODAS RESOURCE DISTRIBUTION SAVE ]");
 
 		let response 					= await call_request_api.call_api(option);
-		if(response.id){
-			res.send({success:true});
-		}else{
-			res.send({success:false});
-		}
+		if(response.id) res.send({success:true});
+		else res.send({success:false});
 	}catch(e){
 		log.error(JSON.stringify(e));
 		res.send({success:false});
@@ -115,9 +112,7 @@ router.post("/v1/resource/dataset/distribution/update", async (req, res, next) =
 		log.debug("[ SODAS RESOURCE DISTRIBUTION UPDATE ]");
 		let response 					= await call_request_api.call_api(option);
 
-		if(response.result == 'success') {
-			res.send({success:true});
-		}
+		if(response.result == 'success') res.send({success:true});
 		else res.send({success:false});
 	}catch(e){
 		log.error(JSON.stringify(e));
@@ -125,7 +120,28 @@ router.post("/v1/resource/dataset/distribution/update", async (req, res, next) =
 	}	
 });
 
+// 배포 삭제
+router.post("/v1/resource/dataset/distribution/remove", async (req, res, next) => {
+	try{
+		console.log( req.body );
+		let params						= req.body ;
+		let access_token 				= await call_request_api.get_access_token();
+		let option 						= call_request_api.get_request_option();
+		option.method 					= 'POST';
+		option.url  				    = call_request_api.distribution_remove_url;
+		option.headers.Authorization 	= access_token;
 
+		option.form						= params;
+		log.debug("[ SODAS RESOURCE DISTRIBUTION REMOVE ]");
+		let response 					= await call_request_api.call_api(option);
+
+		if(response.result == 'success')res.send({success:true});
+		else res.send({success:false});
+	}catch(e){
+		log.error(JSON.stringify(e));
+		res.send({success:false});
+	}	
+});
 
 // 메타데이터 리스트
 router.get("/v1/resource/dataset/list", async (req, res, next) => {
