@@ -1,6 +1,6 @@
 const PropertiesReader 	= require("properties-reader");
 const fs 				= require("fs");
-const util 				= require('util');
+const util 				= require("util");
 const readdir 			= util.promisify(fs.readdir);
 const log 				= require("../common/logger");
 

@@ -23,7 +23,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 
-// Secure
+// Secure Config
 app.use(helmet())
 app.use(helmet.noCache());
 app.use(helmet.noSniff());

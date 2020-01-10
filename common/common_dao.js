@@ -1,7 +1,6 @@
-const pg = require('pg');
-const PropertiesReader 	= require('properties-reader');
-const properties = PropertiesReader("env.properties");
-const {Pool, Client} = require('pg');
+const PropertiesReader 	= require("properties-reader");
+const properties 		= PropertiesReader("env.properties");
+const {Pool, Client} 	= require("pg");
 
 const pool = new Pool ({
 	//환경

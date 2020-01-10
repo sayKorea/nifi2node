@@ -85,7 +85,7 @@
 				$(".price").show();
 			}else{
 				$(".price").hide();
-				$("#price").val("");
+				$("#price").val("0");
 			}
 		});
 
@@ -95,10 +95,17 @@
 				$(".price").show();
 			}else{
 				$(".price").hide();
-				$("#m_userPrice").val("");
+				$("#m_userPrice").val("0");
 			}
 		});
+
+		mask_field();
 	});
+
+	var mask_field = () =>{
+		$("#temporalStart, #temporalEnd, #m_temporalStart, #m_temporalEnd").mask("0000-00-00", {"translation": {0: {pattern: /[0-9*]/}}});
+		$("#price, #m_userPrice").mask("0,000,000,000",{reverse: true,"translation": {0: {pattern: /[0-9*]/}}});
+	};
 
 	var insert_popup = () => {
 		$("#fm01p")[0].reset();
@@ -109,7 +116,7 @@
 		var currentDay = get_current_day;
 		$("#temporalStart").val(currentDay);
 		$("#temporalEnd").val(currentDay);
-
+		$("#priceType").trigger("change");
 		$("#insert_modal").addClass("show-modal");
 	};
 
@@ -258,6 +265,23 @@
 			return false;
 		}
 
+		var pt = $("#priceType").val();
+		if(pt && pt == "charge"){
+			var p = $("#price").val().replace(/,/g,"");
+
+			if(p == "" || p < 1){
+				alert("가격을 입력해 주세요.\n가격 범위는 1 ~ 2,147,483,647 입니다.");
+				$("#price").focus();
+				return false;
+			}
+				
+			if(p > 2147483647 ){
+				alert("가격이 너무 큽니다.\n가격 범위는 1 ~ 2,147,483,647 입니다.");
+				$("#price").focus();
+				return false;
+			}
+		}
+
 		var vgj = keyword_get_json("keyword_table");
 		console.log(vgj);
 		if(vgj)$("#keyword").val(vgj);
@@ -292,6 +316,44 @@
 		else return false;
 		
 		console.log($("#fm02p").serialize());
+
+		if($("#m_title").val().trim() == ""){
+			alert("상품명을 입력하세요!");
+			$("#m_title").focus();
+			return false;
+		}
+		if($("#m_description").val().trim() == ""){
+			alert("상품 설명을 입력하세요!");
+			$("#description").focus();
+			return false;
+		}
+		if($("#m_landingPage").val().trim() == ""){
+			alert("랜딩페이지를 입력하세요!");
+			$("#m_landingPage").focus();
+			return false;
+		}
+		if($("#m_license").val().trim() == ""){
+			alert("라이센스를 입력하세요!");
+			$("#m_license").focus();
+			return false;
+		}
+
+		var pt = $("#m_priceType").val();
+		if(pt && pt == "charge"){
+			var p = $("#m_userPrice").val().replace(/,/g,"");
+
+			if(p == "" || p < 1){
+				alert("가격을 입력해 주세요.\n가격 범위는 1 ~ 2,147,483,647 입니다.");
+				$("#m_userPrice").focus();
+				return false;
+			}
+				
+			if(p > 2147483647 ){
+				alert("가격이 너무 큽니다.\n가격 범위는 1 ~ 2,147,483,647 입니다.");
+				$("#m_userPrice").focus();
+				return false;
+			}
+		}
 
 		$.ajax({
 			url       : "/resource/v1/resource/dataset/update",
@@ -367,8 +429,11 @@
 
 					$("#m_priceType").val(data.priceType);
 					$("#m_priceType").trigger("change");
-					$("#m_userPrice").val(data.userPrice);
-					
+					//$("#m_userPrice").mask("0,000,000,000");
+					$("#m_userPrice").val(data.userPrice).trigger("input");
+					//alert($("#m_userPrice").val());
+					//$("#m_userPrice").unmask().mask("0000-00-00");
+					// $("#m_userPrice").masked(data.userPrice);
 					// if(data.is_free == "free"){
 					// 	$("#m_priceType").val("free");
 					// }else if(data.is_free == "charge"){
@@ -420,8 +485,8 @@
 					$("#m_spatialResolutionInMeters").val(data.spatialResolutionInMeters);
 					$("#m_temporalResolution").val(data.temporalResolution);
 					// $("#m_spatialUri").val(data.spatial_uri);
-					$("#m_temporalStart").val(data.temporalStart);
-					$("#m_temporalEnd").val(data.temporalEnd);
+					$("#m_temporalStart").val(data.temporalStart).trigger("input");
+					$("#m_temporalEnd").val(data.temporalEnd).trigger("input");
 					$("#m_accrualPeriodicity").val(data.accrualPeriodicity);
 				// 	$("#m_was_generated_by").val(data.was_generated_by);
 				// 	$("#m_publisher_spatial_uri").val(data.publisher_spatial_uri);
@@ -451,7 +516,7 @@
 	var close_layer = () => {
 		$("#fm01p")[0].reset();
 		$("#fm02p")[0].reset();
-		$("#price_td").hide();
+		$(".price").hide();
 		$("#insert_modal , #update_modal").removeClass("show-modal");
 		//	clearTimeout(loop_timer);
 	};
@@ -605,7 +670,7 @@
 </style>
 
 <div id="insert_modal" class="modal" style="z-index:10;">
-	<div class="modal-content" style="height:800px;width:1250px;overflow:auto;">
+	<div class="modal-content" style="height:680px;width:1250px;overflow:auto;">
 		<span class="close-button">&times;</span>
 		<h1 class="title">메타등록</h1>
 		<form id="fm01p" style="margin: 0 auto; width: 1220px;">
@@ -623,7 +688,7 @@
 							</td>
 						</tr>
 						<tr>
-							<th>상품명<span class="point_color">*</span></th>
+							<th>상품명 <span class="point_color">*</span></th>
 							<td colspan="7"><input id="title" type="text"  name="title" placeholder="상품명" required style="width:97.7%;"></tdcolspan="7>
 							<!-- <th>상품등록자</th>
 							<td><input id="publisherId" type="text"  name="publisherId" placeholder="상품등록자" disabled></td> -->
@@ -633,7 +698,7 @@
 							<td><input id="creatorId" type="text"  name="creatorId" placeholder="상품생성자" ></td> -->
 						</tr>
 						<tr>
-							<th>상품설명<span class="point_color">*</span></th>
+							<th>상품설명 <span class="point_color">*</span></th>
 							<td colspan="7"><input id="description" type="text"  name="description" placeholder="상품설명" style="width:97.7%;"></td>
 						</tr>
 						<tr>
@@ -641,17 +706,17 @@
 							<td colspan="7"><input id="descriptionDetail" type="text"  name="descriptionDetail" placeholder="상품상세설명" style="width:97.7%;"></td>
 						</tr>
 						<tr>
-							<th>랜딩페이지<span class="point_color">*</span></th>
+							<th>랜딩페이지 <span class="point_color">*</span></th>
 							<td colspan="7"><input id="landingPage" type="text"  name="landingPage" placeholder="랜딩페이지" style="width:97.7%;"></td>
 						</tr>
 						<tr>
-							<th>라이센스<span class="point_color">*</span></th>
+							<th>라이센스 <span class="point_color">*</span></th>
 							<td colspan="7"><input id="license" type="text"  name="license" placeholder="라이센스" style="width:97.7%;"></td>
 							<!-- <th>권한<span class="point_color">*</span></th>
 							<td><input id="rights" type="text"  name="rights" placeholder="권한" value="0"></td>
 						</tr> -->
 						<tr>
-							<th>언어<span class="point_color">*</span></th>
+							<th>언어</th>
 							<td>
 								<select name="language">
 									<option value="ko">한국</option>
@@ -666,13 +731,13 @@
 							<td><input id="issued" type="text"  name="issued" placeholder="생성일자"></td>
 							<th>수정일자</th>
 							<td ><input id="modified" type="text"  name="modified" placeholder="수정일자"></td> -->
-							<th>버젼</th>
+							<th>버전</th>
 							<td><input id="version" type="text"  name="version" placeholder="버전"></td>
 							<!-- <th>키워드</th> -->
 							<!-- <td> -->
 								<input id="keyword" type="hidden"  name="keyword" placeholder="키워드">
 							<!-- </td> -->
-							<th>공개여부<span class="point_color">*</span></th>
+							<th>공개여부</th>
 							<td>
 								<select id="isPublic"  name="isPublic">
 									<option value="Y">공개</option>
@@ -772,8 +837,8 @@
 								</select>
 							</td>
 							
-							<th class="price" style="display:none;">가격</th>
-							<td class="price" style="display:none;"><input id="price" type="text" name="price" placeholder="가격"></td>
+							<th class="price" style="display:none;">가격 <span class="point_color">*</span></th>
+							<td class="price" style="display:none;"><input id="price" type="text" name="price" data-mask="0000-00-00" placeholder="가격"></td>
 							
 						</tr>
 						<!-- <tr>
@@ -838,7 +903,7 @@
 						</tr> -->
 					</table>
 			
-					<div style="float:right;padding-top:10px;">
+					<!-- <div style="float:right;padding-top:10px;">
 						<p class="table_bt01"><a href="javascript:keyword_add();" style="margin-left:7px;"><strong>추가</strong></a></p>
 						<p class="table_bt02"><a href="javascript:keyword_init();" style="margin-left:7px;padding: 14px 35px;"><strong>초기화</strong></a></p>
 					</div>
@@ -850,7 +915,7 @@
 							<th style="width:15%;">타입</th>
 							<th style="width:7%;">삭제</th>
 						</tr>
-					</table>
+					</table> -->
 					<div style="float:right;padding-top:10px;">
 						<!-- <p style="font-size:20px; color:#222; font-weight:bold; margin-top:80px; ">데이터 목록</p> -->
 						<p class="table_bt01"><a href="javascript:close_layer();" style="background-color: gray;"><strong>닫기</strong></a></p>
@@ -863,7 +928,7 @@
 </div>
 
 <div id="update_modal" class="modal" style="z-index:10;">
-	<div class="modal-content" style="height:750px;width:1250px;overflow:auto;">
+	<div class="modal-content" style="height:610px;width:1250px;overflow:auto;">
 		<span class="close-button">&times;</span>
 		<h1 class="title">메타수정</h1>
 		<form id="fm02p" style="margin: 0 auto; width: 1220px;">
@@ -900,7 +965,7 @@
 							<td><input id="m_rights" type="text"  name="rights" placeholder="권한" value="0"></td> -->
 						</tr>
 						<tr>
-							<th>언어 <span class="point_color">*</span></th>
+							<th>언어</th>
 							<td>
 								<select id="m_language" name="m_language">
 									<option value="ko">한국</option>
@@ -915,9 +980,9 @@
 							<td><input id="issued" type="text"  name="issued" placeholder="생성일자"></td>
 							<th>수정일자</th>
 							<td ><input id="modified" type="text"  name="modified" placeholder="수정일자"></td> -->
-							<th>버젼</th>
+							<th>버전</th>
 							<td><input id="m_version" type="text"  name="m_version" placeholder="버전"></td>
-							<th>공개여부 <span class="point_color">*</span></th>
+							<th>공개여부</th>
 							<td>
 								<select id="m_isPublic"  name="m_isPublic">
 									<option value="Y">공개</option>
@@ -1006,7 +1071,6 @@
 							<td><input id="m_temporalStart" type="text"  name="m_temporalStart" placeholder="시작일"></td>
 							<th>종료일</th>
 							<td><input id="m_temporalEnd" type="text"  name="m_temporalEnd" placeholder="종료일"></td>
-							
 						</tr>
 						<tr>
 							<th>가격무료여부</th>
@@ -1017,8 +1081,8 @@
 									<option value="policy">협의</option>
 								</select>
 							</td>
-							<th class="price" style="display:none;">가격</th>
-							<td class="price" style="display:none;"><input id="m_userPrice" type="text" name="m_userPrice" placeholder="가격"></td>
+							<th class="price" style="display:none;">가격 <span class="point_color">*</span></th>
+							<td class="price" style="display:none;"><input id="m_userPrice" type="text" name="m_userPrice" data-mask="0000-00-00" placeholder="가격"></td>
 							
 						</tr>
 						<!-- <tr>
@@ -1083,7 +1147,7 @@
 						</tr> -->
 					</table>
 			
-					<div style="float:right;padding-top:10px;">
+					<!-- <div style="float:right;padding-top:10px;">
 						<p class="table_bt01"><a href="javascript:keyword_update_add();"><strong>추가</strong></a></p>
 						<p class="table_bt02" ><a href="javascript:keyword_update_init();" style="margin-left:7px;padding:14px 35px;"><strong>초기화</strong></a></p>
 					</div>
@@ -1096,7 +1160,7 @@
 							<th style="width:15%;">타입</th>
 							<th style="width:7%;">삭제</th>
 						</tr>
-					</table>
+					</table> -->
 					<div style="float:right;padding-top:10px;">
 						<p style="text-align:center; float:left;"><a href="javascript:close_layer();" style="background-color: gray;border:1px solid gray; color:white; display:inline-block; padding:14px 40px; text-decoration:none; font-size:13px;"><strong>취소</strong></a></p>
 						<p style="text-align:center; float:left; margin-left:7px;"><a href="javascript:resource_update();" style="border:1px solid #009fe9; background:#009fe9; color:#fff; display:inline-block; padding:14px 40px; text-decoration:none; font-size:13px;"><strong>수정</strong></a></p>

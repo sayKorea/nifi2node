@@ -37,20 +37,20 @@ var put_hdfs					= "";
 var get_file					= "";
 
 
-router.get('/', (req, res, next) => {
+router.get("/", (req, res, next) => {
 	console.log(res);
 	console.log("NIFI CALL API");
 	res.send({success:true});
 });
 
-router.get('/test', async (req, res, next) => {
+router.get("/test", async (req, res, next) => {
 	callRequest();
 	res.send({success:true});
 });
 
-router.get('/process_set', async (req, res, next) => {
+router.get("/process_set", async (req, res, next) => {
 	try {
-		const properties 		= PropertiesReader("env.properties");
+		const properties 	= PropertiesReader("env.properties");
 		console.log(req.query);
 		host 				= ip.address();
 		webHost 			= host+":"+webPort;
@@ -134,10 +134,9 @@ router.get('/process_set', async (req, res, next) => {
 		put_hdfs					= "http://"+nifiHost+"/nifi-api/processors/9cba7261-31ad-3e0f-80d5-4ff1deaf210a";
 		get_file					= "http://"+nifiHost+"/nifi-api/processors/aa9a257c-ab1a-3554-9864-17319c098747";
 
-
 		var insert  = " INSERT INTO DATA_LOAD_DETAIL(DATASET_UUID, PROCESS_NAME, PROCESS_TYPE, PROCESS_SUCCESS, PROCESS_START_TIME)";
 			insert += " VALUES ($1, $2, $3, $4, CURRENT_DATE)";
-		var params = [resource_id, 'nifi setting start', '', 'success'];
+		var params = [resource_id, "nifi setting start", "", "success"];
 		queryResult = await callDb(insert ,params);//dao.query(insert ,params);
 
 
@@ -147,9 +146,9 @@ router.get('/process_set', async (req, res, next) => {
 			url			: "",
 			json		: true ,
 			headers: {
-				Connection: 'keep-alive',
+				Connection: "keep-alive",
 				Host: nifiHost,
-				Accept: '*/*','Content-Type': 'application/json' 
+				Accept: "*/*","Content-Type": "application/json" 
 			},
 			body:{}
 		};
@@ -160,10 +159,10 @@ router.get('/process_set', async (req, res, next) => {
 		// ALL PROCESS STOP 
 		//////////////////////////////////////////
 		//put
-		requestOption.method = 'PUT';
-		requestOption.url  = process_group;
-		requestOption.body = process_group_stop;
-		responese = await callAPI(requestOption);
+		requestOption.method 	= "PUT";
+		requestOption.url  		= process_group;
+		requestOption.body 		= process_group_stop;
+		responese 				= await callAPI(requestOption);
 		if(responese){
 			log.debug("[ 01. Process Group Properties Modfy Success!]");
 			//log.debug(responese);
@@ -173,10 +172,10 @@ router.get('/process_set', async (req, res, next) => {
 		//////////////////////////////////////////
 		// GET CLIENT ID
 		//////////////////////////////////////////
-		requestOption.method = 'GET';
-		requestOption.url = client_id_flow;
-		requestOption.body = null;
-		client_id = await callAPI(requestOption);
+		requestOption.method 	= "GET";
+		requestOption.url 		= client_id_flow;
+		requestOption.body 		= null;
+		client_id 				= await callAPI(requestOption);
 		if(responese){
 			log.debug("[ 02. Get Flow - Client ID]");
 			//log.debug(responese);
@@ -186,7 +185,7 @@ router.get('/process_set', async (req, res, next) => {
 		// FILE LIST
 		//////////////////////////////////////////
 		//get
-		// requestOption.method = 'GET';
+		// requestOption.method = "GET";
 		// requestOption.url = list_sftp_url;
 		// responese = await callAPI(requestOption);
 		// if(responese){
@@ -195,7 +194,7 @@ router.get('/process_set', async (req, res, next) => {
 		// }
 
 		//put
-		// requestOption.method = 'PUT';
+		// requestOption.method = "PUT";
 		// responese.component.config.properties.Hostname = "10.39.143.190 ";
 		// responese.component.config.properties.Port = "22";
 		// responese.component.config.properties.Username = "ncloud";
@@ -212,7 +211,7 @@ router.get('/process_set', async (req, res, next) => {
 		// LIST FETCH
 		//////////////////////////////////////////
 		//get
-		// requestOption.method = 'GET';
+		// requestOption.method = "GET";
 		// requestOption.url = list_fetch_url;
 		// requestOption.body = null;
 		// responese = await callAPI(requestOption);
@@ -222,7 +221,7 @@ router.get('/process_set', async (req, res, next) => {
 		// }
 		
 		//put
-		// requestOption.method = 'PUT';
+		// requestOption.method = "PUT";
 		// responese.component.config.properties.Hostname = "10.39.143.190 ";
 		// responese.component.config.properties.Port = "22";
 		// responese.component.config.properties.Username = "ncloud";
@@ -238,16 +237,16 @@ router.get('/process_set', async (req, res, next) => {
 		// GET FILE
 		//////////////////////////////////////////
 		//get
-		requestOption.method = 'GET';
-		requestOption.url = get_file;
-		requestOption.body = null;
-		responese = await callAPI(requestOption);
+		requestOption.method 	= "GET";
+		requestOption.url 		= get_file;
+		requestOption.body 		= null;
+		responese 				= await callAPI(requestOption);
 		if(responese){
 			log.debug("[ 05. Get File Start Properties Get Success!]");
 		}
 		
 		//put
-		requestOption.method = 'PUT';
+		requestOption.method = "PUT";
 		responese.component.config.properties['Input Directory'] = source_path;//"/home1/ncloud/apps/test-data/";
 		responese.component.config.properties['File Filter'] = source_file_name;
 
@@ -262,17 +261,17 @@ router.get('/process_set', async (req, res, next) => {
 		// HTTP INVOKE START
 		//////////////////////////////////////////
 		//get
-		requestOption.method = 'GET';
-		requestOption.url = http_invoke_start;
-		requestOption.body = null;
-		responese = await callAPI(requestOption);
+		requestOption.method 	= "GET";
+		requestOption.url 		= http_invoke_start;
+		requestOption.body 		= null;
+		responese 				= await callAPI(requestOption);
 		if(responese){
 			log.debug("[ 07. HTTP INVOKE Start Properties Get Success!]");
 			//log.debug(responese);
 		}
 		
 		//put
-		requestOption.method = 'PUT';
+		requestOption.method = "PUT";
 		responese.component.config.properties['HTTP Method'] = "GET";
 		responese.component.config.properties['Remote URL'] = "http://"+webHost+"/nifi/process_log?dataset_uuid="+resource_id+"&stepNm=process start&success=success";
 		requestOption.body =responese;
@@ -285,19 +284,19 @@ router.get('/process_set', async (req, res, next) => {
 		//////////////////////////////////////////
 		// HTTP INVOKE END
 		//////////////////////////////////////////
-		requestOption.method = 'GET';
-		requestOption.url = http_invoke_end;
-		requestOption.body = null;
-		responese = await callAPI(requestOption);
+		requestOption.method 	= "GET";
+		requestOption.url 		= http_invoke_end;
+		requestOption.body 		= null;
+		responese 				= await callAPI(requestOption);
 		if(responese){
 			log.debug("[ 09. HTTP INVOKE Start Properties Get Success!]");
 			//log.debug(responese);
 		}
 		
 		//put
-		requestOption.method = 'PUT';
-		responese.component.config.properties['HTTP Method'] = "GET";
-		responese.component.config.properties['Remote URL'] = "http://"+webHost+"/nifi/process_log?dataset_uuid="+resource_id+"&stepNm=process end&success=success";
+		requestOption.method = "PUT";
+		responese.component.config.properties['HTTP Method'] 	= "GET";
+		responese.component.config.properties['Remote URL'] 	= "http://"+webHost+"/nifi/process_log?dataset_uuid="+resource_id+"&stepNm=process end&success=success";
 		requestOption.body =responese;
 		responese = await callAPI(requestOption);
 		if(responese){
@@ -310,17 +309,17 @@ router.get('/process_set', async (req, res, next) => {
 		//////////////////////////////////////////
 		// GET PUT SFTP
 		//////////////////////////////////////////
-		requestOption.method = 'GET';
-		requestOption.url = get_put_sftp;
-		requestOption.body = null;
-		responese = await callAPI(requestOption);
+		requestOption.method 	= "GET";
+		requestOption.url 		= get_put_sftp;
+		requestOption.body		= null;
+		responese 				= await callAPI(requestOption);
 		if(responese){
 			log.debug("[ 11. PUT HDFS Properties Get Success!]");
 			//log.debug(responese);
 		}
 		
 		//put
-		requestOption.method = 'PUT';
+		requestOption.method = "PUT";
 		responese.component.config.properties["Remote Path"] =target_path;			//"/hadoop/dfs/test"; // /hsdoop/dfs/test
 		//신대수 수정
 		//responese.component.config.properties["Hostname"] ="182.173.185.41";		//"/hadoop/dfs/test"; // /hsdoop/dfs/test
@@ -340,7 +339,7 @@ router.get('/process_set', async (req, res, next) => {
 		//////////////////////////////////////////
 		// PUT FILE
 		//////////////////////////////////////////
-		// requestOption.method = 'GET';
+		// requestOption.method = "GET";
 		// requestOption.url = put_file;
 		// requestOption.body = null;
 		// responese = await callAPI(requestOption);
@@ -350,7 +349,7 @@ router.get('/process_set', async (req, res, next) => {
 		// }
 		
 		//put
-		// requestOption.method = 'PUT';
+		// requestOption.method = "PUT";
 		// responese.component.config.properties["Directory"] = "/hadoop/dfs";
 		// requestOption.body =responese;
 		// responese = await callAPI(requestOption);
@@ -363,7 +362,7 @@ router.get('/process_set', async (req, res, next) => {
 		//////////////////////////////////////////
 		// PUT HDFS
 		//////////////////////////////////////////
-		// requestOption.method = 'GET';
+		// requestOption.method = "GET";
 		// requestOption.url = put_hdfs;
 		// requestOption.body = null;
 		// responese = await callAPI(requestOption);
@@ -373,7 +372,7 @@ router.get('/process_set', async (req, res, next) => {
 		// }
 		
 		//put
-		// requestOption.method = 'PUT';
+		// requestOption.method = "PUT";
 		// responese.component.config.properties["Directory"] =target_path;//"/hadoop/dfs/test"; // /hsdoop/dfs/test
 		// requestOption.body =responese;
 		// responese = await callAPI(requestOption);
@@ -386,7 +385,7 @@ router.get('/process_set', async (req, res, next) => {
 		//////////////////////////////////////////
 		// Controller Service - CSVReader Disabled
 		//////////////////////////////////////////
-		// requestOption.method = 'GET';
+		// requestOption.method = "GET";
 		// requestOption.url = controller_service_CSVReader;
 		// requestOption.body = null;
 		// responese = await callAPI(requestOption);
@@ -394,7 +393,7 @@ router.get('/process_set', async (req, res, next) => {
 		// console.log(responese);
 
 		// //put
-		// requestOption.method = 'PUT';
+		// requestOption.method = "PUT";
 		// responese.component.status.runStatus = "DISABLED";
 		// responese.component.state = 'DISABLED';
 		// requestOption.body =responese;
@@ -404,14 +403,14 @@ router.get('/process_set', async (req, res, next) => {
 		// //////////////////////////////////////////
 		// // Controller Service - CSVRecordSetWriter Disabled
 		// //////////////////////////////////////////
-		// requestOption.method = 'GET';
+		// requestOption.method = "GET";
 		// requestOption.url = controller_service_2;
 		// requestOption.body = null;
 		// responese = await callAPI(requestOption);
 		// if(responese){console.log("[ Controller Service - JsonRecordSetWriter Properties Get Success!]]");}
 		
 		// //put
-		// requestOption.method = 'PUT';
+		// requestOption.method = "PUT";
 		// responese.component.state = "DISABLED";
 		// requestOption.body =responese;
 		// responese = await callAPI(requestOption);
@@ -420,21 +419,21 @@ router.get('/process_set', async (req, res, next) => {
 		// //////////////////////////////////////////
 		// // VALID JSON STR - AvroSchemaRegistry
 		// //////////////////////////////////////////
-		// requestOption.method = 'GET';
+		// requestOption.method = "GET";
 		// requestOption.url = valid_json_str;
 		// requestOption.body = null;
 		// responese = await callAPI(requestOption);
 		// if(responese){console.log("[ VALID JSON STR Properties Get Success!]]");}
 
 		// //put
-		// requestOption.method = 'PUT';
+		// requestOption.method = "PUT";
 		// responese.component.state = "DISABLED";
 		// requestOption.body =responese;
 		// responese = await callAPI(requestOption);
 		// if(responese){console.log("[ VALID JSON STR Properties Modfy Success!]]");}
 		
 		// //put
-		// requestOption.method = 'PUT';
+		// requestOption.method = "PUT";
 		// responese.component.state = "ENABLED";
 		// responese.component.properties.candy = queryResult.meta_valid_str;
 		// requestOption.body =responese;
@@ -445,14 +444,14 @@ router.get('/process_set', async (req, res, next) => {
 		// //////////////////////////////////////////
 		// // Controller Service - CSVReader
 		// //////////////////////////////////////////
-		// requestOption.method = 'GET';
+		// requestOption.method = "GET";
 		// requestOption.url = controller_service_1;
 		// requestOption.body = null;
 		// responese = await callAPI(requestOption);
 		// if(responese){console.log("[ Controller Service - CSVReader Properties Get Success!]]");}
 
 		// //put
-		// requestOption.method = 'PUT';
+		// requestOption.method = "PUT";
 		// responese.component.state = "ENABLED";
 		// requestOption.body =responese;
 		// responese = await callAPI(requestOption);
@@ -461,14 +460,14 @@ router.get('/process_set', async (req, res, next) => {
 		// //////////////////////////////////////////
 		// // Controller Service - CSVRecordSetWriter
 		// //////////////////////////////////////////
-		// requestOption.method = 'GET';
+		// requestOption.method = "GET";
 		// requestOption.url = controller_service_2;
 		// requestOption.body = null;
 		// responese = await callAPI(requestOption);
 		// if(responese){console.log("[ Controller Service - JsonRecordSetWriter Properties Get Success!]]");}
 		
 		// //put
-		// requestOption.method = 'PUT';
+		// requestOption.method = "PUT";
 		// responese.component.state = "ENABLED";
 		// requestOption.body =responese;
 		// responese = await callAPI(requestOption);
@@ -477,17 +476,17 @@ router.get('/process_set', async (req, res, next) => {
 		//NIFI START
 		var insert  = " INSERT INTO DATA_LOAD_DETAIL(DATASET_UUID, PROCESS_NAME, PROCESS_TYPE, PROCESS_SUCCESS, PROCESS_START_TIME)";
 			insert += " VALUES ($1, $2, $3, $4, CURRENT_DATE)";
-		var params = [resource_id, 'nifi setting end', '', 'success'];
+		var params  = [resource_id, 'nifi setting end', '', 'success'];
 		queryResult = await callDb(insert ,params);//dao.query(insert ,params);
 
 		//////////////////////////////////////////
 		// ALL PROCESS START 
 		//////////////////////////////////////////
 		//put
-		requestOption.method = 'PUT';
-		requestOption.url	=  process_group;
-		requestOption.body =process_group_start;
-		responese = await callAPI(requestOption);
+		requestOption.method 	= "PUT";
+		requestOption.url		= process_group;
+		requestOption.body 		= process_group_start;
+		responese 				= await callAPI(requestOption);
 		//if(responese){console.log("[ Process Group Properties Modfy Success!]]");}
 
 		if(responese){
@@ -496,8 +495,8 @@ router.get('/process_set', async (req, res, next) => {
 
 			//NIFI START
 			var insert  = " INSERT INTO DATA_LOAD_DETAIL(DATASET_UUID, PROCESS_NAME, PROCESS_TYPE, PROCESS_SUCCESS, PROCESS_START_TIME)";
-			insert += " VALUES ($1, $2, $3, $4, CURRENT_DATE)";
-			var params = [resource_id, 'nifi start', '', 'success'];
+			insert 	   += " VALUES ($1, $2, $3, $4, CURRENT_DATE)";
+			var params 	= [resource_id, 'nifi start', '', 'success'];
 			queryResult = await callDb(insert ,params);//dao.query(insert ,params);
 			//log.debug(queryResult);
 		}
@@ -518,16 +517,13 @@ router.get('/process_set', async (req, res, next) => {
 router.get('/process_log', async (req, res, next) => {
 	log.debug("############################# PROCESS LOG");
 	
-	var dataset_uuid = req.query.dataset_uuid;
-	var stepNm = req.query.stepNm;
-	var success = req.query.success;
-	var insert  = " INSERT INTO DATA_LOAD_DETAIL(DATASET_UUID, PROCESS_NAME, PROCESS_TYPE, PROCESS_SUCCESS, PROCESS_START_TIME)";
-		insert += " VALUES ($1, $2, $3, $4, CURRENT_DATE)";
-		
-	var params = [dataset_uuid, stepNm, '', success];
-	// dao.query(insert ,params , result);
-
-	var queryResult = await callDb(insert ,params);//dao.query(insert ,params);
+	var dataset_uuid 	= req.query.dataset_uuid;
+	var stepNm  		= req.query.stepNm;
+	var success			= req.query.success;
+	var insert  		= " INSERT INTO DATA_LOAD_DETAIL(DATASET_UUID, PROCESS_NAME, PROCESS_TYPE, PROCESS_SUCCESS, PROCESS_START_TIME)";
+		insert 		   += " VALUES ($1, $2, $3, $4, CURRENT_DATE)";
+	var params 			= [dataset_uuid, stepNm, '', success];
+	var queryResult 	= await callDb(insert ,params);//dao.query(insert ,params);
 	//log.debug(queryResult);
 
 	if(stepNm == "process end"){
@@ -560,10 +556,10 @@ router.get('/process_log', async (req, res, next) => {
 			// ALL PROCESS START 
 			//////////////////////////////////////////
 			//put
-			requestOption.method = 'PUT';
-			requestOption.url	=  process_group;
-			requestOption.body =process_group_stop;
-			responese = await callAPI(requestOption);
+			requestOption.method 	= "PUT";
+			requestOption.url		= process_group;
+			requestOption.body 		= process_group_stop;
+			responese 				= await callAPI(requestOption);
 
 			if(responese){
 				log.debug("[ Process Group Properties Stop Success!]");

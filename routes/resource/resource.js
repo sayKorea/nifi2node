@@ -1,9 +1,9 @@
 'use strict'
-const express 			= require('express');
-const uuid 				= require('uuid4');
+const express 			= require("express");
+const uuid 				= require("uuid4");
 const router 			= express.Router();
-const dao 				= require('../../common/common_dao');
-const call_request_api 	= require('../../common/common_request');
+const dao 				= require("../../common/common_dao");
+const call_request_api 	= require("../../common/common_request");
 const log 				= require("../../common/logger");
 
 // 메타데이터 화면
@@ -16,7 +16,7 @@ router.get("/v1/reference-model/taxonomy/version/list", async (req, res, next) =
 	try{
 		let access_token 				= await call_request_api.get_access_token();
 		let option 						= call_request_api.get_request_option();
-		option.method 					= 'GET';
+		option.method 					= "GET";
 		option.url  				    = call_request_api.taxonomy_get_version_list_url;
 		option.headers.Authorization 	= access_token;
 
@@ -24,10 +24,10 @@ router.get("/v1/reference-model/taxonomy/version/list", async (req, res, next) =
 
 		let response 					= await call_request_api.call_api(option);
 
-		res.send(response);
+		return res.send(response);
 	}catch(e){
 		log.error(JSON.stringify(e));
-		res.send({success:false});
+		return res.send({success:false});
 	}	
 });
 
@@ -38,7 +38,7 @@ router.get("/v1/reference-model/taxonomy/category/list", async (req, res, next) 
 		let versionId 					= req.query.versionId; 
 		let access_token 				= await call_request_api.get_access_token();
 		let option 						= call_request_api.get_request_option();
-		option.method 					= 'GET';
+		option.method 					= "GET";
 		option.url  				    = call_request_api.category_get_list_url;
 		option.headers.Authorization 	= access_token;
 		option.qs						=  { versionId: versionId };
@@ -47,10 +47,10 @@ router.get("/v1/reference-model/taxonomy/category/list", async (req, res, next) 
 	
 		let response 					= await call_request_api.call_api(option);
 
-		res.send(response);
+		return res.send(response);
 	}catch(e){
 		log.error(JSON.stringify(e));
-		res.send({success:false});
+		return res.send({success:false});
 	}	
 });
 
@@ -62,7 +62,7 @@ router.get("/v1/resource/dataset/get", async (req, res, next) => {
 		let params						= req.query;
 		let access_token 				= await call_request_api.get_access_token();
 		let option 						= call_request_api.get_request_option();
-		option.method 					= 'GET';
+		option.method 					= "GET";
 		option.url  				    = call_request_api.resource_get_url;
 		option.headers.Authorization 	= access_token;
 		option.qs						= params;
@@ -70,10 +70,10 @@ router.get("/v1/resource/dataset/get", async (req, res, next) => {
 		log.debug("[ SODAS RESOURCE GET ]");
 	
 		let response 					= await call_request_api.call_api(option);
-		res.send( response );
+		return res.send( response );
 	}catch(e){
 		log.error(JSON.stringify(e));
-		res.send({success:false});
+		return res.send({success:false});
 	}
 });
 
@@ -86,7 +86,7 @@ router.get("/v1/resource/dataset/list", async (req, res, next) => {
 		let limit 						= req.query.limit; 
 		let access_token 				= await call_request_api.get_access_token();
 		let option 						= call_request_api.get_request_option();
-		option.method 					= 'GET';
+		option.method 					= "GET";
 		option.url  				    = call_request_api.resource_list_url;
 		option.headers.Authorization 	= access_token;
 		params.offset					= offset;
@@ -99,10 +99,10 @@ router.get("/v1/resource/dataset/list", async (req, res, next) => {
 		
 		let response 					= await call_request_api.call_api(option);
 
-		res.send( response );
+		return res.send( response );
 	}catch(e){
 		log.error(JSON.stringify(e));
-		res.send({success:false});
+		return res.send({success:false});
 	}
 });
 
@@ -114,11 +114,11 @@ router.post("/v1/resource/dataset/save", async (req, res, next) => {
 		let option 							= call_request_api.get_request_option();
 		let price							= req.body.price;
 
-		option.method 						= 'POST';
+		option.method 						= "POST";
 		option.url  				    	= call_request_api.resource_save_url;
 		option.headers.Authorization 		= access_token;
 		
-		var taxonomy 						= {};
+		let taxonomy 						= {};
 		taxonomy.nodeId						= params.category_list;
 		taxonomy.nodeType 					= "taxonomy";
 		params.taxonomy						= JSON.stringify(taxonomy);
@@ -135,7 +135,7 @@ router.post("/v1/resource/dataset/save", async (req, res, next) => {
 		//params.version					= "1.0";
 
 		params.publisherId					= g_center_id;
-		params.ownerId						= g_user_id.split('_')[0];;
+		params.ownerId						= g_user_id.split("_")[0];;
 		params.creatorId					= g_user_id;
 
 		console.log(params);
@@ -151,24 +151,20 @@ router.post("/v1/resource/dataset/save", async (req, res, next) => {
 	
 		let response 						= await call_request_api.call_api(option);
 		if(response.id){
-			if(req.body.priceType == "charge"){
-				
-				response 						= await call_request_api.price_condtion_save(response.id,price,"resource", "dataset");
-				console.log(response);
-				if(response.success){
-					res.send( {success:true} );
-				}
-				else{
-					res.send( {success:false} );
-				}
-			}else{
-				res.send( {success:true} );
-			}
+			if(req.body.priceType != "charge") return res.send( {success:true} );
+
+			price = price.replace(/,/g,"");
+			if(price == "0" || price == "") return res.send( {success:true} );
+
+			response 	= await call_request_api.price_condtion_save(response.id,price,"resource", "dataset");
+			if(response.success) return res.send( {success:true} );
+			
+			return res.send( {success:false} );
 		}
 		else res.send( {success:false} );
 	}catch(e){
 		log.error(JSON.stringify(e));
-		res.send({success:false});
+		return res.send({success:false});
 	}
 });
 
@@ -180,7 +176,7 @@ router.post("/v1/resource/dataset/update", async (req, res, next) => {
 		let option 							= call_request_api.get_request_option();
 		let price							= req.body.m_userPrice;
 
-		option.method 						= 'POST';
+		option.method 						= "POST";
 		option.url  				    	= call_request_api.resource_update_url;
 		option.headers.Authorization 		= access_token;
 		//option.headers['Content-Type']  	= 'application/x-www-form-urlencoded';
@@ -213,31 +209,30 @@ router.post("/v1/resource/dataset/update", async (req, res, next) => {
 		params.keyword				 		= req.body.m_keyword
 		params.license						= req.body.m_license
 		params.publisherId					= g_center_id;
-		params.ownerId						= g_user_id.split('_')[0];;
+		params.ownerId						= g_user_id.split("_")[0];;
 		params.creatorId					= g_user_id;
 
-		option.form							=  params;
+		option.form							= params;
 
 		log.debug("[ SODAS RESOURCE UPDATE ]");
-
-		let response 					= await call_request_api.call_api(option);
+		let response 						= await call_request_api.call_api(option);
 		if(!response.result || response.result != "success") {
 			return res.send({success:false})
 		}
 
-		if(req.body.m_priceType != "charge"){
-			return res.send( {success:true}  );
+		if(req.body.m_priceType == "charge") {
+			price = price.replace(/,/g,"")
+			if(price == "0" || price == "") return res.send( {success:true} );
+			response 	= await call_request_api.price_condtion_update(req.body.m_id,price,"resource", "dataset");
+			if(!response.success) return res.send( {success:false} );
+		}else {
+			response 	= await call_request_api.price_condtion_delete(req.body.m_id,"resource", "dataset");
+			if(!response.success) return res.send( {success:false} );
 		}
-
-		response 	= await call_request_api.price_condtion_update(req.body.m_id,price,"resource", "dataset");
-		if(!response.success){
-			return res.send( {success:false} );
-		}
-		
 		return res.send( {success:true} );
 	}catch(e){
 		log.error(e);
-		res.send({success:false});
+		return res.send({success:false});
 	}
 });
 
@@ -248,7 +243,7 @@ router.post("/v1/resource/dataset/remove", async (req, res, next) => {
 		let access_token 				= await call_request_api.get_access_token();
 		let option 						= call_request_api.get_request_option();
 		
-		option.method 					= 'POST';
+		option.method 					= "POST";
 		option.url  				    = call_request_api.resource_remove_url;
 		option.headers.Authorization 	= access_token;
 
@@ -259,11 +254,11 @@ router.post("/v1/resource/dataset/remove", async (req, res, next) => {
 		log.debug("[ SODAS RESOURCE REMOVE ]");
 	
 		let response 					= await call_request_api.call_api(option);
-		if(response.result && response.result == "success") res.send({success:true});
-		else res.send({success:false});
+		if(response.result && response.result == "success") return res.send({success:true});
+		return res.send({success:false});
 	}catch(e){
 		log.error(JSON.stringify(e));
-		res.send({success:false});
+		return res.send({success:false});
 	}
 });
 
@@ -580,7 +575,7 @@ router.post('/delete', async (req, res, next) => {
 	}
 });
 
-var callDb = async (query, params)=>{
+let callDb = async (query, params)=>{
 	let queryResult;
 	try {
 		log.info(JSON.stringify(query));
